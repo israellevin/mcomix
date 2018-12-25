@@ -670,7 +670,11 @@ class EventHandler(object):
         if new_index == -1:
             self._previous_page_with_protection()
         elif new_index == n:
-            self._next_page_with_protection()
+            if self._window.zoom._fitmode == constants.ZOOM_MODE_HEIGHT:
+                self._window.actiongroup.get_action('fit_width_mode').activate()
+            else:
+                self._next_page_with_protection()
+                self._window.actiongroup.get_action('fit_height_mode').activate()
         else:
             # Update actual viewport
             self._window.update_viewport_position()
