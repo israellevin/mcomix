@@ -669,12 +669,15 @@ class EventHandler(object):
 
         if new_index == -1:
             self._previous_page_with_protection()
+        # When smart scroll will send us to a new page, we check if we are in
+        # best fit mode. If we are, we just move to fit width. If we aren't, we
+        # move to the next page and switch to best fit mode.
         elif new_index == n:
-            if self._window.zoom._fitmode == constants.ZOOM_MODE_HEIGHT:
+            if self._window.zoom._fitmode == constants.ZOOM_MODE_BEST:
                 self._window.actiongroup.get_action('fit_width_mode').activate()
             else:
                 self._next_page_with_protection()
-                self._window.actiongroup.get_action('fit_height_mode').activate()
+                self._window.actiongroup.get_action('best_fit_mode').activate()
         else:
             # Update actual viewport
             self._window.update_viewport_position()
