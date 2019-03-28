@@ -528,29 +528,27 @@ class MainWindow(Gtk.Window):
 
         return False
 
-    def _update_page_information(self):
+    def _update_page_information(self) -> None:
         """ Updates the window with information that can be gathered
         even when the page pixbuf(s) aren't ready yet. """
 
         page_number = self.imagehandler.get_current_page()
         if not page_number:
             return
-        if self.displayed_double():
-            number_of_pages = 2
-            left_filename, right_filename = self.imagehandler.get_page_filename(double=True)
-            left_filesize, right_filesize = self.imagehandler.get_page_filesize(double=True)
+        double = self.displayed_double()
+
+        def make_status(info):
+            if not isinstance(info, tuple):
+                return info
             if self.is_manga_mode:
-                left_filename, right_filename = right_filename, left_filename
-                left_filesize, right_filesize = right_filesize, left_filesize
-            filename = left_filename + ', ' + right_filename
-            filesize = left_filesize + ', ' + right_filesize
-        else:
-            number_of_pages = 1
-            filename = self.imagehandler.get_page_filename()
-            filesize = self.imagehandler.get_page_filesize()
+                info = reversed(info)
+            return ", ".join(info)
+
+        filename = make_status(self.imagehandler.get_page_filename(double=double))
+        filesize = make_status(self.imagehandler.get_page_filesize(double=double))
         self.statusbar.set_page_number(page_number,
                                        self.imagehandler.get_number_of_pages(),
-                                       number_of_pages)
+                                       2 if double else 1)
         self.statusbar.set_filename(filename)
         self.statusbar.set_root(self.filehandler.get_base_filename())
         self.statusbar.set_filesize(filesize)
