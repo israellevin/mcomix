@@ -43,7 +43,7 @@ UNION_INDEX = -2
 
 ANIMATION_DISABLED, ANIMATION_NORMAL = list(range(2))
 
-ZIP, RAR, TAR, GZIP, BZIP2, XZ, PDF, SEVENZIP, LHA, ZIP_EXTERNAL = list(range(10))
+ZIP, RAR, TAR, GZIP, BZIP2, XZ, PDF, SEVENZIP, LHA, ZIP_EXTERNAL, MOBI = list(range(11))
 NORMAL_CURSOR, GRAB_CURSOR, WAIT_CURSOR, NO_CURSOR = list(range(4))
 LIBRARY_DRAG_EXTERNAL_ID, LIBRARY_DRAG_BOOK_ID, LIBRARY_DRAG_COLLECTION_ID = list(range(3))
 AUTOROTATE_NEVER, AUTOROTATE_WIDTH_90, AUTOROTATE_WIDTH_270, \
@@ -86,6 +86,9 @@ LHA_FORMATS = (
 PDF_FORMATS = (
         ('application/pdf',),
         ('pdf',))
+MOBI_FORMATS = (
+        ('application/vnd.amazon.mobi8-ebook'),
+        ('.azw3',))
 
 IMAGEIO_GDKPIXBUF, IMAGEIO_PIL = list(range(2))
 

@@ -11,6 +11,7 @@ from mcomix import constants
 from mcomix import log
 from mcomix.archive import (
     lha_external,
+    mobi,
     pdf_external,
     rar,
     rar_external,
@@ -61,6 +62,9 @@ _HANDLERS = {
     constants.PDF: (
         pdf_external.PdfArchive,
     ),
+    constants.MOBI: (
+        mobi.MobiArchive,
+    ),
 }
 
 def _get_handler(archive_type):
@@ -88,6 +92,9 @@ def lha_available():
 def pdf_available():
     return _is_available(constants.PDF)
 
+def mobi_available():
+    return _is_available(constants.MOBI)
+
 def get_supported_formats():
     global _SUPPORTED_ARCHIVE_FORMATS
     if _SUPPORTED_ARCHIVE_FORMATS is None:
@@ -99,6 +106,7 @@ def get_supported_formats():
             ('7z' , constants.SZIP_FORMATS, szip_available()),
             ('LHA', constants.LHA_FORMATS , lha_available() ),
             ('PDF', constants.PDF_FORMATS , pdf_available() ),
+            ('MobiPocket', constants.MOBI_FORMATS , mobi_available() ),
         ):
             if is_available:
                 supported_formats[name] = (set(formats[0]), set(formats[1]))
@@ -133,6 +141,8 @@ def archive_mime_type(path):
 
             fd = open(path, 'rb')
             magic = fd.read(5)
+            fd.seek(60)
+            magic2 = fd.read(8)
             fd.close()
 
             try:
@@ -164,6 +174,9 @@ def archive_mime_type(path):
 
             if magic[0:4] == b'%PDF':
                 return constants.PDF
+
+            if magic2 == b'BOOKMOBI':
+                return constants.MOBI
 
     except Exception:
         log.warning(_('! Could not read %s'), path)
