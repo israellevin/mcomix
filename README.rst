@@ -1,5 +1,14 @@
 User under win32 should use `original mcomix`_.
 
+
+================
+Toggle View Mode
+================
+
+Fork from MComix3 with a small extra feature - a toggle between best fit and width fit.
+
+I use vi-like motion keybinds (hjkl), and I map space to toggle view mode. I also set the steps required to flip a page to a high number, so I can scroll down a page in fit width mode, then hit space to zoom out into best fit and view the whole page I just read, flip a page, see it in full, then hit space to zoom back in. Perfect.
+
 =======
 MComix3
 =======

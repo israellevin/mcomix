@@ -141,6 +141,9 @@ class EventHandler(object):
         manager.register('fit_manual_mode',
                          self._window.actiongroup.get_action('fit_manual_mode').activate)
 
+        manager.register('toggle_view_mode',
+                         self._window.actiongroup.get_action('toggle_view_mode').activate)
+
         manager.register('manga_mode',
                          self._window.actiongroup.get_action('manga_mode').activate)
         manager.register('invert_scroll',

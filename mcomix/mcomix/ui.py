@@ -140,7 +140,10 @@ class MainUI(Gtk.UIManager):
                 None, _('Magnifying lens'), window.lens.toggle),
             ('stretch', None, _('Stretch small images'),
                 None, _('Stretch images to fit to the screen, depending on zoom mode.'),
-                window.change_stretch)])
+                window.change_stretch),
+            ('toggle_view_mode', None, _('toggle between width and best fit'),
+                None, _('toggle between width and best fit view modes'),
+                window.toggle_view_mode)])
 
         # Note: Don't change the default value for the radio buttons unless
         # also fixing the code for setting the correct one on start-up in main.py.
@@ -267,6 +270,7 @@ class MainUI(Gtk.UIManager):
                     <menuitem action="fit_height_mode" />
                     <menuitem action="fit_size_mode" />
                     <menuitem action="fit_manual_mode" />
+                    <menuitem action="toggle_view_mode" />
                     <separator />
                     <menuitem action="slideshow" />
                     <separator />

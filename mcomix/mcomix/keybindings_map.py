@@ -125,6 +125,8 @@ BINDING_INFO = {
                       'group': _('View mode')},
     'fit_manual_mode': {'title': _('Manual zoom mode'),
                         'group': _('View mode')},
+    'toggle_view_mode': {'title': _('Toggle view mode'),
+                        'group': _('View mode')},
 
     # General UI
     'exit_fullscreen': {'title': _('Exit from fullscreen'),
@@ -227,10 +229,10 @@ DEFAULT_BINDINGS = {
     'scroll_right_top':['KP_9'],
 
     # Arrow keys scroll the image
-    'scroll_down':['Down','KP_Down'],
-    'scroll_up':['Up','KP_Up'],
-    'scroll_right':['Right','KP_Right'],
-    'scroll_left':['Left','KP_Left'],
+    'scroll_down':['Down','KP_Down', 'j'],
+    'scroll_up':['Up','KP_Up', 'k'],
+    'scroll_right':['Right','KP_Right', 'l'],
+    'scroll_left':['Left','KP_Left', 'h'],
 
     # Space key scrolls down a percentage of the window height or the
     # image height at a time. When at the bottom it flips to the next
@@ -240,8 +242,8 @@ DEFAULT_BINDINGS = {
     # the flow of the comic.
     #
     # If Shift is pressed we should backtrack instead.
-    'smart_scroll_up':['<Shift>space'],
-    'smart_scroll_down':['space'],
+    'smart_scroll_up':[],
+    'smart_scroll_down':[],
 
     # View
     'zoom_in':['plus','KP_Add','equal'],
@@ -249,7 +251,7 @@ DEFAULT_BINDINGS = {
     # Zoom out is already defined as GTK menu hotkey
     'zoom_original':['<Control>0','KP_0'],
 
-    'keep_transformation':['k'],
+    'keep_transformation':[],
     'rotate_90':['r'],
     'rotate_270':['<Shift>r'],
     'rotate_180':[],
@@ -266,14 +268,15 @@ DEFAULT_BINDINGS = {
     'manga_mode':['m'],
     'invert_scroll':['x'],
 
-    'lens':['l'],
+    'lens':[],
     'stretch':['y'],
 
     'best_fit_mode':['b'],
     'fit_width_mode':['w'],
-    'fit_height_mode':['h'],
+    'fit_height_mode':[],
     'fit_size_mode':['s'],
     'fit_manual_mode':['a'],
+    'toggle_view_mode':['space'],
 
     # General UI
     'exit_fullscreen':['Escape'],

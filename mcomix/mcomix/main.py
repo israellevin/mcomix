@@ -811,6 +811,13 @@ class MainWindow(Gtk.Window):
         self.zoom.reset_user_zoom()
         self.draw_image()
 
+    def toggle_view_mode(self, toggleaction):
+        prefs['zoom mode'] = (
+            constants.ZOOM_MODE_WIDTH
+            if prefs['zoom mode'] == constants.ZOOM_MODE_BEST else
+            constants.ZOOM_MODE_BEST)
+        self.change_zoom_mode()
+
     def change_autorotation(self, radioaction=None, *args):
         ''' Switches between automatic rotation modes, depending on which
         radiobutton is currently activated. '''

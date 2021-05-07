@@ -17,7 +17,7 @@ prefs = {
     'auto load last file': False,
     'page of last file': 1,
     'path to last file': '',
-    'number of key presses before page turn': 3,
+    'number of key presses before page turn': 100,
     'auto open next archive': True,
     'auto open next directory': True,
     'open first file in prev archive': False,
