@@ -1085,8 +1085,9 @@ class MainWindow(Gtk.Window):
         else:
             text += '\n'
         page_number = self.imagehandler.get_current_page()
+        number_of_pages = self.imagehandler.get_number_of_pages()
         if page_number:
-            text += '%s %s' % (_('Page'), page_number)
+            text += '%s %d / %d' % (_('Page'), page_number, number_of_pages)
         text = text.strip('\n')
         if text:
             self.osd.show(text)
