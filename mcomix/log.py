@@ -20,7 +20,7 @@ if not __logger.handlers:
     __handler.setFormatter(logging.Formatter(
         '%(asctime)s [%(threadName)s] %(levelname)s: %(message)s',
         '%H:%M:%S'))
-    __logger.handlers = [ __handler ]
+    __logger.handlers = [__handler]
 
 # The following functions direct all input to __logger.
 
