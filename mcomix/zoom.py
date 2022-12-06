@@ -6,6 +6,7 @@ from mcomix.preferences import prefs
 from mcomix import tools
 from mcomix import box
 from functools import reduce
+from typing import List, Tuple, Sequence
 
 IDENTITY_ZOOM = 1.0
 IDENTITY_ZOOM_LOG = 0
@@ -13,10 +14,11 @@ USER_ZOOM_LOG_SCALE1 = 4.0
 MIN_USER_ZOOM_LOG = -20
 MAX_USER_ZOOM_LOG = 12
 
+
 class ZoomModel(object):
     """ Handles zoom and fit modes. """
 
-    def __init__(self):
+    def __init__(self) -> None:
         #: User zoom level.
         self._user_zoom_log = IDENTITY_ZOOM_LOG
         #: Image fit mode. Determines the base zoom level for an image by
@@ -24,32 +26,33 @@ class ZoomModel(object):
         self._fitmode = constants.ZOOM_MODE_MANUAL
         self._scale_up = False
 
-    def set_fit_mode(self, fitmode):
+    def set_fit_mode(self, fitmode: int) -> None:
         if fitmode < constants.ZOOM_MODE_BEST or \
-            fitmode > constants.ZOOM_MODE_SIZE:
+           fitmode > constants.ZOOM_MODE_SIZE:
             raise ValueError("No fit mode for id %d." % fitmode)
         self._fitmode = fitmode
 
-    def get_scale_up(self):
+    def get_scale_up(self) -> bool:
         return self._scale_up
 
-    def set_scale_up(self, scale_up):
+    def set_scale_up(self, scale_up: bool) -> None:
         self._scale_up = scale_up
 
-    def _set_user_zoom_log(self, zoom_log):
+    def _set_user_zoom_log(self, zoom_log: int) -> None:
         self._user_zoom_log = min(max(zoom_log, MIN_USER_ZOOM_LOG), MAX_USER_ZOOM_LOG)
 
-    def zoom_in(self):
+    def zoom_in(self) -> None:
         self._set_user_zoom_log(self._user_zoom_log + 1)
 
-    def zoom_out(self):
+    def zoom_out(self) -> None:
         self._set_user_zoom_log(self._user_zoom_log - 1)
 
-    def reset_user_zoom(self):
+    def reset_user_zoom(self) -> None:
         self._set_user_zoom_log(IDENTITY_ZOOM_LOG)
 
-    def get_zoomed_size(self, image_sizes, screen_size, distribution_axis,
-        do_not_transform, prefer_same_size, fit_same_size):
+    def get_zoomed_size(self, image_sizes: List[Sequence[int]], screen_size: Tuple[int, int],
+                        distribution_axis: int, do_not_transform: List[bool], prefer_same_size: bool,
+                        fit_same_size: bool) -> Tuple[int, int]:
         scale_up = self._scale_up
         if prefer_same_size:
             # Preprocessing step: scale all images to the same size
@@ -61,20 +64,21 @@ class ZoomModel(object):
             else:
                 # Scale down to intersection.
                 pre_limits = reduce(box.Box.intersect, image_boxes, image_boxes[0]).get_size()
-            new_image_sizes = [tuple(tools.scale(s, ZoomModel._preferred_scale( \
+            new_image_sizes = [tuple(tools.scale(s, ZoomModel._preferred_scale(
                 s, pre_limits, distribution_axis))) for s in image_sizes]
-            new_image_sizes2 = [new_image_sizes[i] if not do_not_transform[i] else image_sizes[i] \
-                for i in range(len(new_image_sizes))]
+            new_image_sizes2 = [new_image_sizes[i] if not do_not_transform[i] else image_sizes[i]
+                                for i in range(len(new_image_sizes))]
             image_sizes = new_image_sizes2
         union_size = _union_size(image_sizes, distribution_axis)
         limits = ZoomModel._calc_limits(union_size, screen_size, self._fitmode,
-            scale_up)
+                                        scale_up)
         prefscale = ZoomModel._preferred_scale(union_size, limits, distribution_axis)
         preferred_scales = tuple([prefscale if not dnt else IDENTITY_ZOOM for dnt in do_not_transform])
         prescaled = list(map(lambda size, scale, dnt: tuple(_scale_image_size(size, scale)),
-            image_sizes, preferred_scales, do_not_transform))
+                         image_sizes, preferred_scales, do_not_transform))
         prescaled_union_size = _union_size(prescaled, distribution_axis)
-        def _other_preferences(limits, distribution_axis):
+
+        def _other_preferences(limits: int, distribution_axis: int) -> bool:
             for i in range(len(limits)):
                 if i == distribution_axis:
                     continue

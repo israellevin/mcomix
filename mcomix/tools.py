@@ -1,15 +1,16 @@
 """tools.py - Contains various helper functions."""
 
-import os
-import sys
-import re
-import gc
 import bisect
-import operator
-import math
+import gc
 import itertools
+import math
+import operator
+import os
+import re
+import sys
 from functools import reduce
-from typing import List, Union, Any, Tuple, TypeVar, Mapping, Iterable
+from typing import (Any, Iterable, List, Mapping, Sequence, Tuple, TypeVar,
+                    Union)
 
 Numeric = TypeVar('Numeric', int, float)
 
@@ -166,7 +167,7 @@ def smaller_or_equal(a: List, b: List) -> List:
     return list(map(operator.le, a, b))
 
 
-def scale(t: List[Numeric], factor: Numeric) -> List[Numeric]:
+def scale(t: Sequence[Numeric], factor: Numeric) -> List[Numeric]:
     return [x * factor for x in t]
 
 
