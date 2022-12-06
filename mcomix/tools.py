@@ -8,52 +8,52 @@ import bisect
 import operator
 import math
 import itertools
-from functools import reduce, cmp_to_key
+from functools import reduce
+from typing import List, Union, Any, Tuple, TypeVar, Mapping, Iterable
 
+Numeric = TypeVar('Numeric', int, float)
 
 NUMERIC_REGEXP = re.compile(r"\d+|\D+")  # Split into numerics and characters
 PREFIXED_BYTE_UNITS = ("B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB", "RiB", "QiB")
 
 
-def cmp(a, b):
+def cmp(a: str, b: str) -> int:
     """ Forward port of Python2's cmp function """
     return (a > b) - (a < b)
 
-def alphanumeric_sort(filenames):
+
+class AlphanumericSortKey:
+    """ Compares two strings by their natural order (i.e. 1 before 10) """
+    def __init__(self, filename: str) -> None:
+        self.filename_parts: List[Union[int, str]] = [
+            int(part) if part.isdigit() else part
+            for part in NUMERIC_REGEXP.findall(filename.lower())
+        ]
+
+    def __lt__(self, other: 'AlphanumericSortKey') -> bool:
+        for left, right in itertools.zip_longest(self.filename_parts, other.filename_parts, fillvalue=''):
+            if not isinstance(left, type(right)):
+                left_str = str(left)
+                right_str = str(right)
+                if left_str < right_str:
+                    return True
+            else:
+                if left < right:
+                    return True
+
+        return False
+
+
+def alphanumeric_sort(filenames: List[str]) -> None:
     """Do an in-place alphanumeric sort of the strings in <filenames>,
     such that for an example "1.jpg", "2.jpg", "10.jpg" is a sorted
     ordering.
     """
 
-    filenames.sort(key=cmp_to_key(alphanumeric_compare))
+    filenames.sort(key=AlphanumericSortKey)
 
-def alphanumeric_compare(s1, s2):
-    """ Compares two strings by their natural order (i.e. 1 before 10)
-    and returns a result comparable to the cmp function.
-    @return: 0 if identical, -1 if s1 < s2, +1 if s1 > s2. """
-    if s1 is None:
-        return 1
-    elif s2 is None:
-        return -1
 
-    stringparts1 = NUMERIC_REGEXP.findall(s1.lower())
-    stringparts2 = NUMERIC_REGEXP.findall(s2.lower())
-    for i, part in enumerate(stringparts1):
-        if part.isdigit():
-            stringparts1[i] = int(part)
-    for i, part in enumerate(stringparts2):
-        if part.isdigit():
-            stringparts2[i] = int(part)
-
-    min_length = min(len(stringparts1), len(stringparts2))
-    for i in range(min_length):
-        if type(stringparts1[i]) is not type(stringparts2[i]):
-            stringparts1[i] = str(stringparts1[i])
-            stringparts2[i] = str(stringparts2[i])
-
-    return cmp(stringparts1, stringparts2)
-
-def bin_search(lst, value):
+def bin_search(lst: List, value: Any) -> int:
     """ Binary search for sorted list C{lst}, looking for C{value}.
     @return: List index on success. On failure, it returns the 1's
     complement of the index where C{value} would be inserted.
@@ -67,7 +67,7 @@ def bin_search(lst, value):
         return ~index
 
 
-def get_home_directory():
+def get_home_directory() -> str:
     """On UNIX-like systems, this method will return the path of the home
     directory, e.g. /home/username. On Windows, it will return an MComix
     sub-directory of <Documents and Settings/Username>.
@@ -78,7 +78,7 @@ def get_home_directory():
         return os.path.expanduser('~')
 
 
-def get_config_directory():
+def get_config_directory() -> str:
     """Return the path to the MComix config directory. On UNIX, this will
     be $XDG_CONFIG_HOME/mcomix, on Windows it will be the same directory as
     get_home_directory().
@@ -90,11 +90,11 @@ def get_config_directory():
         return get_home_directory()
     else:
         base_path = os.getenv('XDG_CONFIG_HOME',
-            os.path.join(get_home_directory(), '.config'))
+                              os.path.join(get_home_directory(), '.config'))
         return os.path.join(base_path, 'mcomix')
 
 
-def get_data_directory():
+def get_data_directory() -> str:
     """Return the path to the MComix data directory. On UNIX, this will
     be $XDG_DATA_HOME/mcomix, on Windows it will be the same directory as
     get_home_directory().
@@ -106,31 +106,35 @@ def get_data_directory():
         return get_home_directory()
     else:
         base_path = os.getenv('XDG_DATA_HOME',
-            os.path.join(get_home_directory(), '.local/share'))
+                              os.path.join(get_home_directory(), '.local/share'))
         return os.path.join(base_path, 'mcomix')
 
 
-def number_of_digits(n):
+def number_of_digits(n: int) -> int:
     if 0 == n:
         return 1
     return int(math.log10(abs(n))) + 1
 
-def decompose_byte_size_exponent(n):
+
+def decompose_byte_size_exponent(n: float) -> Tuple[float, int]:
     e = 0
     while n > 1024.0:
         n /= 1024.0
         e += 1
     return (n, e)
 
-def byte_size_exponent_to_prefix(e):
-    return PREFIXED_BYTE_UNITS[min(e, len(PREFIXED_BYTE_UNITS)-1)]
 
-def format_byte_size(n):
+def byte_size_exponent_to_prefix(e: int) -> str:
+    return PREFIXED_BYTE_UNITS[min(e, len(PREFIXED_BYTE_UNITS) - 1)]
+
+
+def format_byte_size(n: float) -> str:
     nn, e = decompose_byte_size_exponent(n)
     return ('%d %s' if nn == int(nn) else '%.1f %s') % \
         (nn, byte_size_exponent_to_prefix(e))
 
-def garbage_collect():
+
+def garbage_collect() -> None:
     """ Runs the garbage collector. """
     if sys.version_info[:3] >= (2, 5, 0):
         gc.collect(0)
@@ -138,39 +142,48 @@ def garbage_collect():
         gc.collect()
 
 
-def div(a, b):
+def div(a: Numeric, b: Numeric) -> float:
     return float(a) / float(b)
 
-def volume(t):
+
+def volume(t: List[int]) -> int:
     return reduce(operator.mul, t, 1)
 
-def relerr(approx, ideal):
+
+def relerr(approx: Numeric, ideal: Numeric) -> float:
     return abs(div(approx - ideal, ideal))
 
-def smaller(a, b):
+
+def smaller(a: List, b: List) -> List:
     """ Returns a list with the i-th element set to True if and only if the i-th
     element in a is less than the i-th element in b. """
     return list(map(operator.lt, a, b))
 
-def smaller_or_equal(a, b):
+
+def smaller_or_equal(a: List, b: List) -> List:
     """ Returns a list with the i-th element set to True if and only if the i-th
     element in a is less than or equal to the i-th element in b. """
     return list(map(operator.le, a, b))
 
-def scale(t, factor):
+
+def scale(t: List[Numeric], factor: Numeric) -> List[Numeric]:
     return [x * factor for x in t]
 
-def vector_sub(a, b):
+
+def vector_sub(a: List[Numeric], b: List[Numeric]) -> List[Numeric]:
     """ Subtracts vector b from vector a. """
     return list(map(operator.sub, a, b))
 
-def vector_add(a, b):
+
+def vector_add(a: List[Numeric], b: List[Numeric]) -> List[Numeric]:
     """ Adds vector a to vector b. """
     return list(map(operator.add, a, b))
 
-def vector_opposite(a):
+
+def vector_opposite(a: List[Numeric]) -> List[Numeric]:
     """ Returns the opposite vector -a. """
     return list(map(operator.neg, a))
+
 
 def remap_axes(vector, order):
     return [vector[i] for i in order]
@@ -191,14 +204,21 @@ def fixed_strings_regex(strings):
     strings = set(strings)
     return r'(%s)' % '|'.join(sorted([re.escape(s) for s in strings]))
 
-def formats_to_regex(formats):
+
+def fixed_strings_regex(strings: Iterable[str]) -> str:
+    # introduces a matching group
+    unique_strings = set(strings)
+    return r'(%s)' % '|'.join(sorted([re.escape(s) for s in unique_strings]))
+
+
+def formats_to_regex(formats: Mapping) -> re.Pattern:
     """ Returns a compiled regular expression that can be used to search for
     file extensions specified in C{formats}. """
-    return re.compile(r'\.' + fixed_strings_regex( \
-        itertools.chain.from_iterable([e[1] for e in formats.values()])) \
-        + r'$', re.I)
+    return re.compile(r'\.' + fixed_strings_regex(
+        itertools.chain.from_iterable([e[1] for e in formats.values()])) + r'$', re.I)
 
-def append_number_to_filename(filename, number):
+
+def append_number_to_filename(filename: str, number: int) -> str:
     """ Generate a new string from filename with an appended number right
     before the extension. """
     file_no_ext = os.path.splitext(filename)[0]

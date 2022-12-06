@@ -145,7 +145,7 @@ class _BookmarksDialog(Gtk.Dialog):
 
         for field in user_data:
             result = tools.cmp(getattr(bookmark1, field),
-                getattr(bookmark2, field))
+                               getattr(bookmark2, field))
             if result != 0:
                 return result
 
