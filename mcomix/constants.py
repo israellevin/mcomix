@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """constants.py - Miscellaneous constants."""
 
+import enum
 import os
 
 from mcomix import tools
@@ -25,7 +26,15 @@ FILEINFO_PICKLE_PATH = os.path.join(DATA_DIR, 'file.pickle')
 # Transitional - used if json preferences are (were) absent.
 PREFERENCE_PICKLE_PATH = os.path.join(CONFIG_DIR, 'preferences.pickle')
 
-ZOOM_MODE_BEST, ZOOM_MODE_WIDTH, ZOOM_MODE_HEIGHT, ZOOM_MODE_MANUAL, ZOOM_MODE_SIZE = list(range(5))
+
+class ZoomMode(enum.IntEnum):
+    BEST = 0
+    WIDTH = 1
+    HEIGHT = 2
+    MANUAL = 3
+    SIZE = 4
+
+
 DOUBLE_PAGE_AUTORESIZE_SCALE, DOUBLE_PAGE_AUTORESIZE_SIZE, DOUBLE_PAGE_AUTORESIZE_FIT_SIZE = list(range(3))
 
 WIDTH_AXIS, HEIGHT_AXIS = list(range(2))

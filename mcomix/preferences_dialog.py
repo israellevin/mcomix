@@ -464,8 +464,8 @@ class _PreferencesDialog(Gtk.Dialog):
     def _create_fitmode_control(self):
         """ Combobox for fit to size mode """
         items = (
-                (_('Fit to width'), constants.ZOOM_MODE_WIDTH),
-                (_('Fit to height'), constants.ZOOM_MODE_HEIGHT))
+                (_('Fit to width'), constants.ZoomMode.WIDTH),
+                (_('Fit to height'), constants.ZoomMode.HEIGHT))
 
         box = self._create_combobox(items,
                 prefs['fit to size mode'],

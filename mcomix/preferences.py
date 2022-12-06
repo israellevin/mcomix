@@ -32,7 +32,7 @@ prefs = {
     'stretch': False,
     'default double page': False,
     'default fullscreen': False,
-    'zoom mode': constants.ZOOM_MODE_BEST,
+    'zoom mode': constants.ZoomMode.BEST,
     'default manga mode': False,
     'lens magnification': 2,
     'lens size': 200,
@@ -100,7 +100,7 @@ prefs = {
     'wrap mouse scroll': False,
     'scaling quality': 2,  # GdkPixbuf.InterpType.BILINEAR
     'escape quits': False,
-    'fit to size mode': constants.ZOOM_MODE_HEIGHT,
+    'fit to size mode': constants.ZoomMode.HEIGHT,
     'fit to size px': 1800,
     'scan for new books on library startup': True,
     'openwith commands': [],  # (label, command) pairs

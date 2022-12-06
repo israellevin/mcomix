@@ -61,13 +61,13 @@ def parse_arguments(argv):
 
     fitmodes = optparse.OptionGroup(parser, _('Zoom modes'))
     fitmodes.add_option('-b', '--zoom-best', dest='zoommode', action='store_const',
-            const=constants.ZOOM_MODE_BEST,
+            const=constants.ZoomMode.BEST,
             help=_('Start the application with zoom set to best fit mode.'))
     fitmodes.add_option('-w', '--zoom-width', dest='zoommode', action='store_const',
-            const=constants.ZOOM_MODE_WIDTH,
+            const=constants.ZoomMode.WIDTH,
             help=_('Start the application with zoom set to fit width.'))
     fitmodes.add_option('-h', '--zoom-height', dest='zoommode', action='store_const',
-            const=constants.ZOOM_MODE_HEIGHT,
+            const=constants.ZoomMode.HEIGHT,
             help=_('Start the application with zoom set to fit height.'))
     parser.add_option_group(fitmodes)
 

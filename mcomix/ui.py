@@ -143,15 +143,15 @@ class MainUI(Gtk.UIManager):
         # also fixing the code for setting the correct one on start-up in main.py.
         self._actiongroup.add_radio_actions([
             ('best_fit_mode', 'mcomix-fitbest', _('_Best fit mode'),
-                None, _('Best fit mode'), constants.ZOOM_MODE_BEST),
+                None, _('Best fit mode'), constants.ZoomMode.BEST),
             ('fit_width_mode', 'mcomix-fitwidth', _('Fit _width mode'),
-                None, _('Fit width mode'), constants.ZOOM_MODE_WIDTH),
+                None, _('Fit width mode'), constants.ZoomMode.WIDTH),
             ('fit_height_mode', 'mcomix-fitheight', _('Fit _height mode'),
-                None, _('Fit height mode'), constants.ZOOM_MODE_HEIGHT),
+                None, _('Fit height mode'), constants.ZoomMode.HEIGHT),
             ('fit_size_mode', 'mcomix-fitsize', _('Fit _size mode'),
-                None, _('Fit to size mode'), constants.ZOOM_MODE_SIZE),
+                None, _('Fit to size mode'), constants.ZoomMode.SIZE),
             ('fit_manual_mode', 'mcomix-fitmanual', _('M_anual zoom mode'),
-                None, _('Manual zoom mode'), constants.ZOOM_MODE_MANUAL)],
+                None, _('Manual zoom mode'), constants.ZoomMode.MANUAL)],
             3, window.change_zoom_mode)
 
         # Automatically rotate image if width>height or height>width

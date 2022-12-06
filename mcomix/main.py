@@ -156,11 +156,11 @@ class MainWindow(Gtk.Window):
 
         # Determine zoom mode. If zoom_mode is passed, it overrides
         # the zoom mode preference.
-        zoom_actions = { constants.ZOOM_MODE_BEST : 'best_fit_mode',
-                constants.ZOOM_MODE_WIDTH : 'fit_width_mode',
-                constants.ZOOM_MODE_HEIGHT : 'fit_height_mode',
-                constants.ZOOM_MODE_SIZE : 'fit_size_mode',
-                constants.ZOOM_MODE_MANUAL : 'fit_manual_mode' }
+        zoom_actions = { constants.ZoomMode.BEST: 'best_fit_mode',
+                constants.ZoomMode.WIDTH: 'fit_width_mode',
+                constants.ZoomMode.HEIGHT: 'fit_height_mode',
+                constants.ZoomMode.SIZE: 'fit_size_mode',
+                constants.ZoomMode.MANUAL: 'fit_manual_mode' }
 
         if zoom_mode is not None:
             zoom_action = zoom_actions[zoom_mode]

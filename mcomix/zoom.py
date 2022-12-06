@@ -23,12 +23,12 @@ class ZoomModel(object):
         self._user_zoom_log = IDENTITY_ZOOM_LOG
         #: Image fit mode. Determines the base zoom level for an image by
         #: calculating its maximum size.
-        self._fitmode = constants.ZOOM_MODE_MANUAL
+        self._fitmode = constants.ZoomMode.MANUAL
         self._scale_up = False
 
     def set_fit_mode(self, fitmode: int) -> None:
-        if fitmode < constants.ZOOM_MODE_BEST or \
-           fitmode > constants.ZOOM_MODE_SIZE:
+        if fitmode < constants.ZoomMode.BEST or \
+           fitmode > constants.ZoomMode.SIZE:
             raise ValueError("No fit mode for id %d." % fitmode)
         self._fitmode = fitmode
 
@@ -152,19 +152,19 @@ class ZoomModel(object):
         """ Returns a list or a tuple with the i-th element set to int x if
         fitmode limits the size at the i-th axis to x, or None if fitmode has no
         preference for this axis. """
-        manual = fitmode == constants.ZOOM_MODE_MANUAL
-        if fitmode == constants.ZOOM_MODE_BEST or \
+        manual = fitmode == constants.ZoomMode.MANUAL
+        if fitmode == constants.ZoomMode.BEST or \
             (manual and allow_upscaling and all(tools.smaller(union_size, screen_size))):
             return screen_size
         result = [None] * len(screen_size)
         if not manual:
             fixed_size = None
-            if fitmode == constants.ZOOM_MODE_SIZE:
-                fitmode = prefs['fit to size mode'] # reassigning fitmode
+            if fitmode == constants.ZoomMode.SIZE:
+                fitmode = prefs['fit to size mode']  # reassigning fitmode
                 fixed_size = int(prefs['fit to size px'])
-            if fitmode == constants.ZOOM_MODE_WIDTH:
+            if fitmode == constants.ZoomMode.WIDTH:
                 axis = constants.WIDTH_AXIS
-            elif fitmode == constants.ZOOM_MODE_HEIGHT:
+            elif fitmode == constants.ZoomMode.HEIGHT:
                 axis = constants.HEIGHT_AXIS
             else:
                 assert False, 'Cannot map fitmode to axis'
