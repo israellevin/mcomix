@@ -51,7 +51,7 @@ class ZoomModel(object):
         self._set_user_zoom_log(IDENTITY_ZOOM_LOG)
 
     def get_zoomed_size(self, image_sizes: List[Sequence[int]], screen_size: Tuple[int, int],
-                        distribution_axis: int, do_not_transform: List[bool], prefer_same_size: bool,
+                        distribution_axis: constants.PageAxis, do_not_transform: List[bool], prefer_same_size: bool,
                         fit_same_size: bool) -> Tuple[int, int]:
         scale_up = self._scale_up
         if prefer_same_size:
@@ -78,7 +78,7 @@ class ZoomModel(object):
                          image_sizes, preferred_scales, do_not_transform))
         prescaled_union_size = _union_size(prescaled, distribution_axis)
 
-        def _other_preferences(limits: int, distribution_axis: int) -> bool:
+        def _other_preferences(limits: Sequence[int], distribution_axis: constants.PageAxis) -> bool:
             for i in range(len(limits)):
                 if i == distribution_axis:
                     continue
@@ -163,9 +163,9 @@ class ZoomModel(object):
                 fitmode = prefs['fit to size mode']  # reassigning fitmode
                 fixed_size = int(prefs['fit to size px'])
             if fitmode == constants.ZoomMode.WIDTH:
-                axis = constants.WIDTH_AXIS
+                axis = constants.PageAxis.WIDTH
             elif fitmode == constants.ZoomMode.HEIGHT:
-                axis = constants.HEIGHT_AXIS
+                axis = constants.PageAxis.HEIGHT
             else:
                 assert False, 'Cannot map fitmode to axis'
             result[axis] = fixed_size if fixed_size is not None else screen_size[axis]

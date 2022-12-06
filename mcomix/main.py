@@ -137,9 +137,9 @@ class MainWindow(Gtk.Window):
 
         table.attach(self._event_box, 1, 2, 2, 3, Gtk.AttachOptions.FILL|Gtk.AttachOptions.EXPAND,
             Gtk.AttachOptions.FILL|Gtk.AttachOptions.EXPAND, 0, 0)
-        table.attach(self._scroll[constants.HEIGHT_AXIS], 2, 3, 2, 3, Gtk.AttachOptions.FILL|Gtk.AttachOptions.SHRINK,
+        table.attach(self._scroll[constants.PageAxis.HEIGHT], 2, 3, 2, 3, Gtk.AttachOptions.FILL|Gtk.AttachOptions.SHRINK,
             Gtk.AttachOptions.FILL|Gtk.AttachOptions.SHRINK, 0, 0)
-        table.attach(self._scroll[constants.WIDTH_AXIS], 1, 2, 4, 5, Gtk.AttachOptions.FILL|Gtk.AttachOptions.SHRINK,
+        table.attach(self._scroll[constants.PageAxis.WIDTH], 1, 2, 4, 5, Gtk.AttachOptions.FILL|Gtk.AttachOptions.SHRINK,
             Gtk.AttachOptions.FILL, 0, 0)
         table.attach(self.menubar, 0, 3, 0, 1, Gtk.AttachOptions.FILL|Gtk.AttachOptions.SHRINK,
             Gtk.AttachOptions.FILL, 0, 0)
@@ -203,12 +203,12 @@ class MainWindow(Gtk.Window):
 
         # Each "toggle" widget "eats" part of the main layout visible area.
         self._toggle_axis = {
-            self.thumbnailsidebar              : constants.WIDTH_AXIS ,
-            self._scroll[constants.HEIGHT_AXIS]: constants.WIDTH_AXIS ,
-            self._scroll[constants.WIDTH_AXIS] : constants.HEIGHT_AXIS,
-            self.statusbar                     : constants.HEIGHT_AXIS,
-            self.toolbar                       : constants.HEIGHT_AXIS,
-            self.menubar                       : constants.HEIGHT_AXIS,
+            self.thumbnailsidebar              : constants.PageAxis.WIDTH,
+            self._scroll[constants.PageAxis.HEIGHT]: constants.PageAxis.WIDTH,
+            self._scroll[constants.PageAxis.WIDTH] : constants.PageAxis.HEIGHT,
+            self.statusbar                     : constants.PageAxis.HEIGHT,
+            self.toolbar                       : constants.PageAxis.HEIGHT,
+            self.menubar                       : constants.PageAxis.HEIGHT,
         }
 
         # Start with all "toggle" widgets hidden to avoid ugly transitions.
@@ -914,9 +914,9 @@ class MainWindow(Gtk.Window):
                 if widget.get_visible():
                     axis = self._toggle_axis[widget]
                     requisition = widget.size_request()
-                    if constants.WIDTH_AXIS == axis:
+                    if constants.PageAxis.WIDTH == axis:
                         size = requisition.width
-                    elif constants.HEIGHT_AXIS == axis:
+                    elif constants.PageAxis.HEIGHT == axis:
                         size = requisition.height
                     dimensions[axis] -= size
 
