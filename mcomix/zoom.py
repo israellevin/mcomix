@@ -98,6 +98,7 @@ class ZoomModel(object):
             for i in range(len(preferred_scales))]
         res = list(map(lambda size, scale: list(_scale_image_size(size, scale)),
             image_sizes, res_scales))
+        stretched = [False] * len(res)
         if prefer_same_size:
             # While the algorithm so far tries hard to keep the aspect ratios of the
             # original images, in extreme cases, it is not possible to both keep aspect
@@ -115,8 +116,10 @@ class ZoomModel(object):
                 if d == distribution_axis:
                     continue
                 for i in range(len(res)):
-                    res[i][d] = exs[d]
-        return res
+                    if res[i][d] != exs[d]:
+                        res[i][d] = exs[d]
+                        stretched[i] = True
+        return (res, stretched)
 
     @staticmethod
     def _preferred_scale(image_size, limits, distribution_axis):

@@ -110,7 +110,8 @@ class Statusbar(Gtk.EventBox):
         resolution = ""
         for i in range(len(dimensions)):
             d = dimensions[i]
-            resolution += '%dx%d (%.1f%%)' % (d[0], d[1], d[2] * 100.0)
+            resolution += '%dx%d (%.1f%%%s)' % (d[0], d[1], d[2] * 100.0,
+                "*" if d[3] else "")
             if i < len(dimensions) - 1:
                 resolution += ', '
         self._resolution = resolution

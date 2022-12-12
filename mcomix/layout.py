@@ -30,9 +30,10 @@ class FiniteLayout(object): # 2D only
             if dasize <= 0:
                 dasize = 1
             zoom_dummy_size[distribution_axis] = dasize
-            scaled_sizes = sizes_update(zoom_dummy_size)
-            result = FiniteLayout(scaled_sizes, viewport_size, orientation,
-                spacing, expand_area, distribution_axis, alignment_axis)
+            scaled_sizes_stretches = sizes_update(zoom_dummy_size)
+            result = FiniteLayout(scaled_sizes_stretches[0], scaled_sizes_stretches[1],
+                viewport_size, orientation, spacing, expand_area, distribution_axis,
+                alignment_axis)
             union_scaled_size = result.get_union_box().get_size()
             scrollbar_requests = list(map(operator.or_, scrollbar_requests,
                 tools.smaller(viewport_size, union_scaled_size)))
@@ -42,10 +43,12 @@ class FiniteLayout(object): # 2D only
         return result
 
 
-    def __init__(self, content_sizes, viewport_size, orientation, spacing,
-        wrap_individually, distribution_axis, alignment_axis):
+    def __init__(self, content_sizes, content_stretches, viewport_size, orientation,
+        spacing, wrap_individually, distribution_axis, alignment_axis):
         """ Lays out a finite number of Boxes along the first axis.
         @param content_sizes: The sizes of the Boxes to lay out.
+        @param content_stretches: Booleans indicating whether the corresponding
+        Box size is stretched irrespective of aspect ratio.
         @param viewport_size: The size of the viewport.
         @param orientation: The orientation to use.
         @param spacing: Number of additional pixels between Boxes.
@@ -57,8 +60,8 @@ class FiniteLayout(object): # 2D only
         self.scroller = scrolling.Scrolling()
         self.current_index = -1
         self.wrap_individually = wrap_individually
-        self._reset(content_sizes, viewport_size, orientation, spacing,
-            wrap_individually, distribution_axis, alignment_axis)
+        self._reset(content_sizes, content_stretches, viewport_size, orientation,
+            spacing, wrap_individually, distribution_axis, alignment_axis)
 
 
     def set_viewport_position(self, viewport_position):
@@ -133,9 +136,17 @@ class FiniteLayout(object): # 2D only
 
 
     def get_content_boxes(self):
-        """ Returns the Boxes as they are arranged in this layout. 
+        """ Returns the Boxes as they are arranged in this layout.
         @return: The Boxes as they are arranged in this layout. """
         return self.content_boxes
+
+
+    def get_content_stretches(self):
+        """ Returns Booleans indicating whether the corresponding content
+        Box is stretched irrespective of aspect ratio.
+        @return: Booleans indicating whether the corresponding content
+        Box is stretched irrespective of aspect ratio. """
+        return self.content_stretches
 
 
     def get_wrapper_boxes(self):
@@ -176,8 +187,8 @@ class FiniteLayout(object): # 2D only
         self.orientation = orientation
 
 
-    def _reset(self, content_sizes, viewport_size, orientation, spacing,
-        wrap_individually, distribution_axis, alignment_axis):
+    def _reset(self, content_sizes, content_stretches, viewport_size, orientation,
+        spacing, wrap_individually, distribution_axis, alignment_axis):
         # reverse order if necessary
         if orientation[distribution_axis] == -1:
             content_sizes = tuple(reversed(content_sizes))
@@ -207,6 +218,7 @@ class FiniteLayout(object): # 2D only
             temp_wb_list = tuple(reversed(temp_wb_list))
         # done
         self.content_boxes = temp_cb_list
+        self.content_stretches = content_stretches
         self.wrapper_boxes = temp_wb_list
         self.union_box = temp_bb
         self.viewport_box = box.Box(viewport_size)
@@ -235,7 +247,7 @@ class FiniteLayout(object): # 2D only
 
 
 def create_dummy_layout():
-    return FiniteLayout(((1,1),), (1,1), (1,1), 0, False, 0, 0)
+    return FiniteLayout(((1,1),), ((False, False),), (1,1), (1,1), 0, False, 0, 0)
 
 
 # vim: expandtab:sw=4:ts=4
