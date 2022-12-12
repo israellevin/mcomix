@@ -119,7 +119,7 @@ class ZoomModel(object):
                 if d == distribution_axis:
                     continue
                 for i in range(len(res)):
-                    if res[i][d] != exs[d]:
+                    if (res[i][d] != exs[d]) and not do_not_transform[i]:
                         res[i][d] = exs[d]
                         distorted[i] = True
         return (res, distorted)
@@ -193,14 +193,17 @@ class ZoomModel(object):
         if n >= max_size:
             # In this case, only one solution or only an approximation is available.
             # if n > max_size, the result won't fit into max_size.
-            return [tools.div(1, x[axis]) for x in sizes] # FIXME ignores do_not_transform
-        total_axis_size = sum([x[axis] for x in sizes])
-        if (total_axis_size <= max_size) and not allow_upscaling:
+            return [IDENTITY_ZOOM if dnt else tools.div(1, s[axis]) for s, dnt in zip(sizes, do_not_transform)]
+        total_axis_size = sum([s[axis] for s in sizes])
+        total_dnt_axis_size = sum([s[axis] for s, dnt in zip(sizes, do_not_transform) if dnt])
+        if ((total_axis_size <= max_size) and not allow_upscaling) or \
+            (total_axis_size == total_dnt_axis_size):
             # identity
             return [IDENTITY_ZOOM] * n
 
         # non-trival case
-        scale = tools.div(max_size, total_axis_size) # FIXME initial guess should take unscalable images into account
+        # initial guess
+        scale = tools.div(max_size - total_dnt_axis_size, total_axis_size - total_dnt_axis_size)
         scaling_data = [None] * n
         total_axis_size = 0
         # This loop collects some data we need for the actual computations later.
