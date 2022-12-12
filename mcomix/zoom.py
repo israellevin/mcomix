@@ -1,5 +1,6 @@
 """ Handles zoom and fit of images in the main display area. """
 
+import operator
 from mcomix import constants
 from mcomix.preferences import prefs
 from mcomix import tools
@@ -102,25 +103,19 @@ class ZoomModel(object):
             # original images, in extreme cases, it is not possible to both keep aspect
             # ratios as well as make the images fit to the same size, especially after
             # applying user_scale. In those cases, we will make them fit.
-            mins = [None] * len(limits)
-            maxs = [None] * len(limits)
+            op = operator.gt if scale_up else operator.lt
+            exs = [None] * len(limits)
             for d in range(len(limits)):
                 if d == distribution_axis:
                     continue
                 for i in res:
-                    if mins[d] is None or i[d] < mins[d]:
-                        mins[d] = i[d]
-                    if maxs[d] is None or i[d] > maxs[d]:
-                        maxs[d] = i[d]
+                    if exs[d] is None or op(i[d], exs[d]):
+                        exs[d] = i[d]
             for d in range(len(limits)):
-                if mins[d] == maxs[d]:
-                    # implicitly skips if d == distribution_axis
+                if d == distribution_axis:
                     continue
                 for i in range(len(res)):
-                    if scale_up:
-                        res[i][d] = maxs[d]
-                    else:
-                        res[i][d] = mins[d]
+                    res[i][d] = exs[d]
         return res
 
     @staticmethod
