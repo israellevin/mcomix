@@ -98,12 +98,15 @@ class ZoomModel(object):
             for i in range(len(preferred_scales))]
         res = list(map(lambda size, scale: list(_scale_image_size(size, scale)),
             image_sizes, res_scales))
-        stretched = [False] * len(res)
+        distorted = [False] * len(res)
         if prefer_same_size:
             # While the algorithm so far tries hard to keep the aspect ratios of the
             # original images, in extreme cases, it is not possible to both keep aspect
             # ratios as well as make the images fit to the same size, especially after
             # applying user_scale. In those cases, we will make them fit.
+            # Simple approach: For each dimension, we fit each image to either the
+            # minimum size (if scale_up is false) or maximum size (if scale_up is true)
+            # of all images, given the scaled sizes computed so far.
             op = operator.gt if scale_up else operator.lt
             exs = [None] * len(limits)
             for d in range(len(limits)):
@@ -118,8 +121,8 @@ class ZoomModel(object):
                 for i in range(len(res)):
                     if res[i][d] != exs[d]:
                         res[i][d] = exs[d]
-                        stretched[i] = True
-        return (res, stretched)
+                        distorted[i] = True
+        return (res, distorted)
 
     @staticmethod
     def _preferred_scale(image_size, limits, distribution_axis):

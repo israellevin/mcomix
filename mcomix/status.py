@@ -104,8 +104,10 @@ class Statusbar(Gtk.EventBox):
     def set_resolution(self, dimensions): # 2D only
         """Update the resolution data.
 
-        Takes an iterable of tuples, (x, y, scale), describing the original
-        resolution of an image as well as the currently displayed scale.
+        Takes an iterable of tuples, (x, y, scale, distorted), describing the
+        original resolution of an image as well as the currently displayed
+        scale and whether scaling was done irrespective of aspect ratio,
+        resulting in a distorted image.
         """
         resolution = ""
         for i in range(len(dimensions)):

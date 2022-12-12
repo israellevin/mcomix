@@ -457,8 +457,8 @@ class MainWindow(Gtk.Window):
             scales = tuple(map(lambda x, y: math.sqrt(tools.div(
                 tools.volume(x), tools.volume(y))), scaled_sizes, size_list))
 
-            resolutions = tuple(map(lambda sz, sc, st: sz + [sc,st], size_list,
-                scales, self.layout.get_content_stretches()))
+            resolutions = tuple(map(lambda sz, sc, ds: sz + [sc, ds], size_list,
+                scales, self.layout.get_content_distorted()))
             if self.is_manga_mode:
                 resolutions = tuple(reversed(resolutions))
             self.statusbar.set_resolution(resolutions)

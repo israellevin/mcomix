@@ -30,8 +30,8 @@ class FiniteLayout(object): # 2D only
             if dasize <= 0:
                 dasize = 1
             zoom_dummy_size[distribution_axis] = dasize
-            scaled_sizes_stretches = sizes_update(zoom_dummy_size)
-            result = FiniteLayout(scaled_sizes_stretches[0], scaled_sizes_stretches[1],
+            scaled_sizes_distorted = sizes_update(zoom_dummy_size)
+            result = FiniteLayout(scaled_sizes_distorted[0], scaled_sizes_distorted[1],
                 viewport_size, orientation, spacing, expand_area, distribution_axis,
                 alignment_axis)
             union_scaled_size = result.get_union_box().get_size()
@@ -43,11 +43,11 @@ class FiniteLayout(object): # 2D only
         return result
 
 
-    def __init__(self, content_sizes, content_stretches, viewport_size, orientation,
+    def __init__(self, content_sizes, content_distorted, viewport_size, orientation,
         spacing, wrap_individually, distribution_axis, alignment_axis):
         """ Lays out a finite number of Boxes along the first axis.
         @param content_sizes: The sizes of the Boxes to lay out.
-        @param content_stretches: Booleans indicating whether the corresponding
+        @param content_distorted: Booleans indicating whether the corresponding
         Box size is stretched irrespective of aspect ratio.
         @param viewport_size: The size of the viewport.
         @param orientation: The orientation to use.
@@ -60,7 +60,7 @@ class FiniteLayout(object): # 2D only
         self.scroller = scrolling.Scrolling()
         self.current_index = -1
         self.wrap_individually = wrap_individually
-        self._reset(content_sizes, content_stretches, viewport_size, orientation,
+        self._reset(content_sizes, content_distorted, viewport_size, orientation,
             spacing, wrap_individually, distribution_axis, alignment_axis)
 
 
@@ -141,12 +141,12 @@ class FiniteLayout(object): # 2D only
         return self.content_boxes
 
 
-    def get_content_stretches(self):
+    def get_content_distorted(self):
         """ Returns Booleans indicating whether the corresponding content
         Box is stretched irrespective of aspect ratio.
         @return: Booleans indicating whether the corresponding content
         Box is stretched irrespective of aspect ratio. """
-        return self.content_stretches
+        return self.content_distorted
 
 
     def get_wrapper_boxes(self):
@@ -187,7 +187,7 @@ class FiniteLayout(object): # 2D only
         self.orientation = orientation
 
 
-    def _reset(self, content_sizes, content_stretches, viewport_size, orientation,
+    def _reset(self, content_sizes, content_distorted, viewport_size, orientation,
         spacing, wrap_individually, distribution_axis, alignment_axis):
         # reverse order if necessary
         if orientation[distribution_axis] == -1:
@@ -218,7 +218,7 @@ class FiniteLayout(object): # 2D only
             temp_wb_list = tuple(reversed(temp_wb_list))
         # done
         self.content_boxes = temp_cb_list
-        self.content_stretches = content_stretches
+        self.content_distorted = content_distorted
         self.wrapper_boxes = temp_wb_list
         self.union_box = temp_bb
         self.viewport_box = box.Box(viewport_size)
