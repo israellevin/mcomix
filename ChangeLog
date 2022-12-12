@@ -9,6 +9,8 @@ In development
 
     - Fixed magnifying lens errors when image was rotated.
 
+    - Fixed another byte/unicode error in file chooser dialog.
+
 		FEATURES
 
     - Added option to customize space between pages in double-page mode.
