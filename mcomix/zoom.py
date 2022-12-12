@@ -95,8 +95,33 @@ class ZoomModel(object):
         user_scale = 2 ** (self._user_zoom_log / USER_ZOOM_LOG_SCALE1)
         res_scales = [preferred_scales[i] * (user_scale if not do_not_transform[i] else IDENTITY_ZOOM)
             for i in range(len(preferred_scales))]
-        return tuple(map(lambda size, scale: tuple(_scale_image_size(size, scale)),
+        res = list(map(lambda size, scale: list(_scale_image_size(size, scale)),
             image_sizes, res_scales))
+        if prefer_same_size:
+            # While the algorithm so far tries hard to keep the aspect ratios of the
+            # original images, in extreme cases, it is not possible to both keep aspect
+            # ratios as well as make the images fit to the same size, especially after
+            # applying user_scale. In those cases, we will make them fit.
+            mins = [None] * len(limits)
+            maxs = [None] * len(limits)
+            for d in range(len(limits)):
+                if d == distribution_axis:
+                    continue
+                for i in res:
+                    if mins[d] is None or i[d] < mins[d]:
+                        mins[d] = i[d]
+                    if maxs[d] is None or i[d] > maxs[d]:
+                        maxs[d] = i[d]
+            for d in range(len(limits)):
+                if mins[d] == maxs[d]:
+                    # implicitly skips if d == distribution_axis
+                    continue
+                for i in range(len(res)):
+                    if scale_up:
+                        res[i][d] = maxs[d]
+                    else:
+                        res[i][d] = mins[d]
+        return res
 
     @staticmethod
     def _preferred_scale(image_size, limits, distribution_axis):
