@@ -432,7 +432,9 @@ class MainWindow(Gtk.Window):
                 alignment_axis, self._show_scrollbars, self.get_visible_area_size,
                 lambda zoom_dummy_size: self.zoom.get_zoomed_size(size_list, zoom_dummy_size,
                 distribution_axis, do_not_transform,
-                prefs['double page autoresize'] == constants.DOUBLE_PAGE_AUTORESIZE_SIZE))
+                prefs['double page autoresize'] in (constants.DOUBLE_PAGE_AUTORESIZE_SIZE,
+                constants.DOUBLE_PAGE_AUTORESIZE_FIT_SIZE),
+                prefs['double page autoresize'] == constants.DOUBLE_PAGE_AUTORESIZE_FIT_SIZE))
             content_boxes = self.layout.get_content_boxes()
             scaled_sizes = list(map(box.Box.get_size, content_boxes))
 

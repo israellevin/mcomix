@@ -441,7 +441,8 @@ class _PreferencesDialog(Gtk.Dialog):
         """ Creates the ComboBox control for selecting double page autoresize options. """
         items = (
                 (_('Prefer same scale'), constants.DOUBLE_PAGE_AUTORESIZE_SCALE),
-                (_('Fit to same size'), constants.DOUBLE_PAGE_AUTORESIZE_SIZE))
+                (_('Prefer same size'), constants.DOUBLE_PAGE_AUTORESIZE_SIZE),
+                (_('Fit to same size'), constants.DOUBLE_PAGE_AUTORESIZE_FIT_SIZE))
 
         box = self._create_combobox(items,
                 prefs['double page autoresize'],

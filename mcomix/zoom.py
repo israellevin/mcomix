@@ -49,7 +49,7 @@ class ZoomModel(object):
         self._set_user_zoom_log(IDENTITY_ZOOM_LOG)
 
     def get_zoomed_size(self, image_sizes, screen_size, distribution_axis,
-        do_not_transform, prefer_same_size):
+        do_not_transform, prefer_same_size, fit_same_size):
         scale_up = self._scale_up
         if prefer_same_size:
             # Preprocessing step: scale all images to the same size
@@ -99,7 +99,7 @@ class ZoomModel(object):
         res = list(map(lambda size, scale: list(_scale_image_size(size, scale)),
             image_sizes, res_scales))
         distorted = [False] * len(res)
-        if prefer_same_size:
+        if prefer_same_size and fit_same_size:
             # While the algorithm so far tries hard to keep the aspect ratios of the
             # original images, in extreme cases, it is not possible to both keep aspect
             # ratios as well as make the images fit to the same size, especially after
