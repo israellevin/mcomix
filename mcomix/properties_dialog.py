@@ -111,7 +111,7 @@ class _PropertiesDialog(Gtk.Dialog):
 
     def _update_page_secondary_info(self, page, location):
         secondary_info = [
-            (_('Location'), i18n.to_unicode(os.path.dirname(location))),
+            (_('Location'), i18n.to_display_string(i18n.to_unicode(os.path.dirname(location)))),
         ]
         try:
             stats = os.stat(location)

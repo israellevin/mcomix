@@ -109,9 +109,12 @@ def get_translation() -> gettext.NullTranslations:
     (gettext.GNUTranslations is a subclass of NullTranslations.)"""
     return _translation or gettext.NullTranslations()
 
-
 def _(message: str) -> str:
     """Translate the messsage using the current translator."""
     return get_translation().gettext(message)
+
+def to_display_string(string):
+    """ Converts a string to a valid UTF-8 string at the expense of data accuracy. """
+    return string.encode('utf-8', 'surrogateescape').decode('utf-8', 'replace')
 
 # vim: expandtab:sw=4:ts=4

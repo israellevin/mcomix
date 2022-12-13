@@ -8,6 +8,7 @@ from mcomix.preferences import prefs
 from mcomix import message_dialog
 from mcomix import process
 from mcomix import callback
+from mcomix import i18n
 from mcomix.i18n import _
 
 
@@ -356,7 +357,7 @@ class OpenWithEditor(Gtk.Dialog):
 
         try:
             args = list(map(self._quote_if_necessary, command.parse(self._window)))
-            self._test_field.set_text(" ".join(args))
+            self._test_field.set_text(" ".join(map(i18n.to_display_string, args)))
             self._run_button.set_sensitive(True)
 
             if not command.is_valid_workdir(self._window, allow_empty=True):

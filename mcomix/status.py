@@ -121,11 +121,11 @@ class Statusbar(Gtk.EventBox):
 
     def set_root(self, root):
         """Set the name of the root (directory or archive)."""
-        self._root = i18n.to_unicode(root)
+        self._root = i18n.to_display_string(i18n.to_unicode(root))
 
     def set_filename(self, filename):
         """Update the filename."""
-        self._filename = i18n.to_unicode(filename)
+        self._filename = i18n.to_display_string(i18n.to_unicode(filename))
 
     def set_filesize(self, size):
         """Update the filesize."""

@@ -50,7 +50,7 @@ class __BookmarksStore(object):
     def add_bookmark_by_values(self, name, path, page, numpages, archive_type, date_added):
         """Create a bookmark and add it to the list."""
         bookmark = bookmark_menu_item._Bookmark(self._window, self._file_handler,
-            name, path, page, numpages, archive_type, date_added)
+            i18n.to_display_string(name), path, page, numpages, archive_type, date_added)
 
         self.add_bookmark(bookmark)
 
@@ -175,7 +175,7 @@ class __BookmarksStore(object):
 
     def write_bookmarks_file(self):
         """Store relevant bookmark info in the mcomix directory."""
-        
+
         # Merge changes in case file was modified from within other instances
         if self.file_was_modified():
             new_bookmarks, _ = self.load_bookmarks()

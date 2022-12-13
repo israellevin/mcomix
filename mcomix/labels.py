@@ -1,5 +1,6 @@
 """labels.py - Gtk.Label convenience classes."""
 
+from mcomix import i18n
 from gi.repository import GLib, Gtk, Pango
 
 
@@ -27,7 +28,7 @@ class FormattedLabel(Gtk.Label):
             int(self._scale * 10 * 1024),
             self._weight,
             self._STYLES[self._style],
-            GLib.markup_escape_text(text)
+            GLib.markup_escape_text(i18n.to_display_string(text))
         )
         self.set_markup(markup)
 

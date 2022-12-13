@@ -1,6 +1,7 @@
 """bookmark_menu_item.py - A signle bookmark item."""
 
 from gi.repository import Gtk
+from mcomix import i18n
 
 class _Bookmark(Gtk.ImageMenuItem):
 
@@ -61,7 +62,8 @@ class _Bookmark(Gtk.ImageMenuItem):
         page = '%d / %d' % (self._page, self._numpages)
         date = self._date_added.strftime("%x %X")
 
-        return (pixbuf, self._name, page, self._path, date, self)
+        return (pixbuf, self._name, page, i18n.to_display_string(self._path),
+            date, self)
 
     def pack(self):
         """Return a tuple suitable for pickling. The bookmark can be fully

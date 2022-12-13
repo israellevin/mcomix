@@ -57,7 +57,7 @@ class _Page(Gtk.ScrolledWindow):
         """Set the filename to be displayed to <filename>. Call this before
         set_main_info().
         """
-        label = labels.BoldLabel(i18n.to_unicode(filename))
+        label = labels.BoldLabel(i18n.to_display_string(i18n.to_unicode(filename)))
         label.set_alignment(0, 0.5)
         label.set_selectable(True)
         self._mainbox.pack_start(label, False, False, 0)

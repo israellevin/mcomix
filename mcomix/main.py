@@ -953,7 +953,7 @@ class MainWindow(Gtk.Window):
         if self.slideshow.is_running():
             title = '[%s] %s' % (_('SLIDESHOW'), title)
 
-        self.set_title(title)
+        self.set_title(i18n.to_display_string(title))
 
     def set_bg_colour(self, colour):
         """Set the background colour to <colour>. Colour is a sequence in the
