@@ -2,6 +2,7 @@
 
 """ 7z archive extractor. """
 
+import re
 import os
 import subprocess
 import tempfile
@@ -12,6 +13,7 @@ from mcomix.archive import archive_base
 
 # Filled on-demand by SevenZipArchive
 _7z_executable = -1
+
 
 class SevenZipArchive(archive_base.ExternalExecutableArchive):
     """ 7z file extractor using the 7z executable. """
@@ -24,7 +26,7 @@ class SevenZipArchive(archive_base.ExternalExecutableArchive):
     def __init__(self, archive):
         super(SevenZipArchive, self).__init__(archive)
         self._is_solid = False
-        self._is_encrypted =  False
+        self._is_encrypted = False
         self._contents = []
 
     def _get_executable(self):
@@ -69,8 +71,8 @@ class SevenZipArchive(archive_base.ExternalExecutableArchive):
             return None
 
         if self._state == self.STATE_HEADER:
-            if (line.startswith('Error:') or line.startswith('ERROR:')) and \
-               line.endswith(': Can not open encrypted archive. Wrong password?'):
+            if re.match(r'^error:.+?can\s?not open encrypted archive\. wrong password\?$', line,
+                        re.IGNORECASE):
                 self._is_encrypted = True
                 raise self.EncryptedHeader()
             if 'Solid = +' == line:
@@ -105,7 +107,7 @@ class SevenZipArchive(archive_base.ExternalExecutableArchive):
             #: Current path while listing contents.
             self._path = None
             proc = subprocess.run(self._get_list_arguments(),
-                stdout=subprocess.PIPE, stderr=process.STDOUT, encoding='utf-8')
+                                  stdout=subprocess.PIPE, stderr=process.STDOUT, encoding='utf-8')
             try:
                 for line in proc.stdout.splitlines():
                     filename = self._parse_list_output_line(line.rstrip(os.linesep))
@@ -124,7 +126,7 @@ class SevenZipArchive(archive_base.ExternalExecutableArchive):
     def extract(self, filename, destination_dir):
         """ Extract <filename> from the archive to <destination_dir>. """
         assert isinstance(filename, str) and \
-                isinstance(destination_dir, str)
+               isinstance(destination_dir, str)
 
         if not self._get_executable():
             return
@@ -208,7 +210,7 @@ class TarArchive(SevenZipArchive):
     def __init__(self, archive):
         super(TarArchive, self).__init__(archive)
         self._is_solid = True
-        self._is_encrypted =  False
+        self._is_encrypted = False
 
     def _get_extract_arguments(self, list_file=None):
         # Note: we ignore the list_file argument, which

@@ -11,6 +11,9 @@ In development
 
     - Fixed another byte/unicode error in file chooser dialog.
 
+    - 7z archives with encrypted header could not be extracted on Windows,
+      as MComix did not properly parse that the archive needed password input.
+
     FEATURES
 
     - Added option to customize space between pages in double-page mode.
