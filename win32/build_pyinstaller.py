@@ -77,6 +77,7 @@ def copy_other_files():
 
     if os.path.isdir('../mcomix-other/7z'):
         shutil.copy('../mcomix-other/7z/7z.exe', 'dist/MComix/7z.exe')
+        shutil.copy('../mcomix-other/7z/7z.dll', 'dist/MComix/7z.dll')
         win32_newline('../mcomix-other/7z/License.txt', 'dist/MComix/licenses/7z/License.txt')
 
     if os.path.isdir('../mcomix-other/mutool'):
