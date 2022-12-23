@@ -7,6 +7,8 @@ from gi.repository import Gdk, GdkPixbuf, Gtk
 from mcomix.preferences import prefs
 from mcomix import image_tools
 from mcomix import constants
+from mcomix import box
+from mcomix import tools
 
 
 class MagnifyingLens(object):
@@ -130,131 +132,155 @@ class MagnifyingLens(object):
         """Get a pixbuf containing the appropiate image data for the lens
         where <x> and <y> are the positions of the cursor.
         """
+        lens_size = (prefs['lens size'], prefs['lens size'])
+        lens_scale = (prefs['lens magnification'], prefs['lens magnification'])
         canvas = GdkPixbuf.Pixbuf.new(colorspace=GdkPixbuf.Colorspace.RGB,
                                       has_alpha=True, bits_per_sample=8,
-                                      width=prefs['lens size'],
-                                      height=prefs['lens size'])
+                                      width=lens_size[0],
+                                      height=lens_size[1]) # 2D only
         canvas.fill(image_tools.convert_rgb16list_to_rgba8int(self._window.get_bg_colour()))
         cb = self._window.layout.get_content_boxes()
         source_pixbufs = self._window.imagehandler.get_pixbufs(len(cb))
-        for i in range(len(cb)):
-            if image_tools.is_animation(source_pixbufs[i]):
+        for b, source_pixbuf in zip(cb, source_pixbufs):
+            if image_tools.is_animation(source_pixbuf):
                 continue
-            cpos = cb[i].get_position()
-            self._add_subpixbuf(canvas, x - cpos[0], y - cpos[1],
-                cb[i].get_size(), source_pixbufs[i])
+            cpos = b.get_position()
+            rotation = 0
+            if prefs['auto rotate from exif']:
+                rotation += image_tools.get_implied_rotation(source_pixbuf)
+            rotation += image_tools.get_size_rotation(source_pixbuf.get_width(),
+                source_pixbuf.get_height())
+            rotation = (rotation + prefs['rotation']) % 360
+            composite_color_args = (255, 0, 0, 8, 0x777777, 0x999999) if \
+                source_pixbuf.get_has_alpha() and \
+                prefs['checkered bg for transparent images'] else None
+            self._draw_lens_pixbuf((x - cpos[0], y - cpos[1]), b.get_size(),
+                source_pixbuf, rotation, (prefs['horizontal flip'], prefs['vertical flip']),
+                lens_size, lens_scale, canvas, prefs['scaling quality'],
+                composite_color_args) # 2D only
 
         return image_tools.add_border(canvas, 1)
 
-    def _add_subpixbuf(self, canvas, x, y, image_size, source_pixbuf):
-        """Copy a subpixbuf from <source_pixbuf> to <canvas> as it should
-        be in the lens if the coordinates <x>, <y> are the mouse pointer
-        position on the main window layout area.
-
-        The displayed image (scaled from the <source_pixbuf>) must have
-        size <image_size>.
-        """
-        # Prevent division by zero exceptions further down
-        if not image_size[0]:
+    def _draw_lens_pixbuf(self, ref_pos, csize, srcbuf, rotation, flips,
+        lens_size, lens_scale, dstbuf, interpolation, composite_color_args):
+        if tools.volume(csize) == 0:
             return
 
-        # FIXME This merely prevents Errors being raised if source_pixbuf is an
-        # animation. The result might be broken, though, since animation,
-        # rotation etc. might not match or will be ignored:
-        source_pixbuf = image_tools.static_image(source_pixbuf)
+        # Some computations are the same for each axis.
+        def calc_1d(ref_pos, csize, src_pixbuf_size, lens_size, lens_scale):
+            # compute initial scales, sizes and positions
+            page_scale = csize / src_pixbuf_size
+            source_ref_pos = ref_pos / page_scale
+            combined_source_scale = page_scale * lens_scale
+            mapped_ref_pos = source_ref_pos * combined_source_scale
+            mapped_ref_pos_int = int(round(mapped_ref_pos * 2)) // 2
+            mapped_size = int(round(src_pixbuf_size * combined_source_scale))
+            # take rounding errors into account
+            applied_source_scale = mapped_size / src_pixbuf_size
+            # calculate data for clamping
+            lens_size_2q, lens_size_2r = divmod(lens_size, 2)
+            neg_mapped_lens_pos = lens_size_2q - mapped_ref_pos_int
+            dest_lens_offset = neg_mapped_lens_pos
+            dest_lens_end = dest_lens_offset + mapped_size
+            # clamp to lens
+            dest_lens_end = min(dest_lens_end, lens_size)
+            dest_lens_offset = max(0, dest_lens_offset)
+            dest_lens_size = dest_lens_end - dest_lens_offset
+            return applied_source_scale, neg_mapped_lens_pos, dest_lens_offset, \
+                dest_lens_size, mapped_size, mapped_ref_pos_int, lens_size_2q, lens_size_2r
 
-        rotation = 0
-        if prefs['auto rotate from exif']:
-            rotation = image_tools.get_implied_rotation(source_pixbuf)
+        # prepare actual computation
+        src_pixbuf_size = [srcbuf.get_width(), srcbuf.get_height()] # 2D only
+        transpose = (1, 0) if rotation in (90, 270) else (0, 1) # 2D only
+        tp = lambda x: _remap_axes(x, transpose)
+        axis_flip = tuple(map(lambda r, f: (rotation in r) ^ f, ((270, 180), (90, 180)), tp(flips))) # 2D only
 
-        rotation += image_tools.get_size_rotation(source_pixbuf.get_width(),
-                                                  source_pixbuf.get_height())
-        rotation = (rotation + prefs['rotation']) % 360
+        # calculate size and position data
+        applied_source_scale, neg_mapped_lens_pos, dest_lens_offset, dest_lens_size, \
+            mapped_size, mapped_ref_pos_int, lens_size_2q, lens_size_2r = \
+            [list(x) for x in zip(*(map(calc_1d, tp(ref_pos), tp(csize),
+            src_pixbuf_size, tp(lens_size), tp(lens_scale))))]
 
-        if rotation in [90, 270]:
-            scale = float(source_pixbuf.get_height()) / image_size[0]
-        else:
-            scale = float(source_pixbuf.get_width()) / image_size[0]
+        if min(dest_lens_size) > 0:
+            # Using GdkPixbuf.Pixbuf.scale here so we do not need to worry about
+            # interpolation issues when close to the edges. Also, one can exploit it
+            # later to only recompute the parts of the lens where the content might
+            # have changed.
+            if any(flips) or any(axis_flip):
+                # Unfortuantely, GdkPixbuf does not seem to provide an API for applying
+                # arbitrary matrix transforms the same way, which is why we need to
+                # apply inefficient workarounds.
 
-        x *= scale
-        y *= scale
+                # keep track of (mirrored) reference point
+                refpos_tracking = list(mapped_ref_pos_int)
+                for i, s in enumerate(axis_flip):
+                    if s:
+                        # Subtracting the remainder keeps a lens with an odd number
+                        # of pixels centered at the (mirrored) reference point.
+                        refpos_tracking[i] = mapped_size[i] - refpos_tracking[i] - lens_size_2r[i]
+                refpos_tracking = tools.vector_sub(refpos_tracking, lens_size_2q)
 
-        source_mag = prefs['lens magnification'] / scale
-        width = height = prefs['lens size'] / source_mag
+                # write to temporary buffer
+                tempbuf = GdkPixbuf.Pixbuf.new(dstbuf.get_colorspace(),
+                    dstbuf.get_has_alpha(), dstbuf.get_bits_per_sample(), *dest_lens_size)
+                temp_lens_box = box.Box.intersect(box.Box(lens_size, position=refpos_tracking),
+                    box.Box(mapped_size))
+                srcbuf.scale(tempbuf, 0, 0, *dest_lens_size,
+                    *tools.vector_opposite(temp_lens_box.get_position()),
+                    *applied_source_scale, interpolation) # 2D only
 
-        paste_left = x > width / 2
-        paste_top = y > height / 2
-        dest_x = max(0, int(math.ceil((width / 2 - x) * source_mag)))
-        dest_y = max(0, int(math.ceil((height / 2 - y) * source_mag)))
+                # apply all necessary transforms to temporary buffer
+                if rotation != 0:
+                    tempbuf = tempbuf.rotate_simple(_angle_to_gdkpixbuf_rotation(rotation))
+                for i, f in enumerate(flips):
+                    if f:
+                        tempbuf = tempbuf.flip(horizontal=_axis_to_gdkpixbuf_flip_horizontal(i)) # 2D only
 
-        if rotation == 90:
-            x, y = y, source_pixbuf.get_height() - x
-        elif rotation == 180:
-            x = source_pixbuf.get_width() - x
-            y = source_pixbuf.get_height() - y
-        elif rotation == 270:
-            x, y = source_pixbuf.get_width() - y, x
-        if prefs['horizontal flip']:
-            if rotation in (90, 270):
-                y = source_pixbuf.get_height() - y
+                # Not sure whether it should be inverse axis remapping instead of
+                # forward, but in 2D, there is no difference anyway.
+                remapped_dest_lens_offset = tp(dest_lens_offset)
+                remapped_dest_lens_size = tp(dest_lens_size)
+
+                # copy result from temporary buffer to actual lens buffer
+                if composite_color_args is None:
+                    tempbuf.copy_area(0, 0, *remapped_dest_lens_size, dstbuf,
+                        *remapped_dest_lens_offset) # 2D only
+                else:
+                    tempbuf.composite_color(dstbuf, *remapped_dest_lens_offset,
+                        *remapped_dest_lens_size, *remapped_dest_lens_offset, 1, 1,
+                        GdkPixbuf.InterpType.NEAREST, *composite_color_args) # 2D only
+                # unref temporary buffer
+                tempbuf = None
             else:
-                x = source_pixbuf.get_width() - x
-        if prefs['vertical flip']:
-            if rotation in (90, 270):
-                x = source_pixbuf.get_width() - x
-            else:
-                y = source_pixbuf.get_height() - y
-
-        src_x = x - width / 2
-        src_y = y - height / 2
-        if src_x < 0:
-            width += src_x
-            src_x = 0
-        if src_y < 0:
-            height += src_y
-            src_y = 0
-        width = max(0, min(source_pixbuf.get_width() - src_x, width))
-        height = max(0, min(source_pixbuf.get_height() - src_y, height))
-        if width < 1 or height < 1:
-            return
-
-        subpixbuf = source_pixbuf.new_subpixbuf(int(src_x), int(src_y),
-            int(width), int(height))
-        subpixbuf = subpixbuf.scale_simple(
-            int(math.ceil(source_mag * subpixbuf.get_width())),
-            int(math.ceil(source_mag * subpixbuf.get_height())),
-            prefs['scaling quality'])
-
-        if rotation == 90:
-            subpixbuf = subpixbuf.rotate_simple(
-                GdkPixbuf.PixbufRotation.CLOCKWISE)
-        elif rotation == 180:
-            subpixbuf = subpixbuf.rotate_simple(
-                GdkPixbuf.PixbufRotation.UPSIDEDOWN)
-        elif rotation == 270:
-            subpixbuf = subpixbuf.rotate_simple(
-                GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE)
-        if prefs['horizontal flip']:
-            subpixbuf = subpixbuf.flip(horizontal=True)
-        if prefs['vertical flip']:
-            subpixbuf = subpixbuf.flip(horizontal=False)
-
-        subpixbuf = self._window.enhancer.enhance(subpixbuf)
-
-        if paste_left:
-            dest_x = 0
+                # no workaround needed
+                if composite_color_args is None:
+                    srcbuf.scale(dstbuf, *dest_lens_offset, *dest_lens_size,
+                        *neg_mapped_lens_pos, *applied_source_scale, interpolation) # 2D only
+                else:
+                    srcbuf.composite_color(dstbuf, *dest_lens_offset, *dest_lens_size,
+                        *neg_mapped_lens_pos, *applied_source_scale, interpolation,
+                        *composite_color_args) # 2D only
         else:
-            dest_x = min(canvas.get_width() - subpixbuf.get_width(), dest_x)
-        if paste_top:
-            dest_y = 0
-        else:
-            dest_y = min(canvas.get_height() - subpixbuf.get_height(), dest_y)
+            # If we are here, there is either no image to be drawn at all, or it is
+            # out of range.
+            pass
+        return dstbuf
 
-        if subpixbuf.get_has_alpha() and prefs['checkered bg for transparent images']:
-            subpixbuf = subpixbuf.composite_color_simple(subpixbuf.get_width(), subpixbuf.get_height(),
-                GdkPixbuf.InterpType.NEAREST, 255, 8, 0x777777, 0x999999)
+def _axis_to_gdkpixbuf_flip_horizontal(i):
+    return (True, False)[i]
 
-        subpixbuf.copy_area(0, 0, subpixbuf.get_width(),
-            subpixbuf.get_height(), canvas, dest_x, dest_y)
+def _angle_to_gdkpixbuf_rotation(deg):
+    if deg == 0:
+        return GdkPixbuf.PixbufRotation.NONE
+    elif deg == 90:
+        return GdkPixbuf.PixbufRotation.CLOCKWISE
+    elif deg == 180:
+        return GdkPixbuf.PixbufRotation.UPSIDEDOWN
+    elif deg == 270:
+        return GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE
+    raise ValueError("illegal angle: " + str(deg))
+
+def _remap_axes(vector, order):
+    return [vector[i] for i in order]
 
 # vim: expandtab:sw=4:ts=4
