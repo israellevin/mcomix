@@ -32,18 +32,26 @@ GTK_GDK_COLOR_BLACK = Gdk.color_parse('black')
 GTK_GDK_COLOR_WHITE = Gdk.color_parse('white')
 
 
+def axis_to_gdkpixbuf_flip_horizontal(i):
+    return (True, False)[i]
+
+def angle_to_gdkpixbuf_rotation(deg):
+    if deg == 0:
+        return GdkPixbuf.PixbufRotation.NONE
+    elif deg == 90:
+        return GdkPixbuf.PixbufRotation.CLOCKWISE
+    elif deg == 180:
+        return GdkPixbuf.PixbufRotation.UPSIDEDOWN
+    elif deg == 270:
+        return GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE
+    raise ValueError("illegal angle: " + str(deg))
+
 def rotate_pixbuf(src, rotation):
     rotation %= 360
-    if 0 == rotation:
-        return src
-    if 90 == rotation:
-        return src.rotate_simple(GdkPixbuf.PixbufRotation.CLOCKWISE)
-    if 180 == rotation:
-        return src.rotate_simple(GdkPixbuf.PixbufRotation.UPSIDEDOWN)
-    if 270 == rotation:
-        return src.rotate_simple(GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE)
-    raise ValueError("unsupported rotation: %s" % rotation)
+    return src if rotation == 0 else src.rotate_simple(angle_to_gdkpixbuf_rotation(rotation))
 
+def flip_pixbuf(src, axis):
+    return src.flip(horizontal=axis_to_gdkpixbuf_flip_horizontal(axis))
 
 def get_fitting_size(source_size, target_size,
                      keep_ratio=True, scale_up=False):
@@ -119,16 +127,14 @@ def fit_in_rectangle(src, width, height, keep_ratio=True, scale_up=False, rotati
                                      scale_up=scale_up)
 
     if src.get_has_alpha():
-        if prefs['checkered bg for transparent images']:
-            check_size, color1, color2 = 8, 0x777777, 0x999999
-        else:
-            check_size, color1, color2 = 1024, 0xFFFFFF, 0xFFFFFF
+        composite_color_args = get_composite_color_args(0
+            if prefs['checkered bg for transparent images'] else 1)
         if width == src_width and height == src_height:
             # Using anything other than nearest interpolation will result in a
             # modified image if no resizing takes place (even if it's opaque).
             scaling_quality = GdkPixbuf.InterpType.NEAREST
         src = src.composite_color_simple(width, height, scaling_quality,
-                                         255, check_size, color1, color2)
+                                         255, *composite_color_args)
     elif width != src_width or height != src_height:
         src = src.scale_simple(width, height, scaling_quality)
 
@@ -615,6 +621,9 @@ def text_color_for_background_color(bgcolor):
 
 def color_to_floats_rgba(color, alpha=1.0):
     return [c / 65535.0 for c in color[:3]] + [alpha]
+
+def get_composite_color_args(variant):
+    return ((8, 0x777777, 0x999999), (1024, 0xFFFFFF, 0xFFFFFF))[variant]
 
 def get_image_info(path):
     """Return information about and select preferred providers for loading

@@ -132,8 +132,8 @@ class MagnifyingLens(object):
         """Get a pixbuf containing the appropiate image data for the lens
         where <x> and <y> are the positions of the cursor.
         """
-        lens_size = (prefs['lens size'], prefs['lens size'])
-        lens_scale = (prefs['lens magnification'], prefs['lens magnification'])
+        lens_size = (prefs['lens size'],) * 2 # 2D only
+        lens_scale = (prefs['lens magnification'],) * 2 # 2D only
         canvas = GdkPixbuf.Pixbuf.new(colorspace=GdkPixbuf.Colorspace.RGB,
                                       has_alpha=True, bits_per_sample=8,
                                       width=lens_size[0],
@@ -151,7 +151,7 @@ class MagnifyingLens(object):
             rotation += image_tools.get_size_rotation(source_pixbuf.get_width(),
                 source_pixbuf.get_height())
             rotation = (rotation + prefs['rotation']) % 360
-            composite_color_args = (255, 0, 0, 8, 0x777777, 0x999999) if \
+            composite_color_args = image_tools.get_composite_color_args(0) if \
                 source_pixbuf.get_has_alpha() and \
                 prefs['checkered bg for transparent images'] else None
             self._draw_lens_pixbuf((x - cpos[0], y - cpos[1]), b.get_size(),
@@ -192,7 +192,7 @@ class MagnifyingLens(object):
         # prepare actual computation
         src_pixbuf_size = [srcbuf.get_width(), srcbuf.get_height()] # 2D only
         transpose = (1, 0) if rotation in (90, 270) else (0, 1) # 2D only
-        tp = lambda x: _remap_axes(x, transpose)
+        tp = lambda x: tools.remap_axes(x, transpose)
         axis_flip = tuple(map(lambda r, f: (rotation in r) ^ f, ((270, 180), (90, 180)), tp(flips))) # 2D only
 
         # calculate size and position data
@@ -231,10 +231,10 @@ class MagnifyingLens(object):
 
                 # apply all necessary transforms to temporary buffer
                 if rotation != 0:
-                    tempbuf = tempbuf.rotate_simple(_angle_to_gdkpixbuf_rotation(rotation))
+                    tempbuf = image_tools.rotate_pixbuf(tempbuf, rotation)
                 for i, f in enumerate(flips):
                     if f:
-                        tempbuf = tempbuf.flip(horizontal=_axis_to_gdkpixbuf_flip_horizontal(i)) # 2D only
+                        tempbuf = image_tools.flip_pixbuf(tempbuf, i)
 
                 # Not sure whether it should be inverse axis remapping instead of
                 # forward, but in 2D, there is no difference anyway.
@@ -248,7 +248,7 @@ class MagnifyingLens(object):
                 else:
                     tempbuf.composite_color(dstbuf, *remapped_dest_lens_offset,
                         *remapped_dest_lens_size, *remapped_dest_lens_offset, 1, 1,
-                        GdkPixbuf.InterpType.NEAREST, *composite_color_args) # 2D only
+                        GdkPixbuf.InterpType.NEAREST, 255, 0, 0, *composite_color_args) # 2D only
                 # unref temporary buffer
                 tempbuf = None
             else:
@@ -259,28 +259,12 @@ class MagnifyingLens(object):
                 else:
                     srcbuf.composite_color(dstbuf, *dest_lens_offset, *dest_lens_size,
                         *neg_mapped_lens_pos, *applied_source_scale, interpolation,
-                        *composite_color_args) # 2D only
+                        255, 0, 0, *composite_color_args) # 2D only
         else:
             # If we are here, there is either no image to be drawn at all, or it is
             # out of range.
             pass
         return dstbuf
 
-def _axis_to_gdkpixbuf_flip_horizontal(i):
-    return (True, False)[i]
-
-def _angle_to_gdkpixbuf_rotation(deg):
-    if deg == 0:
-        return GdkPixbuf.PixbufRotation.NONE
-    elif deg == 90:
-        return GdkPixbuf.PixbufRotation.CLOCKWISE
-    elif deg == 180:
-        return GdkPixbuf.PixbufRotation.UPSIDEDOWN
-    elif deg == 270:
-        return GdkPixbuf.PixbufRotation.COUNTERCLOCKWISE
-    raise ValueError("illegal angle: " + str(deg))
-
-def _remap_axes(vector, order):
-    return [vector[i] for i in order]
 
 # vim: expandtab:sw=4:ts=4

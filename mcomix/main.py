@@ -448,9 +448,9 @@ class MainWindow(Gtk.Window):
                 if do_not_transform[i]:
                     continue
                 if prefs['horizontal flip']:
-                    pixbuf_list[i] = pixbuf_list[i].flip(horizontal=True)
+                    pixbuf_list[i] = image_tools.flip_pixbuf(pixbuf_list[i], 0)
                 if prefs['vertical flip']:
-                    pixbuf_list[i] = pixbuf_list[i].flip(horizontal=False)
+                    pixbuf_list[i] = image_tools.flip_pixbuf(pixbuf_list[i], 1)
                 pixbuf_list[i] = self.enhancer.enhance(pixbuf_list[i])
 
             for i in range(pixbuf_count):

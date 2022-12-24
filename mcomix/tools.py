@@ -172,6 +172,14 @@ def vector_opposite(a):
     """ Returns the opposite vector -a. """
     return list(map(operator.neg, a))
 
+def remap_axes(vector, order):
+    return [vector[i] for i in order]
+
+def inverse_axis_map(order):
+    identity = list(range(len(order)))
+    return [identity[order[i]] for i in identity]
+
+
 def fixed_strings_regex(strings):
     # introduces a matching group
     strings = set(strings)

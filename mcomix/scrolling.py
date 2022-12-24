@@ -41,9 +41,8 @@ class Scrolling(object):
         # Remap axes
         if axis_map is not None:
             content_size, viewport_size, viewport_position, orientation, \
-                max_scroll = Scrolling._map_remap_axes([content_size,
-                viewport_size, viewport_position, orientation, max_scroll],
-                axis_map)
+                max_scroll = list(map(lambda v: tools.remap_axes(v, axis_map),
+                [content_size, viewport_size, viewport_position, orientation, max_scroll]))
 
         result = list(viewport_position)
         carry = True
@@ -135,8 +134,7 @@ class Scrolling(object):
 
         # Undo axis remapping, if any
         if axis_map is not None:
-            result = Scrolling._remap_axes(result,
-                Scrolling._inverse_axis_map(axis_map))
+            result = tools.remap_axes(result, tools.inverse_axis_map(axis_map))
 
         return tools.vector_add(result, offset)
 
@@ -242,22 +240,6 @@ class Scrolling(object):
 
             result.append(partial_sum)
         return result
-
-
-    @staticmethod
-    def _remap_axes(vector, order):
-        return [vector[i] for i in order]
-
-
-    @staticmethod
-    def _map_remap_axes(vectors, order):
-        return [Scrolling._remap_axes(v, order) for v in vectors]
-
-
-    @staticmethod
-    def _inverse_axis_map(order):
-        identity = list(range(len(order)))
-        return [identity[order[i]] for i in identity]
 
 
 # vim: expandtab:sw=4:ts=4
