@@ -141,22 +141,17 @@ class MagnifyingLens(object):
         canvas.fill(image_tools.convert_rgb16list_to_rgba8int(self._window.get_bg_colour()))
         cb = self._window.layout.get_content_boxes()
         source_pixbufs = self._window.imagehandler.get_pixbufs(len(cb))
-        for b, source_pixbuf in zip(cb, source_pixbufs):
+        transforms = self._window.transforms
+        for b, source_pixbuf, tf in zip(cb, source_pixbufs, transforms):
             if image_tools.is_animation(source_pixbuf):
                 continue
             cpos = b.get_position()
-            rotation = tools.compile_rotations(
-                image_tools.get_implied_rotation(source_pixbuf) if
-                prefs['auto rotate from exif'] else 0,
-                image_tools.get_size_rotation(source_pixbuf.get_width(),
-                source_pixbuf.get_height()),
-                prefs['rotation']
-            )
+            _scale, rotation, flips = tf.to_image_transforms() # FIXME use scale as soon as it is correctly included
             composite_color_args = image_tools.get_composite_color_args(0) if \
                 source_pixbuf.get_has_alpha() and \
                 prefs['checkered bg for transparent images'] else None
             self._draw_lens_pixbuf((x - cpos[0], y - cpos[1]), b.get_size(),
-                source_pixbuf, rotation, (prefs['horizontal flip'], prefs['vertical flip']),
+                source_pixbuf, rotation, flips,
                 lens_size, lens_scale, canvas, prefs['scaling quality'],
                 composite_color_args) # 2D only
 
