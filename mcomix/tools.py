@@ -179,6 +179,12 @@ def inverse_axis_map(order):
     identity = list(range(len(order)))
     return [identity[order[i]] for i in identity]
 
+def compile_rotations(*rotations):
+    return reduce(lambda a, x: a + (x % 360) % 360, rotations, 0)
+
+def rotation_swaps_axes(rotation):
+    return rotation in (90, 270)
+
 
 def fixed_strings_regex(strings):
     # introduces a matching group

@@ -171,8 +171,7 @@ class ImageHandler(object):
             width, height = pixbuf.get_width(), pixbuf.get_height()
             if prefs['auto rotate from exif']:
                 rotation = image_tools.get_implied_rotation(pixbuf)
-                assert rotation in (0, 90, 180, 270)
-                if rotation in (90, 270):
+                if tools.rotation_swaps_axes(rotation):
                     width, height = height, width
             if width > height:
                 return True

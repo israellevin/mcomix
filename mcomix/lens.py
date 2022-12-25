@@ -145,12 +145,13 @@ class MagnifyingLens(object):
             if image_tools.is_animation(source_pixbuf):
                 continue
             cpos = b.get_position()
-            rotation = 0
-            if prefs['auto rotate from exif']:
-                rotation += image_tools.get_implied_rotation(source_pixbuf)
-            rotation += image_tools.get_size_rotation(source_pixbuf.get_width(),
-                source_pixbuf.get_height())
-            rotation = (rotation + prefs['rotation']) % 360
+            rotation = tools.compile_rotations(
+                image_tools.get_implied_rotation(source_pixbuf) if
+                prefs['auto rotate from exif'] else 0,
+                image_tools.get_size_rotation(source_pixbuf.get_width(),
+                source_pixbuf.get_height()),
+                prefs['rotation']
+            )
             composite_color_args = image_tools.get_composite_color_args(0) if \
                 source_pixbuf.get_has_alpha() and \
                 prefs['checkered bg for transparent images'] else None
@@ -191,7 +192,7 @@ class MagnifyingLens(object):
 
         # prepare actual computation
         src_pixbuf_size = [srcbuf.get_width(), srcbuf.get_height()] # 2D only
-        transpose = (1, 0) if rotation in (90, 270) else (0, 1) # 2D only
+        transpose = (1, 0) if tools.rotation_swaps_axes(rotation) else (0, 1) # 2D only
         tp = lambda x: tools.remap_axes(x, transpose)
         axis_flip = tuple(map(lambda r, f: (rotation in r) ^ f, ((270, 180), (90, 180)), tp(flips))) # 2D only
 
@@ -230,8 +231,7 @@ class MagnifyingLens(object):
                     *applied_source_scale, interpolation) # 2D only
 
                 # apply all necessary transforms to temporary buffer
-                if rotation != 0:
-                    tempbuf = image_tools.rotate_pixbuf(tempbuf, rotation)
+                tempbuf = image_tools.rotate_pixbuf(tempbuf, rotation)
                 for i, f in enumerate(flips):
                     if f:
                         tempbuf = image_tools.flip_pixbuf(tempbuf, i)

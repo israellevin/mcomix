@@ -402,29 +402,29 @@ class MainWindow(Gtk.Window):
                 rotation_list = [0] * len(pixbuf_list)
             virtual_size = [0, 0]
             for i in range(pixbuf_count):
-                if rotation_list[i] in (90, 270):
+                if tools.rotation_swaps_axes(rotation_list[i]):
                     size_list[i].reverse()
                 size = size_list[i]
                 virtual_size[distribution_axis] += size[distribution_axis]
                 virtual_size[alignment_axis] = max(virtual_size[alignment_axis],
                                                    size[alignment_axis])
-            rotation = image_tools.get_size_rotation(*virtual_size)
-            rotation = (rotation + prefs['rotation']) % 360
-            if rotation in (90, 270):
+            rotation = tools.compile_rotations(
+                image_tools.get_size_rotation(*virtual_size), prefs['rotation'])
+            if tools.rotation_swaps_axes(rotation):
                 distribution_axis, alignment_axis = alignment_axis, distribution_axis
                 orientation = list(orientation)
-                orientation.reverse()
+                orientation.reverse() # 2D only
                 for i in range(pixbuf_count):
                     if do_not_transform[i]:
                         continue
-                    size_list[i].reverse()
+                    size_list[i].reverse() # 2D only
             if rotation in (180, 270):
                 orientation = tools.vector_opposite(orientation)
             for i in range(pixbuf_count):
-                rotation_list[i] = (rotation_list[i] + rotation) % 360
-            if prefs['vertical flip'] and rotation in (90, 270):
+                rotation_list[i] = tools.compile_rotations(rotation_list[i], rotation)
+            if prefs['vertical flip'] and tools.rotation_swaps_axes(rotation):
                 orientation = tools.vector_opposite(orientation)
-            if prefs['horizontal flip'] and rotation in (0, 180):
+            if prefs['horizontal flip'] and not tools.rotation_swaps_axes(rotation):
                 orientation = tools.vector_opposite(orientation)
 
             self.layout = layout.FiniteLayout.create_finite_layout(
@@ -684,15 +684,15 @@ class MainWindow(Gtk.Window):
         pageselect.Pageselector(self)
 
     def rotate_90(self, *args):
-        prefs['rotation'] = (prefs['rotation'] + 90) % 360
+        prefs['rotation'] = tools.compile_rotations(prefs['rotation'], 90)
         self.draw_image()
 
     def rotate_180(self, *args):
-        prefs['rotation'] = (prefs['rotation'] + 180) % 360
+        prefs['rotation'] = tools.compile_rotations(prefs['rotation'], 180)
         self.draw_image()
 
     def rotate_270(self, *args):
-        prefs['rotation'] = (prefs['rotation'] + 270) % 360
+        prefs['rotation'] = tools.compile_rotations(prefs['rotation'], 270)
         self.draw_image()
 
     def flip_horizontally(self, *args):

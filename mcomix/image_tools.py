@@ -47,7 +47,6 @@ def angle_to_gdkpixbuf_rotation(deg):
     raise ValueError("illegal angle: " + str(deg))
 
 def rotate_pixbuf(src, rotation):
-    rotation %= 360
     return src if rotation == 0 else src.rotate_simple(angle_to_gdkpixbuf_rotation(rotation))
 
 def flip_pixbuf(src, axis):
@@ -109,10 +108,7 @@ def fit_in_rectangle(src, width, height, keep_ratio=True, scale_up=False, rotati
     width = max(width, 1)
     height = max(height, 1)
 
-    rotation %= 360
-    if rotation not in (0, 90, 180, 270):
-        raise ValueError("unsupported rotation: %s" % rotation)
-    if rotation in (90, 270):
+    if tools.rotation_swaps_axes(rotation):
         width, height = height, width
 
     if scaling_quality is None:
@@ -542,26 +538,19 @@ def get_size_rotation(width, height):
     """ Determines the rotation to be applied.
     Returns the degree of rotation (0, 90, 180, 270). """
 
-    size_rotation = 0
-
-    if (height > width and
-        prefs['auto rotate depending on size'] in
-            (constants.AUTOROTATE_HEIGHT_90, constants.AUTOROTATE_HEIGHT_270)):
-
-        if prefs['auto rotate depending on size'] == constants.AUTOROTATE_HEIGHT_90:
-            size_rotation = 90
-        else:
-            size_rotation = 270
-    elif (width > height and
-          prefs['auto rotate depending on size'] in
-            (constants.AUTOROTATE_WIDTH_90, constants.AUTOROTATE_WIDTH_270)):
-
-        if prefs['auto rotate depending on size'] == constants.AUTOROTATE_WIDTH_90:
-            size_rotation = 90
-        else:
-            size_rotation = 270
-
-    return size_rotation
+    if width != height:
+        arp = prefs['auto rotate depending on size']
+        if height > width:
+            if arp == constants.AUTOROTATE_HEIGHT_90:
+                return 90
+            elif arp == constants.AUTOROTATE_HEIGHT_270:
+                return 270
+        else: # width > height
+            if arp == constants.AUTOROTATE_WIDTH_90:
+                return 90
+            elif arp == constants.AUTOROTATE_WIDTH_270:
+                return 270
+    return 0
 
 def combine_pixbufs( pixbuf1, pixbuf2, are_in_manga_mode ):
     if are_in_manga_mode:
