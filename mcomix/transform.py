@@ -71,7 +71,7 @@ class Transform(object): # 2D only
         return self.m[0] == 0
 
     def to_image_transforms(self):
-        """ Compiles the transform to a sequence of hints to basic transform
+        """ Decomposes the transform to a sequence of hints to basic transform
         instructions typically found in image processing libraries. The sequence
         will refer to the positive scaling factors to be applied for each axis
         first, followed by at most one rotation, and finally followed by at most
@@ -87,6 +87,11 @@ class Transform(object): # 2D only
         if f0 and f1:
             f0, f1 = False, False
             r += 180
+        if f0 and r == 90:
+            # Try to avoid horizontal flips because they tend to be slow, given
+            # a certain combination of hardware, memory layout and libraries.
+            f0, f1 = False, True
+            r = 270
         return (s, r, (f0, f1))
 
 Transform.ID = Transform(1, 0, 0, 1)
