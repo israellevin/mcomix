@@ -66,7 +66,7 @@ class MagnifyingLens(object):
 
         lens_size = (prefs['lens size'],) * 2 # 2D only
         border_size = 1
-        rectangle, check_offset = self._calculate_lens_rect(x, y, *lens_size, border_size)
+        rectangle = self._calculate_lens_rect(x, y, *lens_size, border_size)
 
         draw_region = Gdk.Rectangle()
         draw_region.x, draw_region.y, draw_region.width, draw_region.height = rectangle
@@ -75,7 +75,8 @@ class MagnifyingLens(object):
             last_region.x, last_region.y, last_region.width, last_region.height = self._last_lens_rect
             draw_region = Gdk.rectangle_union(draw_region, last_region)
 
-        pixbuf = self._get_lens_pixbuf(x, y, lens_size, border_size, check_offset)
+        pixbuf = self._get_lens_pixbuf(x, y, lens_size, border_size,
+            (x - rectangle[0], y - rectangle[1]))
         window = self._window._main_layout.get_bin_window()
         window.begin_paint_rect(draw_region)
 
@@ -104,8 +105,7 @@ class MagnifyingLens(object):
         lens_x = min(lens_x, max_width - width)
         lens_y = min(lens_y, max_height - height)
 
-        return ((lens_x, lens_y, width + 2 * border_size, height + 2 * border_size),
-            (x - lens_x, y - lens_y))
+        return lens_x, lens_y, width + 2 * border_size, height + 2 * border_size
 
     def _clear_lens(self, current_lens_region=None):
         """ Invalidates the area that was damaged by the last call to draw_lens. """
