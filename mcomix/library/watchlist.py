@@ -1,7 +1,7 @@
 """ Library watch list dialog and backend classes. """
 
 import os
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 from gi.repository import GObject
 
 from mcomix.library import backend_types
@@ -157,7 +157,7 @@ class WatchListDialog(Gtk.Dialog):
         iter = model.get_iter(path)
         # Editing the model in the CellRendererCombo callback stops the editing
         # operation, causing GTK warnings. Delay until callback is finished.
-        GObject.idle_add(model.set_value, iter, COL_COLLECTION_ID, new_id)
+        GLib.idle_add(model.set_value, iter, COL_COLLECTION_ID, new_id)
 
         self._changed = True
 

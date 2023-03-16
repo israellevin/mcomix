@@ -2,8 +2,7 @@
 import sys
 import os
 import re
-from gi.repository import Gtk
-from gi.repository import GObject
+from gi.repository import Gtk, GLib, GObject
 
 from mcomix.preferences import prefs
 from mcomix import message_dialog
@@ -527,7 +526,7 @@ class OpenWithEditor(Gtk.Dialog):
             model.set_value(iter, column, new_text)
             self._changed = old_value != new_text
             self.test_command()
-        GObject.idle_add(delayed_set_value)
+        GLib.idle_add(delayed_set_value)
 
     def _value_changed(self, renderer, path, column):
         """ Called when a toggle field is changed """
@@ -540,7 +539,7 @@ class OpenWithEditor(Gtk.Dialog):
             model.set_value(iter, column, value)
             self._changed = True
 
-        GObject.idle_add(delayed_set_value)
+        GLib.idle_add(delayed_set_value)
 
     def _response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:

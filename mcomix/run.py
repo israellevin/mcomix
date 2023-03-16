@@ -124,9 +124,9 @@ def run():
         require_version('Gtk', '3.0')
         require_version('Gdk', '3.0')
 
-        from gi.repository import Gdk, Gtk, GObject
+        from gi.repository import Gdk, GLib, Gtk
 
-        GObject.threads_init()
+        GLib.threads_init()
 
     except AssertionError:
         log.error( _("You do not have the required versions of GTK+ 3.0 and PyGObject installed.") )
@@ -200,7 +200,7 @@ def run():
         signal.signal(signal.SIGCHLD, on_sigchld)
 
     for sig in (signal.SIGINT, signal.SIGTERM):
-        signal.signal(sig, lambda signum, stack: GObject.idle_add(window.terminate_program))
+        signal.signal(sig, lambda signum, stack: GLib.idle_add(window.terminate_program))
     try:
         Gtk.main()
     except KeyboardInterrupt: # Will not always work because of threading.

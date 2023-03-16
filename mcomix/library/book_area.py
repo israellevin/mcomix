@@ -2,7 +2,7 @@
 
 import os
 import urllib.request, urllib.parse, urllib.error
-from gi.repository import Gdk, GdkPixbuf, Gtk, GObject
+from gi.repository import Gdk, GdkPixbuf, GLib, Gtk, GObject
 import PIL.Image as Image
 import PIL.ImageDraw as ImageDraw
 
@@ -267,7 +267,7 @@ class _BookArea(Gtk.ScrolledWindow):
                 return
 
             # If the current view is filtered, only draw new books that match the filter
-            if not (self._library.filter_string and 
+            if not (self._library.filter_string and
                     self._library.filter_string.lower() not in book.name.lower()):
                 self.add_books([book])
 
@@ -421,7 +421,7 @@ class _BookArea(Gtk.ScrolledWindow):
         if prefs['library cover size'] != old_size:
             self._cache.invalidate_all()
             collection = self._library.collection_area.get_current_collection()
-            GObject.idle_add(self.display_covers, collection)
+            GLib.idle_add(self.display_covers, collection)
 
     def _pixbuf_size(self, border_size=_BORDER_SIZE):
         # Don't forget the extra pixels for the border!
