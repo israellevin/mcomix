@@ -97,26 +97,8 @@ def parse_arguments(argv):
 
     return opts, args
 
-def run():
-    """Run the program."""
-
-    # Load configuration and setup localisation.
-    preferences.read_preferences_file()
-    from mcomix import i18n
-    i18n.install_gettext()
-
-    # Retrieve and parse command line arguments.
-    argv = portability.get_commandline_args()
-    opts, args = parse_arguments(argv)
-
-    # First things first: set the log level.
-    log.setLevel(opts.loglevel)
-
-    # Reconfigure stdout to replace characters that cannot be printed
-    if hasattr(sys.stdout, 'reconfigure'):
-        sys.stdout.reconfigure(errors='replace')
-
-    # Check for PyGTK and PIL dependencies.
+def setup_dependencies():
+    """Check for PyGTK and PIL dependencies."""
     try:
         from gi import require_version
 
@@ -150,6 +132,30 @@ def run():
         log.error( _('Python Imaging Library Fork (Pillow) 6.0.0 or higher is required.') )
         log.error( _('No version of the Python Imaging Library was found on your system.') )
         wait_and_exit()
+
+
+def run():
+    """Run the program."""
+
+    # Load configuration and setup localisation.
+    preferences.read_preferences_file()
+    from mcomix import i18n
+    i18n.install_gettext()
+
+    # Retrieve and parse command line arguments.
+    argv = portability.get_commandline_args()
+    opts, args = parse_arguments(argv)
+
+    # First things first: set the log level.
+    log.setLevel(opts.loglevel)
+
+    # Reconfigure stdout to replace characters that cannot be printed
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(errors='replace')
+
+    setup_dependencies()
+
+    from gi.repository import Gdk, GLib, Gtk
 
     if not os.path.exists(constants.DATA_DIR):
         os.makedirs(constants.DATA_DIR, 0o700)
