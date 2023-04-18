@@ -4,10 +4,9 @@
 
 from mcomix import log
 from mcomix import process
+from mcomix.version_tools import LegacyVersion
 from mcomix.archive import archive_base
 
-# FIXME: LooseVersion is deprecated
-from distutils.version import LooseVersion
 import math
 import os
 import re
@@ -97,8 +96,8 @@ class PdfArchive(archive_base.BaseArchive):
             finally:
                 proc.stderr.close()
                 proc.wait()
-            version = LooseVersion(version)
-            if version >= LooseVersion('1.8'):
+            version = LegacyVersion(version)
+            if version >= LegacyVersion('1.8'):
                 # Mutool executable with draw support.
                 _mudraw_exec = [mutool, 'draw']
                 _mudraw_trace_args = ['-F', 'trace']
@@ -110,7 +109,7 @@ class PdfArchive(archive_base.BaseArchive):
                     log.debug('mudraw executable not found')
                 else:
                     _mudraw_exec = [mudraw]
-                    if version >= LooseVersion('1.7'):
+                    if version >= LegacyVersion('1.7'):
                         _mudraw_trace_args = ['-F', 'trace']
                     else:
                         _mudraw_trace_args = ['-x']
