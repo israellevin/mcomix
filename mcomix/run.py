@@ -143,7 +143,7 @@ def run():
     i18n.install_gettext()
 
     # Retrieve and parse command line arguments.
-    argv = portability.get_commandline_args()
+    argv = sys.argv[1:]
     opts, args = parse_arguments(argv)
 
     # First things first: set the log level.
