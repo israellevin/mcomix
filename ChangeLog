@@ -9,6 +9,11 @@ In development
 
     - Added new de facto IEC prefixes.
 
+    - Window size should be remembered correctly again when restarting the
+      application.
+
+    - Replaced usage of deprecated GTK threading/timer functionality.
+
 MComix 2.1.0
 Release date: 2022-12-17
 

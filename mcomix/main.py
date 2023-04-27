@@ -261,12 +261,13 @@ class MainWindow(Gtk.Window):
             self._event_handler.drag_n_drop_event)
 
         self.uimanager.set_sensitivities()
-        self.show()
         self.restore_window_geometry()
 
         if prefs['default fullscreen'] or fullscreen:
             toggleaction = self.actiongroup.get_action('fullscreen')
             toggleaction.set_active(True)
+
+        self.show()
 
         if prefs['previous quit was quit and save']:
             fileinfo = self.filehandler.read_fileinfo_file()
@@ -735,7 +736,8 @@ class MainWindow(Gtk.Window):
         # Disable action until transition if complete.
         toggleaction.set_sensitive(False)
         if toggleaction.get_active():
-            self.save_window_geometry()
+            if self.previous_size != (None, None):
+                self.save_window_geometry()
             self.fullscreen()
         else:
             self.unfullscreen()
