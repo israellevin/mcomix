@@ -106,7 +106,7 @@ def setup_dependencies():
         require_version('Gtk', '3.0')
         require_version('Gdk', '3.0')
 
-        from gi.repository import Gdk, GLib, Gtk, GLib
+        from gi.repository import Gdk, GLib, Gtk
 
         GLib.threads_init()
 
