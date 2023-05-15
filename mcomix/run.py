@@ -106,7 +106,7 @@ def setup_dependencies():
         require_version('Gtk', '3.0')
         require_version('Gdk', '3.0')
 
-        from gi.repository import Gdk, GLib, Gtk
+        from gi.repository import Gdk, GLib, Gtk, GLib
 
         GLib.threads_init()
 
@@ -184,6 +184,7 @@ def run():
         Gtk.widget_set_default_direction(Gtk.TextDirection.RTL)
 
     Gdk.set_program_class(constants.APPNAME)
+    GLib.set_prgname(constants.APPNAME)
 
     settings = Gtk.Settings.get_default()
     # Enable icons for menu items.
