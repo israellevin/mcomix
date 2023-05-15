@@ -14,6 +14,8 @@ In development
 
     - Replaced usage of deprecated GTK threading/timer functionality.
 
+    - Fixed GLib application name. This improves integration with Gnome.
+
 MComix 2.1.0
 Release date: 2022-12-17
 
