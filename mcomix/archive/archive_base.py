@@ -7,6 +7,8 @@ import os
 import errno
 import threading
 
+from typing import Literal
+
 from mcomix import portability
 from mcomix import i18n
 from mcomix import process
@@ -240,5 +242,17 @@ class ExternalExecutableArchive(NonUnicodeArchive):
                          stdout=output)
         finally:
             output.close()
+
+
+class DisabledArchive(BaseArchive):
+    """Returned to indicate that a requested archiver is unavailable."""
+
+    def __init__(self, archive) -> None:
+        super().__init__(archive)
+
+    @staticmethod
+    def is_available() -> Literal[False]:
+        """Status of this archiver (always false)."""
+        return False
 
 # vim: expandtab:sw=4:ts=4
