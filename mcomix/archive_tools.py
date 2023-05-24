@@ -75,6 +75,7 @@ def _get_handler(archive_type):
             return handler
         if handler.is_available():
             return handler
+        log.debug("Ignoring unavailable handler %s", handler.__name__)
 
 def _is_available(archive_type):
     """ Return True if a handler supporting the <archive_type> format is available """
