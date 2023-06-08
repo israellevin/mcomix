@@ -3,7 +3,10 @@ In development
 
     FEATURES
 
-    - Added support for MobiPocket (AZW3) format books.
+    - Added support for MobiPocket (AZW3) format books. Archives with DRM are
+      not supported.
+
+    - The OSD now shows the current page and the total number of pages.
 
 MComix 2.1.1
 Release date: 2023-05-15
