@@ -29,6 +29,7 @@ class Extractor(object):
 
     def __init__(self):
         self._setupped = False
+        self._archive = None
 
     def setup(self, src, dst, type=None):
         """Setup the extractor with archive <src> and destination dir <dst>.
@@ -174,7 +175,7 @@ class Extractor(object):
             files.sort()
 
         try:
-            log.debug('Extracting from "%s" to "%s": "%s"', self._src, self._dst, '", "'.join(files))
+            # log.debug('Extracting from "%s" to "%s": "%s"', self._src, self._dst, '", "'.join(files))
             for f in self._archive.iter_extract(files, self._dst):
                 if self._extract_thread.must_stop():
                     return
@@ -195,7 +196,7 @@ class Extractor(object):
         """
 
         try:
-            log.debug('Extracting from "%s" to "%s": "%s"', self._src, self._dst, name)
+            # log.debug('Extracting from "%s" to "%s": "%s"', self._src, self._dst, name)
             self._archive.extract(name, self._dst)
 
         except Exception as ex:
