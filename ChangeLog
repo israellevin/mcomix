@@ -1,6 +1,11 @@
 MComix 2.2.0
 In development
 
+    BUG FIXES
+
+    - Fixed incorrect PDF transformations on systems using a recent version of
+      MuPDF.
+
     FEATURES
 
     - Added support for MobiPocket (AZW3) format books. Archives with DRM are
