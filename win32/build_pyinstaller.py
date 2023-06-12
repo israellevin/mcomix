@@ -13,14 +13,30 @@ having to play around with relative path names.
 
     0. To begin with, follow the installation instructions of PyGObject
        on Windows. At the time of this writing, using MSYS2 is recommended.
-    1. Using the MSYS2 mingw64 shell, install mingw-w64-x86_64-gtk3,
-       mingw-w64-x86_64-python3, mingw-w64-x86_64-python3-gobject,
-       mingw-w64-x86_64-python3-pil, mingw-w64-x86_64-python3-pillow
+
+    1. Using the MSYS2 mingw64 shell, install:
+
+           pacman -Sy \
+               mingw-w64-x86_64-gtk3 \
+               mingw-w64-x86_64-python \
+               mingw-w64-x86_64-python-gobject \
+               mingw-w64-x86_64-python-pillow \
+               mingw-w64-x86_64-python-pymupdf
+
     2. In the same shell, install pyinstaller with pip:
-       python3 -m pip install --user pyinstaller
+       
+           python3 -m pip install --user pyinstaller
+
        Make sure that the installed pyinstaller executable is on PATH.
-    3. 'win32/build_pyinstaller.py' will create the folder dist and copy relevant
-       libraries.
+       You may wish to use a virtual environment:
+
+           python3 -m venv venv --system-site-packages
+           . ./venv/bin/activate
+           python3 -m pip install pyinstaller
+
+    3. 'win32/build_pyinstaller.py' will create the folder 'dist/MComix'
+       and copy relevant libraries.
+
     4. This script will copy images, translations and documentation
        into the created distribution folder.
 """
