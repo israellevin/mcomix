@@ -1171,7 +1171,7 @@ class MainWindow(Gtk.Window):
 
         # This hack is to avoid Python issue #1856.
         for thread in threading.enumerate():
-            if thread is not threading.currentThread():
+            if thread is not threading.currentThread() and not isinstance(thread, threading._DummyThread):
                 log.debug('Waiting for thread %s to finish before exit', thread)
                 thread.join()
 
