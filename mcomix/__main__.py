@@ -15,7 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # -------------------------------------------------------------------------
-
+import multiprocessing as mp
 from .run import run
+
+mp.freeze_support()
+mp.set_start_method('spawn')
 run()
 
