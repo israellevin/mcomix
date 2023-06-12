@@ -12,6 +12,7 @@ from mcomix import log
 from mcomix.archive import (
     lha_external,
     mobi,
+    pdf_multi,
     pdf_external,
     rar,
     rar_external,
@@ -60,6 +61,7 @@ _HANDLERS = {
         sevenzip_external.SevenZipArchive,
     ),
     constants.PDF: (
+        pdf_multi.PdfMultiArchive,
         pdf_external.PdfArchive,
     ),
     constants.MOBI: (
