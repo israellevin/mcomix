@@ -189,21 +189,18 @@ def vector_opposite(a: List[Numeric]) -> List[Numeric]:
 def remap_axes(vector, order):
     return [vector[i] for i in order]
 
+
 def inverse_axis_map(order):
     identity = list(range(len(order)))
     return [identity[order[i]] for i in identity]
 
+
 def compile_rotations(*rotations):
     return reduce(lambda a, x: a + (x % 360) % 360, rotations, 0)
 
-def rotation_swaps_axes(rotation):
+
+def rotation_swaps_axes(rotation: int) -> bool:
     return rotation in (90, 270)
-
-
-def fixed_strings_regex(strings):
-    # introduces a matching group
-    strings = set(strings)
-    return r'(%s)' % '|'.join(sorted([re.escape(s) for s in strings]))
 
 
 def fixed_strings_regex(strings: Iterable[str]) -> str:
