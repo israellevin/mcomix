@@ -40,7 +40,7 @@ class DisabledFitzArchive(DisabledArchive):
 # On import, this code tests for a compatible version of the fitz
 # module (PyMuPDF), and exports as "PdfMultiArchive" either the
 # FitzArchive class from native_pdf.parent, or the DisabledFitzArchive
-# class (aliased to 'FitzArchive' for caller-size reporting purposes)
+# class (aliased to 'FitzArchive' for caller-side reporting purposes)
 
 try:
     if os.environ.get("MCOMIX_DISABLE_PDF_MULTI") is not None:
