@@ -8,7 +8,7 @@ from typing import Type
 from mcomix import log
 from mcomix.archive.archive_base import BaseArchive, DisabledArchive
 
-from distutils.version import LooseVersion
+from mcomix.version_tools import LegacyVersion
 
 FITZ_VERSION_REQUIRED = "1.19.2"
 
@@ -47,8 +47,8 @@ try:
         raise DisabledError("MCOMIX_DISABLE_PDF_MULTI set in environment")
     import fitz
 
-    fitz_version = LooseVersion(fitz.VersionFitz)
-    required_version = LooseVersion(FITZ_VERSION_REQUIRED)
+    fitz_version = LegacyVersion(fitz.VersionFitz)
+    required_version = LegacyVersion(FITZ_VERSION_REQUIRED)
 
     if fitz_version < required_version:
         raise UnsupportedFitzVersionError(found_version=fitz.VersionFitz)
