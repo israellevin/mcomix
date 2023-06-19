@@ -358,16 +358,16 @@ class _BookArea(Gtk.ScrolledWindow):
         elif path2 is None:
             return -1
 
-        name1 = os.path.split(path1.decode('utf-8'))[1].lower()
-        name2 = os.path.split(path2.decode('utf-8'))[1].lower()
+        name1 = os.path.split(path1)[1].lower()
+        name2 = os.path.split(path2)[1].lower()
 
-        return tools.alphanumeric_compare(name1, name2)
+        return tools.cmp(tools.AlphanumericSortKey(name1), tools.AlphanumericSortKey(name2))
 
     def _sort_by_path(self, treemodel, iter1, iter2, user_data):
         """ Compares two books based on their full path, in natural order. """
         path1 = self._liststore.get_value(iter1, 2)
         path2 = self._liststore.get_value(iter2, 2)
-        return tools.alphanumeric_compare(path1, path2)
+        return tools.cmp(tools.AlphanumericSortKey(path1), tools.AlphanumericSortKey(path2))
 
     def _icon_added(self, model, path, iter, *args):
         """ Justifies the alignment of all cell renderers when new data is
