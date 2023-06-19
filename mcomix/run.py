@@ -108,7 +108,9 @@ def setup_dependencies():
 
         from gi.repository import Gdk, GLib, Gtk
 
-        GLib.threads_init()
+        # Older GLib requires initialization before using threads
+        if GLib.check_version(2, 32, 0) is not None:
+            GLib.threads_init()
 
     except AssertionError:
         log.error( _("You do not have the required versions of GTK+ 3.0 and PyGObject installed.") )
