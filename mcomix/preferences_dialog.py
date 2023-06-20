@@ -39,16 +39,28 @@ class _PreferencesDialog(Gtk.Dialog):
         self.set_border_width(4)
         notebook.set_border_width(6)
 
-        appearance = self._init_appearance_tab()
-        notebook.append_page(appearance, Gtk.Label(label=_('Appearance')))
-        behaviour = self._init_behaviour_tab()
-        notebook.append_page(behaviour, Gtk.Label(label=_('Behaviour')))
-        display = self._init_display_tab()
-        notebook.append_page(display, Gtk.Label(label=_('Display')))
-        advanced = self._init_advanced_tab()
-        notebook.append_page(advanced, Gtk.Label(label=_('Advanced')))
-        shortcuts = self.shortcuts = self._init_shortcuts_tab()
-        notebook.append_page(shortcuts, Gtk.Label(label=_('Shortcuts')))
+        page_inits = (
+            (_('Appearance'), self._init_appearance_tab),
+            (_('Behaviour'), self._init_behaviour_tab),
+            (_('Display'), self._init_display_tab),
+            (_('Advanced'), self._init_advanced_tab),
+        )
+
+        for title, page_init in page_inits:
+            container = Gtk.ScrolledWindow()
+            container.set_policy(
+                Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+            container.set_min_content_height(400)
+            container.set_propagate_natural_height(True)
+            container.set_overlay_scrolling(False)
+            page = page_init()
+            container.add(page)
+            notebook.append_page(container, Gtk.Label(label=title))
+
+        # Shortcuts is already a ScrolledWindow
+        self.shortcuts = self._init_shortcuts_tab()
+        notebook.append_page(
+            self.shortcuts, Gtk.Label(label=_('Shortcuts')))
 
         notebook.connect('switch-page', self._tab_page_changed)
         # Update the Reset button's tooltip
@@ -329,6 +341,7 @@ class _PreferencesDialog(Gtk.Dialog):
         # ----------------------------------------------------------------
         km = keybindings.keybinding_manager(self._window)
         page = keybindings_editor.KeybindingEditorWindow(km)
+        self.shortcuts = page
         return page
 
     def _tab_page_changed(self, notebook, page_ptr, page_num):
