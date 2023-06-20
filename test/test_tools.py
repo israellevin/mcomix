@@ -13,3 +13,8 @@ class TestAlphanumericSort(unittest.TestCase):
         lst = ['text_2.jpg', '2_text.jpg']
         tools.alphanumeric_sort(lst)
         self.assertListEqual(lst, ['2_text.jpg', 'text_2.jpg'])
+
+    def test_sort_creates_strict_order(self) -> None:
+        lst = ['Comic 001-01.jpg', 'Comic 001-00.jpg', 'zCover.jpg', 'Comic 001-03.jpg']
+        tools.alphanumeric_sort(lst)
+        self.assertListEqual(lst, ['Comic 001-00.jpg', 'Comic 001-01.jpg', 'Comic 001-03.jpg', 'zCover.jpg'])

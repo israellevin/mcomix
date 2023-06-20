@@ -38,9 +38,13 @@ class AlphanumericSortKey:
                 right_str = str(right)
                 if left_str < right_str:
                     return True
+                elif left_str > right_str:
+                    return False
             else:
                 if left < right:
                     return True
+                elif left > right:
+                    return False
 
         return False
 
