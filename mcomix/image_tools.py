@@ -16,7 +16,7 @@ from mcomix import tools
 PIL_VERSION = ('Pillow', PIL.__version__)
 
 # Unfortunately gdk_pixbuf_version is not exported, so show the GTK+ version instead.
-log.info('GDK version: %s, GTK+: %s.%s', GdkPixbuf.PIXBUF_VERSION, Gtk.get_major_version(), Gtk.get_minor_version())
+log.info(f'GDK version: {GdkPixbuf.PIXBUF_VERSION}, GTK+: {Gtk.get_major_version()}.{Gtk.get_minor_version()}, GLib: {GLib.MAJOR_VERSION}.{GLib.MINOR_VERSION}')
 log.info('PIL version: %s [%s]', PIL_VERSION[0], PIL_VERSION[1])
 
 # Fallback pixbuf for missing images.
