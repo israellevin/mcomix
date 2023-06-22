@@ -392,7 +392,7 @@ class _PreferencesDialog(Gtk.Dialog):
             ('English', 'en'),  # English
             ('Español', 'es'),  # Spanish
             ('فارسی', 'fa'),  # Persian
-            ('Français', 'fr'), # French
+            ('Français', 'fr'),  # French
             ('Galego', 'gl'),  # Galician
             ('עברית', 'he'),  # Hebrew
             ('Hrvatski jezik', 'hr'),  # Croatian
@@ -407,7 +407,7 @@ class _PreferencesDialog(Gtk.Dialog):
             ('pусский язык', 'ru'),  # Russian
             ('Svenska', 'sv'),  # Swedish
             ('українська мова', 'uk'),  # Ukrainian
-            ('簡體中文', 'zh_CN'),  # Chinese (simplified)
+            ('简体中文', 'zh_CN'),  # Chinese (simplified)
             ('正體中文', 'zh_TW')]  # Chinese (traditional)
         languages.sort(key=operator.itemgetter(0))
 
