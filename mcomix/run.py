@@ -99,6 +99,16 @@ def parse_arguments(argv):
 
 def setup_dependencies():
     """Check for PyGTK and PIL dependencies."""
+
+    # Fake gettext, if necessary
+    import builtins
+    if not hasattr(builtins, '_'):
+        def fake_gettext(arg: str) -> str:
+            return arg
+
+        builtins.__dict__['_'] = fake_gettext
+    _ = builtins._  # noqa
+
     try:
         from gi import require_version
 
@@ -106,31 +116,33 @@ def setup_dependencies():
         require_version('Gtk', '3.0')
         require_version('Gdk', '3.0')
 
-        from gi.repository import Gdk, GLib, Gtk
+        from gi.repository import Gdk, GLib, Gtk  # noqa
 
-        GLib.threads_init()
+        # Older GLib requires initialization before using threads
+        if GLib.check_version(2, 32, 0) is not None:
+            GLib.threads_init()
 
     except AssertionError:
-        log.error( _("You do not have the required versions of GTK+ 3.0 and PyGObject installed.") )
+        log.error(_("You do not have the required versions of GTK+ 3.0 and PyGObject installed."))
         wait_and_exit()
 
     except ImportError:
-        log.error( _('No version of GObject was found on your system.') )
-        log.error( _('This error might be caused by missing GTK+ libraries.') )
+        log.error(_('No version of GObject was found on your system.'))
+        log.error(_('This error might be caused by missing GTK+ libraries.'))
         wait_and_exit()
 
     try:
         import PIL.Image
 
         if PIL.__version__ < '6.0.0':
-            log.error( _("You don't have the required version of the Python Imaging Library Fork (Pillow) installed."))
-            log.error( _('Installed Pillow version is: %s') % PIL.__version__ )
-            log.error( _('Required Pillow version is: 6.0.0 or higher') )
+            log.error(_("You don't have the required version of the Python Imaging Library Fork (Pillow) installed."))
+            log.error(_('Installed Pillow version is: %s') % PIL.__version__)
+            log.error(_('Required Pillow version is: 6.0.0 or higher'))
             wait_and_exit()
 
     except ImportError:
-        log.error( _('Python Imaging Library Fork (Pillow) 6.0.0 or higher is required.') )
-        log.error( _('No version of the Python Imaging Library was found on your system.') )
+        log.error(_('Python Imaging Library Fork (Pillow) 6.0.0 or higher is required.'))
+        log.error(_('No version of the Python Imaging Library was found on your system.'))
         wait_and_exit()
 
 
