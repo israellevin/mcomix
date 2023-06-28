@@ -48,9 +48,7 @@ class FitzWorker:
             - The page contains 0, or more than 1, embedded image
         """
         page = self.doc[page_num]
-        if (len(page.get_images()) != 1
-            or len(page.get_text()) > 0
-            ):
+        if len(page.get_images()) != 1 or len(page.get_text()) > 0:
             self._complex_doc = True
             result = True
             self.log.debug("PDF page %d, must render page", page_num + 1)
@@ -109,12 +107,24 @@ class FitzWorker:
         If the probe fails, 'png' is used as a fallback, as that's the
         type rendered page pixmaps will be saved with.
         """
-        assert self._extract_as_image(page_num)
-        xref = self._get_image_xref(page_num)
-        img = fitz.image_profile(self.doc.xref_stream_raw(xref))
-        extension = img.get('ext', 'png')
-        del img
-        return extension
+        extension = 'png'
+        try:
+            xref = self._get_image_xref(page_num)
+            img = fitz.image_profile(
+                self.doc.xref_stream_raw(xref))
+            # If image_profile returns an empty dict, the image type is
+            # "exotic" and not supported for direct extraction.
+            # That doesn't mean that the images can't be extracted.
+            # Document.extract_image will automatically convert to PNG,
+            # when we call it to extract the xref. It'll be slower than
+            # extraction without converting, but still very fast.
+            if img:
+                extension = img.get('ext', 'png')
+                del img
+        except (AttributeError, TypeError):
+            pass
+        finally:
+            return extension
 
     def _get_image_xref(self, page_num) -> int:
         try:
@@ -132,7 +142,7 @@ class FitzWorker:
             if self._extract_as_image(pg):
                 xref = self._get_image_xref(pg)
                 ext = self._image_extension(pg)
-                filename =  f"{pagenum}:xref{xref:04}.{ext}"
+                filename = f"{pagenum}:xref{xref:04}.{ext}"
             else:
                 filename = f"{pagenum}.png"
             yield filename
