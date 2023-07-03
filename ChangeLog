@@ -6,7 +6,7 @@ In development
     - Fixed incorrect PDF transformations on systems using a recent version of
       MuPDF.
 
-    - Updated Pillow version check.
+    - Fixed incompatibility with Pillow 10.0.0 due to bug in version check.
 
     FEATURES
 
