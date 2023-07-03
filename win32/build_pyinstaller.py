@@ -24,7 +24,7 @@ having to play around with relative path names.
                mingw-w64-x86_64-python-pymupdf
 
     2. In the same shell, install pyinstaller with pip:
-       
+
            python3 -m pip install --user pyinstaller
 
        Make sure that the installed pyinstaller executable is on PATH.
@@ -41,7 +41,8 @@ having to play around with relative path names.
        into the created distribution folder.
 """
 
-def clear_distdir(distdir):
+
+def clear_distdir(distdir: str) -> None:
     """ Removes files from <distdir>. """
     if not os.path.isdir(distdir):
         return
@@ -56,7 +57,8 @@ def clear_distdir(distdir):
         elif os.path.isdir(file):
             shutil.rmtree(file)
 
-def run_pyinstaller():
+
+def run_pyinstaller() -> int:
     """ Runs setup.py py2exe. """
     print('Executing pyinstaller...')
     args = ['pyinstaller', 'win32/MComix.spec']
@@ -64,7 +66,8 @@ def run_pyinstaller():
 
     return proc_result.returncode
 
-def win32_newline(source, dest):
+
+def win32_newline(source: str, dest: str) -> None:
     """ Converts Unix newlines to Windows newlines. """
     from_fp = open(source, "r", encoding='utf-8')
 
@@ -80,7 +83,8 @@ def win32_newline(source, dest):
     from_fp.close()
     to_fp.close()
 
-def copy_other_files():
+
+def copy_other_files() -> None:
     """ Copy other relevant files into dist directory. """
     print("Copying misc files into dist directory...")
     win32_newline('ChangeLog', 'dist/MComix/ChangeLog.txt')
@@ -109,12 +113,14 @@ def copy_other_files():
             if os.path.isdir(path):
                 shutil.copytree(path, os.path.join('dist/MComix/licenses', entry))
 
+
 if __name__ == '__main__':
     clear_distdir('dist/MComix')
 
     success = run_pyinstaller() == 0
 
-    if not success: sys.exit(1)
+    if not success:
+        sys.exit(1)
 
     copy_other_files()
 

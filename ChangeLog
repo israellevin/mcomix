@@ -10,6 +10,9 @@ In development
 
     FEATURES
 
+    - MComix can now use the PyMuPDF Python package to provide PDF reading
+      capabilities, with improved extraction/decoding speed.
+
     - Added support for MobiPocket (AZW3) format books. Archives with DRM are
       not supported.
 
