@@ -134,7 +134,11 @@ def setup_dependencies():
     try:
         import PIL.Image
 
-        if PIL.__version__ < '6.0.0':
+        try:
+            pil_major_version = int(PIL.__version__[0:PIL.__version__.index('.')])
+        except (ValueError, IndexError):
+            pil_major_version = 0
+        if pil_major_version < 6:
             log.error(_("You don't have the required version of the Python Imaging Library Fork (Pillow) installed."))
             log.error(_('Installed Pillow version is: %s') % PIL.__version__)
             log.error(_('Required Pillow version is: 6.0.0 or higher'))

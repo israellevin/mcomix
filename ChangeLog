@@ -6,6 +6,8 @@ In development
     - Fixed incorrect PDF transformations on systems using a recent version of
       MuPDF.
 
+    - Updated Pillow version check.
+
     FEATURES
 
     - Added support for MobiPocket (AZW3) format books. Archives with DRM are
