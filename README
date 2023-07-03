@@ -67,8 +67,9 @@
   "lha" is needed to open LHA/LZA archives. Note that "7z" can be used as
   substitute for both "unrar" and "lha".
 
-  To read PDF files, MComix can use the tools provided by MuPDF, namely
-  mutool and mudraw.
+  To read PDF files, MComix can use the tools provided by MuPDF. The
+  pdf_external extractor uses the mutool and mudraw command-line tools,
+  while the pdf_multi extractor uses the PyMuPDF language bindings.
 
 === Credits ===================================================================
 

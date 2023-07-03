@@ -9,8 +9,11 @@ import logging
 from logging import DEBUG, INFO, WARNING, ERROR
 
 
-__all__ = ['debug', 'info', 'warning', 'error', 'setLevel',
-           'DEBUG', 'INFO', 'WARNING', 'ERROR']
+__all__ = [
+    'debug', 'info', 'warning', 'error',
+    'DEBUG', 'INFO', 'WARNING', 'ERROR',
+    'getLevel', 'setLevel',
+]
 
 # Set up default logger.
 __logger = logging.getLogger('mcomix')
@@ -22,8 +25,12 @@ if not __logger.handlers:
         '%H:%M:%S'))
     __logger.handlers = [__handler]
 
-# The following functions direct all input to __logger.
 
+def getLevel():
+    return __logger.level
+
+
+# The following functions direct all input to __logger.
 debug = __logger.debug
 info = __logger.info
 warning = __logger.warning

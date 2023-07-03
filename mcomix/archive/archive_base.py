@@ -7,6 +7,8 @@ import os
 import errno
 import threading
 
+from typing import Literal
+
 from mcomix import portability
 from mcomix import i18n
 from mcomix import process
@@ -120,7 +122,7 @@ class BaseArchive(object):
         If an empty string is set, assume that the user did not provide
         a password. """
 
-        password = archive.ask_for_password(self.archive)
+        password = archive.password.ask_for_password(self.archive)
         if password is None:
             password = ""
 
@@ -240,5 +242,17 @@ class ExternalExecutableArchive(NonUnicodeArchive):
                          stdout=output)
         finally:
             output.close()
+
+
+class DisabledArchive(BaseArchive):
+    """Returned to indicate that a requested archiver is unavailable."""
+
+    def __init__(self, archive) -> None:
+        super().__init__(archive)
+
+    @staticmethod
+    def is_available() -> Literal[False]:
+        """Status of this archiver (always false)."""
+        return False
 
 # vim: expandtab:sw=4:ts=4

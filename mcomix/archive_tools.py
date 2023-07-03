@@ -12,6 +12,7 @@ from mcomix import log
 from mcomix.archive import (
     lha_external,
     mobi,
+    pdf_multi,
     pdf_external,
     rar,
     rar_external,
@@ -60,6 +61,7 @@ _HANDLERS = {
         sevenzip_external.SevenZipArchive,
     ),
     constants.PDF: (
+        pdf_multi.PdfMultiArchive,
         pdf_external.PdfArchive,
     ),
     constants.MOBI: (
@@ -75,6 +77,7 @@ def _get_handler(archive_type):
             return handler
         if handler.is_available():
             return handler
+        log.debug("Ignoring unavailable handler %s", handler.__name__)
 
 def _is_available(archive_type):
     """ Return True if a handler supporting the <archive_type> format is available """

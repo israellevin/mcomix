@@ -6,16 +6,12 @@ from mcomix import log
 from mcomix import process
 from mcomix.version_tools import LegacyVersion
 from mcomix.archive import archive_base
+from mcomix.constants import PDF_RENDER_DPI_DEF, PDF_RENDER_DPI_MAX
 
 import math
 import os
 import re
 import subprocess
-
-# Default DPI for rendering.
-PDF_RENDER_DPI_DEF = 72 * 4
-# Maximum DPI for rendering.
-PDF_RENDER_DPI_MAX = 72 * 10
 
 _pdf_possible = None
 _mutool_exec = None

@@ -106,4 +106,9 @@ MOBI_FORMATS = (
 
 IMAGEIO_GDKPIXBUF, IMAGEIO_PIL = list(range(2))
 
+# Default DPI for rendering.
+PDF_RENDER_DPI_DEF = 72 * 4
+# Maximum DPI for rendering.
+PDF_RENDER_DPI_MAX = 72 * 10
+
 # vim: expandtab:sw=4:ts=4
