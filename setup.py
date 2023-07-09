@@ -44,6 +44,8 @@ setuptools.setup(
         ('share/icons/hicolor/24x24/apps', ['mcomix/images/24x24/mcomix.png']),
         ('share/icons/hicolor/32x32/apps', ['mcomix/images/32x32/mcomix.png']),
         ('share/icons/hicolor/48x48/apps', ['mcomix/images/48x48/mcomix.png']),
+        ('share/icons/hicolor/256x256/apps', ['mcomix/images/256x256/mcomix.png']),
+        ('share/icons/hicolor/scalable/apps', ['mcomix/images/mcomix.svg']),
         ('share/icons/hicolor/16x16/mimetypes',
             ['mime/icons/16x16/application-x-cbz.png',
              'mime/icons/16x16/application-x-cbr.png',
