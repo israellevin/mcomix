@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MComix 2.0.0\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/projects/mcomix\n"
 "POT-Creation-Date: 2023-07-11 17:36+0200\n"
-"PO-Revision-Date: 2022-12-17 14:13+0100\n"
+"PO-Revision-Date: 2023-07-11 17:39+0200\n"
 "Last-Translator: Moritz Brunner <oddegamra@gmx.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de_DE\n"
 "X-Source-Language: en\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: mcomix/about_dialog.py:28
 #, python-format
@@ -1693,7 +1693,7 @@ msgstr "LHA-Archiv"
 
 #: mcomix/strings.py:19
 msgid "MobiPocket ebook"
-msgstr ""
+msgstr "MobiPocket E-Book"
 
 #: mcomix/strings.py:23
 msgid "Original vision/developer of Comix"
@@ -2537,9 +2537,3 @@ msgstr "_Hinzufügen"
 #: mcomix/library/watchlist.py:87
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Aut_omatisch nach Büchern suchen, wenn Bibliothek geöffnet wird"
-
-#, python-format
-#~ msgid ""
-#~ "Archive handler %(handler)s for archive \"%(archivename)s\" was selected."
-#~ msgstr ""
-#~ "Archiv-Öffner %(handler)s wurde für Archiv \"%(archivename)s\" ausgewählt."
