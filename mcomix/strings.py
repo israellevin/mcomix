@@ -71,6 +71,7 @@ TRANSLATORS = (
           )
 ARTISTS = (
             ('Victor Castillejo', _('Icon design')),
+            ('FeRD (Frank Dana)', _('Vector icon')),
           )
 
 # vim: expandtab:sw=4:ts=4
