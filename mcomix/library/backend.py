@@ -12,14 +12,7 @@ from mcomix.library import backend_types
 # Only for importing legacy data from last-read module
 from mcomix import last_read_page
 
-try:
-    from sqlite3 import dbapi2
-except ImportError:
-    try:
-        from pysqlite2 import dbapi2
-    except ImportError:
-        log.warning( _('! Could neither find pysqlite2 nor sqlite3.') )
-        dbapi2 = None
+from sqlite3 import dbapi2
 
 
 #: Identifies the 'Recent' collection that stores recently read books.

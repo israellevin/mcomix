@@ -7,14 +7,7 @@ from mcomix import constants
 
 # This import is only used for legacy data that is imported
 # into the library at upgrade.
-try:
-    from sqlite3 import dbapi2
-except ImportError:
-    try:
-        from pysqlite2 import dbapi2
-    except ImportError:
-        log.warning( _('! Could neither find pysqlite2 nor sqlite3.') )
-        dbapi2 = None
+from sqlite3 import dbapi2
 
 
 class LastReadPage(object):
