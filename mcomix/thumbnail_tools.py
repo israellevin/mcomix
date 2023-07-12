@@ -14,10 +14,7 @@ import locale
 import PIL.Image as Image
 from urllib.request import pathname2url
 
-try:  # The md5 module is deprecated as of Python 2.5, replaced by hashlib.
-    from hashlib import md5
-except ImportError:
-    from md5 import new as md5
+from hashlib import md5
 
 from mcomix.preferences import prefs
 from mcomix import archive_extractor
