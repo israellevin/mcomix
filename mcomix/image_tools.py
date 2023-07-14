@@ -490,13 +490,13 @@ def _get_png_implied_rotation(pixbuf_or_image):
         raise ValueError()
     if raw_exif is None:
         return None
-    raw_exif = raw_exif.split('\n')
-    if len(raw_exif) < 4 or 'exif' != raw_exif[1]:
+    exif_lines = raw_exif.split('\n')
+    if len(exif_lines) < 4 or 'exif' != exif_lines[1]:
         # Not valid Exif data.
         return None
-    size = int(raw_exif[2])
+    size = int(exif_lines[2])
     try:
-        data = bytes.fromhex(''.join(raw_exif[3:]))
+        data = bytes.fromhex(''.join(exif_lines[3:]))
     except ValueError:
         # Not valid hexadecimal content.
         return None
