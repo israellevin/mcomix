@@ -141,10 +141,7 @@ def format_byte_size(n: float) -> str:
 
 def garbage_collect() -> None:
     """ Runs the garbage collector. """
-    if sys.version_info[:3] >= (2, 5, 0):
-        gc.collect(0)
-    else:
-        gc.collect()
+    gc.collect(0)
 
 
 def div(a: Numeric, b: Numeric) -> float:
