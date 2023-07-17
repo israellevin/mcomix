@@ -59,7 +59,7 @@ def to_utf8(string):
     else:
         return string
 
-def install_gettext():
+def install_gettext(force_lang=None):
     """ Initialize gettext with the correct directory that contains
     MComix translations. This has to be done before any calls to gettext.gettext
     have been made to ensure all strings are actually translated. """
@@ -71,7 +71,10 @@ def install_gettext():
     # Initialize default locale
     locale.setlocale(locale.LC_ALL, '')
 
-    if preferences.prefs['language'] != 'auto':
+    if force_lang is not None:
+        lang = force_lang
+        lang_identifiers = [lang]
+    elif preferences.prefs['language'] != 'auto':
         lang = preferences.prefs['language']
         lang_identifiers = [ lang ]
     else:
@@ -104,10 +107,14 @@ def install_gettext():
     global _translation
     _translation = translation
 
-def get_translation():
-    """ Returns the gettext.Translation instance that has been initialized with
-    install_gettext(). """
-
+def get_translation() -> gettext.NullTranslations:
+    """Returns the loaded translation instance.
+    (gettext.GNUTranslations is a subclass of NullTranslations.)"""
     return _translation or gettext.NullTranslations()
+
+
+def _(message: str) -> str:
+    """Translate the messsage using the current translator."""
+    return get_translation().gettext(message)
 
 # vim: expandtab:sw=4:ts=4
