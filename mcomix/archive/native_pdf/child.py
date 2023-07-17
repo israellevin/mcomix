@@ -88,7 +88,7 @@ class FitzWorker:
         else:
             self.log.debug(
                 'PDF page %d, cannot extract image: %s',
-                page_num + 1, f"{img_rect=}, {page_rect=}")
+                page_num + 1, f"img_rect={img_rect}, page_rect={page_rect}")
         del page
         del image_info
         return is_full_page
