@@ -1,6 +1,10 @@
 MComix 2.3.0
 In development
 
+    BUG FIXES
+
+    - Restored Python 3.7 compatibility in native PDF extractor.
+
     FEATURES
 
     - MComix now offers a high-resolution application icon.
