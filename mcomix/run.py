@@ -49,6 +49,8 @@ def parse_arguments(argv):
             help=_('Show the library on startup.'))
     parser.add_option('-v', '--version', action='callback', callback=print_version,
             help=_('Show the version number and exit.'))
+    parser.add_option('--lang', dest='language_code', action='store',
+            help=_('Temporarily override the interface language.'))
 
     viewmodes = optparse.OptionGroup(parser, _('View modes'))
     viewmodes.add_option('-f', '--fullscreen', dest='fullscreen', action='store_true',
@@ -168,6 +170,9 @@ def run():
     # Reconfigure stdout to replace characters that cannot be printed
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(errors='replace')
+
+    if opts.language_code:
+        i18n.install_gettext(opts.language_code)
 
     setup_dependencies()
 
