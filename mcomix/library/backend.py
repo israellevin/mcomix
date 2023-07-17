@@ -9,6 +9,7 @@ from mcomix import thumbnail_tools
 from mcomix import log
 from mcomix import callback
 from mcomix.library import backend_types
+from mcomix.i18n import _
 # Only for importing legacy data from last-read module
 from mcomix import last_read_page
 

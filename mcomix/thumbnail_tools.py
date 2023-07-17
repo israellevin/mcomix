@@ -26,6 +26,7 @@ from mcomix import portability
 from mcomix import i18n
 from mcomix import callback
 from mcomix import log
+from mcomix.i18n import _
 
 
 class Thumbnailer(object):

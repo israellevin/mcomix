@@ -3,6 +3,7 @@
 from gi.repository import Gtk
 
 from mcomix import message_dialog
+from mcomix.i18n import _
 
 def ask_for_password(archive):
     """ Openes an input dialog to ask for a password. Returns either

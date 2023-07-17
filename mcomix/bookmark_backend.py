@@ -13,6 +13,7 @@ from mcomix import bookmark_menu_item
 from mcomix import callback
 from mcomix import i18n
 from mcomix import message_dialog
+from mcomix.i18n import _
 
 class __BookmarksStore(object):
 

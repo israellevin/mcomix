@@ -9,6 +9,7 @@ from contextlib import closing
 from mcomix import log
 from mcomix import i18n
 from mcomix.archive import archive_base
+from mcomix.i18n import _
 
 
 def is_py_supported_zipfile(path):

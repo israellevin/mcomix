@@ -38,6 +38,7 @@ from mcomix import box
 from mcomix import layout
 from mcomix import log
 from mcomix.transform import Transform
+from mcomix.i18n import _
 
 
 class MainWindow(Gtk.Window):

@@ -10,6 +10,7 @@ import tempfile
 from mcomix import process
 from mcomix import log
 from mcomix.archive import archive_base
+from mcomix.i18n import _
 
 # Filled on-demand by SevenZipArchive
 _7z_executable = -1

@@ -98,11 +98,8 @@ def install_gettext(force_lang=None):
             fp = io.BytesIO(translation_content)
             translation = gettext.GNUTranslations(fp)
             break
-
     else:
         translation = gettext.NullTranslations()
-
-    translation.install()
 
     global _translation
     _translation = translation

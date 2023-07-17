@@ -12,6 +12,7 @@ from mcomix import constants
 from mcomix import message_dialog
 from mcomix import keybindings
 from mcomix import keybindings_editor
+from mcomix.i18n import _
 
 _dialog = None
 

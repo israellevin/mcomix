@@ -36,6 +36,7 @@ def parse_arguments(argv):
     """ Parse the command line passed in <argv>. Returns a tuple containing
     (options, arguments). Errors parsing the command line are handled in
     this function. """
+    from mcomix.i18n import _
 
     parser = optparse.OptionParser(
             usage="%%prog %s" % _('[OPTION...] [PATH]'),
@@ -101,15 +102,7 @@ def parse_arguments(argv):
 
 def setup_dependencies():
     """Check for PyGTK and PIL dependencies."""
-
-    # Fake gettext, if necessary
-    import builtins
-    if not hasattr(builtins, '_'):
-        def fake_gettext(arg: str) -> str:
-            return arg
-
-        builtins.__dict__['_'] = fake_gettext
-    _ = builtins._  # noqa
+    from mcomix.i18n import _
 
     try:
         from gi import require_version

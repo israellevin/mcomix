@@ -5,6 +5,7 @@ from gi.repository import Gtk
 from mcomix.preferences import prefs
 from mcomix.worker_thread import WorkerThread
 from mcomix import callback
+from mcomix.i18n import _
 
 
 class Pageselector(Gtk.Dialog):

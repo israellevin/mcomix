@@ -5,6 +5,7 @@ from . import histogram
 
 from mcomix.preferences import prefs
 from mcomix import image_tools
+from mcomix.i18n import _
 
 _dialog = None
 
