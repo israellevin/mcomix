@@ -15,11 +15,11 @@ import setuptools
 
 from mcomix import constants
 
-
 setuptools.setup(
     name = constants.APPNAME.lower(),
     version = constants.VERSION,
-    packages = ['mcomix', 'mcomix.archive', 'mcomix.library', 'mcomix._vendor.packaging'],
+    packages = ['mcomix', 'mcomix.archive', 'mcomix.archive.native_pdf',
+                'mcomix.library', 'mcomix._vendor.packaging'],
     include_package_data=True,
     entry_points = {
         'console_scripts' : [ 'mcomix = mcomix.run:run' ],

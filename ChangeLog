@@ -5,6 +5,8 @@ In development
 
     - Restored Python 3.7 compatibility in native PDF extractor.
 
+    - Added missing pdf_native submodule to source distribution.
+
     FEATURES
 
     - MComix now offers a high-resolution application icon.

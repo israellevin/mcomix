@@ -7,7 +7,7 @@ import os
 from mcomix import tools
 
 APPNAME = 'MComix'
-VERSION = '2.2.1'
+VERSION = '2.3.0-dev0'
 
 HOME_DIR = tools.get_home_directory()
 CONFIG_DIR = tools.get_config_directory()
