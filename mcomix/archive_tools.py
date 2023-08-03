@@ -22,6 +22,7 @@ from mcomix.archive import (
     zip_external,
 )
 from mcomix import tools
+from mcomix.i18n import _
 
 # Handlers for each archive type.
 _HANDLERS = {

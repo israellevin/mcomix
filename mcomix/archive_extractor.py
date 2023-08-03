@@ -10,6 +10,8 @@ from mcomix import callback
 from mcomix import log
 from mcomix.preferences import prefs
 from mcomix.worker_thread import WorkerThread
+from mcomix.i18n import _
+
 
 class Extractor(object):
 

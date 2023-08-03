@@ -12,6 +12,7 @@ from mcomix.preferences import prefs
 from mcomix import constants
 from mcomix import log
 from mcomix import tools
+from mcomix.i18n import _
 
 PIL_VERSION = ('Pillow', PIL.__version__)
 

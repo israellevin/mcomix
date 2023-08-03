@@ -18,6 +18,7 @@ from mcomix import log
 from mcomix import message_dialog
 from mcomix import tools
 from mcomix.library.pixbuf_cache import get_pixbuf_cache
+from mcomix.i18n import _
 
 _dialog = None
 

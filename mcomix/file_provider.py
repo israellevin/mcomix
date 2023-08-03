@@ -12,6 +12,7 @@ from mcomix import constants
 from mcomix import preferences
 from mcomix import i18n
 from mcomix import log
+from mcomix.i18n import _
 
 def get_file_provider(filelist):
     """ Initialize a FileProvider with the files in <filelist>.

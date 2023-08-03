@@ -5,6 +5,7 @@ import pkgutil
 
 from mcomix import image_tools
 from mcomix import log
+from mcomix.i18n import _
 
 def mcomix_icons():
     """ Returns a list of differently sized pixbufs for the

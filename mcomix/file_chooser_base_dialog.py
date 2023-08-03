@@ -15,6 +15,7 @@ from mcomix import thumbnail_tools
 from mcomix import message_dialog
 from mcomix import file_provider
 from mcomix import tools
+from mcomix.i18n import _
 
 mimetypes.init()
 
