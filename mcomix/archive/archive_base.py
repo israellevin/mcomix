@@ -7,8 +7,6 @@ import os
 import errno
 import threading
 
-from typing import Literal
-
 from mcomix import portability
 from mcomix import i18n
 from mcomix import process
@@ -247,11 +245,11 @@ class ExternalExecutableArchive(NonUnicodeArchive):
 class DisabledArchive(BaseArchive):
     """Returned to indicate that a requested archiver is unavailable."""
 
-    def __init__(self, archive) -> None:
+    def __init__(self, archive: str) -> None:
         super().__init__(archive)
 
     @staticmethod
-    def is_available() -> Literal[False]:
+    def is_available() -> bool:
         """Status of this archiver (always false)."""
         return False
 
