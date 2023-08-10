@@ -4,21 +4,8 @@
 from __future__ import annotations
 
 import sys
-from typing import Optional, Tuple, Type, TYPE_CHECKING
+from typing import Optional, Tuple
 
-if TYPE_CHECKING and sys.version_info[:2] >= (3, 11):
-    from typing import TypeAlias
-    MatrixData: TypeAlias = Tuple[float, float, float, float]
-    Scales: TypeAlias = Tuple[float, float]
-    Rotation: TypeAlias = int
-    Flips: TypeAlias = Tuple[bool, bool]
-    ImageTransforms: TypeAlias = Tuple[Scales, Rotation, Flips]
-elif TYPE_CHECKING:
-    MatrixData = "Tuple[float, float, float, float]"
-    Scales = "Tuple[float, float]"
-    Rotation = "int"
-    Flips = "Tuple[bool, bool]"
-    ImageTransforms = "Tuple[Scales, Rotation, Flips]"
 
 class Matrix:
     """Simple linear transformations represented as a 2x2 matrix.
@@ -30,7 +17,7 @@ class Matrix:
 
     def __init__(self, m1: float, m2: float, m3: float, m4: float) -> None:
         """Initialize a row-major transformation matrix."""
-        self.m: MatrixData = (m1, m2, m3, m4)
+        self.m: Tuple[float, float, float, float] = (m1, m2, m3, m4)
 
     def __str__(self) -> str:
         return str(self.m)
@@ -38,9 +25,6 @@ class Matrix:
     def __repr__(self) -> str:
         args = ", ".join([str(x) for x in self.m])
         return f'Matrix({args})'
-
-    def __reduce__(self) -> Tuple[Type[Matrix], MatrixData]:
-        return (self.__class__, self.m)
 
     def __bool__(self) -> bool:
         """Does this matrix perform any operations (is not identity)?"""
@@ -86,7 +70,10 @@ class Matrix:
 
     def and_then_all(self, *nexts: Matrix) -> Matrix:
         """The matrix resulting from self transformed by each 'nexts' in turn."""
-        return sum(nexts, start=self)
+        out = self
+        for m in nexts:
+            out += m
+        return out
 
     def swaps_axes(self) -> bool:
         """ Determines whether this matrix includes a transpose of the axes. """
@@ -123,7 +110,7 @@ class Matrix:
         """The matrix result of flipping self vertically."""
         return self.flipped(y=True)
 
-    def to_image_transforms(self) -> ImageTransforms:
+    def to_image_transforms(self) -> Tuple[Tuple[float, float], int, Tuple[bool, bool]]:
         """ Decomposes the transform to a sequence of hints to basic transform
         instructions typically found in image processing libraries. The sequence
         will refer to the positive scaling factors to be applied for each axis
@@ -133,9 +120,9 @@ class Matrix:
         factors for the corresponding axes, r is one of (0, 90, 180, 270),
         referring to the clockwise rotation to be applied, and f is a sequence
         of bools where True refers to the corresponding axis to be flipped. """
-        s: Scales = (abs(self.m[0] + self.m[1]), abs(self.m[2] + self.m[3]))
-        r: Rotation = 90 if self.swaps_axes() else 0
-        f: Flips = (
+        s: Tuple[float, float] = (abs(self.m[0] + self.m[1]), abs(self.m[2] + self.m[3]))
+        r: int = 90 if self.swaps_axes() else 0
+        f: Tuple[bool, bool] = (
             self.swaps_axes() ^ (self.m[0] < 0 or self.m[1] < 0),
             (self.m[2] < 0 or self.m[3] < 0)
         )
@@ -199,7 +186,10 @@ class Transform(Matrix):
         return cls.ID
 
     @classmethod
-    def from_image_transforms(cls, t: ImageTransforms) -> Matrix:
+    def from_image_transforms(
+            cls,
+            t: Tuple[Tuple[float, float], int, Tuple[bool, bool]]
+    ) -> Matrix:
         """Create a Matrix transform from a set of image transforms."""
         s, r, f = t[0:3]
         return (
