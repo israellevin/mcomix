@@ -37,8 +37,10 @@ from mcomix import tools
 from mcomix import box
 from mcomix import layout
 from mcomix import log
-from mcomix.transform import Transform
+from mcomix.transform import Matrix, Transform
 from mcomix.i18n import _
+
+from typing import List
 
 
 class MainWindow(Gtk.Window):
@@ -66,7 +68,7 @@ class MainWindow(Gtk.Window):
         self._last_scroll_destination = constants.SCROLL_TO_START
 
         self.layout = layout.create_dummy_layout()
-        self.transforms = []
+        self.transforms: List[Matrix] = []
         self._spacing = prefs['space between two pages']
         self._waiting_for_redraw = False
 
@@ -448,20 +450,17 @@ class MainWindow(Gtk.Window):
                     continue
                 pixbuf_list[i] = image_tools.fit_pixbuf_to_rectangle(
                     pixbuf_list[i], scaled_sizes[i], rotation_list[i])
-                self.transforms[i] = self.transforms[i].and_then(
-                    Transform.from_rotation(rotation_list[i])) # FIXME also include scales
+                self.transforms[i] += Transform.from_rotation(rotation_list[i]) # FIXME also include scales
 
             for i in range(pixbuf_count):
                 if do_not_transform[i]:
                     continue
                 if prefs['horizontal flip']:
                     pixbuf_list[i] = image_tools.flip_pixbuf(pixbuf_list[i], 0)
-                    self.transforms[i] = self.transforms[i].and_then(
-                        Transform.from_flips(True, False))
+                    self.transforms[i] += Transform.from_flips(True, False)
                 if prefs['vertical flip']:
                     pixbuf_list[i] = image_tools.flip_pixbuf(pixbuf_list[i], 1)
-                    self.transforms[i] = self.transforms[i].and_then(
-                        Transform.from_flips(False, True))
+                    self.transforms[i] += Transform.from_flips(False, True)
                 pixbuf_list[i] = self.enhancer.enhance(pixbuf_list[i])
 
             for i in range(pixbuf_count):
