@@ -1,7 +1,12 @@
 MComix 2.3.0
-In development
+Release date: 2023-08-26
 
     BUG FIXES
+
+    - Updated the bundled UnRAR64.dll in the Win32 All-In-One
+      package to the latest version. Old versions may or may not
+      be affected by a remote code execution vulnerability recently
+      fixed in WinRAR 6.23.
 
     - Restored Python 3.7 compatibility in native PDF extractor.
 
