@@ -7,7 +7,7 @@ from mcomix.archive import archive_base
 from mcomix.archive.native_pdf.manager import FitzProcessWrangler
 from mcomix.log import getLevel
 
-from typing import Generator, Literal
+from typing import Generator
 
 
 class FitzArchive(archive_base.BaseArchive):
@@ -24,7 +24,7 @@ class FitzArchive(archive_base.BaseArchive):
         self.log.debug("PDF contains %d pages", self.mgr.page_count())
 
     @staticmethod
-    def is_available() -> Literal[True]:
+    def is_available() -> bool:
         """Report whether this extractor is available (always true)."""
         return True
 
