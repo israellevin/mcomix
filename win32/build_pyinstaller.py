@@ -61,7 +61,7 @@ def clear_distdir(distdir: str) -> None:
 def run_pyinstaller() -> int:
     """ Runs setup.py py2exe. """
     print('Executing pyinstaller...')
-    args = ['pyinstaller', 'win32/MComix.spec']
+    args = ['pyinstaller', 'win32/mcomix.spec']
     proc_result = subprocess.run(args, shell=True)
 
     return proc_result.returncode
