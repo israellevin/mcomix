@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>mcomix</id>
+    <version>2.3.0</version>
+    <packageSourceUrl>https://sourceforge.net/p/mcomix/git/ci/master/tree/win32/mcomix.nuspec</packageSourceUrl>
+    <owners>Oddegamra</owners>
+
+    <title>MComix</title>
+    <authors>The MComix Team</authors>
+    <projectUrl>https://sourceforge.net/projects/mcomix/</projectUrl>
+    <iconUrl>https://mcomix.sourceforge.io/media/mcomix.png</iconUrl>
+    <copyright>2005 - 2023</copyright>
+    <licenseUrl>https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectSourceUrl>https://sourceforge.net/p/mcomix/git/ci/master/tree/</projectSourceUrl>
+    <docsUrl>https://sourceforge.net/p/mcomix/wiki/Home/</docsUrl>
+    <bugTrackerUrl>https://sourceforge.net/p/mcomix/bugs/</bugTrackerUrl>
+    <releaseNotes>https://sourceforge.net/p/mcomix/news/</releaseNotes>
+    <tags>mcomix comics reader</tags>
+    <summary>MComix is a user-friendly, customizable image viewer. It is specifically designed to handle comic books (both Western comics and manga) and supports a variety of container formats. MComix is a fork of Comix.</summary>
+    <description># Summary
+MComix is a user-friendly, customizable image viewer. It is specifically designed to handle comic books (both Western comics and manga) and supports a variety of container formats (including CBR, CBZ, CB7, CBT, LHA and PDF). It is written in Python using GTK+ through the PyGTK bindings, and runs on both Linux and Windows.
+
+MComix is a fork of the [Comix project](https://comix.sourceforge.net), and aims to add bug fixes and stability improvements after Comix development came to a halt in late 2009.
+
+# Features
+* Reads most common image formats, as well as PDF, ZIP, RAR, 7Z and LHA archives directly.
+* Fullscreen mode, double-page mode, fit image to window width, height or both.
+* Smart scrolling for easier reading (just hit the space bar a few times and see how it works)
+* Manga mode (for right-to-left comic books)
+* Bookmark pages and add books to the library.</description>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
