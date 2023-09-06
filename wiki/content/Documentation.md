@@ -3,7 +3,7 @@ Documentation
 
 [TOC]
 
-Please note that this site is an ongoing effort to create a somewhat usable user manual for MComix. Since content is close to zero at the moment, feel free to direct questions to the [support request tracker](https://sourceforge.net/p/mcomix/support-requests/) at the moment.
+Please note that this site is an ongoing effort to create a somewhat usable user manual for MComix.
 
 Installation
 ---
