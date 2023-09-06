@@ -1,8 +1,10 @@
 *.pyc
 __pycache__
 win32/*.nupkg
+*.egg-info/
 build/
 dist/
+env/
 install/
 tags*
 
