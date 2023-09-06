@@ -30,12 +30,16 @@ class WikiClient:
         return WikiPage(title=json["title"], text=json["text"], labels=json["labels"])
 
     def create_or_update_page(self, page: WikiPage) -> None:
-        """Creates or updates the page with the given title."""
-        requests.post(
+        """Creates or updates the page with the given title.
+        Raises PermissionError if the bearer token isn't accepted."""
+        response = requests.post(
             self._generate_url(page.title),
             {"labels": page.label_string(), "text": page.text},
             auth=self.auth,
         )
+
+        if response.status_code == 401:
+            raise PermissionError()
 
     def _generate_url(self, path: str) -> str:
         """Generate a REST API url from the base path determined by script arguments,
