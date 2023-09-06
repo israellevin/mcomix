@@ -3,9 +3,9 @@
 import sys
 import locale
 import ctypes
-import io
 
-def uri_prefix():
+
+def uri_prefix() -> str:
     """ The prefix used for creating file URIs. This is 'file://' on
     Linux, but 'file:' on Windows due to urllib using a different
     URI creating scheme here. """
@@ -14,7 +14,8 @@ def uri_prefix():
     else:
         return 'file://'
 
-def normalize_uri(uri):
+
+def normalize_uri(uri: str) -> str:
     """ Normalize URIs passed into the program by different applications,
     normally via drag-and-drop. """
 
@@ -27,21 +28,23 @@ def normalize_uri(uri):
     else:
         return uri
 
-def invalid_filesystem_chars():
+
+def invalid_filesystem_chars() -> str:
     """ List of characters that cannot be used in filenames on the target platform. """
     if sys.platform == 'win32':
         return r':*?"<>|' + "".join([chr(i) for i in range(0, 32)])
     else:
         return ''
 
-def get_default_locale():
+
+def get_default_locale() -> str:
     """ Gets the user's default locale. """
     if sys.platform == 'win32':
         windll = ctypes.windll.kernel32
         code = windll.GetUserDefaultUILanguage()
         return locale.windows_locale[code]
     else:
-        lang, _ = locale.getdefaultlocale(['LANGUAGE', 'LC_ALL', 'LC_MESSAGES', 'LANG'])
+        lang, _ = locale.getdefaultlocale(('LANGUAGE', 'LC_ALL', 'LC_MESSAGES', 'LANG'))
         if lang:
             return str(lang)
         else:
