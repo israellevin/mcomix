@@ -1,6 +1,12 @@
 MComix 2.4.0
 In development
 
+    BUG FIXES
+
+    - Fix regression from version 2.0.0 that triggered the wrong
+      hotkey functionality when the SHIFT modifier was involved on
+      Windows (for example, SHIFT+Space only triggered Space)
+
     FEATURES
 
     - MComix automatically switches to a dark theme if Windows color

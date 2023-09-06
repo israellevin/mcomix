@@ -407,17 +407,21 @@ class EventHandler(object):
 
         if code[0]:
             keyval = code[1]
+            # 'consumed' is the modifier that was necessary to type the key
             consumed = code[4]
 
-            # If the resulting key is upper case (i.e. SHIFT + key),
-            # convert it to lower case and remove SHIFT from the consumed flags
-            # to match how keys are registered (<Shift> + lowercase)
-            if (event.get_state() & Gdk.ModifierType.SHIFT_MASK and
-                keyval != Gdk.keyval_to_lower(keyval)):
-                keyval = Gdk.keyval_to_lower(keyval)
-                consumed &= ~Gdk.ModifierType.SHIFT_MASK
+            if event.get_state() & Gdk.ModifierType.SHIFT_MASK:
+                # If the resulting key is upper case (i.e. SHIFT + key),
+                # convert it to lower case and remove SHIFT from the consumed flags
+                # to match how keys are registered (<Shift> + lowercase)
+                if keyval != Gdk.keyval_to_lower(keyval):
+                    keyval = Gdk.keyval_to_lower(keyval)
+                    consumed &= ~Gdk.ModifierType.SHIFT_MASK
+                # If lower/upper case conversion with SHIFT is not applicable to the key pressed,
+                # i.e. Space and other special keys, remove SHIFT from the consumed mask.
+                if Gdk.keyval_to_upper(keyval) == Gdk.keyval_to_lower(keyval):
+                    consumed &= ~Gdk.ModifierType.SHIFT_MASK
 
-            # 'consumed' is the modifier that was necessary to type the key
             manager.execute((keyval, event.get_state() & ~consumed & ALL_ACCELS_MASK))
 
         # ---------------------------------------------------------------
