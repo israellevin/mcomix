@@ -201,8 +201,13 @@ def run():
     GLib.set_prgname(constants.APPNAME)
 
     settings = Gtk.Settings.get_default()
-    # Enable icons for menu items.
-    settings.props.gtk_menu_images = True
+    if settings:
+        # Enable icons for menu items.
+        settings.props.gtk_menu_images = True
+
+        # Prefer dark theme if system theme mode is set to dark
+        if portability.is_system_ui_dark_themed() == constants.SystemThemeLightness.DARK:
+            settings.set_property('gtk-application-prefer-dark-theme', True)
 
     from mcomix import main
     window = main.MainWindow(fullscreen = opts.fullscreen, is_slideshow = opts.slideshow,

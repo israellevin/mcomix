@@ -111,4 +111,11 @@ PDF_RENDER_DPI_DEF = 72 * 4
 # Maximum DPI for rendering.
 PDF_RENDER_DPI_MAX = 72 * 10
 
+
+class SystemThemeLightness(enum.Enum):
+    """ Represents the system theme configuration for light/dark. """
+    LIGHT = 0
+    DARK = 1
+    UNKNOWN = 2
+
 # vim: expandtab:sw=4:ts=4
