@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 import requests
 
@@ -12,17 +12,30 @@ class WikiClient:
     def __init__(self, projectname: str, wikiname: str, bearertoken: str) -> None:
         self.projectname = projectname
         self.wikiname = wikiname
-        self.bearertoken = bearertoken
+        self.auth = BearerAuth(bearertoken)
 
     def pagenames(self) -> List[str]:
+        """Returns a list of all page titles available in the Wiki"""
         response = requests.get(self._generate_url(""))
         pagenames: List[str] = response.json()["pages"]
         return pagenames
 
-    def page(self, pagename: str) -> WikiPage:
+    def page(self, pagename: str) -> Optional[WikiPage]:
+        """Returns the contents of the given Wiki page."""
         response = requests.get(self._generate_url(pagename))
+        if response.status_code == 404:
+            return None
+
         json = response.json()
-        return WikiPage(title=json["title"], text=json["text"])
+        return WikiPage(title=json["title"], text=json["text"], labels=json["labels"])
+
+    def create_or_update_page(self, page: WikiPage) -> None:
+        """Creates or updates the page with the given title."""
+        requests.post(
+            self._generate_url(page.title),
+            {"labels": page.label_string(), "text": page.text},
+            auth=self.auth,
+        )
 
     def _generate_url(self, path: str) -> str:
         """Generate a REST API url from the base path determined by script arguments,
