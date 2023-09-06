@@ -12,7 +12,7 @@ MComix is a fork of the [Comix project](http://comix.sourceforge.net/), and aims
 <br />
 [[project_screenshots]]
 
-Dependencies
+<a name="Dependencies"></a>Dependencies
 ---
 
 The following programs and libraries are required in order to install and run MComix:

@@ -4,72 +4,22 @@
 
   MComix is a user-friendly, customizable image viewer. It is specifically
   designed to handle comic books (both Western comics and manga) and supports a
-  variety of container formats (including CBR, CBZ, CB7, CBT, LHA and PDF).
-  MComix is a fork of Comix. It is written in Python and uses GTK+ through the
+  variety of container formats.
+  MComix is a fork of Comix. It is written in Python and uses GTK 3 through the
   PyGObject bindings.
 
 === Installation ==============================================================
 
+  Please follow the installation instructions at
+  https://sourceforge.net/p/mcomix/wiki/Installation/
 
-  Run "python3 setup.py install" as root. This will install MComix in the
-  site-packages folder of Python. An executable "mcomix" will be placed in
-  /usr/bin.
-
-  In order to install MComix in another base directory, use the --prefix option.
-  The option --user explicitly installs MComix in the user's home directory,
-  which does not need root access.
-
-  Example:
-
-      # python3 setup.py --prefix /usr install
-
-  As an example of how to install MComix from the downloaded tar.gz file, run
-  as the root user (via su or sudo):
-
-      # tar -xzf mcomix-x.y.tar.gz
-      # cd mcomix-x.y
-      # python3 setup.py install
-
-  If you don't want to install MComix in some system directory, you can just
-  execute the file mcomixstarter.py in the unpacked MComix directory to
-  run the program. You could also create a symlink somewhere in your PATH
-  pointing to this file.
-
-  Note:
-
-  The above example will not install icons, desktop integration, the
-  man page, or other optional files normally placed into /usr/share. To do so,
-  setup.py must be called with a additonal options:
-
-      # python3 setup.py install --single-version-externally-managed \
-	                            --prefix /usr --root / --record mcomix-files.txt
-
-  This sort of installation is only recommended for advanced users, as no
-  simple uninstall procedure exists of yet. All files belonging to MComix will
-  be written into mcomix-files.txt, and must be removed manually when MComix
-  is to be uninstalled.
+  Most users will find it convenient to use the package provided by their
+  operating system package manager.
 
 === Dependencies ==============================================================
 
-  MComix needs Python 3.7 or newer to work. PyGObject 3.36.0, PyCairo 1.16.0,
-  as well as Pillow (Python Imaging Library Fork) 6.0.0 or newer must be
-  available.
-
-  You also need either the "unrar" or the "rar" program installed if you wish
-  to read RAR (.cbr) archives.
-
-  Alternatively, MComix can use libunrar from Rarlab. Place libunrar.so (or
-  UnRar64.dll on Win32) either in the system's standard library path (/usr/lib64
-  or C:\Windows\system32), or directly in MComix' root directory when run
-  without having first installed MComix.
-
-  To read 7Zip archives, you need to have the "7z" program installed. Likewise,
-  "lha" is needed to open LHA/LZA archives. Note that "7z" can be used as
-  substitute for both "unrar" and "lha".
-
-  To read PDF files, MComix can use the tools provided by MuPDF. The
-  pdf_external extractor uses the mutool and mudraw command-line tools,
-  while the pdf_multi extractor uses the PyMuPDF language bindings.
+  For a list of packages and libraries needed to run MComix, please refer to
+  the documentation at https://sourceforge.net/p/mcomix/wiki/Home/#Dependencies
 
 === Credits ===================================================================
 
@@ -89,7 +39,7 @@
 
 === Contact ===================================================================
 
-  Lead Developer: Louis Casillas <oxaric@gmail.com>
-  https://sourceforge.net/p/mcomix/wiki/
+  Please use the issue tracker at https://sourceforge.net/p/mcomix/_list/tickets
+  to get in touch with the MComix developers.
 
 ===============================================================================

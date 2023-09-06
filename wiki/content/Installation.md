@@ -28,6 +28,8 @@ In order to install MComix in another base directory, use the `--prefix` option.
     ~ # unzip mcomix-0.99.zip
     ~ # python mcomix-0.99/setup.py --prefix /usr install
 
+This sort of installation is only recommended for advanced users, as no simple uninstall procedure exists when using `setup.py`.
+
 Installation on Windows
 ---
 
