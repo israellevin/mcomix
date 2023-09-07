@@ -47,7 +47,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 include = ["mcomix*"]
 
-[tools.setuptools.dynamic]
+[tool.setuptools.dynamic]
 version = {attr = "mcomix.constants.VERSION"}
 
 [tool.mypy]
