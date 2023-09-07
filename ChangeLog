@@ -7,6 +7,9 @@ In development
       hotkey functionality when the SHIFT modifier was involved on
       Windows (for example, SHIFT+Space only triggered Space)
 
+    - MComix should now be properly selectable as default application
+      on Windows in the "Open with..." shell dialog.
+
     FEATURES
 
     - MComix automatically switches to a dark theme if Windows color
