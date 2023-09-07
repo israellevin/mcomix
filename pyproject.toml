@@ -1,3 +1,45 @@
+[project]
+name = "mcomix"
+dynamic = ["version"]
+description = "GTK comic book viewer"
+readme = {file = "README", content-type = "text/plain"}
+required-python = ">=3.7"
+license = {file = "COPYING"}
+authors = [{name = "Pontus Ekberg"}]
+maintainers = [{name = "The MComix Team"}]
+keywords = ["comics", "manga", "images", "reader", "image viewer"]
+classifiers = [
+  "Development Status :: 6 - Mature",
+  "Environment :: X11 Applications :: GTK",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: POSIX :: BSD",
+  "Programming Language :: Python :: 3",
+  "Topic :: Multimedia :: Graphics :: Viewers"
+]
+dependencies = [
+  "PyGObject>=3.36.0",
+  "pycairo>=1.16.0",
+  "Pillow>=6.0.0",
+]
+
+[project.optional-dependencies]
+fileformats = [
+  "chardet",
+  "PyMuPDF>=1.19.2"
+]
+
+[project.urls]
+Homepage = "https://mcomix.sourceforge.io"
+Documentation = "https://sourceforge.net/projects/mcomix/Wiki/Home/"
+Repository = "https://sourceforge.net/p/mcomix/git/ci/master/tree/"
+Changelog = "https://sourceforge.net/p/mcomix/news/"
+
+[project.scripts]
+mcomix = "mcomix.run:run"
+
 [tool.mypy]
 disallow_untyped_defs = true
 disallow_any_unimported = true
