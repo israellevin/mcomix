@@ -15,8 +15,8 @@ def list_files(basedir, *patterns):
 
         for pattern in patterns:
             cur_pattern = os.path.join(dirpath, pattern)
-            all_files.extend([ os.path.normpath(path)
-                               for path in glob.glob(cur_pattern) ])
+            all_files.extend([os.path.normpath(path)
+                              for path in glob.glob(cur_pattern)])
 
     return all_files
 
@@ -28,6 +28,9 @@ added_files.extend([(os.path.join('..', path),
                      os.path.split(path)[0])
                     for path in list_files('mcomix/images', '*.png')])
 
+attach_console = True
+if 'PYINSTALLER_CONSOLE' in os.environ:
+    attach_console = int(os.environ['PYINSTALLER_CONSOLE']) != 0
 
 a = Analysis(['../mcomixstarter.py'],
              pathex=[],
@@ -42,11 +45,13 @@ a = Analysis(['../mcomixstarter.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
-pyz = PYZ(a.pure, a.zipped_data,
-             cipher=block_cipher)
+
+pyz = PYZ(a.pure,
+          a.zipped_data,
+          cipher=block_cipher)
 
 exe = EXE(pyz,
-          a.scripts, 
+          a.scripts,
           [],
           exclude_binaries=True,
           name='MComix',
@@ -54,15 +59,17 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True,
+          console=attach_console,
           disable_windowed_traceback=False,
           target_arch=None,
+          version='version_file.txt',
           codesign_identity=None,
           entitlements_file=None , icon='../mcomix/images/mcomix.ico')
+
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
-               a.datas, 
+               a.datas,
                strip=False,
                upx=True,
                upx_exclude=[],

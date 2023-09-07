@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
 import os
-import sys
+import pathlib
+import re
 import shutil
+import string
 import subprocess
+import sys
+import zipfile
+
+# Patch import path to be able to import the mcomix module
+sys.path.append(str(pathlib.Path(__file__).parent.parent))
+
+from mcomix import constants
 
 """ Wrapper for pyinstaller, to compensate some shortcomings of the build process.
 
@@ -48,7 +57,7 @@ def clear_distdir(distdir: str) -> None:
         return
 
     files = [os.path.join(distdir, file)
-            for file in os.listdir(distdir)]
+             for file in os.listdir(distdir)]
 
     print('Cleaning %s...' % distdir)
     for file in files:
@@ -58,11 +67,34 @@ def clear_distdir(distdir: str) -> None:
             shutil.rmtree(file)
 
 
-def run_pyinstaller() -> int:
+def prepare_version_file() -> None:
+    """ Fills out version information for embedding in the final executable. """
+    print("Creating version file with current MComix version")
+    with open('win32/version_file.template') as fp:
+        tmpl = string.Template(fp.read())
+
+    version_match = re.search(r"^(\d+)\.(\d+).(\d+)", constants.VERSION)
+    if not version_match:
+        print('Could not determine current version', file=sys.stderr)
+        sys.exit(1)
+
+    version_file_contents = tmpl.substitute(major=version_match.group(1),
+                                            minor=version_match.group(2),
+                                            patch=version_match.group(3))
+    with open('win32/version_file.txt', 'w') as out:
+        out.write(version_file_contents)
+
+
+def run_pyinstaller(attach_console: bool) -> int:
     """ Runs setup.py py2exe. """
     print('Executing pyinstaller...')
-    args = ['pyinstaller', 'win32/mcomix.spec']
-    proc_result = subprocess.run(args, shell=True)
+    args = ['pyinstaller', 'win32/mcomix.spec', '--noconfirm']
+
+    # The spec file takes this environment setting to determine if a console should be attached
+    environ = os.environ.copy()
+    environ["PYINSTALLER_CONSOLE"] = "1" if attach_console else "0"
+
+    proc_result = subprocess.run(args, shell=True, env=environ)
 
     return proc_result.returncode
 
@@ -114,14 +146,39 @@ def copy_other_files() -> None:
                 shutil.copytree(path, os.path.join('dist/MComix/licenses', entry))
 
 
+def create_release_archive() -> None:
+    """ Packs the contents of the release directory. """
+    print("Creating ZIP archive...")
+    with zipfile.ZipFile(f'dist/mcomix-{constants.VERSION}-win64-all-in-one.zip', 'w') as zip:
+        basedir = pathlib.Path('dist/MComix/')
+        for dirpath, dirnames, filenames in os.walk('dist/MComix/'):
+            currentdir = pathlib.Path(dirpath)
+            for filename in filenames:
+                full_file_path = currentdir / filename
+                zip.write(full_file_path, full_file_path.relative_to(basedir))
+
+
 if __name__ == '__main__':
-    clear_distdir('dist/MComix')
+    prepare_version_file()
 
-    success = run_pyinstaller() == 0
-
+    # First, a console application is created with default arguments from the spec
+    clear_distdir('dist/MComix/')
+    success = run_pyinstaller(attach_console=True) == 0
     if not success:
         sys.exit(1)
 
+    shutil.move('dist/MComix/MComix.exe', 'dist/MComix.Console.exe')
+
+    # Create version without console
+    clear_distdir('dist/MComix/')
+    success = run_pyinstaller(attach_console=False) == 0
+    if not success:
+        sys.exit(1)
+
+    os.unlink('win32/version_file.txt')
+
+    shutil.move('dist/MComix.Console.exe', 'dist/MComix/')
     copy_other_files()
+    create_release_archive()
 
 # vim: expandtab:sw=4:ts=4
