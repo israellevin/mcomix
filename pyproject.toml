@@ -3,7 +3,7 @@ name = "mcomix"
 dynamic = ["version"]
 description = "GTK comic book viewer"
 readme = {file = "README", content-type = "text/plain"}
-required-python = ">=3.7"
+requires-python = ">=3.7"
 license = {file = "COPYING"}
 authors = [{name = "Pontus Ekberg"}]
 maintainers = [{name = "The MComix Team"}]
@@ -39,6 +39,16 @@ Changelog = "https://sourceforge.net/p/mcomix/news/"
 
 [project.scripts]
 mcomix = "mcomix.run:run"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["mcomix*"]
+
+[tools.setuptools.dynamic]
+version = {attr = "mcomix.constants.VERSION"}
 
 [tool.mypy]
 disallow_untyped_defs = true
