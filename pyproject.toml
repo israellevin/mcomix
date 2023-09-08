@@ -31,13 +31,18 @@ fileformats = [
   "PyMuPDF>=1.19.2"
 ]
 dev = [
+  # For building Windows package
   "pyinstaller; os_name == 'nt'",
+  # For creating source package
   "build",
+  # For updating virtual environment
   "pip-review",
+  # For language server/IDE
   "python-lsp-server[flake8]",
   "pylsp-mypy",
   "pyls-isort",
   "python-lsp-black",
+  # For mypy
   "types-Pillow",
   "pygobject-stubs"
 ]
