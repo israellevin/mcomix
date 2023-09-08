@@ -44,6 +44,8 @@ Some examples:
 * Replace `gir1.2-gtk-4.0` with `gir1.2-gtk-3.0` on Ubuntu/Debian
 * Replace `gtk4` with `gtk3` on Arch Linux
 
+_Windows/MSYS2 note_: Due to a bug in Setuptools, the ujson package, which is needed to process pyproject.toml projects, cannot be built on MSYS2. Please install the `mingw-w64-x86_64-python-ujson` package from Pacman.
+
 With PyGObject installed, you can now create a virtual environment for MComix. Virtual environments used in Python to separate dependencies of various Python applications from each other, in order to avoid depdency conflicts between system and application packages. Virtual environments can be created in a variety of ways using different packages, but the most simple is probably using the `venv` package, which is often bundled with Python.
 
     :::bash
