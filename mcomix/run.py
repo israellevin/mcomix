@@ -6,7 +6,7 @@ import signal
 
 if __name__ == '__main__':
     print('PROGRAM TERMINATED', file=sys.stderr)
-    print('Please do not run this script directly! Use mcomixstarter.py instead.', file=sys.stderr)
+    print('Please do not run this script directly! Use the mcomix script or mcomixstarter.py instead.', file=sys.stderr)
     sys.exit(1)
 
 # These modules must not depend on GTK, Pillow,
