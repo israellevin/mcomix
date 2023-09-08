@@ -76,6 +76,7 @@ The extracted MComix directory can now be safely deleted. To uninstall MComix, s
 You can mostly follow the regular instructions above. Instead of using a source tarball, check out the repository from SourceForge with Git. Then, in the repository folder, install an editable package of MComix by passing the `-e` switch to `pip install`. This will still download all dependencies, but instead of copying a read-only package to your virtual environment, the package will be linked to the repository source code. This way, you can modify the source code, and changes will appear immediately after restarting MComix.
 
     ::: bash
+    (mcomix-venv) mcomix $ export PYGOBJECT_STUB_CONFIG=Gtk3,Gdk3,Soup2
     (mcomix-venv) mcomix $ python -m pip install -e .[dev]
 
 The `dev` optional depdency installs tools for static code analysis, Python language server and other useful tools.
