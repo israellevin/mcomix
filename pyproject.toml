@@ -31,8 +31,9 @@ fileformats = [
   "PyMuPDF>=1.19.2"
 ]
 dev = [
-  "pyinstaller; os_name == 'nt'"
+  "pyinstaller; os_name == 'nt'",
   "build",
+  "pip-review",
   "python-lsp-server[flake8]",
   "pylsp-mypy",
   "pyls-isort",

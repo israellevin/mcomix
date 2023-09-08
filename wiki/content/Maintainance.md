@@ -58,7 +58,7 @@ This will create `mcomix-version.tar.gz` in the `dist` subfolder, ready for uplo
 
 1. A MSYS2 installation with the following packages: `mingw-w64-x86_64-python3-pillow`, `mingw-w64-x86_64-gtk3`, `mingw-w64-x86_64-python3`, `mingw-w64-x86_64-python3-gobject`, `mingw-w64-x86_64-python3-pip`, `mingw-w64-x86_64-python-pymupdf`. 
 2. Make sure to update to the latest version of these packages before starting the release with `pacman -Syuu`.
-3. The Python 3 package `pyinstaller` is automatically installed when development dependencies have been installed, but it shoulld be updated to the latest version with `python -m pip install -U pyinstaller`
+3. The Python 3 package `pyinstaller` is automatically installed when development dependencies have been installed, but it shoulld be updated to the latest version with `pip-review --auto`
 4. The installer script expects optional archive extractors in the directory `../mcomix-other`,  relative to MComix' root directory.  At this time, those are:
 4.1. `../mcomix-other/7z/7z.exe`, `../mcomix-other/7z/License.txt` (from [7-zip](https://www.7-zip.org/download.html))
 4.2. `../mcomix-other/mutool/COPYING.txt`, `../mcomix-other/mutool/mutool.exe` (from [mupdf](https://mupdf.com/releases/index.html))
