@@ -38,7 +38,7 @@ Preparing a new release
 The following steps should be performed prior to releasing a new version.
 
 1. Make sure the `ChangeLog` is up-to-date. Add a "Release Date" line below the line indicating the current version.
-2. Edit `mcomix/constants.py` and make sure the `VERSION` constant is correct and final. Remove the `-dev` suffix if required.
+2. Edit `mcomix/constants.py` and make sure the `VERSION` constant is correct and final. Remove the `-dev0` suffix if required.
 3. Update the translation template as outlined above if required.
 4. Commit changes to Git with a message indicating that the current commit marks a new version, for example "MComix 1.3.0".
 5. Create an [annotated tag ](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with the version number, for example "1.3.0", using the command `git tag -a 1.3.0 -m "Version 1.3.0"`
@@ -47,18 +47,18 @@ The following steps should be performed prior to releasing a new version.
 Compiling the distribution files
 --------------------------------
 
-The source distribution files can be created from any system with Python installed. Simply execute on a Linux machine from the root directory:
+The source distribution files can be created from any system with Python installed. When following the steps to set up a development environment on [Installation], the `build` module can be used to create the source package.
 
 ~~~~~~
 :::bash
-python3 setup.py sdist --formats=gztar,zip
+python3 -m build -s
 ~~~~~~
 
-This will create `mcomix-version.tar.gz` and `mcomix-version.zip` in the `dist` subfolder, ready for uploading. Note that the tar archive should not be created on a Windows machine, to avoid files in the archive having executable permission bits set. Building the all-in-one Windows archive is a bit more difficult and requires:
+This will create `mcomix-version.tar.gz` in the `dist` subfolder, ready for uploading. Note that the command should not be run on a Windows machine, to avoid files in the archive having executable permission bits set. Building the all-in-one Windows archive is a bit more difficult and requires:
 
 1. A MSYS2 installation with the following packages: `mingw-w64-x86_64-python3-pillow`, `mingw-w64-x86_64-gtk3`, `mingw-w64-x86_64-python3`, `mingw-w64-x86_64-python3-gobject`, `mingw-w64-x86_64-python3-pip`, `mingw-w64-x86_64-python-pymupdf`. 
 2. Make sure to update to the latest version of these packages before starting the release with `pacman -Syuu`.
-3. The Python 3 package pyinstaller must be installed using pip: `python3 -m pip install pyinstaller` (and updated with `python3 -m pip install -U pyinstaller`)
+3. The Python 3 package `pyinstaller` is automatically installed when development dependencies have been installed, but it shoulld be updated to the latest version with `python -m pip install -U pyinstaller`
 4. The installer script expects optional archive extractors in the directory `../mcomix-other`,  relative to MComix' root directory.  At this time, those are:
 4.1. `../mcomix-other/7z/7z.exe`, `../mcomix-other/7z/License.txt` (from [7-zip](https://www.7-zip.org/download.html))
 4.2. `../mcomix-other/mutool/COPYING.txt`, `../mcomix-other/mutool/mutool.exe` (from [mupdf](https://mupdf.com/releases/index.html))
@@ -68,20 +68,20 @@ Afterwards, open a shell in MComix root directory and execute:
 
 ~~~~~~
 :::bash
-python3 win32/build_pyinstaller.py
+python win32/build_pyinstaller.py
 ~~~~~~
 
-This will compile all necessary libraries and files, and copy them to the directory `dist`. All that is left now is starting MComix.exe from that directory (does it run?), renaming the directory to `MComix-version`, create a ZIP archive containing the directory, and renaming the ZIP archive to `mcomix-version.win64.all-in-one.zip`.
-
+This will compile all necessary libraries and files, and copy them to the directory `dist`.
 
 Uploading a new release
 -----------------------
 
-The procedure is fairly straight-forward. First, switch to the list of files on MComix' project page, then create a new folder corresponding the the version to be released, e.g. `MComix 1.3.0`. Open the folder, click on the "Add file" button, and upload the previously created archive files (`mcomix-version.tar.gz`, `mcomix-version.zip` and `mcomix-version.win64.all-in-one.zip`). When uploading has finished, the now uploaded files should be selected as default files for people visiting the MComix project page. To do this, click on the (i) icon to the right of each file.
+The procedure is fairly straight-forward. First, switch to the list of files on MComix' project page, then create a new folder corresponding the the version to be released, e.g. `MComix 1.3.0`. Open the folder, click on the "Add file" button, and upload the previously created archive files (`mcomix-version.tar.gz`, `mcomix-version.win64.all-in-one.zip`). When uploading has finished, the now uploaded files should be selected as default files for people visiting the MComix project page. To do this, click on the (i) icon to the right of each file.
 
 1. Mark the win32 all-in-one archive as default file for Windows.
-2. Mark the tar.gz archive as default file for everything else, except "Others".
-3. Mark the zip archive as default for "Others".
+2. Mark the tar.gz archive as default file for everything else.
+
+Sometimes, uploading the Win32 package using the web form times out. In this case, the file can be uploaded with scp following the [SCP upload manual](https://sourceforge.net/p/forge/documentation/SCP/) of SourceForge.
 
 At this point, creating a news entry containing the changes in this version (copy-pasted from `ChangeLog`) might be advisable.
 
@@ -89,6 +89,6 @@ At this point, creating a news entry containing the changes in this version (cop
 Post-release tasks
 ------------------
 
-After releasing a new version, it is helpful to edit `mcomix/constants.py` and increase the version number. Also append `-dev` so that people running MComix from Git source have some indicator that they're running a work-in-progress version.
+After releasing a new version, it is helpful to edit `mcomix/constants.py` and increase the version number. Also append `-dev0` so that people running MComix from Git source have some indicator that they're running a work-in-progress version.
 
 On SourceForge, new milestones corresponding to the new version should be started and the old milestones marked as closed. Only the "Support Requests" and "Bugs" trackers need milestones. The milestone "Git" should always be open. The milestone is mainly useful for people reporting bugs - this allows to identify the version where the bug occurs, or -alternatively- where the bug has been fixed.
