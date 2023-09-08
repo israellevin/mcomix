@@ -14,6 +14,10 @@ In development
       since the Python ecosystem is moving away from packaging
       files outside of the Python package itself.
 
+    - Source archives will be distributed in .tar.gz format
+      only, since this is what the Python packaging specifications
+      mandate.
+
     - mcomixstarter.py is no longer distributed, instead
       simply run "mcomix" when the package is installed.
 
