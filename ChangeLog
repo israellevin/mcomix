@@ -18,8 +18,8 @@ In development
       only, since this is what the Python packaging specifications
       mandate.
 
-    - mcomixstarter.py is no longer distributed, instead
-      simply run "mcomix" when the package is installed.
+    - When the package is installed, simply run "mcomix".
+      mcomixstarter.py is no longer needed.
 
     - Refer to the installation documentation at
       https://sourceforge.net/p/mcomix/wiki/Installation/
