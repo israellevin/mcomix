@@ -1,5 +1,25 @@
-MComix 2.4.0
+MComix 3.0.0
 In development
+
+    BREAKING CHANGES
+
+    - MComix no longer uses the now obsolete setup.py-based
+      installation and packaging. Instead, it is based on
+      pyproject.toml with setuptools as build backend (since
+      MComix already had a dependency on it anyway).
+
+    - Due to this change, application meta files (such as
+      mcomix.desktop) that usually go into /usr/share are no
+      longer copied automatically by the installation process,
+      since the Python ecosystem is moving away from packaging
+      files outside of the Python package itself.
+
+    - mcomixstarter.py is no longer distributed, instead
+      simply run "mcomix" when the package is installed.
+
+    - Refer to the installation documentation at
+      https://sourceforge.net/p/mcomix/wiki/Installation/
+      for more information.
 
     BUG FIXES
 
