@@ -31,6 +31,7 @@ fileformats = [
   "PyMuPDF>=1.19.2"
 ]
 dev = [
+  "build",
   "python-lsp-server[flake8]",
   "pylsp-mypy",
   "pyls-isort",
