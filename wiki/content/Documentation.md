@@ -8,7 +8,7 @@ Please note that this site is an ongoing effort to create a somewhat usable user
 Installation
 ---
 
-Instructions for installing MComix can be found on the [Installation] page. Since MComix is mostly self-contained, simply extracting the source archive and running `mcomixstarter.py` is sufficient for testing purposes.
+Instructions for installing MComix can be found on the [Installation] page.
 
 
 The main window

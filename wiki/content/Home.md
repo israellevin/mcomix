@@ -4,7 +4,7 @@ MComix
 Summary
 ---
 
-MComix is a user-friendly, customizable image viewer. It is specifically designed to handle comic books (both Western comics and manga) and supports a variety of container formats (including CBR, CBZ, CB7, CBT, LHA and PDF). It is written in Python using GTK+ through the PyGTK bindings, and runs on both Linux and Windows.
+MComix is a user-friendly, customizable image viewer. It is specifically designed to handle comic books (both Western comics and manga) and supports a variety of container formats (including CBR, CBZ, CB7, CBT, LHA and PDF). It is written in Python using GTK through the PyGGObject bindings, and runs on both Linux and Windows.
 
 MComix is a fork of the [Comix project](http://comix.sourceforge.net/), and aims to add bug fixes and stability improvements after Comix development came to a halt in late 2009.
 
