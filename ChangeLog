@@ -34,6 +34,9 @@ In development
     - MComix should now be properly selectable as default application
       on Windows in the "Open with..." shell dialog.
 
+    - Fixed broken thumbnail generation using the Python PDF extraction
+      manager on Windows.
+
     FEATURES
 
     - MComix automatically switches to a dark theme if Windows color

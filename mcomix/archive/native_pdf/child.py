@@ -2,17 +2,20 @@
 
 import os
 import multiprocessing as mp
-from multiprocessing.managers import BaseManager, BaseProxy
-from typing import Optional
+from typing import Iterator, Optional
 
 import fitz
 
 from mcomix.constants import PDF_RENDER_DPI_DEF
 
 
+# Will delimit the page name from the xref part of a file name
+XREF_DELIMITER = '_mcmxref'
+
+
 class FitzWorker:
-    def __init__(self, filename, log_level=None):
-        self._extension = None
+    def __init__(self, filename: str, log_level: Optional[int] = None) -> None:
+        self._extension: Optional[str] = None
         self._complex_doc = False
         self.log = mp.get_logger()
         if log_level is not None:
@@ -22,24 +25,21 @@ class FitzWorker:
     def page_count(self) -> int:
         return self.doc.page_count
 
-    def _image_extension(self, page_num) -> str:
+    def _image_extension(self, page_num: int) -> str:
         """Return the filename extension for the page image."""
         if self._extension is None:
             self._extension = self._check_image_type(page_num)
         return self._extension
 
-    def _extract_as_image(self, page_num):
+    def _extract_as_image(self, page_num: int) -> bool:
         """Check whether the page can be extracted via image export."""
         if self._complex_doc:
             return False
-        if (
-            not self._must_render_page(page_num)
-            and self._can_extract_image(page_num)
-        ):
+        if not self._must_render_page(page_num) and self._can_extract_image(page_num):
             return True
         return False
 
-    def _must_render_page(self, page_num):
+    def _must_render_page(self, page_num: int) -> bool:
         """Determine if a page has any forced-render markers.
 
         Rendering to pixmap must be forced if any of these apply:
@@ -58,7 +58,7 @@ class FitzWorker:
         del page
         return result
 
-    def _can_extract_image(self, page_num):
+    def _can_extract_image(self, page_num: int) -> bool:
         """Determine if a page has an extractable image.
 
         Makes a closer examination than _must_render_page(),
@@ -82,7 +82,7 @@ class FitzWorker:
         page_rect = fitz.Rect(page.mediabox).irect
         page_area = page_rect.get_area()
         area_diff = abs(page_area - img_rect.get_area())
-        is_full_page = area_diff < 0.05 * page_area
+        is_full_page: bool = area_diff < 0.05 * page_area
         if is_full_page:
             self.log.debug('PDF page %d: can extract fullpage image', page_num + 1)
         else:
@@ -93,7 +93,7 @@ class FitzWorker:
         del image_info
         return is_full_page
 
-    def _check_image_type(self, page_num) -> str:
+    def _check_image_type(self, page_num: int) -> str:
         """Examine the page's embedded image for its file type.
 
         The extension is determined heuristically by probing only the
@@ -126,7 +126,7 @@ class FitzWorker:
         finally:
             return extension
 
-    def _get_image_xref(self, page_num) -> int:
+    def _get_image_xref(self, page_num: int) -> int:
         try:
             image_info = self.doc.get_page_images(page_num)
             xref = int(image_info[0][0])
@@ -136,18 +136,18 @@ class FitzWorker:
         finally:
             image_info = None
 
-    def iter_contents(self):
+    def iter_contents(self) -> Iterator:
         for pg in range(self.doc.page_count):
             pagenum = f"page{pg + 1:04}"
             if self._extract_as_image(pg):
                 xref = self._get_image_xref(pg)
                 ext = self._image_extension(pg)
-                filename = f"{pagenum}:xref{xref:04}.{ext}"
+                filename = f"{pagenum}{XREF_DELIMITER}{xref:04}.{ext}"
             else:
                 filename = f"{pagenum}.png"
             yield filename
 
-    def extract_xref(self, xref: int, path: str):
+    def extract_xref(self, xref: int, path: str) -> None:
         """Save the embedded PDF image for a given xref."""
         img = self.doc.extract_image(xref)
         if not img:
@@ -159,7 +159,7 @@ class FitzWorker:
             out.write(img_bytes)
         del img_bytes
 
-    def render_page(self, pg: int, path: str):
+    def render_page(self, pg: int, path: str) -> None:
         """Render the page to an image file and save."""
         page = self.doc[pg]
         pixmap = page.get_pixmap(dpi=PDF_RENDER_DPI_DEF)
@@ -167,11 +167,11 @@ class FitzWorker:
         del pixmap
         del page
 
-    def extract_file(self, filename: str, dest: str):
+    def extract_file(self, filename: str, dest: str) -> None:
         outpath = os.path.join(dest, filename)
-        if ':' in filename:
-            _, ref = filename.split(':')
-            xref = int(ref[4:8])
+        if XREF_DELIMITER in filename:
+            _, ref = filename.split(XREF_DELIMITER)
+            xref = int(ref[:4])
             self.extract_xref(xref, outpath)
         elif filename.startswith('page'):
             pg_num = int(filename[4:8]) - 1
