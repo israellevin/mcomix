@@ -17,9 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # -------------------------------------------------------------------------
-import multiprocessing as mp
-import mcomix.run
+from mcomix.__main__ import main
 
-mp.freeze_support()
-mp.set_start_method('spawn')
-mcomix.run.run()
+if __name__ == '__main__':
+    main()
