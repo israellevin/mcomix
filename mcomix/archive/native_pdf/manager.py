@@ -47,7 +47,7 @@ class WorkerProxy(BaseProxy):
         return w.iter_contents()
 
     @classmethod
-    def _extract_pages(cls, entries, save_path) -> Generator[str, None, None]:
+    def _extract_pages(cls, entries, save_path: str) -> Generator[str, None, None]:
         w = FitzWorker(cls.filename)
         for e in entries:
             w.extract_file(e, save_path)

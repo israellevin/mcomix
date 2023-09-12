@@ -2,7 +2,7 @@
 
 import os
 import multiprocessing as mp
-from typing import Iterator, Optional
+from typing import Generator, Optional
 
 import fitz
 
@@ -14,7 +14,7 @@ XREF_DELIMITER = '_mcmxref'
 
 
 class FitzWorker:
-    def __init__(self, filename: str, log_level: Optional[int] = None) -> None:
+    def __init__(self, filename: Optional[str], log_level: Optional[int] = None) -> None:
         self._extension: Optional[str] = None
         self._complex_doc = False
         self.log = mp.get_logger()
@@ -136,7 +136,7 @@ class FitzWorker:
         finally:
             image_info = None
 
-    def iter_contents(self) -> Iterator:
+    def iter_contents(self) -> Generator[str, None, None]:
         for pg in range(self.doc.page_count):
             pagenum = f"page{pg + 1:04}"
             if self._extract_as_image(pg):
