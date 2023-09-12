@@ -10,10 +10,19 @@
 
     <Media Id='1' EmbedCab='yes' Cabinet='mcomix.cab' />
 
-    <Icon Id='mcomix.ico' SourceFile='../mcomix/images/mcomix.ico' />
-    <Property Id='ARPPRODUCTICON' Value='mcomix.ico' />
+    <UIRef Id="WixUI_InstallDir" />
+    <WixVariable Id="WixUILicenseRtf" Value="win32/msi/gpl-2.0.rtf" />
+    <WixVariable Id="WixUIBannerBmp" Value="win32/msi/mcomix-dialog-banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="win32/msi/mcomix-dialog-background.bmp" />
 
-    <Feature Id='Complete'>
+    <Icon Id='mcomix.ico' SourceFile='../mcomix/images/mcomix.ico' />
+
+    <Property Id='ARPPRODUCTICON' Value='mcomix.ico' />
+    <Property Id='WIXUI_INSTALLDIR' Value='INSTALLDIR' />
+
+    <Feature Id='Complete' Title='MComix' Description='Full installation'
+      ConfigurableDirectory='INSTALLDIR'
+      Absent='disallow'>
       <ComponentGroupRef Id='APPLICATIONFILES' />
     </Feature>
   </Product>

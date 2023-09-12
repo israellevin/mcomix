@@ -62,21 +62,21 @@ def generate_id_from_string(
     """Transforms the text in such a way that it conforms to ID requirements, i.e.
     certain chars must be absent, max. 72 characters, starting with character or underscore.
     """
-    suffix = generate_id_suffix(idtype)
-    if path != root:
-        relative_path = path.relative_to(root)
-        # Take the first letter from all path parts, exclude the filename
-        pathparts = [shorten_dir_part(part, 4) for part in relative_path.parts[:-1]]
-        dirpart_length = sum(len(part) for part in pathparts) + len(
-            pathparts
-        )  # Assuming a single char separator between each part
-        avail_remaining_length = MAX_ID_LENGTH - dirpart_length - len(suffix)
-        # Take the full filename
-        pathparts.append(relative_path.name[-avail_remaining_length:])
-    else:
-        # Since MComix.d is hardcoded as dir id further down, this special handling makes sure the same ID
+    if path == root:
+        # Since INSTALLDIR is hardcoded as dir id further down, this special handling makes sure the same ID
         # is generated here for the root directory
-        pathparts = [path.name]
+        return "INSTALLDIR"
+
+    relative_path = path.relative_to(root)
+    # Take the first letter from all path parts, exclude the filename
+    pathparts = [shorten_dir_part(part, 4) for part in relative_path.parts[:-1]]
+    dirpart_length = sum(len(part) for part in pathparts) + len(
+        pathparts
+    )  # Assuming a single char separator between each part
+    suffix = generate_id_suffix(idtype)
+    avail_remaining_length = MAX_ID_LENGTH - dirpart_length - len(suffix)
+    # Take the full filename
+    pathparts.append(relative_path.name[-avail_remaining_length:])
 
     safetext = re.sub(r"[-/\\@+]", "_", "_".join(pathparts))
 
@@ -158,17 +158,21 @@ def generate_wix_fileset(releasedir: pathlib.Path) -> str:
     compgroup_xml: list[str] = []
 
     generate_xml_entries_for_path(
-        dirs_xml, components_xml, compgroup_xml, releasedir, releasedir, 0
+        dirs_xml, components_xml, compgroup_xml, releasedir, releasedir, 3
     )
 
     dirs_xml = (
         [
             "<Directory Id='TARGETDIR' Name='SourceDir'>",
-            "<Directory Id='ProgramFiles64Folder'>",
-            f"<Directory Id='MComix{generate_id_suffix(IdType.Directory)}' Name='MComix'>",
+            f"{INDENT_ONELEVEL*1}<Directory Id='ProgramFiles64Folder'>",
+            f"{INDENT_ONELEVEL*2}<Directory Id='INSTALLDIR' Name='MComix'>",
         ]
         + dirs_xml
-        + ["</Directory>", "</Directory>", "</Directory>"]
+        + [
+            f"{INDENT_ONELEVEL*2}</Directory>",
+            f"{INDENT_ONELEVEL*1}</Directory>",
+            "</Directory>",
+        ]
     )
 
     compgroup_xml = (
@@ -219,6 +223,8 @@ def compile_msi(
             f"-dVERSION={normalize_mcomix_version()}",
             "-arch",
             "x64",
+            "-ext",
+            "WixUIExtension",
             "-o",
             str(temp_dir) + os.sep,
         ]
@@ -233,15 +239,15 @@ def compile_msi(
             str(temp_dir.joinpath(path.name).with_suffix(".wixobj"))
             for path in input_files
         ]
-        + ["-o", str(msi_path), "-spdb"]
+        + ["-ext", "WixUIExtension", "-spdb", "-o", str(msi_path)]
     )
     subprocess.run(cmd, check=True)
 
 
 def main() -> None:
-    spec = pathlib.Path("win32/mcomix.wxs")
+    spec_path = pathlib.Path("win32/msi/mcomix.wxs")
     win32_builddir = pathlib.Path("dist/MComix")
-    if not spec.exists() or not win32_builddir.exists():
+    if not spec_path.exists() or not win32_builddir.exists():
         print(
             "Error: WiX specification or release directory do not exist, "
             "make sure you are in the correct working directory.",
@@ -254,14 +260,14 @@ def main() -> None:
         tmpdir.mkdir()
 
     # Generate file list and create auxilary WXS file
-    autogen_filename = tmpdir.joinpath(f"mcomix-frag-{VERSION}.wxs")
-    with open(autogen_filename, "w") as fp:
+    autogen_path = tmpdir.joinpath(f"mcomix-frag-{VERSION}.wxs")
+    with open(autogen_path, "w") as fp:
         autogen_fragment_wix_content = generate_wix_fileset(win32_builddir)
         fp.write(autogen_fragment_wix_content)
 
     # Generate MSI
     compile_msi(
-        [pathlib.PurePath("win32/mcomix.wxs"), autogen_filename],
+        [spec_path, autogen_path],
         tmpdir,
         pathlib.PurePath("dist/"),
     )
