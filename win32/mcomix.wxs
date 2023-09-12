@@ -13,31 +13,6 @@
     <Icon Id='mcomix.ico' SourceFile='../mcomix/images/mcomix.ico' />
     <Property Id='ARPPRODUCTICON' Value='mcomix.ico' />
 
-    <Directory Id='TARGETDIR' Name='SourceDir'>
-      <Directory Id='ProgramFiles64Folder'>
-        <Directory Id='MComix.dir' Name='MComix'>
-          <Directory Id='cairo.dir' Name='cairo' />
-        </Directory>
-      </Directory>
-    </Directory>
-
-    <DirectoryRef Id='MComix.dir' FileSource='../dist/MComix'>
-      <Component Id='MComix.exe'>
-        <File Id='MComix.exe' Name='MComix.exe' KeyPath='yes' />
-      </Component>
-    </DirectoryRef>
-
-    <DirectoryRef Id='cairo.dir' FileSource='../dist/MComix/cairo'>
-      <Component Id='_cairo.cp311_mingw_x86_64.pyd'>
-        <File Id='_cairo.cp311_mingw_x86_64.pyd' Name='_cairo.cp311-mingw_x86_64.pyd' KeyPath='yes' />
-      </Component>
-    </DirectoryRef>
-
-    <ComponentGroup Id='APPLICATIONFILES'>
-      <ComponentRef Id='MComix.exe' />
-      <ComponentRef Id='_cairo.cp311_mingw_x86_64.pyd' />
-    </ComponentGroup>
-
     <Feature Id='Complete'>
       <ComponentGroupRef Id='APPLICATIONFILES' />
     </Feature>
