@@ -21,7 +21,7 @@ The following programs and libraries are required in order to install and run MC
 - [GTK+ 3](http://www.gtk.org/), [PyGObject](https://pygobject.readthedocs.io/en/latest/) 3.36.0 or newer, and [PyCairo](https://github.com/pygobject/pycairo) 1.16.0 or newer. Windows users need to install [MSYS2](https://www.msys2.org/) and install the necessary packages there.
 - [Python Imaging Library Fork (Pillow)](https://pypi.python.org/pypi/Pillow) 6.0.0 or newer.
 
-The above packages are only required if you intend to run MComix from source or on UNIX-like systems. The all-in-one Windows package already includes all dependencies.
+The above packages are only required if you intend to run MComix from source or on UNIX-like systems. The pre-built Windows packages already include all dependencies.
 
 In order to to read RAR/CBR archives, either `rar` or `unrar` has to be installed. Alternatively, MComix can also make use of [unrar64.dll/libunrar.so](http://www.rarsoft.com/rar_add.htm). The library should be placed either in your default system library directory, or directly in MComix' root directory. To open 7Zip archives, the `7z` executable is required. Likewise, LZA/LHA archives require the `lha` executable (with fallback to `7z`). Opening PDF files requires either the [PyMuPDF](https://pypi.org/project/PyMuPDF/) package, or `mutool`, which is provided by the [MuPDF](https://mupdf.com/) software.
 
