@@ -25,6 +25,9 @@ In development
       https://sourceforge.net/p/mcomix/wiki/Installation/
       for more information.
 
+    - The Windows all-in-one ZIP package is now called simply
+      mcomix-win64-<version>.zip.
+
     BUG FIXES
 
     - Fix regression from version 2.0.0 that triggered the wrong
@@ -41,6 +44,9 @@ In development
 
     - MComix automatically switches to a dark theme if Windows color
       settings are set to "Dark".
+
+    - MComix now has a Windows MSI installer. Users no longer have to
+      manually extract the ZIP archive and move around files.
 
 MComix 2.3.0
 Release date: 2023-08-26
