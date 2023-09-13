@@ -41,7 +41,7 @@ The following steps should be performed prior to releasing a new version.
 2. Edit `mcomix/constants.py` and make sure the `VERSION` constant is correct and final. Remove the `-dev0` suffix if required.
 3. Update the translation template as outlined above if required.
 4. Commit changes to Git with a message indicating that the current commit marks a new version, for example "MComix 1.3.0".
-5. Create an [annotated tag ](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with the version number, for example "1.3.0", using the command `git tag -a 1.3.0 -m "Version 1.3.0"`
+5. Create an [annotated tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with the version number, for example "1.3.0", using the command `git tag -a 1.3.0 -m "Version 1.3.0"`
 
 
 Compiling the distribution files
@@ -54,17 +54,17 @@ The source distribution files can be created from any system with Python install
 python3 -m build -s
 ~~~~~~
 
-This will create `mcomix-version.tar.gz` in the `dist` subfolder, ready for uploading. Note that the command should not be run on a Windows machine, to avoid files in the archive having executable permission bits set. Building the all-in-one Windows archive is a bit more difficult and requires:
+This will create `mcomix-version.tar.gz` in the `dist` subfolder, ready for uploading. Note that the command should not be run on a Windows machine, to avoid files in the archive having executable permission bits set. Building the Windows packages is a bit more difficult and requires:
 
 1. A MSYS2 installation with the following packages: `mingw-w64-x86_64-python3-pillow`, `mingw-w64-x86_64-gtk3`, `mingw-w64-x86_64-python3`, `mingw-w64-x86_64-python3-gobject`, `mingw-w64-x86_64-python3-pip`, `mingw-w64-x86_64-python-ujson`, `mingw-w64-x86_64-python-pymupdf`. 
 2. Make sure to update to the latest version of these packages before starting the release with `pacman -Syuu`.
-3. The Python 3 package `pyinstaller` is automatically installed when development dependencies have been installed, but it shoulld be updated to the latest version with `pip-review --auto`
+3. The Python 3 package `pyinstaller` is automatically installed when development dependencies have been installed, but it shoulld be updated to the latest version with `pip-review --auto --local`
 4. The installer script expects optional archive extractors in the directory `../mcomix-other`,  relative to MComix' root directory.  At this time, those are:
 4.1. `../mcomix-other/7z/7z.exe`, `../mcomix-other/7z/License.txt` (from [7-zip](https://www.7-zip.org/download.html))
 4.2. `../mcomix-other/mutool/COPYING.txt`, `../mcomix-other/mutool/mutool.exe` (from [mupdf](https://mupdf.com/releases/index.html))
 4.3. `../mcomix-other/unrar/license.txt`, `../mcomix-other/unrar/UnRAR64.dll7` (from [WinRar](https://www.rarlab.com/rar_add.htm))
 
-Afterwards, open a shell in MComix root directory and execute:
+Afterwards, open a MINGW64 shell in MComix root directory and execute:
 
 ~~~~~~
 :::bash
@@ -73,15 +73,24 @@ python win32/build_pyinstaller.py
 
 This will compile all necessary libraries and files, and copy them to the directory `dist`.
 
+Afterwards, switch back to a regular Windows console and build the MSI installer. This requires the [WiX toolset](https://wixtoolset.org/docs/wix3/) on your PATH. Navigate to MComix' root folder and execute:
+
+~~~~~~~
+::: bash
+python win32/build_msi.py
+~~~~~~~
+
+You will be notified if problems occured while the installer is building. The finished installer will be placed in the `dist` directory.
+
 Uploading a new release
 -----------------------
 
-The procedure is fairly straight-forward. First, switch to the list of files on MComix' project page, then create a new folder corresponding the the version to be released, e.g. `MComix 1.3.0`. Open the folder, click on the "Add file" button, and upload the previously created archive files (`mcomix-version.tar.gz`, `mcomix-version.win64.all-in-one.zip`). When uploading has finished, the now uploaded files should be selected as default files for people visiting the MComix project page. To do this, click on the (i) icon to the right of each file.
+The procedure is fairly straight-forward. First, switch to the list of files on MComix' project page, then create a new folder corresponding the the version to be released, e.g. `MComix 1.3.0`. Open the folder, click on the "Add file" button, and upload the previously created archive files (`mcomix-version.tar.gz`, `mcomix-win64-version.zip` and `mcomix-win64-version,msi`). When uploading has finished, the now uploaded files should be selected as default files for people visiting the MComix project page. To do this, click on the (i) icon to the right of each file.
 
-1. Mark the win32 all-in-one archive as default file for Windows.
+1. Mark the MSI installer as default file for Windows.
 2. Mark the tar.gz archive as default file for everything else.
 
-Sometimes, uploading the Win32 package using the web form times out. In this case, the file can be uploaded with scp following the [SCP upload manual](https://sourceforge.net/p/forge/documentation/SCP/) of SourceForge.
+Sometimes, uploading the windows packages using the web form can time out. In this case, the files can be uploaded with scp following the [SCP upload manual](https://sourceforge.net/p/forge/documentation/SCP/) of SourceForge.
 
 At this point, creating a news entry containing the changes in this version (copy-pasted from `ChangeLog`) might be advisable.
 

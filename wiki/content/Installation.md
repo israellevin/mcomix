@@ -31,10 +31,17 @@ Users of the popular [Chocolatey package manager](https://chocolatey.org/install
     ::: powershell
     PS > choco install -y mcomix
 
-### Manual installation
-The all-in-one version includes all dependencies and a pre-built executable. After extraction, simply run `MComix.exe`.
+### Scoop
+MComix is also available in the Extras bucket of the [Scoop package manager](https://scoop.sh/). Follow the following steps in a console:
 
-To uninstall MComix, delete the directory MComix was extracted to, and MComix' settings directory, which can be found unter `%HOMEPATH%/MComix`.
+    ::: bash
+    > scoop bucket add extras
+    > scoop install extras/mcomix
+
+### Manual installation
+Simply install the MSI package. The installation requires administrator access. If such access is not available on the machine you plan to use MComix on, you can fall back extracting `mcomix-win64-<version>.zip` anywhere on your harddisk, and run `MComix.exe` from there.
+
+The uninstaller leaves user data, such as the configuration and library contents, on your disk. To completely remove these files, manually delete the folder `%HOMEPATH%/MComix`.
 
 # Running MComix from source
 Since MComix has heavy dependencies on non-Python binary packages that are tendious to install, running it from source is somewhat difficult. At the very least, you will need PyGObject, which has a very good [Getting Started guide](https://pygobject.readthedocs.io/en/latest/getting_started.html) for various operating systems. Please remember that MComix still requires *GTK 3*, while the documentation usually refers to the GTK 4 package. Adapt package manager calls as needed when installing the packages.
