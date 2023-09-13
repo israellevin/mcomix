@@ -31,6 +31,13 @@ Users of the popular [Chocolatey package manager](https://chocolatey.org/install
     ::: powershell
     PS > choco install -y mcomix
 
+### Scoop
+MComix is also available in the Extras bucket of the [Scoop package manager](https://scoop.sh/). Follow the following steps in a console:
+
+    ::: bash
+    > scoop bucket add extras
+    > scoop install extras/mcomix
+
 ### Manual installation
 Simply install the MSI package. The installation requires administrator access. If such access is not available on the machine you plan to use MComix on, you can fall back extracting `mcomix-win64-<version>.zip` anywhere on your harddisk, and run `MComix.exe` from there.
 
