@@ -20,10 +20,32 @@
     <Property Id='ARPPRODUCTICON' Value='mcomix.ico' />
     <Property Id='WIXUI_INSTALLDIR' Value='INSTALLDIR' />
 
+    <DirectoryRef Id="TARGETDIR">
+      <Directory Id='ProgramMenuFolder'>
+        <Directory Id='ApplicationProgramMenuFolder' Name='MComix'>
+          <Component Id='ProgramShortcuts.c'>
+            <Shortcut Id='MComix.exe.s' Name='MComix'
+              Description='MComix is a user-friendly, customizable image viewer.'
+              Target='[!MComix.exe.f]'
+              WorkingDirectory='INSTALLDIR' />
+            <Shortcut Id='Uninstall.s' Name='Uninstall MComix'
+              Description='Uninstalls MComix.'
+              Target='[SystemFolder]msiexec.exe'
+              Arguments='/x [ProductCode]' />
+            <RemoveFolder Id='CleanupProgramMenuDir' Directory='ApplicationProgramMenuFolder' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\MComix' Name='Installed' Type='integer' Value='1' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+    </DirectoryRef>
+
+    <!-- XXX: The uninstaller currently leaves user config files on the disk. -->
+
     <Feature Id='Complete' Title='MComix' Description='Full installation'
       ConfigurableDirectory='INSTALLDIR'
       Absent='disallow'>
       <ComponentGroupRef Id='APPLICATIONFILES' />
+      <ComponentRef Id='ProgramShortcuts.c' />
     </Feature>
   </Product>
 </Wix>

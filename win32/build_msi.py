@@ -34,6 +34,11 @@ def normalize_mcomix_version() -> str:
         raise AttributeError()
 
 
+def auto_close_last_xml_element(xml_list: list[str]) -> None:
+    """Replace the closing brace in the last list element with />"""
+    xml_list[-1] = xml_list[-1].replace(">", " />")
+
+
 def shorten_dir_part(text: str, length: int) -> str:
     """Makes sure the passed text is no longer than <length>,
     equally distributing the available length to the front of the
@@ -112,7 +117,7 @@ def generate_xml_entries_for_path(
 
             # If no new directories were added, shorten last directory tag
             if len(dirs_xml) == xml_entries:
-                dirs_xml[-1] = dirs_xml[-1].replace(">", "/>")
+                auto_close_last_xml_element(dirs_xml)
             else:
                 dirs_xml.append(f"{indent}</Directory>")
 
