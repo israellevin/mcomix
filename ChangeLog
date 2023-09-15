@@ -40,6 +40,9 @@ In development
     - Fixed broken thumbnail generation using the Python PDF extraction
       manager on Windows.
 
+    - Fixed bug in Python PDF extraction that prevented rotated PDF images
+      being displayed without rotation.
+
     FEATURES
 
     - MComix automatically switches to a dark theme if Windows color

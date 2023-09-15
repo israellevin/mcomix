@@ -1,12 +1,15 @@
 """Child process code for native PDF multiprocessing."""
 
+import io
 import os
 import multiprocessing as mp
+from PIL import Image
 from typing import Generator, Optional
 
 import fitz
 
 from mcomix.constants import PDF_RENDER_DPI_DEF
+from mcomix.preferences import prefs
 
 
 # Will delimit the page name from the xref part of a file name
@@ -147,16 +150,32 @@ class FitzWorker:
                 filename = f"{pagenum}.png"
             yield filename
 
-    def extract_xref(self, xref: int, path: str) -> None:
-        """Save the embedded PDF image for a given xref."""
+    def extract_xref(self, page: int, xref: int, path: str) -> None:
+        """Save the embedded PDF image for a given xref. The page is indexed starting with zero."""
         img = self.doc.extract_image(xref)
         if not img:
             return
         os.makedirs(os.path.dirname(path), exist_ok=True)
         img_bytes = img.get("image", b"")
         del img
-        with open(path, "wb") as out:
-            out.write(img_bytes)
+
+        # The extract_image method always returns the unrotated version of the image,
+        # unaffected by any page modifications of rotation.
+        rotation = self.doc[page].rotation
+        if rotation in (90, 180, 270) and prefs['auto rotate from exif']:
+            buffer = io.BytesIO(img_bytes)
+            pil_img = Image.open(buffer)
+            transpose = Image.Transpose.ROTATE_270
+            if rotation == 180:
+                transpose = Image.Transpose.ROTATE_180
+            elif rotation == 270:
+                transpose = Image.Transpose.ROTATE_90
+            pil_img = pil_img.transpose(transpose)
+            pil_img.save(path)
+
+        else:
+            with open(path, "wb") as out:
+                out.write(img_bytes)
         del img_bytes
 
     def render_page(self, pg: int, path: str) -> None:
@@ -170,9 +189,10 @@ class FitzWorker:
     def extract_file(self, filename: str, dest: str) -> None:
         outpath = os.path.join(dest, filename)
         if XREF_DELIMITER in filename:
-            _, ref = filename.split(XREF_DELIMITER)
+            pginfo, ref = filename.split(XREF_DELIMITER)
+            page = int(pginfo[-4:]) - 1
             xref = int(ref[:4])
-            self.extract_xref(xref, outpath)
+            self.extract_xref(page, xref, outpath)
         elif filename.startswith('page'):
             pg_num = int(filename[4:8]) - 1
             self.render_page(pg_num, outpath)
