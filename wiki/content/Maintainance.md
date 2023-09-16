@@ -37,7 +37,7 @@ Preparing a new release
 
 The following steps should be performed prior to releasing a new version.
 
-1. Make sure the `ChangeLog` is up-to-date. Add a "Release Date" line below the line indicating the current version.
+1. Make sure the `ChangeLog.md` is up-to-date. Add a "Release Date" line below the line indicating the current version.
 2. Edit `mcomix/constants.py` and make sure the `VERSION` constant is correct and final. Remove the `-dev0` suffix if required.
 3. Update the translation template as outlined above if required.
 4. Commit changes to Git with a message indicating that the current commit marks a new version, for example "MComix 1.3.0".
@@ -92,7 +92,7 @@ The procedure is fairly straight-forward. First, switch to the list of files on 
 
 Sometimes, uploading the windows packages using the web form can time out. In this case, the files can be uploaded with scp following the [SCP upload manual](https://sourceforge.net/p/forge/documentation/SCP/) of SourceForge.
 
-At this point, creating a news entry containing the changes in this version (copy-pasted from `ChangeLog`) might be advisable.
+At this point, creating a news entry containing the changes in this version (copy-pasted from `ChangeLog.md`) might be advisable.
 
 
 Post-release tasks

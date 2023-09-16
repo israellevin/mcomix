@@ -119,8 +119,8 @@ def win32_newline(source: str, dest: str) -> None:
 def copy_other_files() -> None:
     """ Copy other relevant files into dist directory. """
     print("Copying misc files into dist directory...")
-    win32_newline('ChangeLog', 'dist/MComix/ChangeLog.txt')
-    win32_newline('README', 'dist/MComix/README.txt')
+    win32_newline('ChangeLog.md', 'dist/MComix/ChangeLog.md')
+    win32_newline('README.md', 'dist/MComix/README.md')
     win32_newline('COPYING', 'dist/MComix/licenses/mcomix/COPYING.txt')
 
     if os.path.isdir('../mcomix-other/unrar'):
