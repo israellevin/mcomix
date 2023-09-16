@@ -86,6 +86,7 @@ prefs = {
     'window y': 0,
     'window height': 600,
     'window width': 640,
+    'window maximized': False,
     'pageselector height': -1,
     'pageselector width': -1,
     'library cover size': 125,

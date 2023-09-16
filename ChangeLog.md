@@ -42,6 +42,10 @@
 - Fixed bug in Python PDF extraction that prevented rotated PDF images
   being displayed without rotation.
 - Fixed regression from version 2.2.0 that broke archive password handling.
+- MComix previously didn't remember to restore the "maximized" window state
+  when restarting.
+- Fixed window not being restored at correct position after restarting
+  when runnig on Windows.
 
 ### Features
 

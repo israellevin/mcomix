@@ -264,13 +264,13 @@ class MainWindow(Gtk.Window):
             self._event_handler.drag_n_drop_event)
 
         self.uimanager.set_sensitivities()
+        self.show()
         self.restore_window_geometry()
 
         if prefs['default fullscreen'] or fullscreen:
             toggleaction = self.actiongroup.get_action('fullscreen')
             toggleaction.set_active(True)
 
-        self.show()
 
         if prefs['previous quit was quit and save']:
             fileinfo = self.filehandler.read_fileinfo_file()
@@ -1113,25 +1113,27 @@ class MainWindow(Gtk.Window):
     def get_window_geometry(self):
         return self.get_position() + self.get_size()
 
-    def save_window_geometry(self):
-        (
-            prefs['window x'],
-            prefs['window y'],
-            prefs['window width'],
-            prefs['window height'],
-
-        ) = self.get_window_geometry()
+    def save_window_geometry(self) -> None:
+        x, y, width, height = self.get_window_geometry()
+        prefs['window x'] = x
+        prefs['window y'] = y
+        prefs['window width'] = width
+        prefs['window height'] = height
+        prefs['window maximized'] = self.is_maximized()
 
     def restore_window_geometry(self):
         if self.get_window_geometry() == (prefs['window x'],
                                           prefs['window y'],
                                           prefs['window width'],
-                                          prefs['window height']):
+                                          prefs['window height']) \
+           and self.is_maximized() == prefs['window maximized']:
             return False
-        self.resize(prefs['window width'], prefs['window height'])
-        # FIXME: Moving the Window on Windows causes it to go completely offscreen
-        if sys.platform != 'win32':
-            self.move(prefs['window x'], prefs['window y'])
+
+        self.move(prefs['window x'], prefs['window y'])
+        if prefs['window maximized']:
+            self.maximize()
+        else:
+            self.resize(prefs['window width'], prefs['window height'])
         return True
 
     def update_space(self):

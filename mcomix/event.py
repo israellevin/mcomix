@@ -33,7 +33,7 @@ class EventHandler(object):
             self._window.previous_size = size
             self._window.draw_image()
 
-    def window_state_event(self, widget, event):
+    def window_state_event(self, widget, event: Gdk.EventWindowState):
         is_fullscreen = self._window.is_fullscreen
         if self._window.was_fullscreen != is_fullscreen:
             # Fullscreen state changed.
@@ -50,6 +50,7 @@ class EventHandler(object):
             if redraw:
                 self._window.previous_size = self._window.get_size()
                 self._window.draw_image()
+
 
     def register_key_events(self):
         """ Registers keyboard events and their default binings, and hooks
