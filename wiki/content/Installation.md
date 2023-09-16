@@ -41,7 +41,7 @@ MComix is also available in the Extras bucket of the [Scoop package manager](htt
 ### Manual installation
 Simply install the MSI package. The installation requires administrator access. If such access is not available on the machine you plan to use MComix on, you can fall back extracting `mcomix-win64-<version>.zip` anywhere on your harddisk, and run `MComix.exe` from there.
 
-The uninstaller leaves user data, such as the configuration and library contents, on your disk. To completely remove these files, manually delete the folder `%HOMEPATH%/MComix`.
+The uninstaller leaves user data, such as the configuration and library contents, on your disk. To completely remove these files, manually delete the folder `%APPDATA%/MComix`.
 
 # Running MComix from source
 Since MComix has heavy dependencies on non-Python binary packages that are tendious to install, running it from source is somewhat difficult. At the very least, you will need PyGObject, which has a very good [Getting Started guide](https://pygobject.readthedocs.io/en/latest/getting_started.html) for various operating systems. Please remember that MComix still requires *GTK 3*, while the documentation usually refers to the GTK 4 package. Adapt package manager calls as needed when installing the packages.
@@ -78,7 +78,7 @@ If you want additional file format support for MComix, install the optional depd
 
 On Linux, you may want to copy additional application meta files to `/usr/local/share/` for better desktop integration. All files are stored in the `share` folder in the MComix source archive, with paths already matching their expected destination in `/usr/local/share`. Please note that these files cannot be automatically uninstalled when copied by hand.
 
-The extracted MComix directory can now be safely deleted. To uninstall MComix, simply delete the virtual environment folder, and MComix' settings directory. It can be found in your user directory, usually `~/.config/mcomix` on Linux and `%HOMEPATH%/MComix` on Windows.
+The extracted MComix directory can now be safely deleted. To uninstall MComix, simply delete the virtual environment folder, and MComix' settings directory. It can be found in your user directory, usually `~/.config/mcomix` on Linux and `%APPDATA%/MComix` on Windows.
 
 # Developing MComix
 
