@@ -1,5 +1,5 @@
 # MComix 3.0.0
-## In development
+## Release date: 2023-09-16
 
 ### Breaking Changes
 
