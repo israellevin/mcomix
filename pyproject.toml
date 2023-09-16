@@ -7,7 +7,7 @@ requires-python = ">=3.7"
 license = {file = "COPYING"}
 authors = [{name = "Pontus Ekberg"}]
 maintainers = [{name = "The MComix Team"}]
-keywords = ["comics", "manga", "images", "reader", "image viewer"]
+keywords = ["comix", "comics", "manga", "images", "reader", "image viewer", "cbr", "cbz"]
 classifiers = [
   "Development Status :: 6 - Mature",
   "Environment :: X11 Applications :: GTK",
