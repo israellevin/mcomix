@@ -109,7 +109,7 @@ def generate_xml_entries_for_path(
         if path.is_dir():
             path_id = generate_id_from_string(path, root_dir, IdType.Directory)
 
-            dirs_xml.append(f"{indent}<Directory Id='{path_id}' Name='{path.stem}'>")
+            dirs_xml.append(f"{indent}<Directory Id='{path_id}' Name='{path.name}'>")
             xml_entries = len(dirs_xml)
             generate_xml_entries_for_path(
                 dirs_xml, components_xml, compgroup_xml, path, root_dir, depth + 1
