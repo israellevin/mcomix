@@ -3,6 +3,7 @@
 
 import enum
 import os
+import sys
 
 from mcomix import tools
 
@@ -14,7 +15,7 @@ CONFIG_DIR = tools.get_config_directory()
 DATA_DIR = tools.get_data_directory()
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-THUMBNAIL_PATH = os.path.join(HOME_DIR, '.thumbnails/normal')
+THUMBNAIL_PATH = os.path.join(HOME_DIR if sys.platform != 'win32' else DATA_DIR, '.thumbnails/normal')
 LIBRARY_DATABASE_PATH = os.path.join(DATA_DIR, 'library.db')
 LASTPAGE_DATABASE_PATH = os.path.join(DATA_DIR, 'lastreadpage.db')
 LIBRARY_COVERS_PATH = os.path.join(DATA_DIR, 'library_covers')
