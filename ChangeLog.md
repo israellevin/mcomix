@@ -37,6 +37,7 @@
   manager on Windows.
 - Fixed bug in Python PDF extraction that prevented rotated PDF images
   being displayed without rotation.
+- Fixed regression from version 2.2.0 that broke archive password handling.
 
 ### Features
 
