@@ -1,9 +1,11 @@
 """ preferences.py - Contains the preferences and the functions to read and
 write them.  """
 
+import json
 import os
 import pickle
-import json
+import shutil
+import sys
 
 from mcomix import constants
 
@@ -109,10 +111,23 @@ prefs = {
     'space between two pages': 2,
 }
 
-def read_preferences_file():
+
+def migrate_home_config_path() -> None:
+    """ Migrate the old configuration directory in the user's
+    home directory to %APPDATA% on Win32, if the directory
+    doesn't already exist. """
+    if sys.platform == "win32":
+        old_config_dir = os.path.join(os.path.expanduser("~"), "MComix")
+        if os.path.isdir(old_config_dir) and not os.path.isdir(constants.CONFIG_DIR):
+            shutil.move(old_config_dir, constants.CONFIG_DIR)
+
+
+def read_preferences_file() -> None:
     """Read preferences data from disk."""
 
     saved_prefs = None
+
+    migrate_home_config_path()
 
     if os.path.isfile(constants.PREFERENCE_PATH):
         try:

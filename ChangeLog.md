@@ -25,6 +25,10 @@
 - Former `README` and `ChangeLog` have been converted to
   Markdown format and are now called `README.md` and
   `ChangeLog.md`.
+- On Win32, the MComix user folder, formerly in %HOME%/MComix,
+  has been moved to %APPDATA%/MComix to be more in line
+  with regular Windows directory conventions. The old directory
+  will be automatically migrated on startup.
 
 ### Bug fixes
 
