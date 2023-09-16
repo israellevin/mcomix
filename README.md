@@ -11,8 +11,7 @@ PyGObject bindings.
 
 ## Installation
 
-Please follow the [installation instructions](https://sourceforge.net/p/mcomix/wiki/Installation/)
-on the Wiki.
+Please follow the [installation instructions](https://sourceforge.net/p/mcomix/wiki/Installation/) on the Wiki.
 
 Most users will find it convenient to use the package provided by their
 operating system package manager.
@@ -40,5 +39,4 @@ See mcomix/_vendor/packaging-21.0.dist-info/LICENSE for details.
 
 ## Contact
 
-Please use the [issue tracker](https://sourceforge.net/p/mcomix/_list/tickets)
-to get in touch with the MComix developers.
+Please use the [issue tracker](https://sourceforge.net/p/mcomix/_list/tickets) to get in touch with the MComix developers.
