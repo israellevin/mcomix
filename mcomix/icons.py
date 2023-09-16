@@ -7,6 +7,7 @@ from mcomix import image_tools
 from mcomix import log
 from mcomix.i18n import _
 
+
 def mcomix_icons():
     """ Returns a list of differently sized pixbufs for the
     application icon. """
@@ -20,7 +21,8 @@ def mcomix_icons():
 
     return pixbufs
 
-def load_icons():
+
+def load_icons() -> None:
     _icons = (('gimp-flip-horizontal.png',   'mcomix-flip-horizontal'),
               ('gimp-flip-vertical.png',     'mcomix-flip-vertical'),
               ('gimp-rotate-180.png',        'mcomix-rotate-180'),
@@ -35,7 +37,7 @@ def load_icons():
               ('library.png',                'mcomix-library'),
               ('comments.png',               'mcomix-comments'),
               ('zoom.png',                   'mcomix-zoom'),
-              ('lens.png',                   'mcomix-lens'),
+              ('magnifyingglass.png',        'mcomix-lens'),
               ('double-page.png',            'mcomix-double-page'),
               ('manga.png',                  'mcomix-manga'),
               ('fitbest.png',                'mcomix-fitbest'),
@@ -58,7 +60,6 @@ def load_icons():
         except Exception:
             log.warning(_('! Could not load icon "%s"'), filename)
     factory.add_default()
-
 
 
 # vim: expandtab:sw=4:ts=4
