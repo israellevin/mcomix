@@ -696,13 +696,14 @@ class _BookArea(Gtk.ScrolledWindow):
 
         Gtk.drag_set_icon_pixbuf(context, pointer, -5, -5)
 
-    def _drag_data_get(self, iconview, context, selection, *args):
+    def _drag_data_get(self, iconview: thumbnail_view.ThumbnailIconView, context: Gdk.DragContext,
+                       selection: Gtk.SelectionData, info: int, time: int) -> None:
         """Fill the SelectionData with (iconview) paths for the dragged books
         formatted as a string with each path separated by a comma.
         """
         paths = iconview.get_selected_items()
-        text = ','.join([str(path[0]) for path in paths])
-        selection.set('text/plain', 8, text)
+        text = ','.join(path.to_string() for path in paths)
+        selection.set_text(text, len(text))
 
     def _drag_data_received(self, widget, context, x, y, data, *args):
         """Handle drag-n-drop events ending on the book area (i.e. from

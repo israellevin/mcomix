@@ -1,7 +1,8 @@
 """library_collection_area.py - Comic book library window that displays the collections."""
 
 from xml.sax.saxutils import escape as xmlescape
-from gi.repository import Gdk, GLib, Gtk, GObject
+from gi.repository import Gdk, GLib, Gtk
+from typing import TYPE_CHECKING
 
 from mcomix.preferences import prefs
 from mcomix import constants
@@ -10,6 +11,8 @@ from mcomix import status
 from mcomix import file_chooser_library_dialog
 from mcomix import message_dialog
 from mcomix.i18n import _
+if TYPE_CHECKING:
+    from mcomix.library.main_dialog import _LibraryDialog
 
 _dialog = None
 # The "All books" collection is not a real collection stored in the library,
@@ -17,19 +20,20 @@ _dialog = None
 _COLLECTION_ALL = -1
 _COLLECTION_RECENT = -2
 
+
 class _CollectionArea(Gtk.ScrolledWindow):
 
     """The _CollectionArea is the sidebar area in the library where
     different collections are displayed in a tree.
     """
 
-    def __init__(self, library):
+    def __init__(self, library: "_LibraryDialog"):
         super(_CollectionArea, self).__init__()
         self._library = library
         self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
-        self._treestore = Gtk.TreeStore(str, int) # (Name, ID) of collections.
-        self._treeview = Gtk.TreeView(self._treestore)
+        self._treestore = Gtk.TreeStore.new([str, int])  # (Name, ID) of collections.
+        self._treeview = Gtk.TreeView.new_with_model(self._treestore)
         self._treeview.connect('cursor_changed', self._collection_selected)
         self._treeview.connect('drag_data_received', self._drag_data_received)
         self._treeview.connect('drag_motion', self._drag_motion)
@@ -339,14 +343,14 @@ class _CollectionArea(Gtk.ScrolledWindow):
         else:
             treeview.expand_to_path(path)
 
-    def _drag_data_received(self, treeview, context, x, y, selection, drag_id,
-      eventtime):
+    def _drag_data_received(self, treeview: Gtk.TreeView, context: Gdk.DragContext, x: int, y: int,
+                            selection: Gtk.SelectionData, drag_id: int, eventtime: int) -> None:
         """Move books dragged from the _BookArea to the target collection,
         or move some collection into another collection.
         """
         self._library.set_status_message('')
         drop_row = treeview.get_dest_row_at_pos(x, y)
-        if drop_row is None: # Drop "after" the last row.
+        if drop_row is None:  # Drop "after" the last row.
             dest_path, pos = ((len(self._treestore) - 1,),
                 Gtk.TreeViewDropPosition.AFTER)
         else:
@@ -370,7 +374,7 @@ class _CollectionArea(Gtk.ScrolledWindow):
                         src_collection)
                     self._library.book_area.remove_book_at_path(int(path_str))
 
-    def _drag_motion(self, treeview, context, x, y, *args):
+    def _drag_motion(self, treeview: Gtk.TreeView, context: Gdk.DragContext, x: int, y: int, time: int) -> bool:
         """Set the library statusbar text when hovering a drag-n-drop over
         a collection (either books or from the collection area itself).
         Also set the TreeView to accept drops only when we are hovering over
@@ -382,17 +386,17 @@ class _CollectionArea(Gtk.ScrolledWindow):
         drop_row = treeview.get_dest_row_at_pos(x, y)
         src_collection = self.get_current_collection()
         # Why isn't the drag ID passed along with drag-motion events?
-        if Gtk.drag_get_source_widget(context) is self._treeview: # Moving collection.
+        if Gtk.drag_get_source_widget(context) is self._treeview:  # Moving collection.
             model, src_iter = treeview.get_selection().get_selected()
-            if drop_row is None: # Drop "after" the last row.
+            if drop_row is None:  # Drop "after" the last row.
                 dest_path, pos = (len(model) - 1,), Gtk.TreeViewDropPosition.AFTER
             else:
                 dest_path, pos = drop_row
             dest_iter = model.get_iter(dest_path)
-            if model.is_ancestor(src_iter, dest_iter): # No cycles!
+            if model.is_ancestor(src_iter, dest_iter):  # No cycles!
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return
+                return False
             dest_collection = self._get_collection_at_path(dest_path)
             if pos in (Gtk.TreeViewDropPosition.BEFORE, Gtk.TreeViewDropPosition.AFTER):
                 dest_collection = self._library.backend.get_supercollection(
@@ -402,7 +406,7 @@ class _CollectionArea(Gtk.ScrolledWindow):
                 src_collection == dest_collection):
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return
+                return False
             src_name = self._library.backend.get_collection_name(
                 src_collection)
             if dest_collection is None:
@@ -411,23 +415,22 @@ class _CollectionArea(Gtk.ScrolledWindow):
                 dest_name = self._library.backend.get_collection_name(
                     dest_collection)
             message = (_("Put the collection '%(subcollection)s' in the collection '%(supercollection)s'.") %
-                {'subcollection': src_name, 'supercollection': dest_name})
-        else: # Moving book(s).
+                       {'subcollection': src_name, 'supercollection': dest_name})
+        else:  # Moving book(s).
             if drop_row is None:
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return
+                return False
             dest_path, pos = drop_row
             if pos in (Gtk.TreeViewDropPosition.BEFORE, Gtk.TreeViewDropPosition.AFTER):
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return
+                return False
             dest_collection = self._get_collection_at_path(dest_path)
-            if (src_collection == dest_collection or
-              dest_collection == _COLLECTION_ALL):
+            if src_collection == dest_collection or dest_collection == _COLLECTION_ALL:
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return
+                return False
             dest_name = self._library.backend.get_collection_name(
                 dest_collection)
             if src_collection == _COLLECTION_ALL:
@@ -440,8 +443,9 @@ class _CollectionArea(Gtk.ScrolledWindow):
                     'destination collection': dest_name})
         self._set_acceptable_drop(True)
         self._library.set_status_message(message)
+        return True
 
-    def _set_acceptable_drop(self, acceptable):
+    def _set_acceptable_drop(self, acceptable: bool) -> None:
         """Set the TreeView to accept drops if <acceptable> is True."""
         if acceptable:
             self._treeview.enable_model_drag_dest(
@@ -451,7 +455,7 @@ class _CollectionArea(Gtk.ScrolledWindow):
         else:
             self._treeview.enable_model_drag_dest([], Gdk.DragAction.MOVE)
 
-    def _drag_begin(self, treeview, context):
+    def _drag_begin(self, treeview: Gtk.TreeView, context: Gdk.DragContext) -> None:
         """Create a cursor image for drag-n-drop of collections. We use the
         default one (i.e. the row with text), but put the hotspot in the
         top left corner so that one can actually see where one is dropping,
@@ -459,8 +463,10 @@ class _CollectionArea(Gtk.ScrolledWindow):
         """
         path = treeview.get_cursor()[0]
         surface = treeview.create_row_drag_icon(path)
-        width, height = surface.get_width(), surface.get_height()
-        pixbuf = Gdk.pixbuf_get_from_surface(surface, 0, 0, width, height)
+        image_surface = surface.map_to_image(None)
+        width, height = image_surface.get_width(), image_surface.get_height()
+        pixbuf = Gdk.pixbuf_get_from_surface(image_surface, 0, 0, width, height)
+        surface.unmap_image(image_surface)
         Gtk.drag_set_icon_pixbuf(context, pixbuf, -5, -5)
 
 # vim: expandtab:sw=4:ts=4
