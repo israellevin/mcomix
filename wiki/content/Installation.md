@@ -25,11 +25,17 @@ The Arch Linux User Repository (AUR) usually has the most current version of MCo
 
 ## Installation on Windows
 
-### Chocolatey
-Users of the popular [Chocolatey package manager](https://chocolatey.org/install) can download the `mcomix` package, which takes care of installation and upgrading MComix.
+### Winget
+Starting with version 3.0.0, MComix is available from the [WinGet package manager](https://learn.microsoft.com/en-us/windows/package-manager/winget/).
 
     ::: powershell
-    PS > choco install -y mcomix
+    PS > winget install mcomix
+
+### Chocolatey
+Users of the [Chocolatey package manager](https://chocolatey.org/install) can download the `mcomix` package, which takes care of installation and upgrading MComix. Since the package is currently in moderation, the version has to be added explicitly.
+
+    ::: powershell
+    PS > choco install -y mcomix --version=2.3.0
 
 ### Scoop
 MComix is also available in the Extras bucket of the [Scoop package manager](https://scoop.sh/). Follow the following steps in a console:
