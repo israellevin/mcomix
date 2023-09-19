@@ -374,7 +374,7 @@ class _CollectionArea(Gtk.ScrolledWindow):
                         src_collection)
                     self._library.book_area.remove_book_at_path(int(path_str))
 
-    def _drag_motion(self, treeview: Gtk.TreeView, context: Gdk.DragContext, x: int, y: int, time: int) -> bool:
+    def _drag_motion(self, treeview: Gtk.TreeView, context: Gdk.DragContext, x: int, y: int, time: int) -> None:
         """Set the library statusbar text when hovering a drag-n-drop over
         a collection (either books or from the collection area itself).
         Also set the TreeView to accept drops only when we are hovering over
@@ -396,7 +396,7 @@ class _CollectionArea(Gtk.ScrolledWindow):
             if model.is_ancestor(src_iter, dest_iter):  # No cycles!
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return False
+                return
             dest_collection = self._get_collection_at_path(dest_path)
             if pos in (Gtk.TreeViewDropPosition.BEFORE, Gtk.TreeViewDropPosition.AFTER):
                 dest_collection = self._library.backend.get_supercollection(
@@ -406,7 +406,7 @@ class _CollectionArea(Gtk.ScrolledWindow):
                 src_collection == dest_collection):
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return False
+                return
             src_name = self._library.backend.get_collection_name(
                 src_collection)
             if dest_collection is None:
@@ -420,17 +420,17 @@ class _CollectionArea(Gtk.ScrolledWindow):
             if drop_row is None:
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return False
+                return
             dest_path, pos = drop_row
             if pos in (Gtk.TreeViewDropPosition.BEFORE, Gtk.TreeViewDropPosition.AFTER):
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return False
+                return
             dest_collection = self._get_collection_at_path(dest_path)
             if src_collection == dest_collection or dest_collection == _COLLECTION_ALL:
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
-                return False
+                return
             dest_name = self._library.backend.get_collection_name(
                 dest_collection)
             if src_collection == _COLLECTION_ALL:
@@ -443,15 +443,16 @@ class _CollectionArea(Gtk.ScrolledWindow):
                     'destination collection': dest_name})
         self._set_acceptable_drop(True)
         self._library.set_status_message(message)
-        return True
+        Gdk.drag_status(context, Gdk.DragAction.MOVE, time)
+        return
 
     def _set_acceptable_drop(self, acceptable: bool) -> None:
         """Set the TreeView to accept drops if <acceptable> is True."""
         if acceptable:
             self._treeview.enable_model_drag_dest(
-                [('book', Gtk.TargetFlags.SAME_APP, constants.LIBRARY_DRAG_BOOK_ID),
-                ('collection', Gtk.TargetFlags.SAME_WIDGET, constants.LIBRARY_DRAG_COLLECTION_ID)],
-                Gdk.DragAction.MOVE)
+                [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, constants.LIBRARY_DRAG_BOOK_ID),
+                 Gtk.TargetEntry.new('collection', Gtk.TargetFlags.SAME_WIDGET, constants.LIBRARY_DRAG_COLLECTION_ID)],
+                 Gdk.DragAction.MOVE)
         else:
             self._treeview.enable_model_drag_dest([], Gdk.DragAction.MOVE)
 

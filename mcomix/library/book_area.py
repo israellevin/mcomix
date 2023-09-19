@@ -76,7 +76,7 @@ class _BookArea(Gtk.ScrolledWindow):
         self._iconview.modify_base(Gtk.StateType.NORMAL, image_tools.GTK_GDK_COLOR_BLACK)
         self._iconview.enable_model_drag_source(
             Gdk.ModifierType.BUTTON1_MASK,
-            [Gtk.TargetEntry.new('book', Gtk.TargetFlags.SAME_APP,
+            [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP,
                                  constants.LIBRARY_DRAG_EXTERNAL_ID)],
             Gdk.DragAction.MOVE)
         self._iconview.drag_dest_set(
@@ -657,7 +657,7 @@ class _BookArea(Gtk.ScrolledWindow):
         num_books = len(iconview.get_selected_items())
         book = self.get_book_at_path(icon_path)
 
-        cover = self._library.backend.get_book_cover(book)
+        cover: GdkPixbuf.Pixbuf = self._library.backend.get_book_cover(book)
         if cover is None:
             cover = image_tools.MISSING_IMAGE_ICON
 

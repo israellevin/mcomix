@@ -1,3 +1,12 @@
+# MComix 3.0.1
+## In development
+
+### Bug Fixes
+
+- Fixed regression from 2.0.0 in Library collection list.
+  The bug prevented drag-and-dropping books from the
+  main book area into a collection.
+
 # MComix 3.0.0
 ## Release date: 2023-09-16
 
