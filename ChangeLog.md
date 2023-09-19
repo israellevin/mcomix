@@ -8,6 +8,9 @@
   main book area into a collection.
 - Added official MIME types for CBZ/CBR files to list
   of supported archive formats.
+- Fixed a bug that caused the "Recent" pseudo-collection in the
+  Library to be displayed with the wrong localized name in some
+  cases.
 
 # MComix 3.0.0
 ## Release date: 2023-09-16
