@@ -76,7 +76,7 @@ This will compile all necessary libraries and files, and copy them to the direct
 Afterwards, switch back to a regular Windows console and build the MSI installer. This requires the [WiX toolset](https://wixtoolset.org/docs/wix3/) on your PATH. Navigate to MComix' root folder and execute:
 
 ~~~~~~~
-::: bash
+:::bash
 python win32/build_msi.py
 ~~~~~~~
 

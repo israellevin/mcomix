@@ -8,19 +8,19 @@ MComix is available in most major distributions' packaging systems, and should b
 ### Ubuntu / Debian
 Ubuntu has packaged an up-to-date version of MComix starting with Ubuntu 23.04 (Lunar). The same holds true for Debian 12 (Bookworm).
 
-    ::: bash
+    :::bash
     ~ $ sudo apt install mcomix
 
 ### openSUSE
 openSUSE users can download a current MComix version starting from openSUSE 15.4 (Leap)
 
-    ::: bash
+    :::bash
     ~ $ sudo zypper install mcomix
 
 ### Arch Linux
 The Arch Linux User Repository (AUR) usually has the most current version of MComix.
 
-    ::: bash
+    :::bash
     ~ $ yay -S mcomix
 
 ## Installation on Windows
@@ -28,19 +28,19 @@ The Arch Linux User Repository (AUR) usually has the most current version of MCo
 ### Winget
 Starting with version 3.0.0, MComix is available from the [WinGet package manager](https://learn.microsoft.com/en-us/windows/package-manager/winget/).
 
-    ::: powershell
+    :::powershell
     PS > winget install mcomix
 
 ### Chocolatey
 Users of the [Chocolatey package manager](https://chocolatey.org/install) can download the `mcomix` package, which takes care of installation and upgrading MComix. Since the package is currently in moderation, the version has to be added explicitly.
 
-    ::: powershell
+    :::powershell
     PS > choco install -y mcomix --version=2.3.0
 
 ### Scoop
 MComix is also available in the Extras bucket of the [Scoop package manager](https://scoop.sh/). Follow the following steps in a console:
 
-    ::: bash
+    :::bash
     > scoop bucket add extras
     > scoop install extras/mcomix
 
@@ -70,7 +70,7 @@ Using the `--system-site-packages` switch is important to give the environment a
 
 With the virtual environment activated, extract the MComix source tarball and install the package using the `pip` standard module:
 
-    ::: bash
+    :::bash
     (mcomix-venv) ~ $ tar -xzf mcomix-<versionnr>.tar.gz
     (mcomix-venv) ~ $ cd mcomix-<versionnr>
     (mcomix-venv) mcomix-<versionnr> $ python -m pip install .
@@ -79,7 +79,7 @@ Pip now installs all required dependencies as well as the `mcomix` executable. W
 
 If you want additional file format support for MComix, install the optional depdency `fileformats`:
 
-    ::: bash
+    :::bash
     (mcomix-venv) mcomix-<versionnr> $ python -m pip install .[fileformats]
 
 On Linux, you may want to copy additional application meta files to `/usr/local/share/` for better desktop integration. All files are stored in the `share` folder in the MComix source archive, with paths already matching their expected destination in `/usr/local/share`. Please note that these files cannot be automatically uninstalled when copied by hand.
@@ -90,7 +90,7 @@ The extracted MComix directory can now be safely deleted. To uninstall MComix, s
 
 You can mostly follow the regular instructions above. Instead of using a source tarball, check out the repository from SourceForge with Git. Then, in the repository folder, install an editable package of MComix by passing the `-e` switch to `pip install`. This will still download all dependencies, but instead of copying a read-only package to your virtual environment, the package will be linked to the repository source code. This way, you can modify the source code, and changes will appear immediately after restarting MComix.
 
-    ::: bash
+    :::bash
     (mcomix-venv) mcomix $ export PYGOBJECT_STUB_CONFIG=Gtk3,Gdk3,Soup2
     (mcomix-venv) mcomix $ python -m pip install -e .[dev]
 
