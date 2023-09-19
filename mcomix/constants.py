@@ -102,8 +102,8 @@ PDF_FORMATS = (
         ('application/pdf',),
         ('pdf',))
 MOBI_FORMATS = (
-        ('application/vnd.amazon.mobi8-ebook'),
-        ('.azw3',))
+        ('application/vnd.amazon.mobi8-ebook',),
+        ('azw3',))
 
 IMAGEIO_GDKPIXBUF, IMAGEIO_PIL = list(range(2))
 
