@@ -84,10 +84,10 @@ SIZE_HUGE, SIZE_LARGE, SIZE_NORMAL, SIZE_SMALL, SIZE_TINY = MAX_LIBRARY_COVER_SI
 ACCEPTED_COMMENT_EXTENSIONS = ['txt', 'nfo', 'xml']
 
 ZIP_FORMATS = (
-        ('application/x-zip', 'application/zip', 'application/x-zip-compressed', 'application/x-cbz'),
+        ('application/x-zip', 'application/zip', 'application/x-zip-compressed', 'application/vnd.comicbook+zip', 'application/x-cbz'),
         ('zip', 'cbz'))
 RAR_FORMATS = (
-        ('application/x-rar', 'application/x-cbr'),
+        ('application/x-rar', 'application/vnd.comicbook-rar', 'application/x-cbr'),
         ('rar', 'cbr'))
 TAR_FORMATS = (
         ('application/x-tar', 'application/x-gzip', 'application/x-bzip2', 'application/x-cbt'),
