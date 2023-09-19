@@ -6,6 +6,8 @@
 - Fixed regression from 2.0.0 in Library collection list.
   The bug prevented drag-and-dropping books from the
   main book area into a collection.
+- Added official MIME types for CBZ/CBR files to list
+  of supported archive formats.
 
 # MComix 3.0.0
 ## Release date: 2023-09-16
