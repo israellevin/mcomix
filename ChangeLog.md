@@ -11,6 +11,8 @@
 - Fixed a bug that caused the "Recent" pseudo-collection in the
   Library to be displayed with the wrong localized name in some
   cases.
+- Fixed error when re-opening an archive in double-page mode,
+  thanks to a patch by Spencer Berger.
 
 # MComix 3.0.0
 ## Release date: 2023-09-16
