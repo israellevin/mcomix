@@ -3,7 +3,7 @@
 [TOC]
 
 ## Installation on Linux
-MComix is available in most major distributions' packaging systems, and should be installed using the distribution's system mechanism if possible.
+MComix is available in most major distributions' packaging systems, and should be installed using the distribution's system mechanism if possible. If your distribution only ships an ancient version of MComix, you might opt to install it as Flatpak instead.
 
 ### Ubuntu / Debian
 Ubuntu has packaged an up-to-date version of MComix starting with Ubuntu 23.04 (Lunar). The same holds true for Debian 12 (Bookworm).
@@ -22,6 +22,13 @@ The Arch Linux User Repository (AUR) usually has the most current version of MCo
 
     :::bash
     ~ $ yay -S mcomix
+
+### Flathub
+
+If your distribution supports the installation of [Flatpaks](https://flatpak.org/setup/), you can download and install MComix from Flathub:
+
+    :::bash
+    ~ $ flatpak install flathub net.sourceforge.mcomix
 
 ## Installation on Windows
 
