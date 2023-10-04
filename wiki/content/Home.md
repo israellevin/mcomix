@@ -40,4 +40,4 @@ Icons with a filename starting with "gimp" are taken from The GIMP, and icons wi
 Developer resources
 ---
 
-* The [Maintainance] page has instructions for common tasks related to releasing new versions of MComix.
+* The [Maintenance] page has instructions for common tasks related to releasing new versions of MComix.
