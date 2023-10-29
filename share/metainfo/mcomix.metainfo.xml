@@ -32,6 +32,6 @@
  <update_contact>https://sourceforge.net/p/mcomix/bugs/</update_contact>
 
  <provides>
-  <binary>mcomix</provides>
+  <binary>mcomix</binary>
  </provides>
 </component>

@@ -14,6 +14,8 @@
 - Fixed error when re-opening an archive in double-page mode,
   thanks to a patch by Spencer Berger.
 - Improved robustness to invalid UTF-8.
+- Fixed copy/paste error in application metadata XML file
+  (thanks to Emfox Zhou)
 
 # MComix 3.0.0
 ## Release date: 2023-09-16
