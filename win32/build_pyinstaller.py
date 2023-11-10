@@ -30,7 +30,8 @@ having to play around with relative path names.
                mingw-w64-x86_64-python \
                mingw-w64-x86_64-python-gobject \
                mingw-w64-x86_64-python-pillow \
-               mingw-w64-x86_64-python-pymupdf
+               mingw-w64-x86_64-python-pymupdf \
+               mingw-w64-x86_64-libjxl
 
     2. In the same shell, install pyinstaller with pip:
 
