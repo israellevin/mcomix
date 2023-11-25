@@ -3,6 +3,7 @@
 `mcomix_icon_artwork.svg` is the Inkscape source file
 for a 2023 update of the icon artwork, previously available
 only as a bitmap image (see below).
+
 The updated icon is rendered as a 100% vector-format SVG,
 making it fully scalable to any size with no degradation.
 The new vector artwork is a mostly-faithful recreation
@@ -18,6 +19,9 @@ directly from the optimized SVG file. The `Makefile` in this directory
 should be run after editing  `mcomix_icon_arwork.svg`. It will
 first generate the optimized `../mcomix/images/mcomix.svg` file, 
 then generate all of the necessary PNG icons from the optimized SVG.
+
+A set of icon files following the FreeDesktop icon standard are also
+generated into `../share/icons/hicolor/`, in both PNG and SVG format.
 
 Updating the Windows icon file `../mcomix/images/mcomix.ico`
 is currently a manual process performed with the GIMP gui.
