@@ -12,10 +12,10 @@ def mcomix_icons():
     """ Returns a list of differently sized pixbufs for the
     application icon. """
 
-    sizes = ('16x16', '32x32', '48x48', '256x256')
+    sizes = ('16', '32', '48', '256')
     pixbufs = [
         image_tools.load_pixbuf_data(
-            pkgutil.get_data('mcomix', 'images/%s/mcomix.png' % size)
+            pkgutil.get_data('mcomix', f'images/mcomix-{size}.png')
         ) for size in sizes
     ]
 
