@@ -146,6 +146,8 @@ class _Collection(_BackendObject):
             if filter_string:
                 sql += ''' WHERE book.name LIKE '%' || ? || '%' '''
                 sql_args.append(filter_string)
+                sql += ''' OR book.path LIKE '%' || ? || '%' '''
+                sql_args.append(filter_string)
 
             cursor = self.get_backend().execute(sql, sql_args)
             rows = cursor.fetchall()
@@ -211,6 +213,8 @@ class _DefaultCollection(_Collection):
         sql_args = []
         if filter_string:
             sql += ''' WHERE book.name LIKE '%' || ? || '%' '''
+            sql_args.append(filter_string)
+            sql += ''' OR book.path LIKE '%' || ? || '%' '''
             sql_args.append(filter_string)
 
         cursor = self.get_backend().execute(sql, sql_args)
