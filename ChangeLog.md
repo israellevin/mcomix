@@ -16,6 +16,8 @@
 - Improved robustness to invalid UTF-8.
 - Fixed copy/paste error in application metadata XML file
   (thanks to Emfox Zhou)
+- The library search field now considers not only the book name,
+  but also its full path, as the tooltip already stated.
 
 # MComix 3.0.0
 ## Release date: 2023-09-16
