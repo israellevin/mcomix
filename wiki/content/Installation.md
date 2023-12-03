@@ -39,10 +39,10 @@ Starting with version 3.0.0, MComix is available from the [WinGet package manage
     PS > winget install mcomix
 
 ### Chocolatey
-Users of the [Chocolatey package manager](https://chocolatey.org/install) can download the `mcomix` package, which takes care of installation and upgrading MComix. Since the package is currently in moderation, the version has to be added explicitly.
+Users of the [Chocolatey package manager](https://chocolatey.org/install) can download the `mcomix` package, which takes care of installation and upgrading MComix.
 
     :::powershell
-    PS > choco install -y mcomix --version=2.3.0
+    PS > choco install -y mcomix
 
 ### Scoop
 MComix is also available in the Extras bucket of the [Scoop package manager](https://scoop.sh/). Follow the following steps in a console:
