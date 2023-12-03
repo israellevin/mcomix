@@ -75,7 +75,7 @@ class MobiArchive(archive_base.NonUnicodeArchive):
     def extract(self, filename, destination_dir):
         ''' Extract <filename> from the archive to <destination_dir>. '''
         destination_path = os.path.join(destination_dir, filename)
-        fnparts = re.split('^image([0-9]*)\.', filename)
+        fnparts = re.split(r'^image([0-9]*)\.', filename)
         if len(fnparts) == 3:
             i = int(fnparts[1])-1+self.firstimg
             data = self.sect.loadSection(i)
