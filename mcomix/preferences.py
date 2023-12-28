@@ -81,6 +81,7 @@ prefs = {
     'saturation': 1.0,
     'sharpness': 1.0,
     'auto contrast': False,
+    'invert color': False,
     'max pages to cache': 7,
     'window x': 0,
     'window y': 0,

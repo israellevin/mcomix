@@ -82,12 +82,20 @@ class _EnhanceImageDialog(Gtk.Dialog):
         vbox.pack_start(self._autocontrast_button, False, False, 2)
         self._autocontrast_button.connect('toggled', self._change_values)
 
+        self._invert_color_button = \
+            Gtk.CheckButton.new_with_mnemonic(_('_Invert image colors'))
+        self._invert_color_button.set_tooltip_text(
+            _('Invert(negate) image colors'))
+        vbox.pack_start(self._invert_color_button, False, False, 2)
+        self._invert_color_button.connect('toggled', self._change_values)
+
         self._block = True
         self._brightness_scale.set_value(self._enhancer.brightness - 1)
         self._contrast_scale.set_value(self._enhancer.contrast - 1)
         self._saturation_scale.set_value(self._enhancer.saturation - 1)
         self._sharpness_scale.set_value(self._enhancer.sharpness - 1)
         self._autocontrast_button.set_active(self._enhancer.autocontrast)
+        self._invert_color_button.set_active(self._enhancer.invert_color)
         self._block = False
         self._contrast_scale.set_sensitive(
             not self._autocontrast_button.get_active())
@@ -136,6 +144,7 @@ class _EnhanceImageDialog(Gtk.Dialog):
         self._enhancer.autocontrast = self._autocontrast_button.get_active()
         self._contrast_scale.set_sensitive(
             not self._autocontrast_button.get_active())
+        self._enhancer.invert_color = self._invert_color_button.get_active()
         self._enhancer.signal_update()
 
     def _response(self, dialog, response):
@@ -150,6 +159,7 @@ class _EnhanceImageDialog(Gtk.Dialog):
             prefs['saturation'] = self._enhancer.saturation
             prefs['sharpness'] = self._enhancer.sharpness
             prefs['auto contrast'] = self._enhancer.autocontrast
+            prefs['invert color'] = self._enhancer.invert_color
 
         elif response == Gtk.ResponseType.REJECT:
             self._block = True
@@ -158,6 +168,7 @@ class _EnhanceImageDialog(Gtk.Dialog):
             self._saturation_scale.set_value(prefs['saturation'] - 1.0)
             self._sharpness_scale.set_value(prefs['sharpness'] - 1.0)
             self._autocontrast_button.set_active(prefs['auto contrast'])
+            self._invert_color_button.set_active(prefs['invert color'])
             self._block = False
             self._change_values(self)
 

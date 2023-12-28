@@ -327,6 +327,10 @@ class EventHandler(object):
             ['<Control>L'],
             self._window.actiongroup.get_action('library').activate)
 
+        manager.register('invert_color',
+            ['<Control>I'],
+            self._window.actiongroup.get_action('invert_color').activate)
+
         # Space key scrolls down a percentage of the window height or the
         # image height at a time. When at the bottom it flips to the next
         # page.

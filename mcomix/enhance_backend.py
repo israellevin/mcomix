@@ -19,16 +19,18 @@ class ImageEnhancer(object):
         self.saturation = prefs['saturation']
         self.sharpness = prefs['sharpness']
         self.autocontrast = prefs['auto contrast']
+        self.invert_color = prefs['invert color']
 
     def enhance(self, pixbuf):
         """Return an "enhanced" version of <pixbuf>."""
 
         if (self.brightness != 1.0 or self.contrast != 1.0 or
           self.saturation != 1.0 or self.sharpness != 1.0 or
-          self.autocontrast):
+          self.autocontrast or self.invert_color):
 
             return image_tools.enhance(pixbuf, self.brightness, self.contrast,
-                self.saturation, self.sharpness, self.autocontrast)
+                self.saturation, self.sharpness, self.autocontrast,
+                self.invert_color)
 
         return pixbuf
 

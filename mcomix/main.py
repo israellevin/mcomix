@@ -743,6 +743,11 @@ class MainWindow(Gtk.Window):
         # as we'll be receiving a window state
         # change or resize event.
 
+    def change_invert_color(self, toggleaction):
+        prefs['invert color'] = not self.enhancer.invert_color
+        self.enhancer.invert_color = prefs['invert color']
+        self.enhancer.signal_update()
+
     def change_zoom_mode(self, radioaction=None, *args):
         if radioaction:
             prefs['zoom mode'] = radioaction.get_current_value()

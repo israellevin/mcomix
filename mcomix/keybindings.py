@@ -138,6 +138,7 @@ BINDING_INFO = {
     'open' : { 'title': _('Open'), 'group': _('File') },
     'enhance_image' : { 'title': _('Enhance image'), 'group': _('File') },
     'library' : { 'title': _('Library'), 'group': _('File') },
+    'invert_color' : { 'title': _('Invert image colors'), 'group': _('File') },
 }
 
 # Generate 9 entries for executing command 1 to 9

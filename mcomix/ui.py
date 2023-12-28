@@ -138,7 +138,9 @@ class MainUI(Gtk.UIManager):
                 None, _('Magnifying lens'), window.lens.toggle),
             ('stretch', None, _('Stretch small images'),
                 None, _('Stretch images to fit to the screen, depending on zoom mode.'),
-                window.change_stretch)])
+                window.change_stretch),
+            ('invert_color', None, _('_Invert image colors'),
+                None, _('Invert image colors'), window.change_invert_color)])
 
         # Note: Don't change the default value for the radio buttons unless
         # also fixing the code for setting the correct one on start-up in main.py.
