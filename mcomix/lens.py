@@ -157,6 +157,8 @@ class MagnifyingLens(object):
                 composite_color_args, (x - border_size - check_offset[0],
                 y - border_size - check_offset[1])) # 2D only
 
+        canvas = self._window.enhancer.enhance(canvas)
+
         return image_tools.add_border(canvas, border_size)
 
     def _draw_lens_pixbuf(self, ref_pos, csize, srcbuf, rotation, flips,
