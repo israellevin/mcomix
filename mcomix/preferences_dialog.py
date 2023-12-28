@@ -827,6 +827,9 @@ class _PreferencesDialog(Gtk.Dialog):
         elif preference == 'show page numbers on thumbnails':
             self._window.thumbnailsidebar.toggle_page_numbers_visible()
 
+        elif preference == 'archive thumbnail as icon':
+            self._window.update_icon(True)
+
     def _color_button_cb(self, colorbutton, preference):
         """Callback for the background colour selection button."""
 
