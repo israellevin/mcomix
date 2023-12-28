@@ -5,6 +5,7 @@ from gi.repository import GLib
 
 from mcomix.preferences import prefs
 from mcomix import image_tools
+from mcomix.library import main_dialog
 
 class ImageEnhancer(object):
 
@@ -43,5 +44,8 @@ class ImageEnhancer(object):
 
         self._window.thumbnailsidebar.clear()
         GLib.idle_add(self._window.thumbnailsidebar.load_thumbnails)
+
+        if main_dialog._dialog is not None:
+            main_dialog._dialog.book_area.load_covers()
 
 # vim: expandtab:sw=4:ts=4

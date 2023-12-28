@@ -236,7 +236,7 @@ class _BookArea(Gtk.ScrolledWindow):
         self.add_books(books)
 
         # Re-attach model here
-        self._iconview.set_model(self._liststore)
+        GLib.idle_add(self._iconview.set_model, self._liststore)
 
     def stop_update(self):
         """Signal that the updating of book covers should stop."""
@@ -378,6 +378,11 @@ class _BookArea(Gtk.ScrolledWindow):
             cell.set_fixed_size(width, height)
             cell.set_alignment(0.5, 0.5)
 
+    def load_covers(self):
+        self._cache.invalidate_all()
+        collection = self._library.collection_area.get_current_collection()
+        GLib.idle_add(self.display_covers, collection)
+
     def _book_size_changed(self, old, current):
         """ Called when library cover size changes. """
         old_size = prefs['library cover size']
@@ -420,9 +425,7 @@ class _BookArea(Gtk.ScrolledWindow):
                 prefs['library cover size'] = size
 
         if prefs['library cover size'] != old_size:
-            self._cache.invalidate_all()
-            collection = self._library.collection_area.get_current_collection()
-            GLib.idle_add(self.display_covers, collection)
+            self.load_covers()
 
     def _pixbuf_size(self, border_size=_BORDER_SIZE):
         # Don't forget the extra pixels for the border!
@@ -443,8 +446,10 @@ class _BookArea(Gtk.ScrolledWindow):
             except:
                 pixbuf = image_tools.MISSING_IMAGE_ICON
             pixbuf = image_tools.fit_in_rectangle(pixbuf, width, height, scale_up=True)
-            pixbuf = image_tools.add_border(pixbuf, 1, 0xFFFFFFFF)
             self._cache.add(book.path, pixbuf)
+
+        pixbuf = self._library._window.enhancer.enhance(pixbuf);
+        pixbuf = image_tools.add_border(pixbuf, 1, 0xFFFFFFFF)
 
         # Display indicator of having finished reading the book.
         # This information isn't cached in the pixbuf cache, as it changes frequently.
