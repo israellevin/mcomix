@@ -93,9 +93,12 @@ class ImageHandler(object):
         pixbufs = self.get_pixbufs(number_of_bufs)
 
         if len(pixbufs) == 1:
+            pixbufs[0] = self._window.enhancer.enhance(pixbufs[0])
             auto_bg = image_tools.get_most_common_edge_colour(pixbufs[0])
         elif len(pixbufs) == 2:
             left, right = pixbufs
+            left = self._window.enhancer.enhance(left)
+            right = self._window.enhancer.enhance(right)
             if self._window.is_manga_mode:
                 left, right = right, left
 
