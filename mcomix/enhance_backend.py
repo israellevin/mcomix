@@ -1,6 +1,7 @@
 """enhance_backend.py - Image enhancement handler and dialog (e.g. contrast,
 brightness etc.)
 """
+from gi.repository import GLib
 
 from mcomix.preferences import prefs
 from mcomix import image_tools
@@ -39,5 +40,8 @@ class ImageEnhancer(object):
         values has been made.
         """
         self._window.draw_image()
+
+        self._window.thumbnailsidebar.clear()
+        GLib.idle_add(self._window.thumbnailsidebar.load_thumbnails)
 
 # vim: expandtab:sw=4:ts=4
