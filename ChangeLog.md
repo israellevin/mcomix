@@ -1,5 +1,11 @@
-# MComix 3.0.1
+# MComix 3.1.0
 ## In development
+
+### Features
+
+- Image colors can be negated in the Image Enhancement dialog.
+  Furthermore, enhancements now apply to most UI elements, such as
+  sidebar thumbnails, magnified lens image and library covers.
 
 ### Bug Fixes
 
