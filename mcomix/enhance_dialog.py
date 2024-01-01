@@ -85,7 +85,7 @@ class _EnhanceImageDialog(Gtk.Dialog):
         self._invert_color_button = \
             Gtk.CheckButton.new_with_mnemonic(_('_Invert image colors'))
         self._invert_color_button.set_tooltip_text(
-            _('Invert(negate) image colors'))
+            _('Invert (negate) image colors.'))
         vbox.pack_start(self._invert_color_button, False, False, 2)
         self._invert_color_button.connect('toggled', self._change_values)
 
