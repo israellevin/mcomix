@@ -100,12 +100,12 @@ def fit_in_rectangle(src, width, height, keep_ratio=True, scale_up=False, rotati
 
     If <src> has an alpha channel it gets a checkboard background.
     """
-    # "Unbounded" really means "bounded to 10000 px" - for simplicity.
+    # "Unbounded" really means "bounded to RENDER_SIZE_LIMIT" - for simplicity.
     # MComix would probably choke on larger images anyway.
     if width < 0:
-        width = 100000
+        width = constants.RENDER_SIZE_LIMIT
     elif height < 0:
-        height = 100000
+        height = constants.RENDER_SIZE_LIMIT
     width = max(width, 1)
     height = max(height, 1)
 
