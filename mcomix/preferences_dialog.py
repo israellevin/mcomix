@@ -248,7 +248,7 @@ class _PreferencesDialog(Gtk.Dialog):
 
         page.add_row(Gtk.Label(label=_('Fixed size for this mode:')),
             self._create_pref_spinner('fit to size px',
-            1, 10, 10000, 10, 50, 0, None))
+            1, 10, constants.RENDER_SIZE_LIMIT, 10, 50, 0, None))
 
         page.new_section(_('Slideshow'))
 
