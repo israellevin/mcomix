@@ -6,6 +6,9 @@
 - Image colors can be negated in the Image Enhancement dialog.
   Furthermore, enhancements now apply to most UI elements, such as
   sidebar thumbnails, magnified lens image and library covers.
+- "Fit to size" has been generalised. Bounds can now be set
+  independently for width and height, and different bounds can be
+  applied to wide layouts and other layouts.
 
 ### Bug Fixes
 
