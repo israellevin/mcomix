@@ -104,8 +104,10 @@ prefs = {
     'wrap mouse scroll': False,
     'scaling quality': 2,  # GdkPixbuf.InterpType.BILINEAR
     'escape quits': False,
-    'fit to size width': 1800,
-    'fit to size height': 1800,
+    'fit to size width wide': 1800,
+    'fit to size height wide': 1800,
+    'fit to size width other': 1800,
+    'fit to size height other': 1800,
     'scan for new books on library startup': True,
     'openwith commands': [],  # (label, command) pairs
     'animation mode': constants.ANIMATION_NORMAL,

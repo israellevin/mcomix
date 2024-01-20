@@ -158,7 +158,12 @@ class ZoomModel(object):
             return screen_size
         result = [None] * len(screen_size)
         if fitmode == constants.ZoomMode.SIZE:
-            return [int(prefs['fit to size width']), int(prefs['fit to size height'])]
+            if union_size[constants.PageAxis.WIDTH] > union_size[constants.PageAxis.HEIGHT]:
+                return [int(prefs['fit to size width wide']),
+                    int(prefs['fit to size height wide'])]
+            else:
+                return [int(prefs['fit to size width other']),
+                    int(prefs['fit to size height other'])]
         if not manual:
             fixed_size = None
             if fitmode == constants.ZoomMode.WIDTH:

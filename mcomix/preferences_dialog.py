@@ -243,12 +243,20 @@ class _PreferencesDialog(Gtk.Dialog):
 
         page.new_section(_('Fit to size mode'))
 
-        page.add_row(Gtk.Label(label=_('Fixed width for this mode:')),
-            self._create_pref_spinner('fit to size width',
+        page.add_row(Gtk.Label(label=_('Fixed width for wide layouts:')),
+            self._create_pref_spinner('fit to size width wide',
             1, 10, constants.RENDER_SIZE_LIMIT, 10, 50, 0, None))
 
-        page.add_row(Gtk.Label(label=_('Fixed height for this mode:')),
-            self._create_pref_spinner('fit to size height',
+        page.add_row(Gtk.Label(label=_('Fixed height for wide layouts:')),
+            self._create_pref_spinner('fit to size height wide',
+            1, 10, constants.RENDER_SIZE_LIMIT, 10, 50, 0, None))
+
+        page.add_row(Gtk.Label(label=_('Fixed width for other layouts:')),
+            self._create_pref_spinner('fit to size width other',
+            1, 10, constants.RENDER_SIZE_LIMIT, 10, 50, 0, None))
+
+        page.add_row(Gtk.Label(label=_('Fixed height for other layouts:')),
+            self._create_pref_spinner('fit to size height other',
             1, 10, constants.RENDER_SIZE_LIMIT, 10, 50, 0, None))
 
         page.new_section(_('Slideshow'))
@@ -879,11 +887,8 @@ class _PreferencesDialog(Gtk.Dialog):
             prefs['number of key presses before page turn'] = int(value)
             self._window._event_handler._extra_scroll_events = 0
 
-        elif preference == 'fit to size width':
-            prefs[preference] = int(value)
-            self._window.change_zoom_mode()
-
-        elif preference == 'fit to size height':
+        elif preference in ('fit to size width wide', 'fit to size height wide',
+            'fit to size width other', 'fit to size height other',):
             prefs[preference] = int(value)
             self._window.change_zoom_mode()
 
