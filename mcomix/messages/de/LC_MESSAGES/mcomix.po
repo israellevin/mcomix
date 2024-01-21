@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MComix 2.0.0\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/projects/mcomix\n"
 "POT-Creation-Date: 2024-01-21 19:52+0100\n"
-"PO-Revision-Date: 2024-01-01 14:26+0100\n"
+"PO-Revision-Date: 2024-01-21 19:55+0100\n"
 "Last-Translator: Moritz Brunner <oddegamra@gmx.org>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -1162,24 +1162,20 @@ msgid "Fit to size mode"
 msgstr "Modus mit fester Größe"
 
 #: mcomix/preferences_dialog.py:246
-#, fuzzy
 msgid "Fixed width for wide pages:"
-msgstr "Feste Größe für diesen Modus:"
+msgstr "Feste Größe für breite Seiten:"
 
 #: mcomix/preferences_dialog.py:250
-#, fuzzy
 msgid "Fixed height for wide pages:"
-msgstr "Modus mit angepasster Höhe"
+msgstr "Feste Höhe für breite Seiten:"
 
 #: mcomix/preferences_dialog.py:254
-#, fuzzy
 msgid "Fixed width for other pages:"
-msgstr "Feste Größe für diesen Modus:"
+msgstr "Feste Breite für andere Seiten:"
 
 #: mcomix/preferences_dialog.py:258
-#, fuzzy
 msgid "Fixed height for other pages:"
-msgstr "Feste Größe für diesen Modus:"
+msgstr "Feste Höhe für andere Seiten:"
 
 #: mcomix/preferences_dialog.py:262
 msgid "Slideshow"
