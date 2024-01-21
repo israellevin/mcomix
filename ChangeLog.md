@@ -8,7 +8,7 @@
   sidebar thumbnails, magnified lens image and library covers.
 - "Fit to size" has been generalised. Bounds can now be set
   independently for width and height, and different bounds can be
-  applied to wide layouts and other layouts.
+  applied to wide pages and other pages.
 
 ### Bug Fixes
 

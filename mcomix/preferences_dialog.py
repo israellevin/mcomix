@@ -243,19 +243,19 @@ class _PreferencesDialog(Gtk.Dialog):
 
         page.new_section(_('Fit to size mode'))
 
-        page.add_row(Gtk.Label(label=_('Fixed width for wide layouts:')),
+        page.add_row(Gtk.Label(label=_('Fixed width for wide pages:')),
             self._create_pref_spinner('fit to size width wide',
             1, 10, constants.RENDER_SIZE_LIMIT, 10, 50, 0, None))
 
-        page.add_row(Gtk.Label(label=_('Fixed height for wide layouts:')),
+        page.add_row(Gtk.Label(label=_('Fixed height for wide pages:')),
             self._create_pref_spinner('fit to size height wide',
             1, 10, constants.RENDER_SIZE_LIMIT, 10, 50, 0, None))
 
-        page.add_row(Gtk.Label(label=_('Fixed width for other layouts:')),
+        page.add_row(Gtk.Label(label=_('Fixed width for other pages:')),
             self._create_pref_spinner('fit to size width other',
             1, 10, constants.RENDER_SIZE_LIMIT, 10, 50, 0, None))
 
-        page.add_row(Gtk.Label(label=_('Fixed height for other layouts:')),
+        page.add_row(Gtk.Label(label=_('Fixed height for other pages:')),
             self._create_pref_spinner('fit to size height other',
             1, 10, constants.RENDER_SIZE_LIMIT, 10, 50, 0, None))
 
