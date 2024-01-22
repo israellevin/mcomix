@@ -150,7 +150,7 @@ def copy_other_files() -> None:
 def create_release_archive() -> None:
     """ Packs the contents of the release directory. """
     print("Creating ZIP archive...")
-    with zipfile.ZipFile(f'dist/mcomix-win64-{constants.VERSION}.zip', 'w', compression=zipfile.ZIP_LZMA) as zip:
+    with zipfile.ZipFile(f'dist/mcomix-win64-{constants.VERSION}.zip', 'w', compression=zipfile.ZIP_DEFLATED) as zip:
         basedir = pathlib.Path('dist/MComix/')
         for dirpath, dirnames, filenames in os.walk('dist/MComix/'):
             currentdir = pathlib.Path(dirpath)
