@@ -1041,12 +1041,11 @@ class EventHandler:
         if new_index == -1:
             self._previous_page_with_protection()
         elif new_index == self._window.displayed_page_count():
-            if self._window.zoom._fitmode == constants.ZoomMode.BEST:
-                self._window.actiongroup.get_action('fit_width_mode').activate()
-            else:
-                self._next_page_with_protection()
-                if self._window.zoom._fitmode == constants.ZoomMode.WIDTH:
+            if self._window.zoom._fitmode != constants.ZoomMode.BEST:
+                if self._next_page_with_protection():
                     self._window.actiongroup.get_action('best_fit_mode').activate()
+            else:
+                self._window.actiongroup.get_action('fit_width_mode').activate()
         else:
             self._window.update_viewport_position()
 
