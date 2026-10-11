@@ -13,6 +13,7 @@ from mcomix import constants
 from mcomix import icons
 from mcomix import keybindings
 from mcomix import main
+from mcomix import osd
 from mcomix import page_marks
 from mcomix import page_rotations
 from mcomix import preferences
@@ -762,6 +763,16 @@ class ReadTest(_StripTest):
                 wraps=main.status.format_page_number) as named:
             self.window.update_title()
         named.assert_called_once_with([1], len(self.PAGES))
+
+    def test_the_page_number_over_a_fullscreen_strip_is_its_alone(self):
+        prefs['page counter'] = osd.PageCounter.ALWAYS
+        counter = self.window.page_counter
+        with unittest.mock.patch.object(self.window, 'is_fullscreen',
+                                        return_value=True):
+            counter.update()
+            self.assertEqual('1 / %d' % len(self.PAGES), counter.text())
+            self.window.scroll(0, 700)
+            self.assertEqual('2 / %d' % len(self.PAGES), counter.text())
 
     def test_copy_takes_it_alone(self):
         copied = []
