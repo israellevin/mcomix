@@ -217,14 +217,14 @@ class ImageHandler:
                 self._window.filehandler.archive_type is not None):
             return True
 
-        if (prefs['skip broken pages'] and prefs['default double page']
+        if (prefs['skip broken pages'] and self._window.is_double_page
                 and page < self.get_number_of_pages()
                 and (self.is_broken(page) or self.is_broken(page + 1))):
             # Shown on its own, so that the page that would not load
             # beside it can be turned past.
             return True
 
-        if (prefs['default double page']
+        if (self._window.is_double_page
                 and page < self.get_number_of_pages()
                 and (self._is_marked(page) or self._is_marked(page + 1))):
             # Shown on its own for the same reason: the page beside it
@@ -232,7 +232,7 @@ class ImageHandler:
             # the two is marked to stand alone.
             return True
 
-        if (not prefs['default double page'] or
+        if (not self._window.is_double_page or
                 not prefs['virtual double page for fitting images'] & constants.SHOW_DOUBLE_AS_ONE_WIDE or
                 page == self.get_number_of_pages()):
             return False
@@ -680,10 +680,11 @@ class ImageHandler:
         in the order they are wanted in: the page itself and the ones
         after it, then the ones before, clipped to the book.
         """
-        if prefs['default double page']:
-            page_width = 2
-        else:
-            page_width = 1
+        # As many as are on screen: two side by side, one, or every page
+        # of a strip, which is drawn again whenever it grows.
+        page_width = max(1, self._window.displayed_page_count()) \
+            if self._window.is_continuous \
+            else 2 if self._window.is_double_page else 1
         if self._cache_pages == 0:
             # Only ask for current page.
             num_pages = page_width

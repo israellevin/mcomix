@@ -323,7 +323,8 @@ _MENUBAR = (
                    'copy_page', None,
                    'edit_archive', 'comments', None,
                    'preferences')),
-    ('menu_view', ('fullscreen', 'double_page', 'title_page_alone', 'manga_mode', None,
+    ('menu_view', ('fullscreen', 'double_page', 'title_page_alone', 'manga_mode',
+                   'continuous_mode', None,
                    'best_fit_mode', 'fit_width_mode', 'fit_height_mode',
                    'fit_size_mode', 'fit_manual_mode', None,
                    'slideshow', None,
@@ -375,7 +376,8 @@ _POPUP = (
                        'first_page', 'last_page', None,
                        'next_archive', 'previous_archive', None,
                        'next_directory', 'previous_directory')),
-    ('menu_view_popup', ('fullscreen', 'double_page', 'title_page_alone', 'manga_mode', None,
+    ('menu_view_popup', ('fullscreen', 'double_page', 'title_page_alone', 'manga_mode',
+                         'continuous_mode', None,
                          'best_fit_mode', 'fit_width_mode', 'fit_height_mode',
                          'fit_size_mode', 'fit_manual_mode', None,
                          'slideshow', None,
@@ -542,6 +544,7 @@ class MainUI:
             _Entry('thumbnails', None, _('Th_umbnails'), None, window.change_thumbnails_visibility),
             _Entry('hide_all', None, _('H_ide all'), None, window.change_hide_all),
             _Entry('manga_mode', 'view-mirror-symbolic', _('_Manga mode'), _('Manga mode'), window.change_manga_mode),
+            _Entry('continuous_mode', None, _('_Continuous mode'), _('Continuous mode'), window.change_continuous_mode),
             _Entry('invert_scroll', 'edit-undo', _('Invert smart scroll'), _('Invert smart scrolling direction.'), window.change_invert_scroll),
             _Entry('keep_transformation', None, _('_Keep transformation'), _('Keeps the currently selected transformation for the next pages.'),
                    window.change_keep_transformation),
@@ -840,7 +843,18 @@ class MainUI:
 
         # A page stands alone only where two are shown side by side.
         self._actions.get_action('page_alone_popup').set_sensitive(
-            general_sensitive and bool(prefs['default double page']))
+            general_sensitive and self._window.is_double_page)
+
+        # A strip is one column read downwards: the modes that say how
+        # pages sit side by side have nothing to say in it, and keep
+        # what they were set to for when it is left.
+        # Nor do the fit modes: a strip is drawn at a share of the
+        # view's width, which zooming in and out changes.
+        for name in ('double_page', 'title_page_alone', 'manga_mode',
+                     'best_fit_mode', 'fit_width_mode', 'fit_height_mode',
+                     'fit_size_mode', 'fit_manual_mode'):
+            self._actions.get_action(name).set_sensitive(
+                not self._window.is_continuous)
 
         # Only pages that were picked out can be put back.
         self._actions.get_action('unpick_pages').set_sensitive(

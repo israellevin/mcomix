@@ -194,7 +194,7 @@ class PageCounter:
         it whatever it said before, for the preferences that change.
         """
         window = self._window
-        pages = window.displayed_pages() if window.filehandler.file_loaded \
+        pages = window.pages_read() if window.filehandler.file_loaded \
             else []
         if not (prefs['page counter'] != self.NEVER and pages
                 and window.is_fullscreen()):

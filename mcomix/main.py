@@ -76,7 +76,27 @@ class MainWindow(Gtk.Window):
         # ----------------------------------------------------------------
         # Used to detect window fullscreen state transitions.
         self.was_fullscreen = False
-        self.is_manga_mode = False
+        self._manga_mode = False
+        #: How many pages continuous mode last drew, one below the other,
+        #: and how wide, or 0 where the last draw was not of a strip.
+        self._strip_pages = 1
+        self._strip_across = 0
+        #: The axis the strip runs along, down unless it has been turned.
+        self._strip_axis = int(constants.PageAxis.HEIGHT)
+        #: Set while the strip is being moved on to other pages: how
+        #: many pages go on top of the ones drawn, and how far the view
+        #: moves besides.  The next draw applies it; see _follow_strip().
+        self._strip_shift: "tuple[int, float] | None" = None
+        #: Whether the open book's first pages have been looked at, and
+        #: whether they were long strips (_look_for_strip()).
+        self._strip_looked = False
+        self._strip_detected = False
+        #: What the reader set the mode to by hand for a book of long
+        #: strips, which holds for that book and no longer.
+        self._strip_override: "bool | None" = None
+        #: Which end of the page the last turn arrived at, for a draw
+        #: that has to show the page anew from there.
+        self._arrived_at = constants.SCROLL_TO_START
         #: The size the window was laid out at last, or a pair of
         #: Nones until it has been laid out at all.
         self.previous_size: tuple[int, int] | tuple[None, None] = (None, None)
@@ -177,8 +197,10 @@ class MainWindow(Gtk.Window):
         self.popup = self.uimanager.popup
         self.actiongroup = self.uimanager.actions
 
-        # Exactly two, which is the most a screen ever shows; the
-        # second is hidden whenever a single page is displayed.
+        # Two to begin with, which is the most a screen shows side by
+        # side; the second is hidden whenever a single page is
+        # displayed.  Continuous mode makes more as its strip needs
+        # them, and the ones past what is drawn are hidden.
         self.images = [page_image.PageImage(),
                        page_image.PageImage()]
 
@@ -226,6 +248,9 @@ class MainWindow(Gtk.Window):
 
         if prefs['default manga mode'] or manga_mode:
             self.actiongroup.get_action('manga_mode').activate()
+
+        if prefs['continuous mode']:
+            self.actiongroup.get_action('continuous_mode').activate()
 
         # Determine zoom mode. If zoom_mode is passed, it overrides
         # the zoom mode preference.
@@ -317,6 +342,7 @@ class MainWindow(Gtk.Window):
         # A window's default size is what it asked for, not what the
         # compositor gave it, so the canvas is what says it has changed.
         self.page_area.connect('resized', self.event_handler.resize_event)
+        self.page_area.connect('scrolled', self._strip_scrolled)
         self.connect('notify::fullscreened', self.event_handler.window_state_event)
         self.connect('notify::maximized', self.event_handler.window_state_event)
         self.connect_after('unrealize', MainWindow._release)
@@ -458,6 +484,8 @@ class MainWindow(Gtk.Window):
         self._redraw_source = None
         scroll_to = self._pending_scroll_to
         self._pending_scroll_to = None
+        shift = self._strip_shift
+        self._strip_shift = None
 
         self._update_toggles_visibility()
 
@@ -469,8 +497,19 @@ class MainWindow(Gtk.Window):
             return False
 
         if self.imagehandler.page_is_available():
+            continuous = self.is_continuous
             distribution_axis = constants.DISTRIBUTION_AXIS
             alignment_axis = constants.ALIGNMENT_AXIS
+            if continuous:
+                # The pages follow one another down the strip, each as
+                # wide as the last.
+                distribution_axis, alignment_axis = \
+                    alignment_axis, distribution_axis
+                self._strip_pages = self._strip_count()
+                while len(self.images) < self._strip_pages:
+                    image = page_image.PageImage()
+                    self.images.append(image)
+                    self.page_area.put(image, 0, 0)
             pixbuf_count = self.displayed_page_count()
             pixbuf_list = list(self.imagehandler.get_pixbufs(pixbuf_count))
             do_not_transform = [image_tools.is_animation(x) for x in pixbuf_list]
@@ -487,7 +526,8 @@ class MainWindow(Gtk.Window):
             if not self._skip_gave_up and (passed_over or (
                     prefs['skip broken pages'] and (
                         missing[0]
-                        or (any(missing) and not self.displayed_double())))):
+                        or (any(missing) and not continuous
+                            and not self.displayed_double())))):
                 # Unless the reader would rather not see it.  A first
                 # page that would not load is turned past; a second one
                 # leaves the first on its own, now that it has been read
@@ -498,6 +538,16 @@ class MainWindow(Gtk.Window):
                 else:
                     self.draw_image(scroll_to=scroll_to)
                 return False
+            # In a strip a page marked to be passed over is left out:
+            # it has its place among the pages and takes no room, so
+            # the ones either side of it meet.  Not the first, which is
+            # turned past above unless there is no other to show.
+            first = self.imagehandler.get_current_page()
+            left_out = [continuous and index > 0
+                        and self.imagehandler.is_skipped(first + index)
+                        for index in range(pixbuf_count)]
+            do_not_transform = [still or out for still, out
+                                in zip(do_not_transform, left_out)]
             if any(missing):
                 room = max(1, self.get_visible_area_size()[1])
                 for i in range(pixbuf_count):
@@ -508,7 +558,8 @@ class MainWindow(Gtk.Window):
 
             # A list from the start: the rotation handling below turns
             # it around and negates it, both of which give back a list.
-            orientation = list(constants.MANGA_ORIENTATION if self.is_manga_mode
+            orientation = list(constants.MANGA_ORIENTATION
+                               if self.is_manga_mode
                                else constants.WESTERN_ORIENTATION)
 
             # Rotation handling:
@@ -528,8 +579,11 @@ class MainWindow(Gtk.Window):
                 virtual_size[distribution_axis] += size[distribution_axis]
                 virtual_size[alignment_axis] = max(virtual_size[alignment_axis],
                                                    size[alignment_axis])
+            # A strip is as high as its pages together, which says
+            # nothing about which way up it reads.
             rotation = tools.compile_rotations(
-                image_tools.get_size_rotation(*virtual_size), prefs['rotation'])
+                0 if continuous else image_tools.get_size_rotation(*virtual_size),
+                prefs['rotation'])
             if tools.rotation_swaps_axes(rotation):
                 distribution_axis, alignment_axis = alignment_axis, distribution_axis
                 orientation.reverse()  # 2D only
@@ -546,15 +600,36 @@ class MainWindow(Gtk.Window):
             if prefs['horizontal flip'] and not tools.rotation_swaps_axes(rotation):
                 orientation = tools.vector_opposite(orientation)
 
+            if continuous:
+                # Turned, each page is turned where it stands: the strip
+                # still reads from its first page on, down or across.
+                orientation = list(constants.WESTERN_ORIENTATION)
+
+            def strip_sizes(room: list[int]) -> tuple[list[list[int]], list[bool]]:
+                """Every page of the strip at the strip's width, and as
+                high as that makes it."""
+                across = self._strip_width(room[alignment_axis])
+                sizes = []
+                for size, out in zip(size_list, left_out):
+                    scaled = [0, 0]
+                    scaled[alignment_axis] = across
+                    scaled[distribution_axis] = 0 if out else max(1, round(
+                        size[distribution_axis] * across
+                        / max(1, size[alignment_axis])))
+                    sizes.append(scaled)
+                return sizes, [False] * pixbuf_count
+
             reading_pass = self.layout.reading_pass
             self.layout = layout.FiniteLayout.create_finite_layout(
-                pixbuf_count, orientation, self._spacing, distribution_axis,
+                pixbuf_count, orientation,
+                0 if continuous else self._spacing, distribution_axis,
                 alignment_axis, self._show_scrollbars, self.get_visible_area_size,
                 # Every page is laid out at the size the zoom mode
                 # asks for, animations included: they cannot be scaled
                 # ahead of time, but the size is what tells the widget
                 # what to scale each frame to.
-                lambda zoom_dummy_size: self.zoom.get_zoomed_size(
+                strip_sizes if continuous
+                else lambda zoom_dummy_size: self.zoom.get_zoomed_size(
                     size_list, zoom_dummy_size, distribution_axis,
                     [False] * pixbuf_count,
                     prefs['double page autoresize'] in (
@@ -597,14 +672,18 @@ class MainWindow(Gtk.Window):
                 pixbuf_list[i] = self.enhancer.enhance(pixbuf_list[i])
 
             for i in range(pixbuf_count):
-                self.images[i].show_pixbuf(pixbuf_list[i], scaled_sizes[i])
+                if not left_out[i]:
+                    self.images[i].show_pixbuf(pixbuf_list[i], scaled_sizes[i])
 
             scales = tuple(map(lambda x, y: math.sqrt(tools.div(
                 tools.volume(x), tools.volume(y))), scaled_sizes, size_list))
 
             resolutions = tuple(map(lambda sz, sc, ds: sz + [sc, ds], size_list,
                                     scales, self.layout.get_content_distorted()))
-            if self.is_manga_mode:
+            if continuous:
+                # Of the page being read, the one at the top.
+                resolutions = resolutions[:1]
+            elif self.is_manga_mode:
                 resolutions = tuple(reversed(resolutions))
             self.statusbar.set_resolution(resolutions)
             self.statusbar.update()
@@ -619,14 +698,37 @@ class MainWindow(Gtk.Window):
                 self.thumbnailsidebar.change_thumbnail_background_color(
                     bg_colour, dynamic=True)
 
-            if (pixbuf_count == 1 and prefs['default double page']
+            if (pixbuf_count == 1 and self.is_double_page
                     and size_list[0][distribution_axis]
                     > size_list[0][alignment_axis]):
                 # A page wider than high, alone in double page mode, is
                 # a scan of two facing pages, and is read as two.
                 self.layout.spread_pages = 2
             content_size = self.layout.get_union_box().get_size()
-            if scroll_to is None:
+            kept: "tuple[float, float] | None"
+            if scroll_to is not None:
+                kept = None
+            elif continuous:
+                # The strip has grown by the pages that arrived, below
+                # what is being read, which stays where it is; drawn at
+                # another width - a zoom, a resized window - the same
+                # part of it stays at the top of the view.
+                kept = self.page_area.get_position()
+                across = scaled_sizes[0][alignment_axis]
+                if self._strip_across not in (0, across):
+                    kept = (kept[0] * across / self._strip_across,
+                            kept[1] * across / self._strip_across)
+                if shift is not None:
+                    # The pages put on top push what was showing down
+                    # by their height; the pages dropped from the top
+                    # were taken off the offset when they went.
+                    on_top, offset = shift
+                    moved = list(kept)
+                    moved[distribution_axis] += offset + sum(
+                        size[distribution_axis]
+                        for size in scaled_sizes[:on_top])
+                    kept = (moved[0], moved[1])
+            else:
                 # The same pages again, so the one of a spread that was
                 # being read still is.
                 self.layout.reading_pass = reading_pass
@@ -635,8 +737,10 @@ class MainWindow(Gtk.Window):
                 # them, rather than the top left corner's pixels
                 # (upstream feature request 74).
                 kept = self._relative_position(content_size)
-            else:
-                kept = None
+            # A page turn starts the strip anew, at whatever width.
+            self._strip_across = \
+                scaled_sizes[0][alignment_axis] if continuous else 0
+            self._strip_axis = int(distribution_axis)
             self.page_area.set_content_size(*content_size)
             if kept is not None:
                 self.page_area.scroll_to(*kept)
@@ -645,7 +749,7 @@ class MainWindow(Gtk.Window):
                                        *content_boxes[i].get_position())
 
             for i in range(pixbuf_count):
-                self.images[i].set_visible(True)
+                self.images[i].set_visible(not left_out[i])
             for i in range(pixbuf_count, len(self.images)):
                 self.images[i].set_visible(False)
 
@@ -657,7 +761,9 @@ class MainWindow(Gtk.Window):
 
             if scroll_to is not None:
                 destination = (scroll_to,) * 2
-                if constants.SCROLL_TO_START == scroll_to:
+                if constants.SCROLL_TO_START == scroll_to or continuous:
+                    # In a strip the page turned to is the first, from
+                    # either side.
                     index = constants.FIRST_INDEX
                 elif constants.SCROLL_TO_END == scroll_to:
                     index = constants.LAST_INDEX
@@ -753,7 +859,7 @@ class MainWindow(Gtk.Window):
 
         filename = make_status(self.imagehandler.get_page_filename(double=double))
         filesize = make_status(self.imagehandler.get_page_filesize(double=double))
-        self.statusbar.set_page_number(self.displayed_pages(),
+        self.statusbar.set_page_number(self.pages_read(),
                                        self.imagehandler.get_number_of_pages())
         self.statusbar.set_filename(filename)
         self.statusbar.set_root(self.filehandler.get_base_filename())
@@ -814,11 +920,17 @@ class MainWindow(Gtk.Window):
 
     def _page_available(self, page: int) -> None:
         """ Called whenever a new page is ready for displaying. """
+        self._look_for_strip()
         self._settle_at_end()
         # Refresh display when currently opened page becomes available.
         current_page = self.imagehandler.get_current_page()
         nb_pages = self.displayed_page_count()
-        if current_page <= page < (current_page + nb_pages):
+        if self.is_continuous and page == current_page + nb_pages \
+                and nb_pages < constants.CONTINUOUS_MAX_PAGES:
+            # The next page of the strip: it goes below the ones drawn,
+            # and nothing that is being read moves.
+            self.draw_image()
+        elif current_page <= page < (current_page + nb_pages):
             self.draw_image(scroll_to=self._last_scroll_destination)
             self._update_page_information()
 
@@ -870,12 +982,54 @@ class MainWindow(Gtk.Window):
         self._end_pending = None
         self.selected_pages = set()
         self.swap_page = None
+        self._forget_strip()
         self.file_actions.forget_changes()
         self.lens.file_changed()
         self.clear()
         self.thumbnailsidebar.set_visible(False)
         self.thumbnailsidebar.clear()
         self.uimanager.set_sensitivities()
+
+    def _forget_strip(self) -> None:
+        """The book that was looked at for long strips is going: the
+        next one is looked at for itself, and until then the mode is
+        the reader's standing choice."""
+        self._strip_looked = False
+        self._strip_detected = False
+        self._strip_override = None
+        self.actiongroup.get_action('continuous_mode').show_active(
+            self.is_continuous)
+
+    def _look_for_strip(self) -> None:
+        """Tell a book of long strips by its first pages, once they
+        are there, and show it in continuous mode (upstream feature
+        request 126).
+
+        Most of the first CONTINUOUS_SAMPLE_PAGES have to be at least
+        twice as high as wide: a cover or a page of credits among them
+        does not decide it either way.  Looked at once per book, from
+        the sizes in the pictures' headers.
+        """
+        if self._strip_looked or not prefs['continuous for long strips']:
+            return
+        handler = self.imagehandler
+        sample = range(1, min(handler.get_number_of_pages(),
+                              constants.CONTINUOUS_SAMPLE_PAGES) + 1)
+        if not sample or not all(map(handler.page_is_available, sample)):
+            return
+        self._strip_looked = True
+        sizes = [handler.get_size(page) for page in sample]
+        long = sum(1 for width, height in sizes if height >= 2 * width > 0)
+        if 2 * long <= len(sample):
+            return
+        was_continuous = self.is_continuous
+        self._strip_detected = True
+        if not was_continuous:
+            self.actiongroup.get_action('continuous_mode').show_active(True)
+            self.uimanager.set_sensitivities()
+            # From the end the page was arrived at: a book opened from
+            # the one after it is at its last page's bottom.
+            self.draw_image(scroll_to=self._arrived_at)
 
     def new_page(self, at_bottom: bool = False) -> None:
         """Draw a *new* page correctly (as opposed to redrawing the same
@@ -892,6 +1046,7 @@ class MainWindow(Gtk.Window):
             scroll_to = constants.SCROLL_TO_END
         else:
             scroll_to = constants.SCROLL_TO_START
+        self._arrived_at = scroll_to
 
         self.draw_image(scroll_to=scroll_to)
 
@@ -1150,13 +1305,17 @@ class MainWindow(Gtk.Window):
         if not self.filehandler.file_loaded:
             return
 
+        if self.is_continuous and abs(step) == 1:
+            self._page_strip(step)
+            return
+
         current_page = self.imagehandler.get_current_page()
         number_of_pages = self.imagehandler.get_number_of_pages()
 
         new_page = current_page + step
         if (abs(step) == 1 and
                 not single_step and
-                prefs['default double page'] and
+                self.is_double_page and
                 prefs['double step in double page mode']):
             if +1 == step and not self.imagehandler.get_virtual_double_page():
                 new_page += 1
@@ -1267,7 +1426,10 @@ class MainWindow(Gtk.Window):
         remember the turn for them, unless every page is being turned
         alike with "Keep transformation"."""
         prefs['rotation'] = tools.compile_rotations(prefs['rotation'], degrees)
-        if not prefs['keep transformation'] and self.filehandler.file_loaded:
+        # A strip is turned as a whole and stays turned as it is
+        # scrolled: there is no one page the turn belongs to.
+        if not prefs['keep transformation'] and not self.is_continuous \
+                and self.filehandler.file_loaded:
             for page in self.displayed_pages():
                 identity = self.filehandler.page_identity(page)
                 if identity is not None:
@@ -1275,8 +1437,10 @@ class MainWindow(Gtk.Window):
         self.draw_image()
 
     def _remembered_rotation(self) -> int:
-        """The turn remembered for the page on screen, 0 for none."""
-        if not self.filehandler.file_loaded:
+        """The turn remembered for the page on screen, 0 for none, and
+        for none in continuous mode: one page's turn would lay the
+        whole strip on its side."""
+        if not self.filehandler.file_loaded or self.is_continuous:
             return 0
         identity = self.filehandler.page_identity(
             self.imagehandler.get_current_page())
@@ -1326,6 +1490,24 @@ class MainWindow(Gtk.Window):
         self.is_manga_mode = toggleaction.get_active()
         self._update_page_information()
         self.draw_image()
+
+    def change_continuous_mode(self, toggleaction: "ui.Action") -> None:
+        """Show the book as one strip, or a page at a time again.
+
+        Either way the page being read stays the page on show, from its
+        top.
+        """
+        if self._strip_detected:
+            # A book that put itself in the mode is taken out of it, or
+            # put back, for itself: what other books open in stays as
+            # it was chosen.
+            self._strip_override = toggleaction.get_active()
+        else:
+            prefs['continuous mode'] = toggleaction.get_active()
+        # Double page and manga mode are not offered in a strip.
+        self.uimanager.set_sensitivities()
+        self._update_page_information()
+        self.draw_image(scroll_to=constants.SCROLL_TO_START)
 
     def change_invert_scroll(self, toggleaction: "ui.Action") -> None:
         """Set which way smart scrolling walks a page.  Nothing is
@@ -1418,16 +1600,48 @@ class MainWindow(Gtk.Window):
         prefs['keep transformation'] = toggleaction.get_active()
 
     def manual_zoom_in(self, *args: object) -> None:
-        self.zoom.zoom_in()
+        if self.is_continuous:
+            self._set_strip_width(prefs['continuous width']
+                                  + constants.CONTINUOUS_WIDTH_STEP)
+        else:
+            self.zoom.zoom_in()
         self.draw_image()
 
     def manual_zoom_out(self, *args: object) -> None:
-        self.zoom.zoom_out()
+        if self.is_continuous:
+            self._set_strip_width(prefs['continuous width']
+                                  - constants.CONTINUOUS_WIDTH_STEP)
+        else:
+            self.zoom.zoom_out()
         self.draw_image()
 
     def manual_zoom_original(self, *args: object) -> None:
-        self.zoom.reset_user_zoom()
+        if self.is_continuous:
+            self._set_strip_width(constants.CONTINUOUS_WIDTH_DEFAULT)
+        else:
+            self.zoom.reset_user_zoom()
         self.draw_image()
+
+    @staticmethod
+    def _set_strip_width(share: int) -> None:
+        """Draw the strip of continuous mode <share> hundredths of the
+        view wide, within what the mode allows.
+
+        A strip is read at one width, whatever its pages measure, so
+        zooming in that mode changes this and leaves the zoom of every
+        other book alone (upstream feature request 126).
+        """
+        prefs['continuous width'] = min(
+            constants.CONTINUOUS_WIDTH_MAX,
+            max(constants.CONTINUOUS_WIDTH_MIN, share))
+
+    @staticmethod
+    def _strip_width(room: int) -> int:
+        """How wide, in pixels, a strip is drawn in a view <room> wide."""
+        share = min(constants.CONTINUOUS_WIDTH_MAX,
+                    max(constants.CONTINUOUS_WIDTH_MIN,
+                        prefs['continuous width']))
+        return max(1, round(room * share / 100))
 
     def _show_scrollbars(self, request: Sequence[bool]) -> None:
         """ Enables scroll bars depending on requests and preferences. """
@@ -1474,7 +1688,99 @@ class MainWindow(Gtk.Window):
 
         self.page_area.scroll_to(new_hadjust, new_vadjust)
 
-        return old_vadjust != new_vadjust or old_hadjust != new_hadjust
+        moved = old_vadjust != new_vadjust or old_hadjust != new_hadjust
+        if self.is_continuous:
+            # Asked for, not arrived at: scrolling up from the top of
+            # the strip is what brings the page before it.
+            moved = self._follow_strip(
+                (old_hadjust + x, old_vadjust + y),
+                (new_hadjust, new_vadjust)) or moved
+        return moved
+
+    def _strip_scrolled(self, *args: object) -> None:
+        """Bound to the page area's 'scrolled': a scroll bar dragged
+        down the strip of continuous mode moves the strip on as the
+        wheel and the keys do."""
+        if self.is_continuous and self.filehandler.file_loaded:
+            position = self.page_area.get_position()
+            self._follow_strip(position, position)
+
+    def _follow_strip(self, wanted: "tuple[float, float]",
+                      position: "tuple[float, float]") -> bool:
+        """Move the strip of continuous mode on to the pages the view
+        has scrolled to: <position> is where the view is, and <wanted>
+        where it was asked to scroll to before that was held within
+        the strip.  Says whether the strip moved.
+
+        The strip is the current page and what follows it, so the page
+        at the top of the view is kept the current one.  Once the view
+        has scrolled off the end of the current page, the pages it has
+        left are dropped and the first one still in view becomes the
+        current page; asked to scroll up past the top, the page before
+        goes on top.  Either way the strip is drawn again and the view
+        moved by the height that went or came, so that what is on
+        screen stays where it is.
+        """
+        if self._waiting_for_redraw \
+                or not self.imagehandler.page_is_available():
+            # The pages are where the last draw put them, which says
+            # nothing once another is on its way - for a move of the
+            # strip, so that there is one at a time, or for a page
+            # turned to, whose strip is not the one laid out.
+            return False
+        axis = self._strip_axis
+        current = self.imagehandler.get_current_page()
+        if wanted[axis] < 0:
+            # Back to the nearest page that is not passed over; the
+            # ones between come along and take no room.
+            before = current - 1
+            while before > 1 and self.imagehandler.is_skipped(before):
+                before -= 1
+            if before < 1 or not all(
+                    self.imagehandler.page_is_available(page)
+                    for page in range(before, current)):
+                return False
+            self._move_strip(before, (current - before, wanted[axis]))
+            return True
+        boxes = self.layout.get_content_boxes()
+        left = 0
+        while left < len(boxes) - 1 and position[axis] >= \
+                boxes[left + 1].get_position()[axis]:
+            left += 1
+        if not left:
+            return False
+        self._move_strip(current + left,
+                         (0, -boxes[left].get_position()[axis]))
+        return True
+
+    def _move_strip(self, page: int, shift: "tuple[int, float]") -> None:
+        """Make <page> the current one because the view has scrolled
+        to it, and draw the strip from it, moving the view by <shift>.
+
+        Not a turn: nothing scrolls to an edge of the page, and a turn
+        given to the strip by hand stays.
+        """
+        self._strip_shift = shift
+        self.imagehandler.set_page(page)
+        self.page_changed()
+        self.draw_image()
+
+    def _page_strip(self, step: int) -> None:
+        """Scroll the strip a screen down (<step> 1) or up (-1), which
+        is what a turn of the page is in continuous mode, and go on to
+        the next or the previous book where the strip ends (upstream
+        feature request 123)."""
+        room = self.get_visible_area_size()
+        distance = [0.0, 0.0]
+        distance[self._strip_axis] = step * room[self._strip_axis]
+        if self.scroll(distance[0], distance[1]):
+            return
+        current = self.imagehandler.get_current_page()
+        last = self.imagehandler.get_number_of_pages()
+        if step > 0 and current + self._strip_pages > last:
+            self.next_book()
+        elif step < 0 and current <= 1:
+            self.previous_book()
 
     def scroll_to_predefined(self, destination: Sequence[int],
                              index: int | None = None) -> None:
@@ -1524,19 +1830,85 @@ class MainWindow(Gtk.Window):
     def displayed_double(self) -> bool:
         """Return True if two pages are currently displayed."""
         return bool(self.imagehandler.get_current_page() and
-                    prefs['default double page'] and
+                    self.is_double_page and
                     not self.imagehandler.get_virtual_double_page() and
                     self.imagehandler.get_current_page() != self.imagehandler.get_number_of_pages())
 
     def displayed_page_count(self) -> int:
-        """The number of pages on screen: two side by side, or one.
+        """The number of pages on screen: two side by side, or one, or
+        in continuous mode as many as were last drawn one below the
+        other.
 
-        Two is the most MComix ever shows.  The window holds exactly
-        that many page widgets, and every caller that asks for pixbufs,
-        page numbers or a background colour for what is on screen is
-        sized by this.
+        Every caller that asks for pixbufs, page numbers or a
+        background colour for what is on screen is sized by this.
         """
+        if self.is_continuous:
+            return self._strip_pages
         return 2 if self.displayed_double() else 1
+
+    @property
+    def is_manga_mode(self) -> bool:
+        """Whether the pages read from right to left.  Never in
+        continuous mode, which reads down; the reader's choice is kept
+        for when that mode is left."""
+        return self._manga_mode and not self.is_continuous
+
+    @is_manga_mode.setter
+    def is_manga_mode(self, manga: bool) -> None:
+        self._manga_mode = manga
+
+    @property
+    def is_double_page(self) -> bool:
+        """Whether pages are shown two side by side.  Never in
+        continuous mode; the reader's choice is kept for when that mode
+        is left."""
+        return bool(prefs['default double page']) and not self.is_continuous
+
+    @property
+    def is_continuous(self) -> bool:
+        """Whether the book is shown as one strip, its pages one below
+        the other without a gap (upstream feature requests 123 and
+        126).
+
+        The reader's standing choice, or a book of long strips that was
+        told by its pages, unless the reader has said otherwise for
+        that book."""
+        if self._strip_override is not None:
+            return self._strip_override
+        return bool(prefs['continuous mode']) or self._strip_detected
+
+    def _strip_count(self) -> int:
+        """How many pages continuous mode stacks from the current one
+        down: the current one and two screens of what follows it, drawn
+        at the strip's width.  The view can then scroll off the end of
+        the current page, however long it is, which is when the strip
+        moves on (_follow_strip()), with a screen to spare.
+
+        Only pages that are there already are counted, the current one
+        aside, so nothing here waits for a page: the strip grows as
+        they arrive.  A page marked to be passed over is one of the
+        strip's pages and takes no room in it.  Never more than CONTINUOUS_MAX_PAGES, which is
+        what bounds a book of very short pages.
+        """
+        handler = self.imagehandler
+        current = handler.get_current_page()
+        if not current:
+            return 1
+        room_width, room_height = self.get_visible_area_size()[:2]
+        across = self._strip_width(room_width)
+        wanted = 2 * room_height
+        covered = 0.0
+        count = 0
+        for page in range(current, handler.get_number_of_pages() + 1):
+            if count and not handler.page_is_available(page):
+                break
+            width, height = handler.get_size(page)
+            count += 1
+            if count > 1 and not handler.is_skipped(page):
+                covered += height * across / max(1, width)
+            if covered >= wanted or count >= constants.CONTINUOUS_MAX_PAGES:
+                break
+        return max(1, count)
 
     def get_visible_area_size(self) -> tuple[int, ...]:
         """Return a 2-tuple with the width and height of the visible part
@@ -1588,7 +1960,7 @@ class MainWindow(Gtk.Window):
     def update_title(self) -> None:
         """Set the title according to current state."""
         title = '[%s]  %s' % (
-            status.format_page_number(self.displayed_pages(),
+            status.format_page_number(self.pages_read(),
                                       self.imagehandler.get_number_of_pages()),
             self.imagehandler.get_pretty_current_filename())
         title = i18n.to_unicode(title)
@@ -1622,6 +1994,16 @@ class MainWindow(Gtk.Window):
         current: int = self.imagehandler.get_current_page()
         pages = [current + offset for offset in range(this_screen)]
         return list(reversed(pages)) if self.is_manga_mode else pages
+
+    def pages_read(self) -> "list[int]":
+        """The numbers of the pages being read, in the order they read
+        in: the pages on screen, or in continuous mode the one at the
+        top of the view, since a strip has more of itself on screen
+        than anyone is reading.  What the bars and the title name, and
+        what the menu bar's Copy and Save act on."""
+        if self.is_continuous:
+            return [self.imagehandler.get_current_page()]
+        return self.displayed_pages()
 
     #: The CSS classes that outline a picked-out page and the page
     #: waiting to be swapped; theme.py draws them.

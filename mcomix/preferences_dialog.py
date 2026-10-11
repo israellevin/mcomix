@@ -365,6 +365,13 @@ class _PreferencesDialog(Dialog):
                          'space between two pages',
                          1, 0, LARGEST_PAGE_GAP, 1, 10, 0, None))
 
+        page.new_section(_('Continuous mode'))
+
+        page.add_row(self._create_pref_check_button(
+            _('Open long strips in continuous mode'),
+            'continuous for long strips',
+            _('A book most of whose first pages are at least twice as high as wide is shown in continuous mode. The View menu turns it off for that book.')))
+
         page.new_section(_('Fit to size mode'))
 
         page.add_row(Gtk.Label(label=_('Fixed width for wide pages:')),

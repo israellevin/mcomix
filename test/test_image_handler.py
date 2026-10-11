@@ -27,11 +27,18 @@ class _StubFileHandler:
 
 class _StubWindow:
 
+    #: A page at a time or two, never a strip.
+    is_continuous = False
+
     def __init__(self):
         self.filehandler = _StubFileHandler()
 
     def displayed_double(self):
         return False
+
+    @property
+    def is_double_page(self):
+        return bool(prefs['default double page'])
 
 
 class VirtualDoublePageTest(MComixTest):

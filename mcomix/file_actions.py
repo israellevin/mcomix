@@ -723,8 +723,8 @@ class FileActions:
         return bool(self._redone)
 
     def extract_page(self, *args: object) -> None:
-        """Save the pages on screen to disk."""
-        self._save_pages(self._window.displayed_pages())
+        """Save the pages being read to disk."""
+        self._save_pages(self._window.pages_read())
 
     def extract_popup_page(self, *args: object) -> None:
         """Save the page the right-click menu was opened over.
@@ -736,7 +736,7 @@ class FileActions:
         """
         page = self._window.popup_page
         self._save_pages([page] if page is not None
-                         else self._window.displayed_pages())
+                         else self._window.pages_read())
 
     def open_containing_folder(self, *args: object) -> None:
         """Show the open file in the file manager: the archive, or the

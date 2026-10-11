@@ -61,7 +61,7 @@ class Clipboard:
         pixbufs = [
             self._as_shown(pixbuf, transform) for pixbuf, transform in
             zip(self._window.imagehandler.get_pixbufs(
-                    self._window.displayed_page_count()),
+                    len(self._window.pages_read())),
                 self._window.transforms + [Transform.ID] * 2)
         ]
 

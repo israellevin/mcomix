@@ -47,6 +47,16 @@ NORMAL_AXES = (0, 1)
 SWAPPED_AXES = (1, 0)
 WESTERN_ORIENTATION = (1, 1)
 MANGA_ORIENTATION = (-1, 1)
+#: The most pages continuous mode stacks at once, however short they are.
+CONTINUOUS_MAX_PAGES = 16
+#: How wide continuous mode draws its strip, in hundredths of the view's
+#: width: to begin with, at the least and the most, and by how much a
+#: step of the zoom changes it.
+CONTINUOUS_WIDTH_DEFAULT, CONTINUOUS_WIDTH_MIN, CONTINUOUS_WIDTH_MAX = 50, 10, 200
+CONTINUOUS_WIDTH_STEP = 10
+#: How many of a book's first pages are looked at to tell a book of long
+#: strips, which most of them have to be: at least twice as high as wide.
+CONTINUOUS_SAMPLE_PAGES = 6
 SCROLL_TO_CENTER = -2
 SCROLL_TO_START = -3
 SCROLL_TO_END = -4

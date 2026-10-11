@@ -109,6 +109,7 @@ BINDING_INFO: "dict[str, dict[str, str]]" = {
     'double_page': {'title': _('Double page mode'), 'group': _('View mode')},
     'title_page_alone': {'title': _('Title page alone'), 'group': _('View mode')},
     'manga_mode': {'title': _('Manga mode'), 'group': _('View mode')},
+    'continuous_mode': {'title': _('Continuous mode'), 'group': _('View mode')},
     'invert_scroll': {'title': _('Invert smart scroll'), 'group': _('View mode')},
 
     'lens': {'title': _('Magnifying lens'), 'group': _('View mode')},

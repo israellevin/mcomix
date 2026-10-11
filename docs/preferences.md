@@ -66,6 +66,7 @@ Flip two pages in double page mode | Turn two pages at a time while two are show
 Show only one page where appropriate | When double page mode shows one page: "Never", "Only for title pages" (the cover), "Only for wide images", or "Always" (both).
 Page auto-resizing | How two pages of different sizes are fitted side by side: "Prefer same scale", "Prefer same size" or "Fit to same size".
 Space between two pages (in pixels) | 0 to 100; 2 by default.
+Open long strips in continuous mode | A book most of whose first six pages are at least twice as high as wide opens in [continuous mode](reading.md#continuous-mode). On by default. "View → Continuous mode" turns the mode off for that book alone.
 Fixed width for wide pages | "Fit to size" gives wide pages, such as spreads, a size of their own. 3790 by default.
 Fixed height for wide pages | 960 by default.
 Fixed width for other pages | 1450 by default.

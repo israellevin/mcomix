@@ -87,6 +87,8 @@ class ClipboardTest(MComixTest):
                 get_pixbufs=lambda count: list(pixbufs[:count]),
                 get_path_to_page=lambda: path),
             displayed_page_count=lambda: len(pixbufs),
+            # Out of a strip, the pages being read are those on screen.
+            pages_read=lambda: list(range(1, len(pixbufs) + 1)),
             transforms=[] if transforms is None else list(transforms),
             layout=SimpleNamespace(get_content_boxes=lambda: boxes),
             is_manga_mode=is_manga_mode)

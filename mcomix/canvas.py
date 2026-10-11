@@ -25,6 +25,10 @@ class PageCanvas(Gtk.Widget):
         # is what it asked for rather than what it was given, so the
         # canvas says so itself.
         'resized': (GObject.SignalFlags.RUN_FIRST, None, ()),
+        # A scroll bar was moved by hand, which nothing else hears of:
+        # the canvas shows another part of itself without scroll_to()
+        # having been asked.
+        'scrolled': (GObject.SignalFlags.RUN_FIRST, None, ()),
     }
 
     def __init__(self) -> None:
@@ -43,6 +47,9 @@ class PageCanvas(Gtk.Widget):
         #: Set while size_allocate() is configuring the adjustments, so
         #: that the value they emit does not ask for another allocation.
         self._allocating = False
+        #: Set while scroll_to() is moving them, which tells its moves
+        #: from a scroll bar's.
+        self._moving = False
         #: The last size announced through 'resized'.
         self._allocated = (0, 0)
         #: Where scroll_to() was last asked to go, until the next
@@ -86,8 +93,12 @@ class PageCanvas(Gtk.Widget):
         applies it once the adjustments span the new content.
         """
         self._wanted = (x, y)
-        self._hadjustment.set_value(x)
-        self._vadjustment.set_value(y)
+        self._moving = True
+        try:
+            self._hadjustment.set_value(x)
+            self._vadjustment.set_value(y)
+        finally:
+            self._moving = False
         self.queue_allocate()
 
     def get_position(self) -> tuple[float, float]:
@@ -162,8 +173,15 @@ class PageCanvas(Gtk.Widget):
 
 
     def _scrolled(self, _adjustment: Gtk.Adjustment) -> None:
-        if not self._allocating:
-            self.queue_allocate()
+        if self._allocating:
+            return
+        self.queue_allocate()
+        if not self._moving:
+            # A scroll bar's doing: the canvas is where the bar is, not
+            # where scroll_to() last asked to go, which the allocation
+            # would otherwise put it back to.
+            self._wanted = None
+            self.emit('scrolled')
 
     def do_measure(self, orientation: Gtk.Orientation,
                    for_size: int) -> tuple[int, int, int, int]:

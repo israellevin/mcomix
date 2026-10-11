@@ -491,6 +491,7 @@ class DocumentedKeyBindingsTest(MComixTest):
         'Leave fullscreen mode': 'exit_fullscreen',
         'Toggle double page mode': 'double_page',
         'Toggle manga mode': 'manga_mode',
+        'Toggle continuous mode': 'continuous_mode',
         'Toggle slideshow mode': 'slideshow',
         'Pause or resume an animated page': 'pause_animation',
         'Best fit mode': 'best_fit_mode',

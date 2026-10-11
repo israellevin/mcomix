@@ -281,6 +281,10 @@ class EventHandler:
                          ['m'],
                          self._window.actiongroup.get_action('manga_mode').activate)
 
+        manager.register('continuous_mode',
+                         ['v'],
+                         self._window.actiongroup.get_action('continuous_mode').activate)
+
         manager.register('invert_scroll',
                          ['x'],
                          self._window.actiongroup.get_action('invert_scroll').activate)
@@ -992,6 +996,17 @@ class EventHandler:
                           fraction * viewport_size[1]]
         else:
             max_scroll = [small_step] * len(viewport_size)
+        if self._window.is_continuous:
+            # A strip reads straight down: there is no column to finish
+            # before the next, and its pages are not turned to but
+            # scrolled into.
+            step = -max_scroll[1] if backwards else max_scroll[1]
+            if not self._window.scroll(0, step):
+                if backwards:
+                    self._previous_page_with_protection()
+                else:
+                    self._next_page_with_protection()
+            return
         axis_map = constants.SWAPPED_AXES if prefs['invert smart scroll'] \
             else constants.NORMAL_AXES
         self._window.update_layout_position()

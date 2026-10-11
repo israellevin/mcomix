@@ -64,6 +64,7 @@ Toggle fullscreen mode | F, F11
 Leave fullscreen mode | Escape
 Toggle double page mode | D
 Toggle manga mode | M
+Toggle continuous mode | V
 Toggle slideshow mode | CTRL+S
 Pause or resume an animated page | P
 Play an animated page faster | ]

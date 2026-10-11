@@ -8,6 +8,7 @@ import sys
 import threading
 import unittest
 import time
+import types
 import zipfile
 from unittest import mock
 
@@ -1135,6 +1136,9 @@ class ABookOpenedAtItsEndTest(_WindowTest):
     back to within a book is shown from its bottom (upstream bug 70)."""
 
     def test_its_last_page_is_shown_from_the_bottom(self):
+        # Pages this long would otherwise open as a strip, which has
+        # tests of its own in test_continuous.py.
+        prefs['continuous for long strips'] = False
         prefs['zoom mode'] = constants.ZoomMode.WIDTH
         self.window.change_zoom_mode()
         source = os.path.join(self.tmp_dir, 'tall.cbz')
@@ -1585,7 +1589,10 @@ class FileInfoTest(MComixTest):
         for double, start, expected in ((False, -1, 9), (True, -1, 8),
                                         (False, 50, 9), (False, 3, 2)):
             with self.subTest(double=double, start=start):
-                prefs['default double page'] = double
+                # The window's answer: the preference, but never in a
+                # strip, which has no pairs.
+                self.handler._window = types.SimpleNamespace(
+                    is_double_page=double)
                 self.assertEqual(expected, self.handler._get_index_for_page(
                     start, 10, '/books/a.zip'))
 

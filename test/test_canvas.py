@@ -163,4 +163,25 @@ class PageCanvasTest(MComixTest):
                           self.canvas.get_vadjustment().get_value()),
                          (self.CONTENT[0] - self.canvas.get_width(), 0))
 
+    def test_a_scroll_bar_moved_by_hand_is_where_the_canvas_is(self):
+        """scroll_to() keeps where it was asked to go until the next
+        allocation applies it.  A bar moved in between says where the
+        canvas is now: the allocation put it back where scroll_to() had
+        asked, and nothing was told that the view had moved."""
+        self.canvas.set_content_size(*self.CONTENT)
+        self._settle()
+        heard = []
+        self.canvas.connect('scrolled', lambda canvas: heard.append(
+            canvas.get_position()))
+        self.canvas.scroll_to(100, 200)
+        self.assertEqual([], heard, 'scroll_to() is not a bar being moved')
+        self.assertEqual((100, 200), self.canvas.get_position())
+        self.canvas.get_vadjustment().set_value(900)
+        self.assertEqual([(100, 900)], heard)
+        self.assertEqual((100, 900), self.canvas.get_position())
+        self._settle()
+        self.assertEqual((100, 900), self.canvas.get_position())
+        self.assertEqual([(100, 900)], heard,
+                         'the allocation is not a bar being moved either')
+
 # vim: expandtab:sw=4:ts=4

@@ -78,6 +78,23 @@ Zooming, or resizing the window, keeps the middle of the view on the same part o
 - "Show this page alone", in the page's right-click menu, shifts it for good: that page stands alone in this book, and the pages after it pair up anew.
 - Manga mode, the M key, lays out and scrolls pages from right to left.
 
+## Continuous mode
+
+- Continuous mode, the V key or "View → Continuous mode", shows the book as one strip: the pages one below the other with no gap.
+- A book of long strips opens in it by itself: one most of whose first pages are at least twice as high as wide. Turned off there, it is off for that book only. The [preferences](preferences.md#display-tab) turn this off.
+- It is for webtoons and other long strips, whose pictures are cut anywhere, mid-panel included.
+- Double page and manga mode are off while it is on. They come back as they were set when it is turned off.
+- Scrolling goes on from one page into the next, and back, with no turn between them.
+- The keys and buttons that turn a page scroll by the window's height instead. Smart scrolling goes straight down.
+- Past the last page the next book opens, and before the first the previous one, as a page turn does.
+- The page at the top of the window is the current page: the one the status bar and the title name, and the one Copy and Save take.
+- A page marked "Skip this page" is left out of the strip.
+- Rotating turns every page of the strip where it stands. The turn is not remembered for a page, and a page's remembered turn is not applied.
+- Pages are not turned by their shape in it.
+- The strip is half the window wide to begin with, every page at that width.
+- Zoom in and zoom out change the width by a tenth of the window, from a tenth of it to twice its width. Reset zoom goes back to half.
+- That width is kept for strips alone. The fit modes are not offered, and the zoom of other books is not changed.
+
 ## Slideshow
 
 - CTRL+S starts it. It works like pressing the Down arrow at intervals.

@@ -482,7 +482,7 @@ class FileHandler:
             # bottom of its last page, as a page turned back to is.
             self._window.set_page(current_image_index + 1,
                                   at_bottom=self._start_page < 0)
-            if (self._start_page < 0 and prefs['default double page']
+            if (self._start_page < 0 and self._window.is_double_page
                     and current_image_index + 2 == len(image_files)):
                 self._window.arrive_at_end(current_image_index + 1)
 
@@ -909,9 +909,9 @@ class FileHandler:
         the page a "quit and save" ended on, a preference - and none of
         those need still fit this book.
         """
-        if start_page < 0 and prefs['default double page']:
+        if start_page < 0 and self._window.is_double_page:
             current_image_index = num_of_pages - 2
-        elif start_page < 0 and not prefs['default double page']:
+        elif start_page < 0:
             current_image_index = num_of_pages - 1
         elif start_page == 0:
             current_image_index = (self.last_read_page.get_page(path) or 1) - 1
