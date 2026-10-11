@@ -20,6 +20,7 @@ from mcomix import edit_dialog
 from mcomix import file_chooser_simple_dialog
 from mcomix import icons
 from mcomix import main
+from mcomix import page_marks
 from mcomix import widgets
 from mcomix import message_dialog
 from mcomix.dialog import Response
@@ -1077,6 +1078,35 @@ class SavedArchiveContentsTest(MComixTest):
         pump()
         with zipfile.ZipFile(target) as saved:
             return sorted(saved.namelist())
+
+    def _skipped_names(self):
+        """The names of the pages of the open book marked to be passed
+        over, as the store has them."""
+        return sorted(name for name in (
+            'pages/01.png', 'pages/02.png', 'pages/03.png',
+            '1 - Book.png', '2 - Book.png', '3 - Book.png')
+            if page_marks.marked(self.source, name, page_marks.SKIP))
+
+    def test_saved_over_the_open_book_a_mark_stays_on_its_page(self):
+        """The pages are numbered anew by any save, and the editor's
+        followed nothing: the second page was skipped until the book
+        was next opened, and not after."""
+        page_marks.mark(self.source, 'pages/02.png', page_marks.SKIP, True)
+        self.dialog._pack_archive(self.source)
+        pump()
+        self.assertEqual(['2 - Book.png'], self._skipped_names())
+        self.assertEqual('2 - Book.png',
+                         self.window.filehandler.page_member(2))
+        self.assertTrue(self.window.imagehandler.is_skipped(2))
+
+    def test_saved_under_another_name_the_open_book_keeps_its_own(self):
+        page_marks.mark(self.source, 'pages/02.png', page_marks.SKIP, True)
+        self._saved()
+        self.assertEqual(['pages/02.png'], self._skipped_names())
+        self.assertEqual('pages/02.png',
+                         self.window.filehandler.page_member(2))
+        self.assertFalse(page_marks.any_marked(
+            os.path.join(self.tmp_dir, 'Saved.cbz'), page_marks.SKIP))
 
     def test_the_pages_are_there_under_the_names_the_editor_gives_them(self):
         self.assertEqual([name for name in self._saved()

@@ -224,7 +224,7 @@ class _EditArchiveDialog(Dialog):
 
         saved = False
         try:
-            archive_packer.write_archive(
+            written = archive_packer.write_archive(
                 archive_path,
                 images,
                 comments,
@@ -239,6 +239,16 @@ class _EditArchiveDialog(Dialog):
                 # else, so the list itself says what each is called.
                 comment_names=self._comment_area.file_names())
             saved = True
+            book = self.file_handler.get_path_to_base()
+            if (self.file_handler.archive_type is not None
+                    and book is not None and os.path.exists(book)
+                    and os.path.samefile(book, archive_path)):
+                # Written over the book that is open: its pages are
+                # called something else now, and what is kept by their
+                # names follows them, as it does when the window writes
+                # the book back.  Written anywhere else it is another
+                # book, which starts with nothing kept for it.
+                self._window.file_actions.pages_written(book, written)
         except OSError as error:
             log.error(_('! Could not save the archive %(archivefile)s: '
                         '%(error)s'),

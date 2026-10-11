@@ -675,7 +675,7 @@ class FileActions:
                 carried_files=carried_files,
                 archive_type=archive_type, permissions_from=path,
                 page_names=self._page_names)
-            self._pages_written(path, written)
+            self.pages_written(path, written)
         except OSError as error:
             log.error(_('! Could not save the archive %(archivefile)s: '
                         '%(error)s'),
@@ -693,7 +693,7 @@ class FileActions:
             self._window.cursor_handler.set_busy(False)
         return True
 
-    def _pages_written(self, path: str, written: "Mapping[str, str]") -> None:
+    def pages_written(self, path: str, written: "Mapping[str, str]") -> None:
         """Follow the pages of the archive at <path> to the names it
         was just written with: <written> maps the path of each page's
         file to its name in the new archive.
