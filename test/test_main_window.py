@@ -18,7 +18,8 @@ import warnings
 
 from gi.repository import Gdk, Gio, GLib, Gtk
 
-from . import MComixTest, get_testfile_path, hold_open, pump, wait_for
+from . import (MComixTest, fresh_bookmarks_store, get_testfile_path,
+               hold_open, pump, wait_for)
 
 from mcomix import archive_packer
 from mcomix import bookmark_backend
@@ -2478,6 +2479,9 @@ class MainWindowTest(MComixTest):
 
         def watch(*args, **kwargs):
             busy.append(handler._current_cursor)
+            # As write_archive() answers: the name each page was
+            # written under, which is none of them here.
+            return {}
 
         with unittest.mock.patch.object(archive_packer, 'write_archive',
                                         side_effect=watch):
@@ -5009,6 +5013,157 @@ class RestartOnABookTest(MComixTest):
         self._reading(os.path.join(folder, '1.jpg'), 2, 2)
         self.assertEqual((os.path.join(folder, '2.jpg'), 2, None),
                          self._restarted_with())
+
+
+class WhatAPageCarriesThroughASaveTest(MComixTest):
+
+    """A book written back over its archive has its pages numbered
+    anew, and what is kept by a page's name in the archive follows it.
+
+    The book is a copy of the four-page test archive: page 1 a JPEG,
+    page 2 a JPEG, pages 3 and 4 PNGs, all under "images/".
+    """
+
+    def setUp(self):
+        super().setUp()
+        for directory in (constants.CONFIG_DIR, constants.DATA_DIR,
+                          constants.THUMBNAIL_PATH):
+            os.makedirs(directory, exist_ok=True)
+        icons.load_icons()
+        keybindings._manager = None
+        fresh_bookmarks_store()
+        self.book = os.path.join(self.tmp_dir, 'book.zip')
+        shutil.copyfile(get_testfile_path('archives', '01-ZIP-Normal.zip'),
+                        self.book)
+        self.window = main.MainWindow(open_path=self.book)
+        main.set_main_window(self.window)
+        self.handler = self.window.filehandler
+        self._opened(4)
+
+    def tearDown(self):
+        self.window.terminate_program()
+        self.window.destroy()
+        main.set_main_window(None)
+        pump()
+        fresh_bookmarks_store()
+        super().tearDown()
+
+    def _opened(self, pages):
+        images = self.window.imagehandler
+        self.assertTrue(wait_for(
+            lambda: self.handler.file_loaded
+            and images.get_number_of_pages() == pages
+            and all(images.page_is_available(page)
+                    for page in range(1, pages + 1)), seconds=20),
+            images.get_number_of_pages())
+
+    def _identity(self, page):
+        return self.handler.page_identity(page)
+
+    def _save_without(self, page):
+        actions = self.window.file_actions
+        self.assertTrue(actions.remove_pages({page}))
+        self.assertTrue(actions.save_archive())
+
+    def _reopened(self, pages):
+        self.window.file_actions.forget_changes()
+        # Left at its first page, so that nothing asks whether to go on
+        # reading from where it was left.
+        self.window.set_page(1)
+        self.handler.open_file(self.book)
+        self._opened(pages)
+
+    def _skipped(self):
+        images = self.window.imagehandler
+        return [page for page in range(1, images.get_number_of_pages() + 1)
+                if images.is_skipped(page)]
+
+    def test_the_pages_are_called_what_the_archive_now_calls_them(self):
+        self.assertEqual('images/03-PNG-RGB.png', self.handler.page_member(3))
+        self._save_without(1)
+        self.assertEqual(['1 - book.jpg', '2 - book.png', '3 - book.png'],
+                         [self.handler.page_member(page)
+                          for page in (1, 2, 3)])
+        self.assertEqual(2, self.handler.page_of_member('2 - book.png'))
+        self.assertIsNone(
+            self.handler.page_of_member('images/03-PNG-RGB.png'))
+        self._reopened(3)
+        self.assertEqual(['1 - book.jpg', '2 - book.png', '3 - book.png'],
+                         [self.handler.page_member(page)
+                          for page in (1, 2, 3)])
+
+    def test_a_mark_stays_on_its_page(self):
+        """Marked by the name it had, the page was no longer skipped
+        once the book had been written and opened again."""
+        page_marks.mark(*self._identity(3), page_marks.SKIP, True)
+        self._save_without(1)
+        self.assertEqual([2], self._skipped())
+        self._reopened(3)
+        self.assertEqual([2], self._skipped())
+        self.assertFalse(page_marks.marked(
+            self.book, 'images/03-PNG-RGB.png', page_marks.SKIP))
+
+    def test_a_second_save_does_not_hand_it_to_another_page(self):
+        """Written twice, the third page of the book as it came is
+        called first "2 - book.png" and then "1 - book.png", and the
+        fourth takes the name it left."""
+        page_marks.mark(*self._identity(3), page_marks.SKIP, True)
+        self._save_without(1)
+        self._save_without(1)
+        self.assertEqual([1], self._skipped())
+        self._reopened(2)
+        self.assertEqual([1], self._skipped())
+
+    def test_the_mark_of_a_page_taken_out_goes_with_it(self):
+        page_marks.mark(*self._identity(1), page_marks.SKIP, True)
+        self._save_without(1)
+        self.assertEqual([], self._skipped())
+        self.assertFalse(page_marks.any_marked(self.book, page_marks.SKIP))
+
+    def test_a_turn_stays_on_its_page(self):
+        page_rotations.remember(*self._identity(4), 90)
+        self._save_without(2)
+        self.assertEqual([0, 0, 90], [page_rotations.rotation(
+            *self._identity(page)) for page in (1, 2, 3)])
+        self._reopened(3)
+        self.assertEqual([0, 0, 90], [page_rotations.rotation(
+            *self._identity(page)) for page in (1, 2, 3)])
+
+    def test_a_bookmark_finds_its_page_by_the_new_name(self):
+        store = bookmark_backend.BookmarksStore
+        self.window.set_page(3)
+        pump()
+        store.add_current_to_bookmarks()
+        self.assertEqual(['images/03-PNG-RGB.png'], [
+            bookmark.get_member()
+            for bookmark in store.bookmarks_for_path(self.book)])
+        self._save_without(1)
+        self.assertEqual(['2 - book.png'], [
+            bookmark.get_member()
+            for bookmark in store.bookmarks_for_path(self.book)])
+
+    def test_the_cover_chosen_for_the_library_follows(self):
+        library = backend.LibraryBackend()
+        self.assertTrue(library.add_book(self.book))
+        self.assertTrue(library.set_chosen_cover(
+            self.book, 'images/03-PNG-RGB.png'))
+        self._save_without(1)
+        self.assertEqual('2 - book.png', library.get_chosen_cover(self.book))
+
+    def test_a_page_named_by_hand_keeps_what_it_carries_under_that_name(self):
+        page_marks.mark(*self._identity(2), page_marks.SKIP, True)
+        with unittest.mock.patch.object(self.window.file_actions,
+                                        'offer_to_save'):
+            self.assertEqual('title.jpg', self.window.file_actions
+                             .rename_page(2, 'title'))
+        self.assertTrue(self.window.file_actions.save_archive())
+        self.assertEqual('title.jpg', self.handler.page_member(2))
+        self.assertEqual([2], self._skipped())
+        self._reopened(4)
+        self.assertEqual(
+            [page for page in (1, 2, 3, 4)
+             if self.handler.page_member(page) == 'title.jpg'],
+            self._skipped())
 
 
 class ResumeAfterSaveAndQuitTest(MComixTest):

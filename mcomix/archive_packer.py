@@ -90,8 +90,14 @@ def write_archive(archive_path: str, image_files: Sequence[str],
                   archive_type: int = constants.ZIP,
                   permissions_from: "str | None" = None,
                   page_names: "Mapping[str, str] | None" = None,
-                  comment_names: "Mapping[str, str] | None" = None) -> None:
-    """Write an archive of those files at <archive_path>.
+                  comment_names: "Mapping[str, str] | None" = None
+                  ) -> dict[str, str]:
+    """Write an archive of those files at <archive_path>, and answer
+    with the name each page was written under, by its path.
+
+    The pages are numbered as they are written, so nearly every one of
+    them is called something else afterwards: whatever is kept by a
+    page's name in the archive has to follow it there.
 
     Whatever is at that path already is replaced, and only once the new
     archive is whole: it is written under a temporary name in the same
@@ -162,6 +168,7 @@ def write_archive(archive_path: str, image_files: Sequence[str],
         os.chmod(tmp_path, mode)
         os.replace(tmp_path, archive_path)
         written = True
+        return packer.page_names_written()
     finally:
         # A half-written archive under a temporary name is of no use to
         # anyone, and the packer only removes its own on a write error.
@@ -559,17 +566,9 @@ class Packer:
         came with them keeps its own name, or the name the reader gave
         it, unless one of the pages has already taken that.
         """
-        digits = len(str(len(self._image_files)))
-        taken = set()
-
-        for number, path in enumerate(self._image_files, start=1):
-            extension = os.path.splitext(path)[1]
-            name = self._page_names.get(
-                path, f'{number:0{digits}d} - {self._base_name}{extension}')
-            while name in taken:
-                name = '_%s' % name
-            taken.add(name)
-            yield path, name
+        pages = self._pages_to_pack()
+        taken = {name for _path, name in pages}
+        yield from pages
 
         for path in self._other_files:
             name = self._comment_names.get(path, os.path.basename(path))
@@ -585,6 +584,29 @@ class Packer:
                 continue
             taken.add(name)
             yield path, name
+
+    def _pages_to_pack(self) -> list[tuple[str, str]]:
+        """Every page, as (path, the name it is written under), in the
+        order of the pages: numbered, or the name the reader gave it,
+        with an underscore in front of one that is taken already."""
+        digits = len(str(len(self._image_files)))
+        pages = []
+        taken = set()
+        for number, path in enumerate(self._image_files, start=1):
+            extension = os.path.splitext(path)[1]
+            name = self._page_names.get(
+                path, f'{number:0{digits}d} - {self._base_name}{extension}')
+            while name in taken:
+                name = '_%s' % name
+            taken.add(name)
+            pages.append((path, name))
+        return pages
+
+    def page_names_written(self) -> dict[str, str]:
+        """The name each page is written under, by its path.  A file
+        that is more than one page is written once for each, and is
+        named here as the last of them."""
+        return dict(self._pages_to_pack())
 
     def _thread_pack(self) -> None:
         try:

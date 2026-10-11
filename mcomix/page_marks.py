@@ -10,6 +10,8 @@ file's name within it.
 import json
 import os
 
+from collections.abc import Collection, Mapping
+
 from mcomix import constants
 from mcomix import log
 from mcomix import tools
@@ -98,6 +100,32 @@ def follow(old: str, new: str) -> None:
     if pages is not None:
         books[new] = pages
         _save(books)
+
+
+def rename_pages(book: str, renamed: "Mapping[str, str]",
+                 pages: "Collection[str]") -> None:
+    """Keep the marks of <book> for its pages under the names they
+    have now: <renamed> maps the name a page had to the one it has,
+    and <pages> is every name the book now holds.
+
+    A book written again has its pages numbered anew, so a page's name
+    is another's old one as often as not: all of them are moved at
+    once, and what was kept for a page the book no longer holds goes,
+    rather than wait for a page that is one day called that.
+    """
+    stored = _books()
+    kept = stored.get(book)
+    if kept is None:
+        return
+    moved = {renamed.get(page, page): value for page, value in kept.items()}
+    moved = {page: value for page, value in moved.items() if page in pages}
+    if moved == kept:
+        return
+    if moved:
+        stored[book] = moved
+    else:
+        del stored[book]
+    _save(stored)
 
 
 def relocate(old_folder: str, new_folder: str) -> int:

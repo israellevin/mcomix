@@ -17,7 +17,7 @@ from mcomix import tools
 from mcomix.i18n import _
 from mcomix.dialog import Response
 
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -157,6 +157,31 @@ class _BookmarksStore:
                 self._window, self._file_handler, name, new_path, page,
                 numpages, archive_type, added, member=bookmark.get_member(),
                 note=bookmark.get_note()))
+
+    def rename_members(self, path: str, renamed: "Mapping[str, str]") -> None:
+        """Follow the pages of the archive at <path>, which was written
+        again: <renamed> maps the name a page's file had within it to
+        the name it has now.
+
+        A bookmark finds its page by that name, wherever the archive's
+        order has put it; left with the old one it found the page that
+        is called that now, or fell back on a page number the save may
+        have moved.  One write for all of them.
+        """
+        followed = False
+        for position, bookmark in enumerate(self._bookmarks):
+            member = bookmark.get_member()
+            if member is None or member not in renamed \
+                    or not bookmark.same_path(path):
+                continue
+            name, _path, page, numpages, archive_type, added = bookmark.pack()
+            self._bookmarks[position] = bookmark_menu_item._Bookmark(
+                self._window, self._file_handler, name, path, page,
+                numpages, archive_type, added, member=renamed[member],
+                note=bookmark.get_note())
+            followed = True
+        if followed:
+            self.write_bookmarks_file()
 
     @callback.Callback
     def relocate(self, old_folder: str, new_folder: str) -> int:

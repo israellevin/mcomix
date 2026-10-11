@@ -48,7 +48,7 @@ from mcomix import i18n
 from mcomix.i18n import _
 
 from collections import OrderedDict
-from collections.abc import Iterable, Sequence
+from collections.abc import Iterable, Mapping, Sequence
 from typing import NamedTuple, TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -120,6 +120,11 @@ class FileHandler:
         self._base_path: str | None = None
         #: Temporary directory used for extracting archives.
         self._tmp_dir: str | None = None
+        #: The name within the archive of each page that the archive
+        #: was written again under, by the path of its file: a save
+        #: numbers the pages anew, and their files stay where they were
+        #: unpacked to.
+        self._member_names: dict[str, str] = {}
         #: The open archive as it was when it was opened: its path, the
         #: time it was last written and its size.  None for a book that
         #: is no archive, and for one whose file could not be asked.
@@ -288,7 +293,21 @@ class FileHandler:
         path = self._window.imagehandler.get_path_to_page(page)
         if path is None:
             return None
-        return os.path.relpath(path, self._tmp_dir).replace(os.sep, '/')
+        return self.member_of(path)
+
+    def member_of(self, path: str) -> str:
+        """The name within the open archive of the page whose file is
+        unpacked at <path>: what it is called in the archive as it was
+        last written, which need not be what the file is called."""
+        written = self._member_names.get(path)
+        if written is not None:
+            return written
+        return os.path.relpath(path, self._tmp_dir or '').replace(os.sep, '/')
+
+    def members_written(self, names: "Mapping[str, str]") -> None:
+        """The open archive was written again with each page under the
+        name <names> gives the path of its file."""
+        self._member_names = dict(names)
 
     def page_identity(self, page: int) -> "tuple[str, str] | None":
         """What names <page> for as long as its picture is where it is:
@@ -311,8 +330,15 @@ class FileHandler:
         within it, or None where it has none."""
         if self.archive_type is None or self._tmp_dir is None:
             return None
-        wanted = self._extracted_path(member)
         files = self._window.imagehandler.get_image_files()
+        if self._member_names:
+            # Written again since it was opened: the names are the ones
+            # it was written under, not those of the unpacked files.
+            for number, path in enumerate(files, start=1):
+                if self.member_of(path) == member:
+                    return number
+            return None
+        wanted = self._extracted_path(member)
         return files.index(wanted) + 1 if wanted in files else None
 
     def open_file(self, path: str | list[str], start_page: int = 0,
@@ -581,6 +607,7 @@ class FileHandler:
             self._comment_files = []
             self._other_files = []
             self._name_table.clear()
+            self._member_names = {}
             # A listing that was still running will not reach
             # _archive_opened(), since _listed_contents() gives up on a
             # file_loading that has been cleared: the wait cursor has to go

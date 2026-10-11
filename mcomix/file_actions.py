@@ -670,11 +670,12 @@ class FileActions:
             self._window.filehandler.wait_for_files(image_files + comment_files)
             carried_files = self._window.filehandler.get_other_files()
             self._window.filehandler.release_archive()
-            archive_packer.write_archive(
+            written = archive_packer.write_archive(
                 path, image_files, comment_files,
                 carried_files=carried_files,
                 archive_type=archive_type, permissions_from=path,
                 page_names=self._page_names)
+            self._pages_written(path, written)
         except OSError as error:
             log.error(_('! Could not save the archive %(archivefile)s: '
                         '%(error)s'),
@@ -691,6 +692,33 @@ class FileActions:
             # pointing at a wait cursor.
             self._window.cursor_handler.set_busy(False)
         return True
+
+    def _pages_written(self, path: str, written: "Mapping[str, str]") -> None:
+        """Follow the pages of the archive at <path> to the names it
+        was just written with: <written> maps the path of each page's
+        file to its name in the new archive.
+
+        A save numbers the pages anew, so nearly all of them are called
+        something else afterwards, and a good deal is kept by a page's
+        name within its archive: the marks to skip it or show it alone,
+        the turn it was given, its bookmarks, and the cover chosen for
+        the library.  Left where they were, they were lost on the next
+        opening - and after a second save they were found again, by
+        whichever page had come to be called that.
+        """
+        handler = self._window.filehandler
+        renamed = {handler.member_of(page): name
+                   for page, name in written.items()}
+        handler.members_written(written)
+        book = os.path.abspath(path)
+        pages = set(written.values())
+        page_marks.rename_pages(book, renamed, pages)
+        page_rotations.rename_pages(book, renamed, pages)
+        bookmark_backend.BookmarksStore.rename_members(book, renamed)
+        library = backend.LibraryBackend()
+        cover = library.get_chosen_cover(book)
+        if cover is not None and renamed.get(cover, cover) != cover:
+            library.set_chosen_cover(book, renamed[cover])
 
     def undo(self, *args: object) -> bool:
         """Put the pages back as they were before the last change."""
