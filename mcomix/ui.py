@@ -690,6 +690,9 @@ class MainUI:
             Gtk.ShortcutTrigger.parse_string(accelerator),
             Gtk.NamedAction.new(action)))
 
+    #: The submenus of the right-click menu that act on the open book.
+    _NEEDS_A_BOOK = ('menu_move_to_popup', 'menu_open_with_popup')
+
     def _dynamic(self, name: str) -> "Gio.Menu | None":
         """The model of a submenu that is rebuilt as the program runs."""
         return {'menu_recent': self.recent.model,
@@ -727,7 +730,22 @@ class MainUI:
             dynamic = self._dynamic(item)
             if dynamic is not None:
                 # Built and rebuilt elsewhere.
-                section.append_submenu(self._actions.label(item), dynamic)
+                submenu = Gio.MenuItem.new_submenu(self._actions.label(item),
+                                                   dynamic)
+                if hide_disabled and item in self._NEEDS_A_BOOK:
+                    # The right-click menu leaves out what it cannot do,
+                    # and with no book open there is nothing to move or
+                    # to open with another program.  A submenu is hidden
+                    # as an item is, by an action that is disabled: the
+                    # one its own name stands for, which does nothing
+                    # but be enabled while a book is open
+                    # (set_sensitivities()).
+                    submenu.set_attribute_value(
+                        'action',
+                        GLib.Variant('s', self._actions.detailed(item)[0]))
+                    submenu.set_attribute_value(
+                        'hidden-when', GLib.Variant('s', 'action-disabled'))
+                section.append_item(submenu)
                 continue
             entry = Gio.MenuItem.new(self._actions.label(item), None)
             detailed, target = self._actions.detailed(item)
@@ -822,7 +840,7 @@ class MainUI:
                    'next_directory',
                    'previous_directory',
                    'keep_transformation',
-                   'enhance_image')
+                   'enhance_image') + self._NEEDS_A_BOOK
 
         comment = ('comments',)
 

@@ -4940,6 +4940,126 @@ class RestartTest(MComixTest):
         self.assertEqual(['closed', 'launched'], order)
 
 
+class PageMenuSubmenusTest(MComixTest):
+
+    """The right-click menu leaves out what it cannot do, and that goes
+    for its submenus: with no book open there is nothing to move and
+    nothing to open with another program.
+
+    Its items were hidden by their disabled actions; "Move to" and
+    "Open with" open submenus, had no action to be hidden by, and stood
+    in the menu of an empty window.
+    """
+
+    SUBMENUS = ('menu_move_to_popup', 'menu_open_with_popup')
+
+    def setUp(self):
+        super().setUp()
+        for directory in (constants.CONFIG_DIR, constants.DATA_DIR,
+                          constants.THUMBNAIL_PATH):
+            os.makedirs(directory, exist_ok=True)
+        icons.load_icons()
+        keybindings._manager = None
+        self.window = main.MainWindow(
+            open_path=get_testfile_path('archives', '01-ZIP-Normal.zip'))
+        main.set_main_window(self.window)
+        self.assertTrue(wait_for(
+            lambda: self.window.imagehandler.get_number_of_pages() > 0,
+            seconds=20))
+        self.window.present()
+        pump()
+
+    def tearDown(self):
+        self.window.popup.popdown()
+        pump()
+        self.window.terminate_program()
+        self.window.destroy()
+        main.set_main_window(None)
+        pump()
+        super().tearDown()
+
+    def _labels(self):
+        """The text of every label the open menu shows."""
+        found = []
+
+        def walk(widget):
+            if isinstance(widget, Gtk.Label) and widget.get_mapped():
+                found.append(widget.get_text())
+            child = widget.get_first_child()
+            while child is not None:
+                walk(child)
+                child = child.get_next_sibling()
+
+        walk(self.window.popup)
+        return found
+
+    def _shown(self):
+        hold_open(self.window.popup)
+        self.window.show_page_menu(self.window.page_area, 30, 30, None)
+        self.assertTrue(wait_for(self.window.popup.get_mapped))
+        pump()
+        return self._labels()
+
+    def _names(self):
+        actions = self.window.uimanager._actions
+        return [actions.label(name).replace('_', '')
+                for name in self.SUBMENUS]
+
+    def test_with_a_book_open_both_are_offered(self):
+        shown = self._shown()
+        for name in self._names():
+            self.assertIn(name, shown)
+
+    def test_with_no_book_open_neither_is(self):
+        self.window.filehandler.close_file()
+        pump()
+        shown = self._shown()
+        self.assertTrue(shown, 'the menu shows nothing at all')
+        for name in self._names():
+            self.assertNotIn(name, shown)
+
+    def test_they_are_back_when_a_book_is_opened_again(self):
+        self.window.filehandler.close_file()
+        pump()
+        self.window.filehandler.open_file(
+            get_testfile_path('archives', '01-ZIP-Normal.zip'))
+        self.assertTrue(wait_for(
+            lambda: self.window.imagehandler.get_number_of_pages() > 0,
+            seconds=20))
+        shown = self._shown()
+        for name in self._names():
+            self.assertIn(name, shown)
+
+    def test_a_submenu_still_opens(self):
+        """The item is hidden by an action, and an item with an action
+        is usually one that runs it: this one goes on opening its
+        submenu, and the book stays open."""
+        before = self._shown()
+        wanted = self._names()[0]
+        button = None
+
+        def find(widget):
+            nonlocal button
+            if isinstance(widget, Gtk.Label) and widget.get_mapped() \
+                    and widget.get_text() == wanted:
+                button = widget
+            child = widget.get_first_child()
+            while child is not None:
+                find(child)
+                child = child.get_next_sibling()
+
+        find(self.window.popup)
+        while button is not None \
+                and button.__gtype__.name != 'GtkModelButton':
+            button = button.get_parent()
+        self.assertIsNotNone(button, 'no item is called %r' % wanted)
+        button.activate()
+        self.assertTrue(wait_for(
+            lambda: len(self._labels()) > len(before)),
+            'activating the item opened nothing')
+        self.assertTrue(self.window.filehandler.file_loaded)
+
+
 class RestartOnABookTest(MComixTest):
 
     """What a restart hands the new MComix to open: what reopens the
