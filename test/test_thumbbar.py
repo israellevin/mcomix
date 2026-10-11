@@ -359,6 +359,24 @@ class ThumbnailSidebarTest(MComixTest):
             4, constants.TAR, datetime.datetime.now())
         self.assertEqual([], self._badged())
 
+    def test_a_bookmark_relocated_to_this_book_has_its_badge(self):
+        """Bookmarked where its folder used to be, the book is open
+        from where the folder is now; told so, the bookmarks are this
+        book's, and the sidebar showed none until one was next added
+        or removed."""
+        store = self._no_bookmarks()
+        self._ready()
+        book = self.window.filehandler.get_path_to_base()
+        before = os.path.join(self.tmp_dir, 'before')
+        store.add_bookmark_by_values(
+            'moved', os.path.join(before, os.path.basename(book)), 2,
+            self._pages(), constants.ZIP, datetime.datetime.now())
+        self.assertEqual([], self._badged())
+        self.assertEqual(1, store.relocate(before, os.path.dirname(book)))
+        self.assertEqual([2], self._badged())
+        self.assertEqual(1, store.relocate(os.path.dirname(book), before))
+        self.assertEqual([], self._badged())
+
     def _menu_for(self, page):
         """Open the page menu for <page>, as a right click does, and
         close it again at the end of the test."""

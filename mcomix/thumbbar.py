@@ -123,6 +123,9 @@ class ThumbnailSidebar(Gtk.ScrolledWindow, widgets.Releasable):
         store.remove_bookmark += self._bookmarks_changed
         store.replace_bookmark += self._bookmarks_changed
         store.clear_bookmarks += self._bookmarks_changed
+        # A folder of books told to be elsewhere: its bookmarks are those
+        # of other files now, of the one open among them or no longer.
+        store.relocate += self._bookmarks_changed
 
     def release(self) -> None:
         """Take the list off the sidebar once the window has closed.
@@ -137,6 +140,7 @@ class ThumbnailSidebar(Gtk.ScrolledWindow, widgets.Releasable):
         store.remove_bookmark -= self._bookmarks_changed
         store.replace_bookmark -= self._bookmarks_changed
         store.clear_bookmarks -= self._bookmarks_changed
+        store.relocate -= self._bookmarks_changed
         self.set_child(None)
 
     def toggle_page_numbers_visible(self) -> None:
