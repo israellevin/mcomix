@@ -717,8 +717,10 @@ class FileActions:
         bookmark_backend.BookmarksStore.rename_members(book, renamed)
         library = backend.LibraryBackend()
         cover = library.get_chosen_cover(book)
-        if cover is not None and renamed.get(cover, cover) != cover:
-            library.set_chosen_cover(book, renamed[cover])
+        if cover is not None and renamed.get(cover) != cover:
+            # Back to the guessed one where the page chosen was taken
+            # out: its name is the next page's to be given.
+            library.set_chosen_cover(book, renamed.get(cover))
 
     def undo(self, *args: object) -> bool:
         """Put the pages back as they were before the last change."""

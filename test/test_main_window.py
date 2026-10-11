@@ -5270,6 +5270,35 @@ class WhatAPageCarriesThroughASaveTest(MComixTest):
         self._save_without(1)
         self.assertEqual('2 - book.png', library.get_chosen_cover(self.book))
 
+    def test_the_cover_of_a_page_taken_out_is_not_another_page(self):
+        """Written once the pages are numbered, and the page that takes
+        the place of one taken out takes its name: the cover chosen
+        stayed by that name, and was the page after it."""
+        library = backend.LibraryBackend()
+        self.assertTrue(library.add_book(self.book))
+        self._save_without(1)
+        self.assertTrue(library.set_chosen_cover(self.book, '2 - book.png'))
+        self._save_without(2)
+        self.assertEqual('2 - book.png', self.handler.page_member(2))
+        self.assertIsNone(library.get_chosen_cover(self.book))
+
+    def test_the_bookmark_of_a_page_taken_out_is_not_another_page_s(self):
+        """It stays, as a bookmark does whose file is deleted, and goes
+        by its page number rather than by a name another page has."""
+        store = bookmark_backend.BookmarksStore
+        self._save_without(1)
+        self.window.set_page(2)
+        pump()
+        store.add_current_to_bookmarks()
+        self.assertEqual(['2 - book.png'], [
+            bookmark.get_member()
+            for bookmark in store.bookmarks_for_path(self.book)])
+        self._save_without(2)
+        self.assertEqual('2 - book.png', self.handler.page_member(2))
+        self.assertEqual([None], [
+            bookmark.get_member()
+            for bookmark in store.bookmarks_for_path(self.book)])
+
     def test_a_page_named_by_hand_keeps_what_it_carries_under_that_name(self):
         page_marks.mark(*self._identity(2), page_marks.SKIP, True)
         with unittest.mock.patch.object(self.window.file_actions,

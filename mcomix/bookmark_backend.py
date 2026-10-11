@@ -167,17 +167,22 @@ class _BookmarksStore:
         order has put it; left with the old one it found the page that
         is called that now, or fell back on a page number the save may
         have moved.  One write for all of them.
+
+        The bookmark of a page the archive no longer holds stays, and
+        goes by its page number from now on: the name it knew is free
+        for the next page to be numbered so, and the bookmark would
+        open that one as its own.
         """
         followed = False
         for position, bookmark in enumerate(self._bookmarks):
             member = bookmark.get_member()
-            if member is None or member not in renamed \
+            if member is None or renamed.get(member) == member \
                     or not bookmark.same_path(path):
                 continue
             name, _path, page, numpages, archive_type, added = bookmark.pack()
             self._bookmarks[position] = bookmark_menu_item._Bookmark(
                 self._window, self._file_handler, name, path, page,
-                numpages, archive_type, added, member=renamed[member],
+                numpages, archive_type, added, member=renamed.get(member),
                 note=bookmark.get_note())
             followed = True
         if followed:
