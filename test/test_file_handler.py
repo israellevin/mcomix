@@ -483,6 +483,34 @@ class AFolderTreeAsOneBookTest(_WindowTest):
         self.assertEqual((self._page('cover.jpg'), None),
                          self.handler.resume_point())
 
+    def _recent(self):
+        """What opening a book adds to the recent files, in order."""
+        added = []
+        self.window.uimanager.recent.add_path = added.append
+        return added
+
+    def test_a_page_below_the_folder_is_listed_among_the_recent_files_as_the_folder(self):
+        """Reopened at a page below it, the folder was listed by that
+        page's picture, which by itself opens only its own folder."""
+        added = self._recent()
+        self._open(self.manga, start_member='Vol 2/Ch 1/1.jpg')
+        self.assertEqual(self._page('Vol 2/Ch 1/1.jpg'),
+                         self.window.imagehandler.get_real_path())
+        self.assertEqual([self.manga], added)
+
+    def test_a_folder_opened_by_hand_is_listed_as_itself(self):
+        added = self._recent()
+        self._open(self.manga)
+        self.assertEqual([self.manga], added)
+
+    def test_a_picture_opened_by_itself_is_listed_as_itself(self):
+        added = self._recent()
+        self._open(self._page('Vol 2/Ch 1/1.jpg'))
+        self.assertEqual([self._page('Vol 2/Ch 1/1.jpg')], added)
+        del added[:]
+        self._open(self._page('cover.jpg'))
+        self.assertEqual([self._page('cover.jpg')], added)
+
     def test_a_folder_opened_alone_is_found_again_by_its_picture(self):
         prefs['open folder tree as one book'] = False
         picture = self._page('Vol 2/Ch 1/2.jpg')

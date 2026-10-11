@@ -511,7 +511,23 @@ class FileHandler:
                     self._ask_goto_last_read_page(
                         current_file, last_image_index + 1, resume)
 
-        self._window.uimanager.recent.add_path(current_file)
+        self._window.uimanager.recent.add_path(self._book_opened(current_file))
+
+    def _book_opened(self, current_file: str) -> str:
+        """What the recent files call the book just opened at
+        <current_file>: itself, or for a picture that was opened as a
+        page of a folder read with the folders in it, that folder.
+
+        Such a page is reopened by the folder and the picture's path
+        below it (resume_point()), and what was opened is the picture;
+        listed by the picture, the book came back from the recent files
+        as the one folder the picture is in.
+        """
+        if self.archive_type is None and os.path.isfile(current_file):
+            folder = self.resume_point()[0]
+            if folder is not None and os.path.isdir(folder):
+                return folder
+        return current_file
 
     @callback.Callback
     def file_opened(self) -> None:
