@@ -92,6 +92,9 @@ class _CollectionArea(Gtk.ScrolledWindow, widgets.Releasable):
         self._drop_target.connect('drop', self._drag_data_received)
         self._list.add_controller(self._drop_target)
 
+        #: The row the drag in the air began on, which need not be the
+        #: selected one.
+        self._dragged_row: "column_list.Row | None" = None
         drag = Gtk.DragSource()
         drag.set_actions(Gdk.DragAction.MOVE)
         drag.connect('prepare', self._drag_prepare)
@@ -550,10 +553,24 @@ class _CollectionArea(Gtk.ScrolledWindow, widgets.Releasable):
 
     def _drag_prepare(self, source: Gtk.DragSource, x: float,
                       y: float) -> "Gdk.ContentProvider | None":
-        """Offer the collection being dragged."""
-        collection = self.get_current_collection()
-        if collection is None:
+        """Offer the collection the drag began on: the row under the
+        pointer, or the selected one where it began on no row.
+
+        Not the selection alone: GTK selects a row when the button is
+        let go, so a drag from a row that was not selected took the
+        selected collection - "All books" as often as not - and left the
+        one under the pointer where it was.  The selection stays as it
+        is, and with it the books on show.
+        """
+        # By its height alone, as a drop finds its row: a press on the
+        # room left of a name is on that row too.
+        under = self._list.drop_at(x, y)
+        row = under[0] if under is not None \
+            else self._list.get_selected_row()
+        self._dragged_row = row
+        if row is None:
             return None
+        collection = row.collection
         return Gdk.ContentProvider.new_for_value(
             '%s:%d' % (constants.LIBRARY_DRAG_COLLECTION, collection))
 
@@ -648,7 +665,7 @@ class _CollectionArea(Gtk.ScrolledWindow, widgets.Releasable):
         return _NO_DRAG_ACTION
 
     def _drag_begin(self, source: Gtk.DragSource, drag: Gdk.Drag) -> None:
-        """Drag the selected collection under a picture of its own row.
+        """Drag the collection under a picture of its own row.
 
         The hotspot is put a little above and to the left of the
         picture rather than inside it, so that the row the pointer is
@@ -656,7 +673,7 @@ class _CollectionArea(Gtk.ScrolledWindow, widgets.Releasable):
         under the pointer, not the picture, that says where the drop
         would land.
         """
-        row = self._list.get_selected_row()
+        row = self._dragged_row or self._list.get_selected_row()
         if row is None:
             return
         paintable = self._list.row_paintable(row)

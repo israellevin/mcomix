@@ -555,13 +555,40 @@ class CollectionAreaTest(MComixTest):
         self.assertFalse(self.area._drag_data_received(
             None, 'something-else:1', *self._middle_of(self.comics)))
 
+    def test_a_drag_from_a_row_not_selected_is_of_that_row(self):
+        """GTK selects a row when the button is let go: with "Manga"
+        selected, a drag from "Comics" took "Manga", and with "All
+        books" selected it took that."""
+        self.area._list.select_row(self._row_for(self.manga))
+        with unittest.mock.patch.object(
+                Gdk.ContentProvider, 'new_for_value',
+                wraps=Gdk.ContentProvider.new_for_value) as made:
+            self.assertIsNotNone(self.area._drag_prepare(
+                None, *self._middle_of(self.comics)))
+        made.assert_called_once_with('%s:%d' % (
+            constants.LIBRARY_DRAG_COLLECTION, self.comics))
+        self.assertEqual(self.manga, self.area.get_current_collection(),
+                         'the drag changed which books are on show')
+
+    def test_the_picture_dragged_is_of_the_row_the_drag_began_on(self):
+        self.area._list.select_row(self._row_for(self.manga))
+        self.area._drag_prepare(None, *self._middle_of(self.comics))
+        with unittest.mock.patch.object(
+                self.area._list, 'row_paintable',
+                wraps=self.area._list.row_paintable) as pictured:
+            self.area._drag_begin(_StubDragSource(), None)
+        self.assertEqual(self.comics,
+                         pictured.call_args.args[0].collection)
+
     def test_the_drag_offers_the_selected_collection(self):
         with unittest.mock.patch.object(
                 Gdk.ContentProvider, 'new_for_value',
                 wraps=Gdk.ContentProvider.new_for_value) as made:
-            self.assertIsNone(self.area._drag_prepare(None, 0.0, 0.0))
+            # From below every row, where the drag is of the selection.
+            self.assertIsNone(self.area._drag_prepare(None, 0.0, 10000.0))
             self.area._list.select_row(self._row_for(self.manga))
-            self.assertIsNotNone(self.area._drag_prepare(None, 0.0, 0.0))
+            self.assertIsNotNone(
+                self.area._drag_prepare(None, 0.0, 10000.0))
         made.assert_called_once_with('%s:%d' % (
             constants.LIBRARY_DRAG_COLLECTION, self.manga))
 
