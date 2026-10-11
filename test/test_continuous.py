@@ -60,6 +60,21 @@ class _StripTest(MComixTest):
             self.window, 'get_visible_area_size', return_value=self.VIEW)
         view.start()
         self.addCleanup(view.stop)
+        # The page area is told the same.  It scrolls no further than
+        # its own height allows, and that is the window's, which is as
+        # large as the screen lets it be: a page shown at its end stood
+        # at 200 on a screen of 640x480 and at 92 on one of 1280x1024.
+        area = self.window.page_area
+        configure = area._configure
+        across = area.get_hadjustment()
+
+        def configured(adjustment, _viewport, content, wanted=None):
+            configure(adjustment, self.VIEW[adjustment is not across],
+                      content, wanted)
+
+        room = unittest.mock.patch.object(area, '_configure', configured)
+        room.start()
+        self.addCleanup(room.stop)
         handler = self.window.imagehandler
         self.assertTrue(wait_for(
             lambda: all(handler.page_is_available(page)
