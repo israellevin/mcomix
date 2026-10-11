@@ -2395,8 +2395,12 @@ class MainWindow(Gtk.Window):
         them.  The window geometry is among the written settings, so the
         new window comes up where this one stood.
         """
-        # Both have to be read before the file handler is closed.
-        path = self.imagehandler.get_real_path()
+        # All of it has to be read before the file handler is closed.
+        # What reopens the page, not the picture on screen: a picture in
+        # a folder read with the folders in it is that folder and the
+        # picture's path below it, and by itself would bring only its
+        # own folder, where the page's number is another page's.
+        path, member = self.filehandler.resume_point()
         page = self.imagehandler.get_current_page()
 
         def start_again() -> None:
@@ -2405,7 +2409,7 @@ class MainWindow(Gtk.Window):
             write the book out, and the new window is not to come up
             over that question."""
             self.close_program()
-            process.launch_mcomix(path, page)
+            process.launch_mcomix(path, page, member)
 
         self.file_actions.before_closing(start_again)
 

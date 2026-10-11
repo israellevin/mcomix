@@ -4921,7 +4921,7 @@ class RestartTest(MComixTest):
                                         'launch_mcomix') as launch:
             self.window.restart_program()
         self.assertEqual(['closed'], self.closed)
-        launch.assert_called_once_with('/books/one.cbz', 7)
+        launch.assert_called_once_with('/books/one.cbz', 7, None)
 
     def test_the_program_is_closed_before_the_new_one_starts(self):
         """Two MComix writing the configuration files at once is a race
@@ -4934,6 +4934,81 @@ class RestartTest(MComixTest):
                 side_effect=lambda *args: order.append('launched')):
             self.window.restart_program()
         self.assertEqual(['closed', 'launched'], order)
+
+
+class RestartOnABookTest(MComixTest):
+
+    """What a restart hands the new MComix to open: what reopens the
+    page on screen, which for a picture is not always the picture."""
+
+    def setUp(self):
+        super().setUp()
+        for directory in (constants.CONFIG_DIR, constants.DATA_DIR,
+                          constants.THUMBNAIL_PATH):
+            os.makedirs(directory, exist_ok=True)
+        icons.load_icons()
+        keybindings._manager = None
+        self.window = None
+
+    def tearDown(self):
+        if self.window is not None:
+            self.window.terminate_program()
+            self.window.destroy()
+        main.set_main_window(None)
+        pump()
+        super().tearDown()
+
+    def _reading(self, path, pages, page):
+        self.window = main.MainWindow(open_path=path)
+        main.set_main_window(self.window)
+        handler = self.window.imagehandler
+        self.assertTrue(wait_for(
+            lambda: self.window.filehandler.file_loaded
+            and handler.get_number_of_pages() == pages, seconds=20),
+            handler.get_number_of_pages())
+        self.window.set_page(page)
+        pump()
+
+    def _restarted_with(self):
+        self.window.close_program = lambda: None
+        with unittest.mock.patch.object(main.process,
+                                        'launch_mcomix') as launch:
+            self.window.restart_program()
+        return launch.call_args.args
+
+    def test_a_folder_read_with_its_folders_is_reopened_as_that(self):
+        """The fourth page of the tree is the first picture of its
+        own folder: handed over by itself it opened that folder, at a
+        page four that folder does not have."""
+        prefs['open folder tree as one book'] = True
+        series = os.path.join(self.tmp_dir, 'Series')
+        picture = get_testfile_path('images', '01-JPG-Indexed.jpg')
+        for name in ('Volume 1/1.jpg', 'Volume 1/2.jpg', 'Volume 1/3.jpg',
+                     'Volume 2/1.jpg', 'Volume 2/2.jpg'):
+            path = os.path.join(series, *name.split('/'))
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            shutil.copy(picture, path)
+        self._reading(series, 5, 4)
+        self.assertEqual((series, 4, 'Volume 2/1.jpg'),
+                         self._restarted_with())
+
+    def test_an_archive_is_reopened_at_the_file_of_its_page(self):
+        """By its name, which finds the page however the archive is
+        sorted by the time it is opened again."""
+        archive = get_testfile_path('archives', '01-ZIP-Normal.zip')
+        self._reading(archive, 4, 3)
+        self.assertEqual((archive, 3, 'images/03-PNG-RGB.png'),
+                         self._restarted_with())
+
+    def test_a_picture_in_a_folder_is_reopened_as_itself(self):
+        folder = os.path.join(self.tmp_dir, 'Pictures')
+        os.makedirs(folder)
+        picture = get_testfile_path('images', '01-JPG-Indexed.jpg')
+        for name in ('1.jpg', '2.jpg'):
+            shutil.copy(picture, os.path.join(folder, name))
+        self._reading(os.path.join(folder, '1.jpg'), 2, 2)
+        self.assertEqual((os.path.join(folder, '2.jpg'), 2, None),
+                         self._restarted_with())
 
 
 class ResumeAfterSaveAndQuitTest(MComixTest):
