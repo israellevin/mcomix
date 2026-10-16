@@ -120,9 +120,12 @@ class ImageHandler:
         # belongs to the page behind: filed there, that page showed the
         # one it had replaced.  Every listing is a list of its own, so
         # one that is no longer held means the read is nobody's page.
+        # The other thread may have read the same page meanwhile: the
+        # one filed first is kept and answered with, so that both ask
+        # for one pixbuf and what is drawn from it can be kept by it.
         with self._cache_lock:
             if self._image_files is image_files:
-                self._raw_pixbufs[index] = pixbuf
+                pixbuf = self._raw_pixbufs.setdefault(index, pixbuf)
         return pixbuf
 
     def get_pixbufs(self, number_of_bufs: int) -> list[GdkPixbuf.Pixbuf]:

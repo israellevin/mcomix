@@ -144,6 +144,28 @@ class VirtualDoublePageTest(MComixTest):
             image_tools.load_pixbuf = real_load
         self.assertEqual(reads, [], 'the broken page was read a second time')
 
+    def test_a_page_read_by_both_threads_is_one_pixbuf(self):
+        """The caching thread and the main one may read the same page at
+        once; the one that files it second answered with its own copy,
+        and replaced the first one's in the cache, so the page was two
+        pixbufs, and a continuous strip scaled it a second time."""
+        self._open('portrait-no-exif.png')
+        self.handler._raw_pixbufs.clear()
+        real_load = image_tools.load_pixbuf
+        first = []
+
+        def read_by_the_other_thread_meanwhile(path):
+            # The other thread files its read while this one decodes.
+            first.append(real_load(path))
+            self.handler._raw_pixbufs[0] = first[0]
+            return real_load(path)
+
+        with unittest.mock.patch.object(image_tools, 'load_pixbuf',
+                                        read_by_the_other_thread_meanwhile):
+            answered = self.handler._get_pixbuf(0)
+        self.assertIs(first[0], answered)
+        self.assertIs(first[0], self.handler._raw_pixbufs[0])
+
     def test_the_thumbnail_of_a_page_that_will_not_load_is_the_missing_icon(self):
         """The thumbnail bar and the page selector draw what this
         answers, and both take None for a page not extracted yet, to be
