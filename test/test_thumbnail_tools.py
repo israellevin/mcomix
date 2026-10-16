@@ -330,6 +330,44 @@ class ThumbnailReuseTest(MComixTest):
 # vim: expandtab:sw=4:ts=4
 
 
+class ThumbnailFollowTest(MComixTest):
+
+    """A thumbnail kept for a file that moved goes with it."""
+
+    def setUp(self):
+        super().setUp()
+        self._thumbnailer = thumbnail_tools.Thumbnailer(
+            dst_dir=os.path.join(self.tmp_dir, 'thumbnails'),
+            store_on_disk=True, size=(128, 128))
+        self._old = os.path.join(self.tmp_dir, 'old.png')
+        self._new = os.path.join(self.tmp_dir, 'new.png')
+        shutil.copy(get_testfile_path('images', 'red.png'), self._old)
+        self._thumbnailer.thumbnail(self._old)
+        self._stored = self._thumbnailer._path_to_thumbpath(self._old)
+        self.assertTrue(os.path.isfile(self._stored))
+
+    def test_it_is_stored_under_the_new_name(self):
+        self._thumbnailer.follow(self._old, self._new)
+        self.assertFalse(os.path.exists(self._stored))
+        self.assertTrue(os.path.isfile(
+            self._thumbnailer._path_to_thumbpath(self._new)))
+
+    def test_one_that_cannot_be_moved_stays_where_it_was(self):
+        with unittest.mock.patch.object(thumbnail_tools.os, 'replace',
+                                        side_effect=OSError('refused')):
+            self._thumbnailer.follow(self._old, self._new)
+        self.assertTrue(os.path.isfile(self._stored))
+        self.assertFalse(os.path.exists(
+            self._thumbnailer._path_to_thumbpath(self._new)))
+
+    def test_with_none_stored_nothing_happens(self):
+        os.remove(self._stored)
+        with unittest.mock.patch.object(thumbnail_tools.os,
+                                        'replace') as moved:
+            self._thumbnailer.follow(self._old, self._new)
+        moved.assert_not_called()
+
+
 class ArchiveCoverOrientationTest(MComixTest):
 
     """The thumbnail of an archive is of its cover, and is turned the

@@ -15,7 +15,7 @@ import sys
 import unittest
 import unittest.mock
 
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 
 from . import MComixTest
 
@@ -145,6 +145,38 @@ class HandOverTest(MComixTest):
         gone = 'unix:path=%s' % os.path.join(self.tmp_dir, 'no-bus')
         self.assertIs(False, self._second(
             os.path.join(self.tmp_dir, 'a.cbz'), address=gone))
+
+
+class HandOverFailsTest(MComixTest):
+
+    """A bus that answers with an error is no MComix running: the one
+    started opens its files itself rather than lose them."""
+
+    def setUp(self):
+        super().setUp()
+        _keep_the_environment(self)
+        self.instance = single_instance.SingleInstance(
+            'io.github.twwn.mcomix.Test%d' % os.getpid())
+        self.application = unittest.mock.Mock()
+        self.instance._application = self.application
+
+    def test_a_bus_that_cannot_be_asked_hands_nothing_over(self):
+        self.application.register.side_effect = GLib.Error('no bus')
+        self.assertIs(False, self.instance.hand_over(['a.cbz']))
+        self.application.open.assert_not_called()
+
+    def test_a_call_that_does_not_get_through_is_not_handed_over(self):
+        self.application.get_is_remote.return_value = True
+        connection = self.application.get_dbus_connection.return_value
+        connection.flush_sync.side_effect = GLib.Error('gone')
+        self.assertIs(False, self.instance.hand_over(['a.cbz']))
+        self.application.open.assert_called_once()
+
+    def test_a_call_that_gets_through_is_handed_over(self):
+        self.application.get_is_remote.return_value = True
+        self.assertIs(True, self.instance.hand_over(['a.cbz']))
+        self.application.get_dbus_connection.return_value \
+            .flush_sync.assert_called_once_with(None)
 
 
 class ServeTest(MComixTest):

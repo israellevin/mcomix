@@ -1147,6 +1147,16 @@ class UnpackedPagesKeptTest(_WindowTest):
                                  and bool(self.handler._kept))
                 first = self._open(1)
 
+    def test_where_the_room_left_cannot_be_read_they_are_kept_by_number(self):
+        first = self._open(1)
+        with mock.patch.object(file_handler.shutil, 'disk_usage',
+                               side_effect=OSError('gone')):
+            second = self._open(2)
+            self._open(3)
+        self.assertTrue(os.path.isdir(first))
+        self.assertTrue(os.path.isdir(second))
+        self.assertEqual(file_handler.KEPT_BOOKS, len(self.handler._kept))
+
     def test_closing_the_window_keeps_none(self):
         first, second = self._open(1), self._open(2)
         self.handler.discard_kept_pages()
