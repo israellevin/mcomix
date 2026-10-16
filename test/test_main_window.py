@@ -5591,6 +5591,14 @@ class StartUpOptionsTest(MComixTest):
         pump()
         self.assertFalse(self.window.slideshow.is_running())
 
+    def test_a_slideshow_asked_for_with_a_picture_starts_at_once(self):
+        """A picture is open by the time the window has opened it, and
+        the slideshow starts then rather than waiting for a book."""
+        self._start(open_path=get_testfile_path('images', 'blue.png'),
+                    is_slideshow=True)
+        self.assertTrue(self.window.filehandler.file_loaded)
+        self.assertTrue(self.window.slideshow.is_running())
+
     def test_the_library_can_be_asked_for_at_start(self):
         from mcomix.library import main_dialog
         self._start(show_library=True)
