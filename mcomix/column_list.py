@@ -730,10 +730,12 @@ class ColumnListView(Gtk.ColumnView, widgets.Releasable):
             cell.set_model(model)
             current = shown(row) if shown is not None \
                 else str(getattr(row, attr, ''))
-            if current in options:
-                cell.set_selected(options.index(current))
-            else:
-                cell.set_selected(Gtk.INVALID_LIST_POSITION)
+            # A Gtk.DropDown always has a choice selected: told to have
+            # none, it keeps the first.  So a value no longer offered
+            # shows the first choice, as the watch list's own fallback
+            # for a collection that has gone, the default one, does.
+            cell.set_selected(options.index(current)
+                              if current in options else 0)
             cell.handler = cell.connect(
                 'notify::selected',
                 lambda widget, _param: self._chose(widget, row, chosen))

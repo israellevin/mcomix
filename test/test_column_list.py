@@ -841,4 +841,30 @@ class ColumnListViewTest(MComixTest):
             window.destroy()
             pump()
 
+    def test_a_choice_no_longer_offered_shows_the_first(self):
+        """A drop-down cannot be left with nothing chosen, so a value
+        no longer offered shows the first choice; it is not reported as
+        picked."""
+        view = column_list.ColumnListView()
+        chosen = []
+        view.add_choice_column('Shelf', 'shelf',
+                               lambda: ['top', 'middle', 'bottom'],
+                               lambda row, name: chosen.append((row, name)))
+        view.set_rows([column_list.Row(shelf='gone')])
+        window = Gtk.Window()
+        window.set_child(view)
+        window.present()
+        try:
+            for _ in range(20):
+                pump()
+                view.allocate(400, 300, -1, None)
+            cells = [cell for cell in view._each_cell()
+                     if isinstance(cell, Gtk.DropDown)]
+            self.assertEqual(1, len(cells), 'the column drew no drop-down')
+            self.assertEqual(0, cells[0].get_selected())
+            self.assertEqual([], chosen)
+        finally:
+            window.destroy()
+            pump()
+
 # vim: expandtab:sw=4:ts=4
