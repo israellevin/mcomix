@@ -1,5 +1,6 @@
 import statistics
 import time
+import unittest.mock
 
 from gi.repository import Gdk, GdkPixbuf, Gtk
 
@@ -322,6 +323,72 @@ class AnimationSpeedTest(MComixTest):
             image_tools.load_pixbuf(get_image_path('animated.gif')))
         self.addCleanup(image.clear)
         self.assertEqual(2.0, image._playback.speed)
+
+
+class DecoderEndsTest(MComixTest):
+
+    """How the thread that decodes the frames goes on and how it ends,
+    driven here on the test's own thread with frames made up for it."""
+
+    def _decode(self, frames, stop_after_waits=3, stop_while_waiting=False):
+        """Run the decoder over <frames>; answer with what happened in
+        order ('wait', 'next', 'shown') and the playback."""
+        from mcomix import page_image
+        events = []
+        playback = page_image._Playback()
+
+        def wait_until(due):
+            events.append('wait')
+            if events.count('wait') >= stop_after_waits:
+                playback.stop()
+                return None if not stop_while_waiting else due
+            return due
+
+        playback.wait_until = wait_until
+        frames.events = events
+        with unittest.mock.patch.object(
+                page_image.GLib, 'idle_add',
+                lambda *args: events.append('shown')):
+            PageImage()._decode(frames, None, playback)
+        return events
+
+    @staticmethod
+    def _frames(ahead, delays):
+        class Frames(animation.Frames):
+            def next(self):
+                self.events.append('next')
+                delay = next(delays)
+                if isinstance(delay, Exception):
+                    raise delay
+                return object(), delay
+
+        Frames.ahead = ahead
+        delays = iter(delays)
+        return Frames()
+
+    def test_a_decoder_that_cannot_work_ahead_waits_before_each_frame(self):
+        """The gdk-pixbuf iterator only has the frame due now."""
+        self.assertEqual(['wait', 'next', 'shown', 'wait', 'next', 'shown',
+                          'wait'],
+                         self._decode(self._frames(False, [100] * 5)))
+
+    def test_one_that_can_works_before_it_waits(self):
+        self.assertEqual(['next', 'wait', 'shown', 'next', 'wait', 'shown',
+                          'next', 'wait'],
+                         self._decode(self._frames(True, [100] * 5)))
+
+    def test_a_frame_that_cannot_be_decoded_ends_the_animation(self):
+        self.assertEqual(['next', 'wait', 'shown', 'next'], self._decode(
+            self._frames(True, [100, ValueError('broken frame')])))
+
+    def test_an_animation_that_does_not_go_round_again_ends(self):
+        self.assertEqual(['next', 'wait', 'shown', 'next'], self._decode(
+            self._frames(True, [100, 0])))
+
+    def test_a_frame_decoded_as_the_animation_stops_is_not_shown(self):
+        self.assertEqual(['next', 'wait'], self._decode(
+            self._frames(True, [100] * 3), stop_after_waits=1,
+            stop_while_waiting=True))
 
 
 class _SlowFrames(animation.Frames):
