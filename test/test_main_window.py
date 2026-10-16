@@ -4156,7 +4156,11 @@ class MainWindowTest(MComixTest):
         shown = self.window.images[0].get_paintable()
         self.assertEqual((width, height), (shown.get_intrinsic_width(),
                                            shown.get_intrinsic_height()))
-        self.assertEqual((height, width), drawn.call_args_list[-1].args)
+        # The thumbnail bar draws the picture too, at its own size and
+        # from a thread of its own, so it is looked for among the calls.
+        drawn_at = [call.args for call in drawn.call_args_list]
+        self.assertIn((height, width), drawn_at)
+        self.assertNotIn((width, height), drawn_at)
 
     def _rename_dialog(self, page=1):
         """Open the rename dialog on <page> and answer with it."""
