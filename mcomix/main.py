@@ -87,6 +87,11 @@ class MainWindow(Gtk.Window):
         #: many pages go on top of the ones drawn, and how far the view
         #: moves besides.  The next draw applies it; see _follow_strip().
         self._strip_shift: "tuple[int, float] | None" = None
+        #: The pages of the strip as the last draw scaled them, by the
+        #: pixbuf, size, turn and scaling settings they were made from:
+        #: a move of the strip draws again pages most of which it drew
+        #: already, and scaling them is most of a draw.
+        self._strip_fitted: "dict[tuple[object, ...], GdkPixbuf.Pixbuf]" = {}
         #: Whether the open book's first pages have been looked at, and
         #: whether they were long strips (_look_for_strip()).
         self._strip_looked = False
@@ -641,6 +646,7 @@ class MainWindow(Gtk.Window):
             scaled_sizes = list(map(box.Box.get_size, content_boxes))
 
             self.transforms = [Transform.ID] * pixbuf_count
+            fitted: "dict[tuple[object, ...], GdkPixbuf.Pixbuf]" = {}
             for i in range(pixbuf_count):
                 if do_not_transform[i]:
                     continue
@@ -652,13 +658,22 @@ class MainWindow(Gtk.Window):
                         width, height = height, width
                     pixbuf_list[i] = image_tools.missing_image_icon(
                         max(1, int(width)), max(1, int(height)))
-                pixbuf_list[i] = image_tools.fit_pixbuf_to_rectangle(
-                    pixbuf_list[i], scaled_sizes[i], rotation_list[i])
+                # Everything fit_pixbuf_to_rectangle() reads.
+                key = (pixbuf_list[i], *scaled_sizes[i], rotation_list[i],
+                       prefs['scaling quality'],
+                       prefs['checkered bg for transparent images'])
+                pixbuf_list[i] = fitted[key] = self._strip_fitted.get(key) \
+                    or image_tools.fit_pixbuf_to_rectangle(
+                        pixbuf_list[i], scaled_sizes[i], rotation_list[i])
                 # The turn only.  fit_pixbuf_to_rectangle() also scaled
                 # the page to the content box, which the lens - the one
                 # reader of these - takes from the box itself rather
                 # than from here.
                 self.transforms[i] += Transform.from_rotation(rotation_list[i])
+            # Only this draw's pages, and only in a strip: a single page
+            # drawn again is drawn at another size, or is the screen's
+            # worth of pixels it is cheap to scale anew.
+            self._strip_fitted = fitted if continuous else {}
 
             for i in range(pixbuf_count):
                 if do_not_transform[i]:
@@ -1821,6 +1836,7 @@ class MainWindow(Gtk.Window):
             i.set_visible(False)
         for i in self.images:
             i.clear()
+        self._strip_fitted = {}
         self.page_counter.update()
         self._show_scrollbars([False] * len(self._scroll))
         self.layout = layout.create_dummy_layout()

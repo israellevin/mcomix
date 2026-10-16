@@ -11,6 +11,7 @@ from . import MComixTest, pump, wait_for
 
 from mcomix import constants
 from mcomix import icons
+from mcomix import image_tools
 from mcomix import keybindings
 from mcomix import main
 from mcomix import osd
@@ -743,6 +744,53 @@ class ScrollTest(_StripTest):
         self.window.flip_page(1)
         across, down = self.window.page_area.get_position()
         self.assertEqual((200, 0), (across, down))
+
+
+class ScaledOnceTest(_StripTest):
+
+    """A page of the strip is scaled once for as long as it stays in
+    the strip at the same width: a move of the strip scales only the
+    pages that come into it."""
+
+    def _scaled(self, draw):
+        """The pages <draw> scales, by their height as scaled."""
+        with unittest.mock.patch(
+                'mcomix.image_tools.fit_pixbuf_to_rectangle',
+                wraps=image_tools.fit_pixbuf_to_rectangle) as fit:
+            draw()
+            self.assertTrue(wait_for(
+                lambda: not self.window._waiting_for_redraw))
+            pump()
+        return [call.args[1][1] for call in fit.call_args_list]
+
+    def test_a_move_of_the_strip_scales_the_page_that_came_into_it(self):
+        self.assertEqual([1, 2, 3], self.window.displayed_pages())
+        self.assertEqual([600], self._scaled(
+            lambda: self.window.scroll(0, 700)))
+        self.assertEqual([2, 3, 4], self.window.displayed_pages())
+
+    def test_drawn_again_nothing_is_scaled(self):
+        self.assertEqual([], self._scaled(self.window.draw_image))
+
+    def test_another_scaling_quality_scales_every_page_again(self):
+        prefs['scaling quality'] = 0
+        self.assertEqual([600, 600, 300], self._scaled(self.window.draw_image))
+
+    def test_at_another_width_every_page_is_scaled_again(self):
+        prefs['continuous width'] = 50
+        self.assertEqual([300, 300, 150, 300, 300], self._scaled(
+            self.window.draw_image))
+
+    def test_out_of_a_strip_nothing_is_kept(self):
+        prefs['continuous mode'] = False
+        self._redraw()
+        self.assertEqual({}, self.window._strip_fitted)
+
+    def test_a_book_closed_keeps_nothing(self):
+        self.assertTrue(self.window._strip_fitted)
+        self.window.filehandler.close_file()
+        self._redraw()
+        self.assertEqual({}, self.window._strip_fitted)
 
 
 class ReadTest(_StripTest):
