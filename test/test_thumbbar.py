@@ -12,13 +12,14 @@ import os
 import unittest.mock
 
 
-from gi.repository import Gdk, Gtk
+from gi.repository import Gdk, GdkPixbuf, GLib, Gtk
 
 from . import MComixTest, get_testfile_path, pump, wait_for
 
 from mcomix import constants
 from mcomix import icons
 from mcomix import main
+from mcomix import thumbbar
 from mcomix.preferences import prefs
 
 
@@ -427,5 +428,33 @@ class ThumbnailSidebarTest(MComixTest):
             self.sidebar._menu_click(unittest.mock.Mock(), 1, 10, 20)
         shown.assert_not_called()
 
+
+
+class BookmarkBadgeTest(MComixTest):
+
+    """The badge is drawn from its SVG, and left off where there is no
+    SVG loader to draw it with."""
+
+    def setUp(self):
+        super().setUp()
+        thumbbar._bookmark_badge.cache_clear()
+        self.addCleanup(thumbbar._bookmark_badge.cache_clear)
+
+    @unittest.skipUnless(
+        any(format.get_name() == 'svg'
+            for format in GdkPixbuf.Pixbuf.get_formats()),
+        'gdk-pixbuf has no SVG loader')
+    def test_it_is_drawn_at_the_height_asked_for(self):
+        badge = thumbbar._bookmark_badge(24)
+        self.assertIsInstance(badge, Gdk.Texture)
+        self.assertEqual(24, badge.get_height())
+
+    def test_without_an_svg_loader_there_is_none(self):
+        def unknown(*args):
+            raise GLib.Error('no loader for SVG')
+
+        with unittest.mock.patch.object(GdkPixbuf.Pixbuf,
+                                        'new_from_file_at_size', unknown):
+            self.assertIsNone(thumbbar._bookmark_badge(24))
 
 # vim: expandtab:sw=4:ts=4

@@ -79,6 +79,13 @@ class DjvuExternalTest(MComixTest):
         self.assertGreater(blue, 150)
         self.assertLess(red, 80)
 
+    def test_a_document_that_cannot_be_read_lists_no_pages(self):
+        damaged = os.path.join(self.tmp_dir, 'damaged.djvu')
+        with open(self.djvu, 'rb') as whole, open(damaged, 'wb') as cut:
+            cut.write(whole.read(16))
+        archive = djvu_external.DjvuArchive(damaged)
+        self.assertEqual([], list(archive.iter_contents()))
+
 
 @_with_djvulibre
 class DjvuBookTest(_WindowTest):
@@ -109,5 +116,11 @@ class NoDjVuLibreTest(MComixTest):
         self.assertFalse(djvu_external.DjvuArchive.is_available())
         self.assertIn('ddjvu', archive_tools.cannot_open(
             os.path.join('nowhere', 'book.djvu'), constants.DJVU))
+
+    def test_a_handler_made_anyway_names_what_is_missing(self):
+        archive = djvu_external.DjvuArchive(
+            os.path.join('nowhere', 'book.djvu'))
+        with self.assertRaisesRegex(ValueError, 'DjVuLibre'):
+            list(archive.iter_contents())
 
 # vim: expandtab:sw=4:ts=4
