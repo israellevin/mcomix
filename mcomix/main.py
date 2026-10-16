@@ -730,16 +730,19 @@ class MainWindow(Gtk.Window):
                 # part of it stays at the top of the view.
                 kept = self.page_area.get_position()
                 across = scaled_sizes[0][alignment_axis]
+                ratio = 1.0
                 if self._strip_across not in (0, across):
-                    kept = (kept[0] * across / self._strip_across,
-                            kept[1] * across / self._strip_across)
+                    ratio = across / self._strip_across
+                    kept = (kept[0] * ratio, kept[1] * ratio)
                 if shift is not None:
                     # The pages put on top push what was showing down
                     # by their height; the pages dropped from the top
-                    # were taken off the offset when they went.
+                    # were taken off the offset when they went.  The
+                    # offset was measured on the strip as it was drawn,
+                    # so it changes with its width as the rest does.
                     on_top, offset = shift
                     moved = list(kept)
-                    moved[distribution_axis] += offset + sum(
+                    moved[distribution_axis] += offset * ratio + sum(
                         size[distribution_axis]
                         for size in scaled_sizes[:on_top])
                     kept = (moved[0], moved[1])

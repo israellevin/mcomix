@@ -742,6 +742,29 @@ class ScrollTest(_StripTest):
         self.window.scroll(0, 700)
         self.assertEqual([2], changed)
 
+    def test_a_move_and_a_zoom_drawn_together_keep_the_place(self):
+        # 100 into the second page, which starts 600 down; then, before
+        # the strip is drawn again, it is made half as wide.
+        self.window.scroll(0, 700)
+        self.assertTrue(self.window._waiting_for_redraw)
+        prefs['continuous width'] = 50
+        self.window.draw_image()
+        self._drawn()
+        self.assertEqual(2, self._page())
+        self.assertEqual(50, self._down())
+
+    def test_a_move_up_and_a_zoom_drawn_together_keep_the_place(self):
+        self.window.set_page(2)
+        self._redraw()
+        # 100 above the second page, 500 into the first, 600 high.
+        self.window.scroll(0, -100)
+        self.assertTrue(self.window._waiting_for_redraw)
+        prefs['continuous width'] = 50
+        self.window.draw_image()
+        self._drawn()
+        self.assertEqual(1, self._page())
+        self.assertEqual(250, self._down())
+
     def test_a_strip_turned_on_its_side_scrolls_along(self):
         prefs['rotation'] = 90
         prefs['keep transformation'] = True
