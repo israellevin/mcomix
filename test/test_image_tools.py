@@ -573,6 +573,26 @@ class ImageToolsTest(MComixTest):
     def test_get_implied_rotation_from_file_invalid(self):
         self.assertEqual(image_tools.get_implied_rotation_from_file(os.devnull), 0)
 
+    def test_a_png_turned_by_its_exif_chunk_is_turned_without_glycin(self):
+        """gdk-pixbuf's own PNG loader, which the Windows build uses,
+        reads no eXIf chunk; glycin's does.  The header says the page
+        is turned, so the page loaded has to say so too."""
+        path = os.path.join(self.tmp_dir, 'turned.png')
+        exif = Image.Exif()
+        exif[0x0112] = 6
+        Image.new('RGB', (10, 30)).save(path, exif=exif)
+        new_from_file = GdkPixbuf.Pixbuf.new_from_file
+
+        def without_glycin(name):
+            # What the classic loader hands back: no options at all.
+            return new_from_file(name).copy()
+
+        with unittest.mock.patch.object(GdkPixbuf.Pixbuf, 'new_from_file',
+                                        without_glycin):
+            pixbuf = image_tools.load_pixbuf(path)
+        self.assertEqual(90, image_tools.get_implied_rotation(pixbuf))
+        self.assertEqual(90, image_tools.get_implied_rotation_from_file(path))
+
     def test_get_image_header(self):
         # load_pixbuf_size() takes the format and the dimensions from here
         # rather than from get_image_info(), so the two have to agree.

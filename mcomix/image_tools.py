@@ -811,6 +811,16 @@ def load_pixbuf(path: str) -> GdkPixbuf.Pixbuf:
     if _is_lossy_webp(path) or _is_cmyk_jpeg(path):
         attempts.reverse()
     pixbuf = _first_provider_that_loads(attempts, path)
+    if getattr(pixbuf, 'orientation', None) is None \
+            and pixbuf.get_option('orientation') is None \
+            and _get_png_implied_rotation(pixbuf) is None:
+        # gdk-pixbuf's own PNG loader, which a tree without glycin
+        # uses (the Windows build), reads no eXIf chunk, where glycin
+        # and PIL do: the page has to be turned as its header says,
+        # which is what everything that does not load it goes by.
+        orientation = _orientation_from_file(path)
+        if orientation is not None:
+            setattr(pixbuf, 'orientation', str(orientation))
     if prefs['animation mode'] != constants.ANIMATION_DISABLED \
             and file_animates(path):
         # Whoever draws the frames needs the file back: what was loaded
@@ -1057,14 +1067,20 @@ def get_implied_rotation_from_file(path: str) -> int:
 
     Only the image's header is read; the image itself is not decoded.
     """
+    return _implied_rotation(_orientation_from_file(path))
+
+
+def _orientation_from_file(path: str) -> object:
+    """The Exif orientation tag of the image at <path>, read from its
+    header, or None where it has none or cannot be read."""
     try:
         with Image.open(path) as image:
             orientation = image.getexif().get(_EXIF_ORIENTATION_TAG)
             if orientation is None:
                 orientation = _get_png_implied_rotation(image)
     except Exception:
-        return 0
-    return _implied_rotation(orientation)
+        return None
+    return orientation
 
 
 def get_image_header(path: str) -> tuple[str, tuple[int, int]]:
