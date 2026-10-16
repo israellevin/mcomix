@@ -223,6 +223,15 @@ class DirectoryWalkTest(MComixTest):
         self.assertTrue(self.handler.next_archive())
         self.assertEqual(second, self._opened_file())
 
+    def test_previous_archive_takes_the_folder_s_previous_archive_first(self):
+        self._put_archive('a')
+        first = self._put_archive('c')
+        second = os.path.join(self.root, 'c', 'z.cbz')
+        shutil.copy(first, second)
+        self._open(second)
+        self.assertTrue(self.handler.previous_archive())
+        self.assertEqual(first, self._opened_file())
+
     def _put_archives(self, *names):
         paths = [os.path.join(self.root, 'b', name) for name in names]
         for path in paths:
@@ -444,6 +453,15 @@ class ResumedLibraryListTest(_WindowTest):
         self._opened(self.handler, 'b')
         self.assertFalse(os.path.exists(constants.LIBRARY_LIST_PATH))
         self.assertIsNone(file_handler.listed_with(self.books['b']))
+
+    def test_a_list_that_cannot_be_written_leaves_the_book_to_open(self):
+        with mock.patch.object(file_handler.tools, 'atomic_write',
+                               side_effect=PermissionError('read-only')):
+            self.handler.open_file(self.books['a'], listed=self.listed)
+        self._opened(self.handler, 'a')
+        self.assertIsNone(file_handler.listed_with(self.books['a']))
+        self.handler.open_next_archive()
+        self._opened(self.handler, 'c')
 
     def test_a_list_of_the_wrong_shape_is_no_list(self):
         os.makedirs(constants.DATA_DIR, exist_ok=True)
