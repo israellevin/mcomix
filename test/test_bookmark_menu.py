@@ -117,6 +117,9 @@ class BookmarksMenuTest(MComixTest):
             dialog.destroy()
         if self.menu._dialog is not None:
             self.menu._dialog.destroy()
+        # The test case holds the menu until the run is over, and the
+        # store would go on telling it of every later test's bookmarks.
+        self.menu.release()
         pump()
         super().tearDown()
 
