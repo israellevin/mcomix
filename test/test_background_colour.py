@@ -95,3 +95,77 @@ class DynamicBackgroundTest(MComixTest):
             # also run the sidebar's idle callbacks.
             self.window._draw_image()
         self.assertEqual(1, len(calls))
+
+
+class DoublePageBackgroundTest(MComixTest):
+
+    """Two pages side by side: the colour is read down the outer sides,
+    the left of the left page and the right of the right one, which
+    are what meets the background."""
+
+    GREEN = (0, 200, 0)
+    MANGA = False
+
+    def setUp(self):
+        super().setUp()
+        for directory in (constants.CONFIG_DIR, constants.DATA_DIR,
+                          constants.THUMBNAIL_PATH):
+            os.makedirs(directory, exist_ok=True)
+        prefs['smart bg'] = True
+        prefs['default double page'] = True
+        prefs['default manga mode'] = self.MANGA
+        icons.load_icons()
+        book = os.path.join(self.tmp_dir, 'book')
+        os.makedirs(book)
+        # The first page green on its left and red on its right, the
+        # second the other way round: green outside, red in the middle.
+        for name, left, right in (('1.png', self.GREEN, RED),
+                                  ('2.png', RED, self.GREEN)):
+            page = Image.new('RGB', (60, 90), (255, 255, 255))
+            for x in range(60):
+                for y in range(90):
+                    if x < 4:
+                        page.putpixel((x, y), left)
+                    elif x >= 56:
+                        page.putpixel((x, y), right)
+            page.save(os.path.join(book, name))
+        self.window = main.MainWindow()
+        main.set_main_window(self.window)
+        self.window.filehandler.open_file(os.path.join(book, '1.png'))
+        self.assertTrue(wait_for(
+            lambda: self.window.imagehandler.page_is_available(1)
+            and self.window.imagehandler.page_is_available(2)))
+        pump()
+
+    def tearDown(self):
+        self.window.terminate_program()
+        self.window.destroy()
+        main.set_main_window(None)
+        pump()
+        super().tearDown()
+
+    def test_the_colour_is_that_of_the_outer_sides(self):
+        self.window.draw_image()
+        pump()
+        self.assertTrue(self.window.displayed_double())
+        self.assertEqual(self.GREEN, tuple(
+            round(component * 255)
+            for component in self.window.get_bg_colour()[:3]))
+
+
+class MangaDoublePageBackgroundTest(DoublePageBackgroundTest):
+
+    """In manga mode the first page is on the right: the outer sides
+    are then the second page's left and the first page's right, both
+    red, and the sides read are those on screen, not those of the
+    first and the second page."""
+
+    MANGA = True
+
+    def test_the_colour_is_that_of_the_outer_sides(self):
+        self.window.draw_image()
+        pump()
+        self.assertTrue(self.window.is_manga_mode)
+        self.assertEqual(RED, tuple(
+            round(component * 255)
+            for component in self.window.get_bg_colour()[:3]))
