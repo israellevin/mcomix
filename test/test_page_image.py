@@ -316,6 +316,15 @@ class AnimationSpeedTest(MComixTest):
         self.assertEqual([0.1] * 3, self._dues(4.0))
         self.assertEqual([1.6] * 3, self._dues(0.25))
 
+    def test_a_page_playing_takes_a_new_speed_at_once(self):
+        image = PageImage()
+        image.show_pixbuf(
+            image_tools.load_pixbuf(get_image_path('animated.gif')))
+        self.addCleanup(image.clear)
+        self.assertEqual(1.0, image._playback.speed)
+        image.set_speed(3.0)
+        self.assertEqual(3.0, image._playback.speed)
+
     def test_a_page_shown_later_keeps_the_speed(self):
         image = PageImage()
         image.set_speed(2.0)
