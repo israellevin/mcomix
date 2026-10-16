@@ -2127,6 +2127,17 @@ class MainWindowTest(MComixTest):
                            message._secondary.get_text())
                           for message in said])
 
+    def test_a_file_gone_before_it_is_trashed_goes_on_at_once(self):
+        """Taken away from outside while the question was up: nothing
+        to move, and what follows the delete still runs."""
+        gone = os.path.join(self.tmp_dir, 'Gone.cbz')
+        then = unittest.mock.Mock()
+        with unittest.mock.patch.object(file_actions.tools,
+                                        'move_to_trash') as trashed:
+            self.window.file_actions._trash(gone, then)
+        trashed.assert_not_called()
+        then.assert_called_once_with()
+
     def _asked_to_delete_permanently(self, source):
         """Press Shift+Delete on <source> and return the question."""
         self.window.file_actions.delete_permanently()
@@ -4280,6 +4291,19 @@ class MainWindowTest(MComixTest):
             names._rename_answered(rename_dialog.REPLACE,
                                    1, 'Held.png')
         replaced.assert_called_once_with(1, 'Held.png')
+
+    def test_a_rename_cancelled_does_nothing_and_says_it_is_not_done(self):
+        self._ready()
+        names = self.window.file_actions
+        done = unittest.mock.Mock()
+        with unittest.mock.patch.object(names, 'rename_page') as renamed:
+            names._rename_answered(Response.CANCEL, 1, 'Typed.png', done)
+        renamed.assert_not_called()
+        done.assert_not_called()
+        with unittest.mock.patch.object(names, 'rename_page',
+                                        return_value='Typed.png'):
+            names._rename_answered(Response.OK, 1, 'Typed.png', done)
+        done.assert_called_once_with()
 
     def test_swapping_the_names_of_a_loose_book_renames_both_files(self):
         """A book read as a folder of images has no archive to write,
