@@ -741,6 +741,43 @@ class ColumnListViewTest(MComixTest):
             window.destroy()
             pump()
 
+    # -- Text rewritten in place ------------------------------------------
+
+    def _editable_view(self, edited, editable=None):
+        view = column_list.ColumnListView()
+        view.add_editable_column('Name', 'name', edited, editable=editable)
+        view.set_rows(column_list.Row(name=name, fixed=name == 'two')
+                      for name in self.NAMES)
+        self._present(view)
+        cells = []
+
+        def walk(widget):
+            child = widget.get_first_child()
+            while child is not None:
+                if isinstance(child, column_list._EditableCell):
+                    cells.append(child)
+                walk(child)
+                child = child.get_next_sibling()
+
+        walk(view)
+        return {cell.row.name: cell for cell in cells}
+
+    def test_a_cell_rewritten_hands_its_row_the_new_text(self):
+        edits = []
+        cell = self._editable_view(
+            lambda row, text: edits.append((row.name, text)))['three']
+        cell.start_editing()
+        self.assertEqual([], edits, 'an edit begun was taken for its end')
+        cell.set_text('drei')
+        cell.stop_editing(True)
+        self.assertEqual([('three', 'drei')], edits)
+
+    def test_a_row_that_may_not_be_rewritten_is_not_editable(self):
+        cells = self._editable_view(lambda row, text: None,
+                                    editable=lambda row: not row.fixed)
+        self.assertFalse(cells['two'].get_editable())
+        self.assertTrue(cells['one'].get_editable())
+
     # -- Checkboxes and choices -------------------------------------------
 
     def test_a_toggle_column_reports_the_click_with_the_row_it_was_in(self):
