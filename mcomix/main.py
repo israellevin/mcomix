@@ -1911,6 +1911,10 @@ class MainWindow(Gtk.Window):
         if not current:
             return 1
         room_width, room_height = self.get_visible_area_size()[:2]
+        if tools.rotation_swaps_axes(prefs['rotation']):
+            # Turned on its side, the strip runs across the view, and a
+            # page's height is its length along the strip all the same.
+            room_width, room_height = room_height, room_width
         across = self._strip_width(room_width)
         wanted = 2 * room_height
         covered = 0.0

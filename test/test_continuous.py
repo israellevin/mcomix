@@ -752,6 +752,31 @@ class ScrollTest(_StripTest):
         self.assertEqual((200, 0), (across, down))
 
 
+class TurnedStripTest(_StripTest):
+
+    """A strip turned on its side runs across a view wider than high:
+    each page is 600 along it and 200 across, and the strip reaches
+    two screens past the page being read as it does down."""
+
+    VIEW = (1000, 200)
+
+    def setUp(self):
+        super().setUp()
+        prefs['rotation'] = 90
+        prefs['keep transformation'] = True
+        self._redraw()
+
+    def test_the_strip_reaches_two_screens_past_the_page_read(self):
+        self.assertEqual([1, 2, 3, 4, 5], self.window.displayed_pages())
+
+    def test_scrolling_along_moves_the_strip_on(self):
+        self.window.scroll(700, 0)
+        self.assertTrue(wait_for(
+            lambda: not self.window._waiting_for_redraw))
+        pump()
+        self.assertEqual(2, self.window.imagehandler.get_current_page())
+
+
 class ScaledOnceTest(_StripTest):
 
     """A page of the strip is scaled once for as long as it stays in
