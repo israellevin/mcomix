@@ -1140,12 +1140,18 @@ class FileActions:
                 parent or self._window, buttons=Gtk.ButtonsType.CLOSE)
             first = next(iter(failed))
             if len(failed) == 1:
+                title = _('Could not delete "%s"') % os.path.basename(first)
                 reasons = failed[first]
             else:
+                # Counted, as the trash's refusal is: the text below
+                # names every one.
+                title = i18n.get_translation().ngettext(
+                    '%d book could not be deleted.',
+                    '%d books could not be deleted.',
+                    len(failed)) % len(failed)
                 reasons = '\n'.join('%s: %s' % (os.path.basename(path), reason)
                                     for path, reason in failed.items())
-            dialog.set_text(
-                _('Could not delete "%s"') % os.path.basename(first), reasons)
+            dialog.set_text(title, reasons)
             dialog.run_async(lambda response: None)
         return deleted
 

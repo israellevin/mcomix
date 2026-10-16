@@ -2105,6 +2105,28 @@ class MainWindowTest(MComixTest):
         self.assertIsNotNone(said[0].get_widget_for_response(Response.CLOSE),
                              'the message has no button')
 
+    def test_several_files_that_cannot_be_deleted_are_counted(self):
+        """The title named the first of them alone, above a text that
+        listed every one."""
+        paths = [os.path.join(self.tmp_dir, name)
+                 for name in ('One.cbz', 'Two.cbz')]
+        with unittest.mock.patch.object(
+                os, 'remove', side_effect=PermissionError(
+                    13, 'Permission denied')):
+            deleted = self.window.file_actions.delete_files_permanently(
+                paths)
+        self._pump()
+        self.assertEqual([], deleted)
+        said = self._delete_dialogs()
+        for message in said:
+            self.addCleanup(message.destroy)
+        self.assertEqual([('2 books could not be deleted.',
+                           'One.cbz: Permission denied\n'
+                           'Two.cbz: Permission denied')],
+                         [(message._primary.get_text(),
+                           message._secondary.get_text())
+                          for message in said])
+
     def _asked_to_delete_permanently(self, source):
         """Press Shift+Delete on <source> and return the question."""
         self.window.file_actions.delete_permanently()
