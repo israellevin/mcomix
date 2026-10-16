@@ -315,7 +315,7 @@ def _resource_text(path: str) -> str | None:
         stylesheet = Gio.resources_lookup_data(
             path, Gio.ResourceLookupFlags.NONE)
         data = stylesheet.get_data()
-        if data is None:
+        if not data:
             return None
         return data.decode('utf-8')
     except Exception as error:

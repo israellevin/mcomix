@@ -317,8 +317,9 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
         self._covers.unselect_all()
         self._covers.clear()
 
-    def display_covers(self, collection_id: int) -> None:
-        """Display the books that make up <collection_id>."""
+    def display_covers(self, collection_id: int | None) -> None:
+        """Display the books that make up <collection_id>, the whole
+        library where it is None."""
 
         adjustment = self.get_vadjustment()
         if adjustment:
@@ -339,7 +340,8 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
         self._library.control_area.update_info(
             self._covers.get_selected_positions())
 
-    def _place(self, items: Iterable[_BookItem], collection: int) -> None:
+    def _place(self, items: Iterable[_BookItem],
+               collection: int | None) -> None:
         """Give each of <items> the place its book has in the order
         <collection> was put in by hand."""
         positions = self._library.backend.get_book_positions(collection)
@@ -502,8 +504,9 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
         # Through the class, not self: GTK keeps the sort function where
         # Python's collector cannot see it, and a closure over the area
         # would keep the area alive once the library window is closed.
-        def compare(left: _BookItem, right: _BookItem, _data: object) -> int:
-            answer = _BookArea._compare_books(key, left, right)
+        def compare(left: object, right: object, _data: object) -> int:
+            answer = _BookArea._compare_books(key, cast(_BookItem, left),
+                                              cast(_BookItem, right))
             return answer if ascending else -answer
 
         self._covers.set_sorter(Gtk.CustomSorter.new(compare))

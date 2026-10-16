@@ -75,7 +75,9 @@ class _Field(Gtk.Label):
             self._held = 0
             self.queue_resize()
 
-    def do_measure(self, orientation: Gtk.Orientation,
+    # pygobject-stubs 2.19 widens the orientation to its nick strings as
+    # well, which GTK never hands a vfunc; older stubs do not.
+    def do_measure(self, orientation: Gtk.Orientation,  # type: ignore[override, unused-ignore]
                    for_size: int) -> tuple[int, int, int, int]:
         minimum, natural, minimum_baseline, natural_baseline = (
             Gtk.Label.do_measure(self, orientation, for_size))

@@ -16,7 +16,7 @@ from mcomix.i18n import _
 # pygobject-stubs declares props on GObject.Object and on the
 # interface base with signatures that do not match, so any class
 # implementing a GTK interface is reported.
-class _AnimationPaintable(GObject.GObject, Gdk.Paintable):  # type: ignore[misc]
+class _AnimationPaintable(GObject.GObject, Gdk.Paintable):  # type: ignore[misc, unused-ignore]
 
     """One frame of an animation at a time, at a size that never moves.
 

@@ -441,7 +441,8 @@ class _LibraryBackend:
         else:
             return None
 
-    def get_collection_by_id(self, id: int) -> backend_types._Collection | None:
+    def get_collection_by_id(self, id: int | None
+                             ) -> backend_types._Collection | None:
         """Return the collection with <id>, or None if there is none.
 
         Two ids are answered without asking the database.  None and
@@ -826,7 +827,7 @@ class _LibraryBackend:
                          [copy] + shown)
         return True
 
-    def get_book_positions(self, collection: int) -> dict[int, int]:
+    def get_book_positions(self, collection: int | None) -> dict[int, int]:
         """The place of each book <collection> itself holds that has
         been given one by hand, by the book's id.
 

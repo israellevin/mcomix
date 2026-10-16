@@ -43,7 +43,7 @@ class ThumbnailItem(GObject.Object):
 
 # pygobject-stubs declares props on GObject.Object and on the
 # interface base with signatures that do not match.
-class _Badged(GObject.Object, Gdk.Paintable):  # type: ignore[misc]
+class _Badged(GObject.Object, Gdk.Paintable):  # type: ignore[misc, unused-ignore]
 
     """A thumbnail with a badge hanging from its top edge, at the right.
 

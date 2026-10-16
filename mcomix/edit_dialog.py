@@ -98,9 +98,7 @@ class _EditArchiveDialog(Dialog):
                                   ('<Control><Shift>z', _EditArchiveDialog.redo)):
             shortcuts.add_shortcut(Gtk.Shortcut.new(
                 Gtk.ShortcutTrigger.parse_string(accelerator),
-                Gtk.CallbackAction.new(
-                    lambda widget, args, step=step:
-                    step(cast(_EditArchiveDialog, widget)))))
+                Gtk.CallbackAction.new(_shortcut(step))))
         self.add_controller(shortcuts)
 
         self._image_area = edit_image_area._ImageArea(self, window)
@@ -464,6 +462,15 @@ def ask_before_closing(parent: "main.MainWindow", *,
         closes.add_css_class('destructive-action')
     dialog.run_async(
         lambda response: closing() if response == Response.YES else keeping())
+
+
+def _shortcut(step: "Callable[[_EditArchiveDialog], bool]"
+              ) -> "Callable[[Gtk.Widget, GLib.Variant | None], bool]":
+    """What a key of the editor runs: <step> on the editor GTK hands
+    over, which says whether it took the key."""
+    def run(widget: Gtk.Widget, _args: "GLib.Variant | None") -> bool:
+        return step(cast(_EditArchiveDialog, widget))
+    return run
 
 
 def _forget_dialog(dialog: "_EditArchiveDialog") -> None:

@@ -183,7 +183,9 @@ class PageCanvas(Gtk.Widget):
             self._wanted = None
             self.emit('scrolled')
 
-    def do_measure(self, orientation: Gtk.Orientation,
+    # pygobject-stubs 2.19 widens the orientation to its nick strings as
+    # well, which GTK never hands a vfunc; older stubs do not.
+    def do_measure(self, orientation: Gtk.Orientation,  # type: ignore[override, unused-ignore]
                    for_size: int) -> tuple[int, int, int, int]:
         # Nothing: the canvas is whatever room is left over, and scrolls
         # for the rest.
@@ -250,6 +252,6 @@ class PageCanvas(Gtk.Widget):
         self.clear()
         # Gtk.Widget.do_dispose is put there by PyGObject for a widget
         # that overrides it, so the stubs do not describe it.
-        Gtk.Widget.do_dispose(self)  # type: ignore[attr-defined]
+        Gtk.Widget.do_dispose(self)  # type: ignore[attr-defined, unused-ignore]
 
 # vim: expandtab:sw=4:ts=4

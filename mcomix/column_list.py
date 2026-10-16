@@ -193,7 +193,7 @@ class _ChoiceCell(Gtk.DropDown, _Cell):
 # pygobject-stubs declares install_properties() on GObject.Object and
 # on Gtk.Editable with signatures that do not match, so any class
 # implementing the interface is reported.
-class _EditableCell(Gtk.EditableLabel, _Cell):  # type: ignore[misc]
+class _EditableCell(Gtk.EditableLabel, _Cell):  # type: ignore[misc, unused-ignore]
 
     """A cell whose text the user can rewrite in place.
 
@@ -362,7 +362,9 @@ class _ClampLayout(Gtk.LayoutManager):
         super().__init__()
         self._width = width
 
-    def do_measure(self, widget: Gtk.Widget, orientation: Gtk.Orientation,
+    # pygobject-stubs 2.19 widens the orientation to its nick strings as
+    # well, which GTK never hands a vfunc; older stubs do not.
+    def do_measure(self, widget: Gtk.Widget, orientation: Gtk.Orientation,  # type: ignore[override, unused-ignore]
                    for_size: int) -> tuple[int, int, int, int]:
         child = widget.get_first_child()
         if child is None:
@@ -560,7 +562,7 @@ class ColumnListView(Gtk.ColumnView, widgets.Releasable):
             widgets.cut_handlers(cast(Gtk.Widget, cell))
 
     @staticmethod
-    def _children_of(row: Row) -> "Gio.ListStore[Row] | None":
+    def _children_of(row: GObject.Object) -> "Gio.ListStore[Row] | None":
         """The rows under <row>, if it has any."""
         children = getattr(row, 'children', None)
         if not children:
@@ -817,7 +819,8 @@ class ColumnListView(Gtk.ColumnView, widgets.Releasable):
         if sort_key is not None:
             column.set_sorter(Gtk.CustomSorter.new(
                 lambda left, right, _data:
-                _compare(sort_key(left), sort_key(right))))
+                _compare(sort_key(cast(Row, left)),
+                         sort_key(cast(Row, right)))))
         self.append_column(column)
         self._columns.append((attr, column))
         return column
