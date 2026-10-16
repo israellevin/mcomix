@@ -23,6 +23,7 @@ to reopen the book.
 """
 
 
+import json
 import os
 import shutil
 import tempfile
@@ -58,6 +59,46 @@ if TYPE_CHECKING:
 from mcomix.dialog import Response
 
 from collections.abc import Callable
+
+
+def listed_with(path: str) -> list[str] | None:
+    """The books the library showed when <path> was picked from it, in
+    the order shown, where <path> is the book the last one picked from
+    there led to; None otherwise.
+
+    A book reopened from the last session - "auto load last file", or
+    "Save and quit" - walks the books it was being read among for Next
+    and Previous archive, as it did before the restart, rather than its
+    folder.
+    """
+    try:
+        with open(constants.LIBRARY_LIST_PATH, encoding='utf-8') as file:
+            listed = json.load(file)
+    except (OSError, ValueError):
+        return None
+    if not (isinstance(listed, list)
+            and all(isinstance(book, str) for book in listed)):
+        return None
+    return listed if os.path.abspath(path) in listed else None
+
+
+def _keep_listed(listed: Sequence[str] | None) -> None:
+    """Keep <listed> for listed_with(), or forget the books kept where
+    it is None: a book opened any other way walks its folder."""
+    try:
+        if listed is None:
+            os.remove(constants.LIBRARY_LIST_PATH)
+            return
+        os.makedirs(os.path.dirname(constants.LIBRARY_LIST_PATH),
+                    exist_ok=True)
+        # ASCII, which every code page writes: a name the ANSI code page
+        # of Windows has no character for is escaped.
+        with tools.atomic_write(constants.LIBRARY_LIST_PATH) as file:
+            json.dump([os.path.abspath(book) for book in listed], file)
+    except FileNotFoundError:
+        pass
+    except OSError as error:
+        log.debug('Could not keep the books listed: %s', error)
 
 
 #: How many closed books keep their unpacked pages: the one before and
@@ -385,6 +426,13 @@ class FileHandler:
         # middle of a page on; the book is read from its first volume.
         if isinstance(path, str):
             path = archive_tools.first_volume(path) or path
+
+        if listed is not None and isinstance(path, str):
+            _keep_listed(listed)
+        elif not keep_fileprovider:
+            # Opened afresh, not walked to from a book picked in the
+            # library.
+            _keep_listed(None)
 
         try:
             if listed is not None and isinstance(path, str):

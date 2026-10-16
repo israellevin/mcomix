@@ -67,7 +67,10 @@ class MainWindow(Gtk.Window):
                  zoom_mode: "constants.ZoomMode | None" = None,
                  open_path: "str | list[str] | None" = None,
                  open_page: int = 0,
-                 open_member: str | None = None) -> None:
+                 open_member: str | None = None,
+                 resumed: bool = False) -> None:
+        """<resumed> says <open_path> is the book the last session was
+        left on, rather than one named on the command line."""
         super().__init__()
         widgets.drop_focus_when_closed(self)
 
@@ -367,12 +370,19 @@ class MainWindow(Gtk.Window):
 
                 open_path, index, open_member = fileinfo
                 open_page = index + 1
+                resumed = True
 
         prefs['previous quit was quit and save'] = False
 
+        # A book reopened from the last session walks the books it was
+        # picked from in the library, if it was, as it did before.
+        open_listed = file_handler.listed_with(open_path) \
+            if resumed and isinstance(open_path, str) else None
+
         if open_path is not None:
             self.filehandler.open_file(open_path, open_page,
-                                       start_member=open_member)
+                                       start_member=open_member,
+                                       listed=open_listed)
 
         if is_slideshow and open_path is not None:
             self._start_slideshow_once_open()

@@ -412,7 +412,8 @@ class MComixTest(unittest.TestCase):
                         'LIBRARY_DATABASE_PATH', 'LASTPAGE_DATABASE_PATH',
                         'LIBRARY_COVERS_PATH', 'PREFERENCE_PATH',
                         'KEYBINDINGS_CONF_PATH', 'BOOKMARK_PICKLE_PATH',
-                        'FILEINFO_PICKLE_PATH', 'PREFERENCE_PICKLE_PATH')
+                        'FILEINFO_PICKLE_PATH', 'LIBRARY_LIST_PATH',
+                        'PREFERENCE_PICKLE_PATH')
 
     def setUp(self):
         name = '.'.join((
@@ -516,6 +517,7 @@ class MComixTest(unittest.TestCase):
         constants.KEYBINDINGS_CONF_PATH = os.path.join(constants.CONFIG_DIR, 'keybindings.conf')
         constants.BOOKMARK_PICKLE_PATH = os.path.join(constants.DATA_DIR, 'bookmarks.pickle')
         constants.FILEINFO_PICKLE_PATH = os.path.join(constants.DATA_DIR, 'file.pickle')
+        constants.LIBRARY_LIST_PATH = os.path.join(constants.DATA_DIR, 'library_list.json')
         constants.PREFERENCE_PICKLE_PATH = os.path.join(constants.CONFIG_DIR, 'preferences.pickle')
         fresh_bookmarks_store()
         # Reset preferences to default, and with them the baseline a

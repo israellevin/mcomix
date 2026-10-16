@@ -407,6 +407,96 @@ class _WindowTest(MComixTest):
         super().tearDown()
 
 
+class ResumedLibraryListTest(_WindowTest):
+
+    """A book picked in the library walks the books the library showed
+    for Next and Previous archive.  Reopened by the next session it
+    walks them still, as it did before the restart; opened any other
+    way it walks its folder."""
+
+    def setUp(self):
+        super().setUp()
+        self.books = {}
+        for name in ('a.cbz', 'b.cbz', 'c.cbz'):
+            self.books[name[0]] = os.path.join(self.tmp_dir, name)
+            shutil.copy2(get_testfile_path('archives', '01-ZIP-Normal.zip'),
+                         self.books[name[0]])
+        # The folder goes a, b, c; the library showed a, c, b.
+        self.listed = [self.books[key] for key in 'acb']
+
+    def _opened(self, handler, key):
+        self.assertTrue(wait_for(lambda: handler.file_loaded
+                                 and handler.get_path_to_base()
+                                 == self.books[key], seconds=20))
+
+    def test_the_books_shown_are_kept_as_long_as_they_are_walked(self):
+        self.handler.open_file(self.books['a'], listed=self.listed)
+        self._opened(self.handler, 'a')
+        self.assertEqual(self.listed, file_handler.listed_with(self.books['a']))
+        self.handler.open_next_archive()
+        self._opened(self.handler, 'c')
+        self.assertEqual(self.listed, file_handler.listed_with(self.books['c']))
+
+    def test_a_book_opened_afresh_forgets_them(self):
+        self.handler.open_file(self.books['a'], listed=self.listed)
+        self._opened(self.handler, 'a')
+        self.handler.open_file(self.books['b'])
+        self._opened(self.handler, 'b')
+        self.assertFalse(os.path.exists(constants.LIBRARY_LIST_PATH))
+        self.assertIsNone(file_handler.listed_with(self.books['b']))
+
+    def test_a_list_of_the_wrong_shape_is_no_list(self):
+        os.makedirs(constants.DATA_DIR, exist_ok=True)
+        for content in ('{"a": 1}', '[1, 2]', 'not json'):
+            with self.subTest(content=content):
+                with open(constants.LIBRARY_LIST_PATH, 'w') as file:
+                    file.write(content)
+                self.assertIsNone(file_handler.listed_with(self.books['a']))
+
+
+class ResumedWindowTest(MComixTest):
+
+    """What a window reopening the last session's book walks."""
+
+    def setUp(self):
+        super().setUp()
+        for directory in (constants.CONFIG_DIR, constants.DATA_DIR,
+                          constants.THUMBNAIL_PATH):
+            os.makedirs(directory, exist_ok=True)
+        icons.load_icons()
+        self.books = {}
+        for name in ('a.cbz', 'b.cbz', 'c.cbz'):
+            self.books[name[0]] = os.path.join(self.tmp_dir, name)
+            shutil.copy2(get_testfile_path('archives', '01-ZIP-Normal.zip'),
+                         self.books[name[0]])
+        # The folder goes a, b, c; the library showed a, c, b, and the
+        # last session had picked a there.
+        file_handler._keep_listed([self.books[key] for key in 'acb'])
+
+    def _next_after_a(self, resumed):
+        window = main.MainWindow(open_path=self.books['a'], resumed=resumed)
+        main.set_main_window(window)
+        try:
+            handler = window.filehandler
+            self.assertTrue(wait_for(lambda: handler.file_loaded, seconds=20))
+            handler.open_next_archive()
+            self.assertTrue(wait_for(
+                lambda: handler.file_loaded and handler.get_path_to_base()
+                != self.books['a'], seconds=20))
+            return os.path.basename(handler.get_path_to_base())
+        finally:
+            window.terminate_program()
+            window.destroy()
+            main.set_main_window(None)
+            pump()
+
+    def test_the_next_session_walks_the_books_shown(self):
+        self.assertEqual('c.cbz', self._next_after_a(resumed=True))
+
+    def test_a_book_named_on_the_command_line_walks_its_folder(self):
+        self.assertEqual('b.cbz', self._next_after_a(resumed=False))
+
+
 class AFolderTreeAsOneBookTest(_WindowTest):
 
     """ A folder read with the folders in it: what opens, what the

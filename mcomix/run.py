@@ -314,7 +314,7 @@ def run() -> None:
                              manga_mode=opts.manga,
                              double_page=opts.doublepage, zoom_mode=opts.zoommode,
                              open_path=open_path, open_page=open_page,
-                             open_member=open_member)
+                             open_member=open_member, resumed=not args)
     main.set_main_window(window)
     if instance is not None:
         instance.serve(window.open_from_outside, window.present)

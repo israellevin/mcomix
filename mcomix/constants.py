@@ -22,6 +22,8 @@ KEYBINDINGS_CONF_PATH = os.path.join(CONFIG_DIR, 'keybindings.conf')
 
 BOOKMARK_PICKLE_PATH = os.path.join(DATA_DIR, 'bookmarks.pickle')
 FILEINFO_PICKLE_PATH = os.path.join(DATA_DIR, 'file.pickle')
+# The books the library showed when the open book was picked from it.
+LIBRARY_LIST_PATH = os.path.join(DATA_DIR, 'library_list.json')
 # Transitional - used if json preferences are (were) absent.
 PREFERENCE_PICKLE_PATH = os.path.join(CONFIG_DIR, 'preferences.pickle')
 
