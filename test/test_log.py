@@ -7,6 +7,7 @@ import sys
 import tempfile
 import threading
 import unittest
+import unittest.mock
 
 # Imported for what it does: it sets the 'mcomix' logger's handler up.
 import mcomix.log  # noqa: F401
@@ -94,3 +95,16 @@ class LogFileTest(unittest.TestCase):
         self.assertIn('Uncaught exception in thread extract\nTraceback',
                       written)
         self.assertIn('ValueError: in a worker', written)
+
+    def test_an_interrupt_and_a_thread_that_exits_are_not_logged(self):
+        self.addCleanup(setattr, sys, 'excepthook', sys.excepthook)
+        self.addCleanup(setattr, threading, 'excepthook', threading.excepthook)
+        mcomix.log.log_to_file(self.path)
+        mcomix.log.log_uncaught_exceptions()
+        # Ctrl+C goes where Python sends it: a line on standard error.
+        with unittest.mock.patch.object(sys, '__excepthook__') as python:
+            sys.excepthook(KeyboardInterrupt, KeyboardInterrupt(), None)
+        python.assert_called_once()
+        threading.excepthook(threading.ExceptHookArgs(
+            (SystemExit, SystemExit(0), None, threading.Thread())))
+        self.assertEqual('', self._written())
