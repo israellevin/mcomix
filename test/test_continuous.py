@@ -35,6 +35,8 @@ class _StripTest(MComixTest):
     #: Whether the book, whose pages are long, may put itself in the
     #: mode; off where a test is about the mode being off.
     DETECT = False
+    #: The Exif orientation of a page, by its number, where it has one.
+    EXIF: dict[int, int] = {}
 
     def setUp(self):
         super().setUp()
@@ -53,7 +55,11 @@ class _StripTest(MComixTest):
         with zipfile.ZipFile(self.book, 'w') as archive:
             for number, size in enumerate(self.PAGES, 1):
                 name = os.path.join(self.tmp_dir, 'page.png')
-                Image.new('RGB', size, (number * 30, 0, 0)).save(name)
+                exif = Image.Exif()
+                if number in self.EXIF:
+                    exif[0x0112] = self.EXIF[number]
+                Image.new('RGB', size, (number * 30, 0, 0)).save(
+                    name, exif=exif)
                 archive.write(name, '%02d.png' % number)
         self.window = main.MainWindow(open_path=self.book)
         main.set_main_window(self.window)
@@ -793,6 +799,35 @@ class ScaledOnceTest(_StripTest):
         self.assertEqual({}, self.window._strip_fitted)
 
 
+class ExifTest(_StripTest):
+
+    """A page turned by its Exif tag is a page of the strip as it is
+    shown: the second is stored on its side, 3000 high and 100 wide,
+    and shown 3000 wide, which at the strip's width is 7 high."""
+
+    PAGES = ((100, 300), (100, 3000)) + ((100, 300),) * 6
+    EXIF = {2: 6}
+
+    def setUp(self):
+        prefs['auto rotate from exif'] = True
+        super().setUp()
+
+    def test_it_is_laid_out_as_it_is_shown(self):
+        self.assertEqual([((0, 0), (200, 600)), ((0, 600), (200, 7))],
+                         self._boxes()[:2])
+
+    def test_the_strip_reaches_two_screens_below_the_page_read(self):
+        self.assertEqual([1, 2, 3, 4], self.window.displayed_pages())
+
+    def test_scrolling_down_moves_the_strip_on(self):
+        # Past the first page and the second, which ends at 607.
+        self.window.scroll(0, 700)
+        self.assertTrue(wait_for(
+            lambda: not self.window._waiting_for_redraw))
+        pump()
+        self.assertEqual(3, self.window.imagehandler.get_current_page())
+
+
 class ReadTest(_StripTest):
 
     """The page at the top of the view is the one being read: what the
@@ -1015,12 +1050,16 @@ class DetectTest(_StripTest):
                     for page in range(1, pages + 1)), seconds=20))
         self._redraw()
 
-    def _book_of(self, name, sizes):
+    def _book_of(self, name, sizes, orientation=None):
         path = os.path.join(self.tmp_dir, name)
+        exif = Image.Exif()
+        if orientation is not None:
+            exif[0x0112] = orientation
         with zipfile.ZipFile(path, 'w') as archive:
             for number, size in enumerate(sizes, 1):
                 page = os.path.join(self.tmp_dir, 'page.png')
-                Image.new('RGB', size, (0, number * 20, 0)).save(page)
+                Image.new('RGB', size, (0, number * 20, 0)).save(
+                    page, exif=exif)
                 archive.write(page, '%02d.png' % number)
         return path
 
@@ -1053,6 +1092,14 @@ class DetectTest(_StripTest):
         self._open(other, 3)
         self.assertTrue(self.window.is_continuous,
                         'the next strip was kept out of the mode')
+
+    def test_long_pages_stored_on_their_side_are_a_strip(self):
+        """Stored three times as wide as high, turned upright by their
+        Exif tags."""
+        prefs['auto rotate from exif'] = True
+        book = self._book_of('turned.zip', [(400, 100)] * 4, orientation=6)
+        self._open(book, 4)
+        self.assertTrue(self.window._strip_detected)
 
     def test_a_book_of_ordinary_pages_is_left_as_it_is(self):
         book = self._book_of('pages.zip', [(200, 300)] * 4)

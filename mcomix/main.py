@@ -1023,7 +1023,7 @@ class MainWindow(Gtk.Window):
         Most of the first CONTINUOUS_SAMPLE_PAGES have to be at least
         twice as high as wide: a cover or a page of credits among them
         does not decide it either way.  Looked at once per book, from
-        the sizes in the pictures' headers.
+        the sizes in the pictures' headers, turned as the pages are.
         """
         if self._strip_looked or not prefs['continuous for long strips']:
             return
@@ -1033,7 +1033,7 @@ class MainWindow(Gtk.Window):
         if not sample or not all(map(handler.page_is_available, sample)):
             return
         self._strip_looked = True
-        sizes = [handler.get_size(page) for page in sample]
+        sizes = [handler.get_displayed_size(page) for page in sample]
         long = sum(1 for width, height in sizes if height >= 2 * width > 0)
         if 2 * long <= len(sample):
             return
@@ -1918,7 +1918,7 @@ class MainWindow(Gtk.Window):
         for page in range(current, handler.get_number_of_pages() + 1):
             if count and not handler.page_is_available(page):
                 break
-            width, height = handler.get_size(page)
+            width, height = handler.get_displayed_size(page)
             count += 1
             if count > 1 and not handler.is_skipped(page):
                 covered += height * across / max(1, width)

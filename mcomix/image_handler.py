@@ -288,7 +288,7 @@ class ImageHandler:
         key = (path or '', bool(prefs['auto rotate from exif']))
         wide = self._wide.get(key) if path is not None else None
         if wide is None:
-            width, height = self._get_displayed_size(page)
+            width, height = self.get_displayed_size(page)
             wide = width > height
             if path is not None:
                 self._wide[key] = wide
@@ -324,7 +324,7 @@ class ImageHandler:
             start = 2
         return start + (page - start) // 2 * 2
 
-    def _get_displayed_size(self, page: int) -> tuple[int, int]:
+    def get_displayed_size(self, page: int) -> tuple[int, int]:
         """Return the (width, height) <page> will be displayed at.
 
         Reads the image's header rather than decoding it, unless it happens

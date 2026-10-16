@@ -341,9 +341,9 @@ class VirtualDoublePageTest(MComixTest):
     def test_a_cached_page_is_measured_from_the_pixbuf(self):
         self._open('portrait-no-exif.png', 'landscape-no-exif.png')
         # Whichever way round the answer is arrived at, it is the same.
-        uncached = self.handler._get_displayed_size(2)
+        uncached = self.handler.get_displayed_size(2)
         self.handler._get_pixbuf(1)
-        self.assertEqual(self.handler._get_displayed_size(2), uncached)
+        self.assertEqual(self.handler.get_displayed_size(2), uncached)
 
 
 class PageNameAndSizeTest(MComixTest):
