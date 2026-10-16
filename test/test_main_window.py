@@ -16,7 +16,7 @@ import time
 import unittest.mock
 import warnings
 
-from gi.repository import Gdk, Gio, GLib, Gtk
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk
 
 from . import (MComixTest, fresh_bookmarks_store, get_testfile_path,
                hold_open, pump, wait_for)
@@ -4108,6 +4108,33 @@ class MainWindowTest(MComixTest):
         self.assertIn(height, [call.args[1] for call in drawn.call_args_list
                                if len(call.args) == 2],
                       'the picture was scaled rather than drawn at its size')
+
+    @unittest.skipUnless(
+        any(format.get_name() == 'svg'
+            for format in GdkPixbuf.Pixbuf.get_formats()),
+        'without an SVG loader the picture is a square, the same turned')
+    def test_a_page_that_will_not_load_turned_a_quarter_fills_its_box(self):
+        """Turned, the picture is drawn on its side, as a page would be
+        before it is turned, so that turning it fills the box."""
+        directory = self._loose_book('broken-turned', pages=2)
+        with open(os.path.join(directory, '0.png'), 'wb') as damaged:
+            damaged.write(b'not an image')
+        prefs['rotation'] = 90
+        prefs['keep transformation'] = True
+        with unittest.mock.patch.object(
+                image_tools, 'missing_image_icon',
+                wraps=image_tools.missing_image_icon) as drawn:
+            self.window.filehandler.refresh_file()
+            self._pump()
+            self.window.set_page(1)
+            self.window.draw_image()
+            self._pump()
+        width, height = self.window.layout.get_content_boxes()[0].get_size()
+        self.assertNotEqual(width, height)
+        shown = self.window.images[0].get_paintable()
+        self.assertEqual((width, height), (shown.get_intrinsic_width(),
+                                           shown.get_intrinsic_height()))
+        self.assertEqual((height, width), drawn.call_args_list[-1].args)
 
     def _rename_dialog(self, page=1):
         """Open the rename dialog on <page> and answer with it."""
