@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:23+0200\n"
+"POT-Creation-Date: 2026-10-17 05:29+0200\n"
 "PO-Revision-Date: 2009-01-25 21:54+0100\n"
 "Last-Translator: Jan Nekvasil <jan.nekvasil@gmail.com>\n"
 "Language-Team: \n"
@@ -242,7 +242,7 @@ msgstr "Nová zkratka..."
 #
 # File: src/comment.py, line: 16
 # File: src/preferences.py, line: 288
-#: mcomix/comment_dialog.py:28 mcomix/preferences_dialog.py:490
+#: mcomix/comment_dialog.py:28
 msgid "Comments"
 msgstr "Komentáře"
 
@@ -328,7 +328,7 @@ msgstr "_Importovat"
 
 #
 # File: src/edit.py, line: 50
-#: mcomix/edit_dialog.py:109
+#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:421
 msgid "Images"
 msgstr "Obrázky"
 
@@ -931,7 +931,7 @@ msgstr "Zarovnat vlevo dolů"
 #: mcomix/keybindings.py:79 mcomix/keybindings.py:80 mcomix/keybindings.py:81
 #: mcomix/keybindings.py:83 mcomix/keybindings.py:84 mcomix/keybindings.py:85
 #: mcomix/keybindings.py:86 mcomix/keybindings.py:88 mcomix/keybindings.py:89
-#: mcomix/preferences_dialog.py:230
+#: mcomix/preferences_dialog.py:247
 msgid "Scroll"
 msgstr "Posun"
 
@@ -1068,7 +1068,7 @@ msgstr "Automatické otočení podle výšky"
 #
 # File: src/preferences.py, line: 177
 # File: src/ui.py, line: 296
-#: mcomix/keybindings.py:109 mcomix/preferences_dialog.py:350 mcomix/ui.py:531
+#: mcomix/keybindings.py:109 mcomix/preferences_dialog.py:374 mcomix/ui.py:531
 msgid "Double page mode"
 msgstr "Dvoustránkový režim"
 
@@ -1094,7 +1094,7 @@ msgstr "Titulní strana zvlášť"
 msgid "Manga mode"
 msgstr "Manga režim"
 
-#: mcomix/keybindings.py:112 mcomix/preferences_dialog.py:368 mcomix/ui.py:549
+#: mcomix/keybindings.py:112 mcomix/preferences_dialog.py:392 mcomix/ui.py:549
 msgid "Continuous mode"
 msgstr "Souvislý režim"
 
@@ -1180,7 +1180,7 @@ msgstr "Klávesové zkratky"
 
 #
 # File: src/preferences.py, line: 271
-#: mcomix/keybindings.py:132 mcomix/preferences_dialog.py:337
+#: mcomix/keybindings.py:132 mcomix/preferences_dialog.py:176
 msgid "Fullscreen"
 msgstr "Celá obrazovka"
 
@@ -1210,7 +1210,7 @@ msgstr "Posuvníky"
 
 #
 # File: src/preferences.py, line: 109
-#: mcomix/keybindings.py:139 mcomix/preferences_dialog.py:151
+#: mcomix/keybindings.py:139 mcomix/preferences_dialog.py:156
 msgid "Thumbnails"
 msgstr "Náhledy"
 
@@ -1726,7 +1726,7 @@ msgstr "Vždy používat vybranou barvu jako barvu pozadí."
 
 #
 # File: src/preferences.py, line: 102
-#: mcomix/preferences_dialog.py:145 mcomix/preferences_dialog.py:156
+#: mcomix/preferences_dialog.py:145 mcomix/preferences_dialog.py:161
 msgid "Use dynamic background colour"
 msgstr "Používat dynamickou barvu pozadí"
 
@@ -1737,20 +1737,36 @@ msgid "Automatically pick a background colour that fits the viewed image."
 msgstr "Automaticky vybírat barvu hodící se k prohlíženému obrázku."
 
 #
-# File: src/preferences.py, line: 95
+# File: src/preferences.py, line: 153
+#: mcomix/preferences_dialog.py:152
+msgid "Use checkered background for transparent images"
+msgstr "Používat šachovnicové pozadí pro průhledné obrázky"
+
+#
+# File: src/preferences.py, line: 159
 #: mcomix/preferences_dialog.py:154
+msgid ""
+"Use a grey checkered background for transparent images. If this preference "
+"is unset, the background is plain white instead."
+msgstr ""
+"Používat šedé šachovnicové pozadí pro průhledné obrázky. Není-li tato volba "
+"nastavena, je použito prosté bílé pozadí."
+
+#
+# File: src/preferences.py, line: 95
+#: mcomix/preferences_dialog.py:159
 msgid "Use this colour as the thumbnail background:"
 msgstr "Použít tuto barvu jako pozadí náhledů:"
 
 #
 # File: src/preferences.py, line: 97
-#: mcomix/preferences_dialog.py:155
+#: mcomix/preferences_dialog.py:160
 msgid "Always use this selected colour as the thumbnail background colour."
 msgstr "Vždy použít zvolenou barvu jako barvu pozadí náhledů."
 
 #
 # File: src/preferences.py, line: 106
-#: mcomix/preferences_dialog.py:158
+#: mcomix/preferences_dialog.py:163
 msgid ""
 "Automatically use the colour that fits the viewed image for the thumbnail "
 "background."
@@ -1760,53 +1776,45 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 117
-#: mcomix/preferences_dialog.py:163
+#: mcomix/preferences_dialog.py:168
 msgid "Show page numbers on thumbnails"
 msgstr "Zobrazovat čísla stran na náhledech"
 
 #
 # File: src/preferences.py, line: 110
-#: mcomix/preferences_dialog.py:166
+#: mcomix/preferences_dialog.py:171
 msgid "Thumbnail size (in pixels):"
 msgstr "Velikost náhledů (v pixelech):"
 
 #
-# File: src/preferences.py, line: 151
-#: mcomix/preferences_dialog.py:171
-msgid "Transparency"
-msgstr "Průhlednost"
+# File: src/preferences.py, line: 250
+#: mcomix/preferences_dialog.py:179
+msgid "Use fullscreen by default"
+msgstr "Ve výchozím stavu používat celou obrazovku"
 
 #
-# File: src/preferences.py, line: 153
-#: mcomix/preferences_dialog.py:174
-msgid "Use checkered background for transparent images"
-msgstr "Používat šachovnicové pozadí pro průhledné obrázky"
+# File: src/preferences.py, line: 273
+#: mcomix/preferences_dialog.py:183
+msgid "Automatically hide all toolbars in fullscreen"
+msgstr "Automaticky skrýt všechny lišty v režimu celé obrazovky"
 
-#
-# File: src/preferences.py, line: 159
-#: mcomix/preferences_dialog.py:176
-msgid ""
-"Use a grey checkered background for transparent images. If this preference "
-"is unset, the background is plain white instead."
-msgstr ""
-"Používat šedé šachovnicové pozadí pro průhledné obrázky. Není-li tato volba "
-"nastavena, je použito prosté bílé pozadí."
-
-#
-# File: src/preferences.py, line: 196
 #: mcomix/preferences_dialog.py:186
-msgid "Files"
-msgstr "Soubory"
+msgid "Page number in fullscreen:"
+msgstr "Číslo strany v režimu celé obrazovky:"
+
+#: mcomix/preferences_dialog.py:198
+msgid "Startup"
+msgstr "Spuštění"
 
 #
 # File: src/preferences.py, line: 206
-#: mcomix/preferences_dialog.py:189
+#: mcomix/preferences_dialog.py:201
 msgid "Automatically open the last viewed file on startup"
 msgstr "Při spuštění automaticky otevřít naposledy prohlížený soubor"
 
 #
 # File: src/preferences.py, line: 211
-#: mcomix/preferences_dialog.py:191
+#: mcomix/preferences_dialog.py:203
 msgid ""
 "Automatically open, on startup, the file that was open when MComix was last "
 "closed."
@@ -1814,15 +1822,15 @@ msgstr ""
 "Při spuštění automaticky otevře soubor, který byl otevřený při posledním "
 "ukončení MComixu."
 
-#: mcomix/preferences_dialog.py:194
+#: mcomix/preferences_dialog.py:206
 msgid "Open the library on startup"
 msgstr "Při spuštění otevřít knihovnu"
 
-#: mcomix/preferences_dialog.py:198
+#: mcomix/preferences_dialog.py:210
 msgid "Open files in the window that is already open"
 msgstr "Otevírat soubory v okně, které je už otevřené"
 
-#: mcomix/preferences_dialog.py:200
+#: mcomix/preferences_dialog.py:212
 msgid ""
 "A book opened from a file manager or a command line goes to the MComix that "
 "is running, instead of starting another. Takes effect when MComix is next "
@@ -1833,16 +1841,22 @@ msgstr ""
 "MComixu."
 
 #
+# File: src/preferences.py, line: 196
+#: mcomix/preferences_dialog.py:214
+msgid "Files"
+msgstr "Soubory"
+
+#
 # File: src/preferences.py, line: 214
-#: mcomix/preferences_dialog.py:202
+#: mcomix/preferences_dialog.py:216
 msgid "Store information about recently opened files:"
 msgstr "Uchovávat informace o nedávno otevřených souborech:"
 
-#: mcomix/preferences_dialog.py:205
+#: mcomix/preferences_dialog.py:219
 msgid "Save As opens at the last directory saved into"
 msgstr "„Uložit jako“ se otevře v adresáři, kam se ukládalo naposledy"
 
-#: mcomix/preferences_dialog.py:207
+#: mcomix/preferences_dialog.py:221
 msgid ""
 "Open the Save As dialog at the directory in which the last file was saved."
 msgstr ""
@@ -1850,11 +1864,11 @@ msgstr ""
 
 #
 # File: src/library.py, line: 769
-#: mcomix/preferences_dialog.py:210
+#: mcomix/preferences_dialog.py:224
 msgid "Save an edited archive in the format it was opened in"
 msgstr "Uložit upravený archiv ve formátu, ve kterém byl otevřen"
 
-#: mcomix/preferences_dialog.py:212
+#: mcomix/preferences_dialog.py:226
 msgid ""
 "Write an edited archive back as a ZIP, a tar, a 7z or a RAR, whichever it "
 "was read as. The last two need the 7z and rar programs, which MComix does "
@@ -1864,19 +1878,25 @@ msgstr ""
 "načten. Poslední dva vyžadují programy 7z a rar, které MComix neinstaluje; "
 "formát, který zapsat nelze, se uloží jako ZIP."
 
-#: mcomix/preferences_dialog.py:214
+#
+# File: src/preferences.py, line: 289
+#: mcomix/preferences_dialog.py:228
+msgid "Comment extensions:"
+msgstr "Přípony souborů s komentáři:"
+
+#: mcomix/preferences_dialog.py:231
 msgid "Prompts answered for good"
 msgstr "Dotazy zodpovězené jednou provždy"
 
 #
 # File: src/preferences.py, line: 169
-#: mcomix/preferences_dialog.py:233
+#: mcomix/preferences_dialog.py:250
 msgid "Use smart scrolling"
 msgstr "Používat chytré posouvání"
 
 #
 # File: src/preferences.py, line: 174
-#: mcomix/preferences_dialog.py:235
+#: mcomix/preferences_dialog.py:252
 msgid ""
 "With this preference set, the space key and mouse wheel do not only scroll "
 "down or up, but also sideways and so try to follow the natural reading order "
@@ -1886,11 +1906,44 @@ msgstr ""
 "nahoru, ale i do stran, a snaží se tak sledovat přirozené pořadí čtení "
 "komiksu."
 
-#: mcomix/preferences_dialog.py:240
+#: mcomix/preferences_dialog.py:256
+msgid "Number of pixels to scroll per arrow key press:"
+msgstr "Počet pixelů posunutí na jedno stisknutí šipky:"
+
+#: mcomix/preferences_dialog.py:260
+msgid "Set the number of pixels to scroll on a page when using the arrow keys."
+msgstr ""
+"Nastaví, o kolik pixelů se strana posune při použití kláves se šipkami."
+
+#: mcomix/preferences_dialog.py:262
+msgid "Number of pixels to scroll per mouse wheel turn:"
+msgstr "Počet pixelů posunutí na jedno otočení kolečka myši:"
+
+#: mcomix/preferences_dialog.py:266
+msgid "Set the number of pixels to scroll on a page when using a mouse wheel."
+msgstr "Nastaví, o kolik pixelů se strana posune při použití kolečka myši."
+
+#: mcomix/preferences_dialog.py:268
+msgid "Fraction of page to scroll per space key press (in percent):"
+msgstr "Část strany posunutá při stisknutí mezerníku (v procentech):"
+
+#: mcomix/preferences_dialog.py:273
+msgid ""
+"Sets the percentage by which the page will be scrolled down or up when the "
+"space key is pressed."
+msgstr ""
+"Nastaví, o kolik procent se strana posune dolů nebo nahoru při stisknutí "
+"mezerníku."
+
+#: mcomix/preferences_dialog.py:276
+msgid "Page turning"
+msgstr "Listování"
+
+#: mcomix/preferences_dialog.py:279
 msgid "Flip pages when scrolling off the edges of the page"
 msgstr "Listovat při posunutí za okraj strany"
 
-#: mcomix/preferences_dialog.py:242
+#: mcomix/preferences_dialog.py:281
 msgid ""
 "Flip pages when scrolling \"off the page\" with the scroll wheel or with the "
 "arrow keys. It takes n consecutive \"steps\" with the scroll wheel or the "
@@ -1899,68 +1952,11 @@ msgstr ""
 "Listuje při posouvání „mimo stranu“ kolečkem myši nebo klávesami se šipkami. "
 "K přelistování je potřeba n po sobě jdoucích „kroků“ kolečkem nebo šipkami."
 
-#: mcomix/preferences_dialog.py:245
-msgid "Flip pages with a left click"
-msgstr "Listovat levým kliknutím"
-
-#: mcomix/preferences_dialog.py:247
-msgid ""
-"A left click on the page turns to the next one. Clicks with SHIFT or ALT "
-"turn pages either way."
-msgstr ""
-"Levé kliknutí na stranu přejde na další. Kliknutí se SHIFT nebo ALT listují "
-"vždy."
-
-#: mcomix/preferences_dialog.py:249
-msgid "Where a click lands:"
-msgstr "Kam klepnutí míří:"
-
-#: mcomix/preferences_dialog.py:253
-msgid "Skip pages that cannot be shown"
-msgstr "Přeskakovat stránky, které nelze zobrazit"
-
-#: mcomix/preferences_dialog.py:255
-msgid ""
-"Turn past a page whose image is damaged or cannot be read, instead of "
-"showing the broken-image icon in its place."
-msgstr ""
-"Přeskočit stránku, jejíž obrázek je poškozený nebo jej nelze přečíst, místo "
-"zobrazení ikony poškozeného obrázku na jejím místě."
-
-#: mcomix/preferences_dialog.py:257
-msgid "Number of pixels to scroll per arrow key press:"
-msgstr "Počet pixelů posunutí na jedno stisknutí šipky:"
-
-#: mcomix/preferences_dialog.py:261
-msgid "Set the number of pixels to scroll on a page when using the arrow keys."
-msgstr ""
-"Nastaví, o kolik pixelů se strana posune při použití kláves se šipkami."
-
-#: mcomix/preferences_dialog.py:263
-msgid "Number of pixels to scroll per mouse wheel turn:"
-msgstr "Počet pixelů posunutí na jedno otočení kolečka myši:"
-
-#: mcomix/preferences_dialog.py:267
-msgid "Set the number of pixels to scroll on a page when using a mouse wheel."
-msgstr "Nastaví, o kolik pixelů se strana posune při použití kolečka myši."
-
-#: mcomix/preferences_dialog.py:269
-msgid "Fraction of page to scroll per space key press (in percent):"
-msgstr "Část strany posunutá při stisknutí mezerníku (v procentech):"
-
-#: mcomix/preferences_dialog.py:274
-msgid ""
-"Sets the percentage by which the page will be scrolled down or up when the "
-"space key is pressed."
-msgstr ""
-"Nastaví, o kolik procent se strana posune dolů nebo nahoru při stisknutí "
-"mezerníku."
-
-#: mcomix/preferences_dialog.py:277
+#: mcomix/preferences_dialog.py:283
 msgid "Number of \"steps\" to take before flipping the page:"
 msgstr "Počet „kroků“ před přelistováním strany:"
 
-#: mcomix/preferences_dialog.py:281
+#: mcomix/preferences_dialog.py:287
 msgid ""
 "Set the number of \"steps\" needed to flip to the next or previous page.  "
 "Less steps will allow for very fast page turning but you might find yourself "
@@ -1970,11 +1966,11 @@ msgstr ""
 "stranu. Menší počet umožní listovat velmi rychle, ale snadněji se to stane "
 "omylem."
 
-#: mcomix/preferences_dialog.py:284
+#: mcomix/preferences_dialog.py:290
 msgid "Count the steps also when the page fits"
 msgstr "Počítat kroky i u strany, která se vejde"
 
-#: mcomix/preferences_dialog.py:286
+#: mcomix/preferences_dialog.py:292
 msgid ""
 "A page that fits the window turns on the first step past it. With this, it "
 "takes as many steps as above."
@@ -1982,30 +1978,58 @@ msgstr ""
 "Strana, která se vejde do okna, se přelistuje hned prvním krokem za ni. S "
 "touto volbou je potřeba tolik kroků jako výše."
 
-#: mcomix/preferences_dialog.py:288
+#: mcomix/preferences_dialog.py:294
 msgid "Milliseconds to ignore the wheel after it turns a page:"
 msgstr "Milisekundy, po které se kolečko po otočení strany ignoruje:"
 
-#: mcomix/preferences_dialog.py:292
+#: mcomix/preferences_dialog.py:298
 msgid ""
 "Keeps a fast wheel from turning several pages at once. 0 ignores nothing."
 msgstr ""
 "Zabrání rychlému kolečku přelistovat několik stran najednou. 0 nic "
 "neignoruje."
 
-#: mcomix/preferences_dialog.py:294
+#: mcomix/preferences_dialog.py:301
+msgid "Flip pages with a left click"
+msgstr "Listovat levým kliknutím"
+
+#: mcomix/preferences_dialog.py:303
+msgid ""
+"A left click on the page turns to the next one. Clicks with SHIFT or ALT "
+"turn pages either way."
+msgstr ""
+"Levé kliknutí na stranu přejde na další. Kliknutí se SHIFT nebo ALT listují "
+"vždy."
+
+#: mcomix/preferences_dialog.py:305
+msgid "Where a click lands:"
+msgstr "Kam klepnutí míří:"
+
+#: mcomix/preferences_dialog.py:309
+msgid "Skip pages that cannot be shown"
+msgstr "Přeskakovat stránky, které nelze zobrazit"
+
+#: mcomix/preferences_dialog.py:311
+msgid ""
+"Turn past a page whose image is damaged or cannot be read, instead of "
+"showing the broken-image icon in its place."
+msgstr ""
+"Přeskočit stránku, jejíž obrázek je poškozený nebo jej nelze přečíst, místo "
+"zobrazení ikony poškozeného obrázku na jejím místě."
+
+#: mcomix/preferences_dialog.py:313
 msgid "Between books"
 msgstr "Mezi knihami"
 
 #
 # File: src/preferences.py, line: 198
-#: mcomix/preferences_dialog.py:297
+#: mcomix/preferences_dialog.py:316
 msgid "Automatically open the next archive"
 msgstr "Automaticky otevírat následující archiv"
 
 #
 # File: src/preferences.py, line: 203
-#: mcomix/preferences_dialog.py:299
+#: mcomix/preferences_dialog.py:318
 msgid ""
 "Automatically open the next archive in the directory when flipping past the "
 "last page, or the previous archive when flipping past the first page."
@@ -2015,11 +2039,11 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 198
-#: mcomix/preferences_dialog.py:302
+#: mcomix/preferences_dialog.py:321
 msgid "Automatically open next directory"
 msgstr "Automaticky otevírat následující adresář"
 
-#: mcomix/preferences_dialog.py:304
+#: mcomix/preferences_dialog.py:323
 msgid ""
 "Automatically open the first file in the next sibling directory when "
 "flipping past the last page of the last file in a directory, or the previous "
@@ -2029,13 +2053,13 @@ msgstr ""
 "přelistování poslední strany posledního souboru v adresáři, nebo předchozí "
 "adresář po přelistování zpět za první stranu prvního souboru."
 
-#: mcomix/preferences_dialog.py:307
+#: mcomix/preferences_dialog.py:326
 msgid "Open first file when navigating to previous archive"
 msgstr "Otevřít první soubor při přechodu na předchozí archiv"
 
 #
 # File: src/preferences.py, line: 203
-#: mcomix/preferences_dialog.py:309
+#: mcomix/preferences_dialog.py:328
 msgid ""
 "Automatically open the first file of the previous archive when navigating to "
 "it, instead of opening the last file of the previous archive."
@@ -2043,13 +2067,13 @@ msgstr ""
 "Při přechodu na předchozí archiv automaticky otevře jeho první soubor místo "
 "posledního."
 
-#: mcomix/preferences_dialog.py:312
+#: mcomix/preferences_dialog.py:331
 msgid "Open first file when navigating to previous directory"
 msgstr "Otevřít první soubor při přechodu na předchozí adresář"
 
 #
 # File: src/preferences.py, line: 203
-#: mcomix/preferences_dialog.py:314
+#: mcomix/preferences_dialog.py:333
 msgid ""
 "Automatically open the first file of the previous directory when navigating "
 "to it, instead of opening the last file of the previous directory."
@@ -2057,11 +2081,11 @@ msgstr ""
 "Při přechodu na předchozí adresář automaticky otevře jeho první soubor místo "
 "posledního."
 
-#: mcomix/preferences_dialog.py:317
+#: mcomix/preferences_dialog.py:336
 msgid "Open a folder with the folders in it as one book"
 msgstr "Otevřít složku i se složkami v ní jako jednu knihu"
 
-#: mcomix/preferences_dialog.py:319
+#: mcomix/preferences_dialog.py:338
 msgid ""
 "The files of the folders in a folder, two levels down, follow its own. The "
 "next directory is then the one beside it."
@@ -2069,126 +2093,39 @@ msgstr ""
 "Soubory složek ve složce, do hloubky dvou úrovní, následují za jejími "
 "vlastními. Následující adresář je pak ten vedle ní."
 
-#: mcomix/preferences_dialog.py:321
+#: mcomix/preferences_dialog.py:340
 msgid "File order"
 msgstr "Pořadí souborů"
 
-#: mcomix/preferences_dialog.py:323
+#: mcomix/preferences_dialog.py:342
 msgid "Sort files and directories by:"
 msgstr "Řadit soubory a adresáře podle:"
 
 #
 # File: src/filechooser.py, line: 86
-#: mcomix/preferences_dialog.py:326
+#: mcomix/preferences_dialog.py:345
 msgid "Sort archives by:"
 msgstr "Řadit archivy podle:"
 
 #
-# File: src/preferences.py, line: 250
-#: mcomix/preferences_dialog.py:340
-msgid "Use fullscreen by default"
-msgstr "Ve výchozím stavu používat celou obrazovku"
-
-#
-# File: src/preferences.py, line: 273
-#: mcomix/preferences_dialog.py:344
-msgid "Automatically hide all toolbars in fullscreen"
-msgstr "Automaticky skrýt všechny lišty v režimu celé obrazovky"
-
-#: mcomix/preferences_dialog.py:347
-msgid "Page number in fullscreen:"
-msgstr "Číslo strany v režimu celé obrazovky:"
-
-#
-# File: src/preferences.py, line: 179
-#: mcomix/preferences_dialog.py:353
-msgid "Flip two pages in double page mode"
-msgstr "Listovat po dvou stranách v režimu dvou stran"
-
-#
-# File: src/preferences.py, line: 184
-#: mcomix/preferences_dialog.py:355
-msgid ""
-"Flip two pages, instead of one, each time we flip pages in double page mode."
-msgstr "Obracet dvě strany místo jedné při listování ve dvoustránkovém režimu."
-
-#: mcomix/preferences_dialog.py:357
-msgid "Show only one page where appropriate:"
-msgstr "Zobrazovat jen jednu stranu tam, kde je to vhodné:"
-
-#: mcomix/preferences_dialog.py:360
-msgid "Page auto-resizing:"
-msgstr "Automatická změna velikosti stran:"
-
-#
-# File: src/preferences.py, line: 280
-#: mcomix/preferences_dialog.py:363
-msgid "Space between two pages (in pixels):"
-msgstr "Mezera mezi dvěma stranami (v pixelech):"
-
-#: mcomix/preferences_dialog.py:371
-msgid "Open long strips in continuous mode"
-msgstr "Otevírat dlouhé pásy v souvislém režimu"
-
-#: mcomix/preferences_dialog.py:373
-msgid ""
-"A book most of whose first pages are at least twice as high as wide is shown "
-"in continuous mode. The View menu turns it off for that book."
-msgstr ""
-"Kniha, jejíž první stránky jsou většinou alespoň dvakrát vyšší než širší, se "
-"zobrazí v souvislém režimu. Nabídka Zobrazit jej pro tuto knihu vypne."
-
-#
-# File: src/preferences.py, line: 263
-# File: src/ui.py, line: 290
-#: mcomix/preferences_dialog.py:375 mcomix/ui.py:565
-msgid "Fit to size mode"
-msgstr "Režim přizpůsobení velikosti"
-
-#
-# File: src/ui.py, line: 103
-#: mcomix/preferences_dialog.py:377
-msgid "Fixed width for wide pages:"
-msgstr "Pevná šířka pro široké strany:"
-
-#
-# File: src/preferences.py, line: 264
-# File: src/ui.py, line: 292
-#: mcomix/preferences_dialog.py:382
-msgid "Fixed height for wide pages:"
-msgstr "Pevná výška pro široké strany:"
-
-#
-# File: src/ui.py, line: 103
-#: mcomix/preferences_dialog.py:387
-msgid "Fixed width for other pages:"
-msgstr "Pevná šířka pro ostatní strany:"
-
-#
-# File: src/ui.py, line: 103
-#: mcomix/preferences_dialog.py:392
-msgid "Fixed height for other pages:"
-msgstr "Pevná výška pro ostatní strany:"
-
-#
 # File: src/preferences.py, line: 279
-#: mcomix/preferences_dialog.py:397
+#: mcomix/preferences_dialog.py:348
 msgid "Slideshow"
 msgstr "Promítání snímků"
 
 #
 # File: src/preferences.py, line: 280
-#: mcomix/preferences_dialog.py:399
+#: mcomix/preferences_dialog.py:350
 msgid "Slideshow delay (in seconds):"
 msgstr "Prodleva promítání (v sekundách):"
 
 #
 # File: src/preferences.py, line: 280
-#: mcomix/preferences_dialog.py:404
+#: mcomix/preferences_dialog.py:355
 msgid "Slideshow step (in pixels):"
 msgstr "Krok promítání (v pixelech):"
 
-#: mcomix/preferences_dialog.py:408
+#: mcomix/preferences_dialog.py:359
 msgid ""
 "Specify the number of pixels to scroll while in slideshow mode. A positive "
 "value will scroll forward, a negative value will scroll backwards, and a "
@@ -2200,24 +2137,91 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 198
-#: mcomix/preferences_dialog.py:411
+#: mcomix/preferences_dialog.py:362
 msgid "During a slideshow automatically open the next archive"
 msgstr "Během promítání automaticky otevírat následující archiv"
 
-#: mcomix/preferences_dialog.py:413
+#: mcomix/preferences_dialog.py:364
 msgid ""
 "While in slideshow mode allow the next archive to automatically be opened."
 msgstr "Umožní v režimu promítání automaticky otevřít následující archiv."
 
-#: mcomix/preferences_dialog.py:415
-msgid "Rotation"
-msgstr "Orientace"
+#
+# File: src/preferences.py, line: 179
+#: mcomix/preferences_dialog.py:377
+msgid "Flip two pages in double page mode"
+msgstr "Listovat po dvou stranách v režimu dvou stran"
 
-#: mcomix/preferences_dialog.py:418
+#
+# File: src/preferences.py, line: 184
+#: mcomix/preferences_dialog.py:379
+msgid ""
+"Flip two pages, instead of one, each time we flip pages in double page mode."
+msgstr "Obracet dvě strany místo jedné při listování ve dvoustránkovém režimu."
+
+#: mcomix/preferences_dialog.py:381
+msgid "Show only one page where appropriate:"
+msgstr "Zobrazovat jen jednu stranu tam, kde je to vhodné:"
+
+#: mcomix/preferences_dialog.py:384
+msgid "Page auto-resizing:"
+msgstr "Automatická změna velikosti stran:"
+
+#
+# File: src/preferences.py, line: 280
+#: mcomix/preferences_dialog.py:387
+msgid "Space between two pages (in pixels):"
+msgstr "Mezera mezi dvěma stranami (v pixelech):"
+
+#: mcomix/preferences_dialog.py:395
+msgid "Open long strips in continuous mode"
+msgstr "Otevírat dlouhé pásy v souvislém režimu"
+
+#: mcomix/preferences_dialog.py:397
+msgid ""
+"A book most of whose first pages are at least twice as high as wide is shown "
+"in continuous mode. The View menu turns it off for that book."
+msgstr ""
+"Kniha, jejíž první stránky jsou většinou alespoň dvakrát vyšší než širší, se "
+"zobrazí v souvislém režimu. Nabídka Zobrazit jej pro tuto knihu vypne."
+
+#
+# File: src/preferences.py, line: 263
+# File: src/ui.py, line: 290
+#: mcomix/preferences_dialog.py:399 mcomix/ui.py:565
+msgid "Fit to size mode"
+msgstr "Režim přizpůsobení velikosti"
+
+#
+# File: src/ui.py, line: 103
+#: mcomix/preferences_dialog.py:401
+msgid "Fixed width for wide pages:"
+msgstr "Pevná šířka pro široké strany:"
+
+#
+# File: src/preferences.py, line: 264
+# File: src/ui.py, line: 292
+#: mcomix/preferences_dialog.py:406
+msgid "Fixed height for wide pages:"
+msgstr "Pevná výška pro široké strany:"
+
+#
+# File: src/ui.py, line: 103
+#: mcomix/preferences_dialog.py:411
+msgid "Fixed width for other pages:"
+msgstr "Pevná šířka pro ostatní strany:"
+
+#
+# File: src/ui.py, line: 103
+#: mcomix/preferences_dialog.py:416
+msgid "Fixed height for other pages:"
+msgstr "Pevná výška pro ostatní strany:"
+
+#: mcomix/preferences_dialog.py:424
 msgid "Automatically rotate images according to their metadata"
 msgstr "Automaticky otáčet obrázky podle jejich metadat"
 
-#: mcomix/preferences_dialog.py:420
+#: mcomix/preferences_dialog.py:426
 msgid ""
 "Automatically rotate images when an orientation is specified in the image "
 "metadata, such as in an Exif tag."
@@ -2225,35 +2229,66 @@ msgstr ""
 "Automaticky pootáčet obrázky pokud jejich metadata obsahují údaj o "
 "orientaci, jako např. značku Exif."
 
-#
-# File: src/preferences.py, line: 143
-#: mcomix/preferences_dialog.py:422
-msgid "Image quality"
-msgstr "Kvalita obrázku"
+#: mcomix/preferences_dialog.py:428
+msgid "Animation mode:"
+msgstr "Režim animace:"
 
 #
 # File: src/ui.py, line: 297
-#: mcomix/preferences_dialog.py:424
+#: mcomix/preferences_dialog.py:431
 msgid "Scaling mode"
 msgstr "Režim škálování"
 
-#: mcomix/preferences_dialog.py:427
+#: mcomix/preferences_dialog.py:434
 msgid "Screen colour profile:"
 msgstr "Barevný profil obrazovky:"
 
-#: mcomix/preferences_dialog.py:430
+#: mcomix/preferences_dialog.py:437
 msgid "Rendering intent:"
 msgstr "Cíl vykreslování:"
 
+#
+# File: src/preferences.py, line: 124
+#: mcomix/preferences_dialog.py:440
+msgid "Magnifying Lens"
+msgstr "Lupa"
+
+#
+# File: src/preferences.py, line: 125
 #: mcomix/preferences_dialog.py:442
+msgid "Magnifying lens size (in pixels):"
+msgstr "Velikost lupy (v pixelech):"
+
+#
+# File: src/preferences.py, line: 131
+#: mcomix/preferences_dialog.py:446
+msgid ""
+"Set the size of the magnifying lens. It is a square with a side of this many "
+"pixels."
+msgstr ""
+"Nastavit velikost lupy, čtverce o velikosti strany daného počtu pixelů."
+
+#
+# File: src/preferences.py, line: 133
+#: mcomix/preferences_dialog.py:448
+msgid "Magnification factor:"
+msgstr "Míra zvětšení:"
+
+#
+# File: src/preferences.py, line: 140
+#: mcomix/preferences_dialog.py:452
+msgid "Set the magnification factor of the magnifying lens."
+msgstr "Nastavit úroveň zvětšení lupy."
+
+#: mcomix/preferences_dialog.py:462
 msgid "Extraction and cache"
 msgstr "Rozbalování a mezipaměť"
 
-#: mcomix/preferences_dialog.py:450
+#: mcomix/preferences_dialog.py:470
 msgid "Maximum number of concurrent extraction threads:"
 msgstr "Maximální počet souběžných vláken rozbalování:"
 
-#: mcomix/preferences_dialog.py:454
+#: mcomix/preferences_dialog.py:474
 msgid ""
 "Set the maximum number of concurrent threads for formats that support it. A "
 "value of 0 uses one thread for each processor. For PDFs, 0 also keeps within "
@@ -2265,11 +2300,11 @@ msgstr ""
 
 #
 # File: src/thumbremover.py, line: 65
-#: mcomix/preferences_dialog.py:456
+#: mcomix/preferences_dialog.py:476
 msgid "Maximum number of concurrent thumbnail threads:"
 msgstr "Maximální počet souběžných vláken pro náhledy:"
 
-#: mcomix/preferences_dialog.py:460
+#: mcomix/preferences_dialog.py:480
 msgid ""
 "Set the maximum number of concurrent threads used to generate thumbnails. A "
 "value of 0 uses one thread for each processor. Takes effect the next time "
@@ -2279,19 +2314,30 @@ msgstr ""
 "použije jedno vlákno pro každý procesor. Projeví se při příštím spuštění "
 "MComixu."
 
-#: mcomix/preferences_dialog.py:462
+#: mcomix/preferences_dialog.py:482
 msgid "Unpack books in:"
 msgstr "Rozbalovat knihy do:"
 
+#: mcomix/preferences_dialog.py:485
+msgid "Maximum number of pages to store in the cache:"
+msgstr "Maximální počet stran uchovávaných v mezipaměti:"
+
+#: mcomix/preferences_dialog.py:489
+msgid ""
+"Set the max number of pages to cache. A value of -1 will cache the entire "
+"archive."
+msgstr ""
+"Nastaví maximální počet stran v mezipaměti. Hodnota -1 zahrne celý archiv."
+
 #
 # File: src/preferences.py, line: 222
-#: mcomix/preferences_dialog.py:466
+#: mcomix/preferences_dialog.py:492
 msgid "Store thumbnails for opened files"
 msgstr "Uchovávat náhledy otevřených souborů"
 
 #
 # File: src/preferences.py, line: 227
-#: mcomix/preferences_dialog.py:468
+#: mcomix/preferences_dialog.py:494
 msgid ""
 "Store thumbnails for opened files according to the freedesktop.org "
 "specification. These thumbnails are shared by many other applications, such "
@@ -2301,79 +2347,19 @@ msgstr ""
 "freedesktop.org. Tyto náhledy jsou používány mnoha jinými aplikacemi, jako "
 "například většinou správců souborů."
 
-#: mcomix/preferences_dialog.py:470
-msgid "Maximum number of pages to store in the cache:"
-msgstr "Maximální počet stran uchovávaných v mezipaměti:"
-
-#: mcomix/preferences_dialog.py:474
-msgid ""
-"Set the max number of pages to cache. A value of -1 will cache the entire "
-"archive."
-msgstr ""
-"Nastaví maximální počet stran v mezipaměti. Hodnota -1 zahrne celý archiv."
-
-#
-# File: src/preferences.py, line: 124
-#: mcomix/preferences_dialog.py:476
-msgid "Magnifying Lens"
-msgstr "Lupa"
-
-#
-# File: src/preferences.py, line: 125
-#: mcomix/preferences_dialog.py:478
-msgid "Magnifying lens size (in pixels):"
-msgstr "Velikost lupy (v pixelech):"
-
-#
-# File: src/preferences.py, line: 131
-#: mcomix/preferences_dialog.py:482
-msgid ""
-"Set the size of the magnifying lens. It is a square with a side of this many "
-"pixels."
-msgstr ""
-"Nastavit velikost lupy, čtverce o velikosti strany daného počtu pixelů."
-
-#
-# File: src/preferences.py, line: 133
-#: mcomix/preferences_dialog.py:484
-msgid "Magnification factor:"
-msgstr "Míra zvětšení:"
-
-#
-# File: src/preferences.py, line: 140
-#: mcomix/preferences_dialog.py:488
-msgid "Set the magnification factor of the magnifying lens."
-msgstr "Nastavit úroveň zvětšení lupy."
-
-#
-# File: src/preferences.py, line: 289
-#: mcomix/preferences_dialog.py:492
-msgid "Comment extensions:"
-msgstr "Přípony souborů s komentáři:"
-
-#
-# File: src/enhance.py, line: 51
-#: mcomix/preferences_dialog.py:495
-msgid "Animated images"
-msgstr "Animované obrázky"
-
-#: mcomix/preferences_dialog.py:497
-msgid "Animation mode:"
-msgstr "Režim animace:"
-
-#: mcomix/preferences_dialog.py:518
+#: mcomix/preferences_dialog.py:514
 msgid "_Reset keys"
 msgstr "_Obnovit klávesy"
 
-#: mcomix/preferences_dialog.py:520
+#: mcomix/preferences_dialog.py:516
 msgid "Resets all keyboard shortcuts to their default values."
 msgstr "Obnoví všem klávesovým zkratkám výchozí hodnoty."
 
-#: mcomix/preferences_dialog.py:523
+#: mcomix/preferences_dialog.py:519
 msgid "Clear _dialog choices"
 msgstr "Vymazat volby v _dialozích"
 
-#: mcomix/preferences_dialog.py:525
+#: mcomix/preferences_dialog.py:521
 msgid ""
 "Clears all dialog choices that you have previously chosen not to be asked "
 "again."
@@ -2381,11 +2367,11 @@ msgstr ""
 "Vymaže všechny odpovědi v dialozích, u kterých jste zvolili, že se MComix už "
 "nemá ptát."
 
-#: mcomix/preferences_dialog.py:560
+#: mcomix/preferences_dialog.py:556
 msgid "Ask every time"
 msgstr "Zeptat se pokaždé"
 
-#: mcomix/preferences_dialog.py:565
+#: mcomix/preferences_dialog.py:561
 msgid ""
 "What MComix answers this prompt with instead of asking. This is what the "
 "prompt's \"Do not ask again\" box sets."
@@ -2393,27 +2379,27 @@ msgstr ""
 "Odpověď, kterou MComix na tento dotaz dá místo toho, aby jej položil. "
 "Nastavuje ji políčko „Příště se neptat.“ v samotném dotazu."
 
-#: mcomix/preferences_dialog.py:587
+#: mcomix/preferences_dialog.py:583
 msgid "Auto-detect (Default)"
 msgstr "Zjistit automaticky (výchozí)"
 
-#: mcomix/preferences_dialog.py:629
+#: mcomix/preferences_dialog.py:625
 msgid "Follow the system"
 msgstr "Podle systému"
 
-#: mcomix/preferences_dialog.py:630
+#: mcomix/preferences_dialog.py:626
 msgid "Light"
 msgstr "Světlé"
 
-#: mcomix/preferences_dialog.py:631
+#: mcomix/preferences_dialog.py:627
 msgid "Dark"
 msgstr "Tmavé"
 
-#: mcomix/preferences_dialog.py:632
+#: mcomix/preferences_dialog.py:628
 msgid "Pitch black"
 msgstr "Úplně černý"
 
-#: mcomix/preferences_dialog.py:638
+#: mcomix/preferences_dialog.py:634
 msgid ""
 "How MComix itself is painted, whatever the desktop asks for. Pitch black is "
 "the dark theme with black backgrounds, which a screen that lights its pixels "
@@ -2423,11 +2409,11 @@ msgstr ""
 "prostředí. Úplně černý je tmavý motiv s černým pozadím, které obrazovka "
 "rozsvěcující pixely po jednom zobrazí jako naprostou tmu."
 
-#: mcomix/preferences_dialog.py:675
+#: mcomix/preferences_dialog.py:671
 msgid "Restart MComix in the language you picked?"
 msgstr "Restartovat MComix ve zvoleném jazyce?"
 
-#: mcomix/preferences_dialog.py:676
+#: mcomix/preferences_dialog.py:672
 msgid ""
 "MComix is translated as it starts, so most of the interface stays in the "
 "language it started in until it is started again. The book being read, its "
@@ -2437,26 +2423,26 @@ msgstr ""
 "kterém byl spuštěn, dokud jej nespustíte znovu. Čtená kniha, její stránka i "
 "velikost okna zůstanou zachovány."
 
-#: mcomix/preferences_dialog.py:690 mcomix/preferences_dialog.py:839
-#: mcomix/preferences_dialog.py:921 mcomix/preferences_dialog.py:984
+#: mcomix/preferences_dialog.py:686 mcomix/preferences_dialog.py:835
+#: mcomix/preferences_dialog.py:917 mcomix/preferences_dialog.py:980
 #: mcomix/ui.py:571
 msgid "Never"
 msgstr "Nikdy"
 
-#: mcomix/preferences_dialog.py:691
+#: mcomix/preferences_dialog.py:687
 msgid "Only for title pages"
 msgstr "Jen pro titulní strany"
 
-#: mcomix/preferences_dialog.py:692
+#: mcomix/preferences_dialog.py:688
 msgid "Only for wide images"
 msgstr "Jen pro široké obrázky"
 
-#: mcomix/preferences_dialog.py:693 mcomix/preferences_dialog.py:840
-#: mcomix/preferences_dialog.py:922
+#: mcomix/preferences_dialog.py:689 mcomix/preferences_dialog.py:836
+#: mcomix/preferences_dialog.py:918
 msgid "Always"
 msgstr "Vždy"
 
-#: mcomix/preferences_dialog.py:700
+#: mcomix/preferences_dialog.py:696
 msgid ""
 "When showing the first page of an archive, or an image's width exceeds its "
 "height, only a single page will be displayed."
@@ -2466,58 +2452,58 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 78
-#: mcomix/preferences_dialog.py:718
+#: mcomix/preferences_dialog.py:714
 msgid "Prefer same scale"
 msgstr "Upřednostnit stejné měřítko"
 
 #
 # File: src/preferences.py, line: 78
-#: mcomix/preferences_dialog.py:719
+#: mcomix/preferences_dialog.py:715
 msgid "Prefer same size"
 msgstr "Upřednostnit stejnou velikost"
 
 #
 # File: src/preferences.py, line: 263
 # File: src/ui.py, line: 290
-#: mcomix/preferences_dialog.py:720
+#: mcomix/preferences_dialog.py:716
 msgid "Fit to same size"
 msgstr "Přizpůsobit stejné velikosti"
 
-#: mcomix/preferences_dialog.py:727
+#: mcomix/preferences_dialog.py:723
 msgid "Maintain relative size or fit to same size."
 msgstr "Zachová relativní velikost nebo přizpůsobí stejné velikosti."
 
-#: mcomix/preferences_dialog.py:741 mcomix/preferences_dialog.py:788
+#: mcomix/preferences_dialog.py:737 mcomix/preferences_dialog.py:784
 msgid "No sorting"
 msgstr "Bez řazení"
 
-#: mcomix/preferences_dialog.py:742
+#: mcomix/preferences_dialog.py:738
 msgid "File name"
 msgstr "Názvu souboru"
 
-#: mcomix/preferences_dialog.py:743
+#: mcomix/preferences_dialog.py:739
 msgid "File name (GLib)"
 msgstr "Názvu souboru (GLib)"
 
-#: mcomix/preferences_dialog.py:744 mcomix/library/book_area.py:265
+#: mcomix/preferences_dialog.py:740 mcomix/library/book_area.py:265
 msgid "File size"
 msgstr "Velikosti souboru"
 
-#: mcomix/preferences_dialog.py:745
+#: mcomix/preferences_dialog.py:741
 msgid "Last modified"
 msgstr "Času změny"
 
-#: mcomix/preferences_dialog.py:751 mcomix/preferences_dialog.py:797
+#: mcomix/preferences_dialog.py:747 mcomix/preferences_dialog.py:793
 #: mcomix/library/book_area.py:270
 msgid "Ascending"
 msgstr "Vzestupně"
 
-#: mcomix/preferences_dialog.py:752 mcomix/preferences_dialog.py:798
+#: mcomix/preferences_dialog.py:748 mcomix/preferences_dialog.py:794
 #: mcomix/library/book_area.py:271
 msgid "Descending"
 msgstr "Sestupně"
 
-#: mcomix/preferences_dialog.py:760
+#: mcomix/preferences_dialog.py:756
 msgid ""
 "Files will be opened and displayed according to the sort order specified "
 "here. This option does not affect ordering within archives."
@@ -2525,19 +2511,19 @@ msgstr ""
 "Soubory se budou otevírat a zobrazovat v pořadí určeném zde. Tato volba "
 "neovlivňuje pořadí uvnitř archivů."
 
-#: mcomix/preferences_dialog.py:789
+#: mcomix/preferences_dialog.py:785
 msgid "Natural order"
 msgstr "Přirozené pořadí"
 
-#: mcomix/preferences_dialog.py:790
+#: mcomix/preferences_dialog.py:786
 msgid "Literal order"
 msgstr "Doslovné pořadí"
 
-#: mcomix/preferences_dialog.py:791
+#: mcomix/preferences_dialog.py:787
 msgid "GLib order"
 msgstr "Pořadí GLib"
 
-#: mcomix/preferences_dialog.py:806
+#: mcomix/preferences_dialog.py:802
 msgid ""
 "Files within archives will be sorted according to the order specified here. "
 "Natural order will sort numbered files based on their natural order, i.e. 1, "
@@ -2553,7 +2539,7 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 219
-#: mcomix/preferences_dialog.py:845
+#: mcomix/preferences_dialog.py:841
 msgid ""
 "Add information about all files opened from within MComix to the shared "
 "recent files list."
@@ -2563,11 +2549,11 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 214
-#: mcomix/preferences_dialog.py:865
+#: mcomix/preferences_dialog.py:861
 msgid "Delete information about recently opened files?"
 msgstr "Smazat informace o nedávno otevřených souborech?"
 
-#: mcomix/preferences_dialog.py:866
+#: mcomix/preferences_dialog.py:862
 msgid ""
 "This will remove all entries from the \"Recent\" menu, and clear information "
 "about last read pages."
@@ -2575,19 +2561,19 @@ msgstr ""
 "Tím se odstraní všechny položky z nabídky „Nedávné“ a informace o naposledy "
 "čtených stranách."
 
-#: mcomix/preferences_dialog.py:879
+#: mcomix/preferences_dialog.py:875
 msgid "Normal (fast)"
 msgstr "Normální (rychlé)"
 
-#: mcomix/preferences_dialog.py:880
+#: mcomix/preferences_dialog.py:876
 msgid "Bilinear"
 msgstr "Bilineární"
 
-#: mcomix/preferences_dialog.py:881
+#: mcomix/preferences_dialog.py:877
 msgid "Hyperbolic (slow)"
 msgstr "Hyperbolické (pomalé)"
 
-#: mcomix/preferences_dialog.py:887
+#: mcomix/preferences_dialog.py:883
 msgid ""
 "Changes how images are scaled. Slower algorithms result in higher quality "
 "resizing, but longer page loading times."
@@ -2595,19 +2581,19 @@ msgstr ""
 "Mění způsob škálování obrázků. Pomalejší algoritmy dávají vyšší kvalitu, ale "
 "strany se načítají déle."
 
-#: mcomix/preferences_dialog.py:904
+#: mcomix/preferences_dialog.py:900
 msgid "Anywhere: the next page"
 msgstr "Kamkoli: další strana"
 
-#: mcomix/preferences_dialog.py:905
+#: mcomix/preferences_dialog.py:901
 msgid "Halves: back and forward"
 msgstr "Poloviny: zpět a vpřed"
 
-#: mcomix/preferences_dialog.py:906
+#: mcomix/preferences_dialog.py:902
 msgid "Thirds: back, fullscreen, forward"
 msgstr "Třetiny: zpět, celá obrazovka, vpřed"
 
-#: mcomix/preferences_dialog.py:914
+#: mcomix/preferences_dialog.py:910
 msgid ""
 "With \"Flip pages with a left click\": the left half or third of the page "
 "turns back and the right one forward; the middle third enters or leaves "
@@ -2617,19 +2603,19 @@ msgstr ""
 "otáčí zpět a pravá vpřed; prostřední třetina přepíná celou obrazovku. V "
 "režimu manga se levá a pravá strana prohodí."
 
-#: mcomix/preferences_dialog.py:923
+#: mcomix/preferences_dialog.py:919
 msgid "For a few seconds after a page turn"
 msgstr "Na několik sekund po otočení stránky"
 
-#: mcomix/preferences_dialog.py:928
+#: mcomix/preferences_dialog.py:924
 msgid "The pages on screen and the number of pages, in the lower right corner."
 msgstr "Strany na obrazovce a počet stran, v pravém dolním rohu."
 
-#: mcomix/preferences_dialog.py:944
+#: mcomix/preferences_dialog.py:940
 msgid "None"
 msgstr "Žádný"
 
-#: mcomix/preferences_dialog.py:946
+#: mcomix/preferences_dialog.py:942
 msgid ""
 "The ICC profile of the screen, such as one made by calibrating it. Pages are "
 "converted into it from sRGB. Leave it empty where the desktop already "
@@ -2638,23 +2624,23 @@ msgstr ""
 "Profil ICC obrazovky, například vytvořený její kalibrací. Stránky se do něj "
 "převádějí ze sRGB. Nechte prázdné, pokud již převádí pracovní prostředí."
 
-#: mcomix/preferences_dialog.py:964
+#: mcomix/preferences_dialog.py:960
 msgid "Perceptual"
 msgstr "Perceptuální"
 
-#: mcomix/preferences_dialog.py:965
+#: mcomix/preferences_dialog.py:961
 msgid "Relative colorimetric"
 msgstr "Relativní kolorimetrický"
 
-#: mcomix/preferences_dialog.py:966
+#: mcomix/preferences_dialog.py:962
 msgid "Saturation"
 msgstr "Sytost"
 
-#: mcomix/preferences_dialog.py:967
+#: mcomix/preferences_dialog.py:963
 msgid "Absolute colorimetric"
 msgstr "Absolutní kolorimetrický"
 
-#: mcomix/preferences_dialog.py:978
+#: mcomix/preferences_dialog.py:974
 msgid ""
 "How colours the screen cannot show are brought within its range, when a "
 "screen colour profile is set. Perceptual keeps the colours in proportion; "
@@ -2664,19 +2650,19 @@ msgstr ""
 "je-li nastaven barevný profil obrazovky. Perceptuální zachová poměry barev; "
 "relativní kolorimetrický zachová přesně ty, které obrazovka zobrazit dokáže."
 
-#: mcomix/preferences_dialog.py:985 mcomix/library/book_area.py:278
+#: mcomix/preferences_dialog.py:981 mcomix/library/book_area.py:278
 msgid "Normal"
 msgstr "Normální"
 
-#: mcomix/preferences_dialog.py:991
+#: mcomix/preferences_dialog.py:987
 msgid "Controls how animated images should be displayed."
 msgstr "Určuje, jak se mají zobrazovat animované obrázky."
 
-#: mcomix/preferences_dialog.py:1031
+#: mcomix/preferences_dialog.py:1027
 msgid "The temporary folder"
 msgstr "Dočasná složka"
 
-#: mcomix/preferences_dialog.py:1033
+#: mcomix/preferences_dialog.py:1029
 msgid ""
 "The folder archives are unpacked into while they are read, such as a RAM "
 "disk. Empty, the system's temporary folder. Takes effect with the next book "
@@ -2687,7 +2673,7 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 295
-#: mcomix/preferences_dialog.py:1054
+#: mcomix/preferences_dialog.py:1050
 msgid ""
 "Treat all files found within archives, that have one of these file endings, "
 "as comments."
@@ -4197,6 +4183,24 @@ msgstr "S podadresáři"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automaticky hledat nové knihy při _otevření knihovny"
+
+#
+# File: src/preferences.py, line: 151
+#~ msgid "Transparency"
+#~ msgstr "Průhlednost"
+
+#~ msgid "Rotation"
+#~ msgstr "Orientace"
+
+#
+# File: src/preferences.py, line: 143
+#~ msgid "Image quality"
+#~ msgstr "Kvalita obrázku"
+
+#
+# File: src/enhance.py, line: 51
+#~ msgid "Animated images"
+#~ msgstr "Animované obrázky"
 
 #~ msgid "Mi_nimize"
 #~ msgstr "_Minimalizovat"
