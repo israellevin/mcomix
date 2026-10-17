@@ -20,7 +20,7 @@ class _PreferencePage(Gtk.Box):
         """Create a new page where any possible right columns have the
         width request <right_column_width>.
         """
-        super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=18)
         widgets.set_border(self, 12)
         self._right_column_width = right_column_width
 
@@ -50,12 +50,15 @@ class _PreferencePage(Gtk.Box):
             left_item.set_xalign(0)
             left_item.set_yalign(0.5)
 
+        # Nothing in a row takes the height that is left over: the
+        # dialog is as tall as its longest tab, and a row that asked for
+        # the slack spread a shorter tab's sections down the whole of it.
         section = self._current_section()
         if right_item is None:
-            widgets.pack(section.contentbox, left_item, True, True, 0)
+            widgets.pack(section.contentbox, left_item)
         else:
             left_box, right_box = section.new_split_boxes()
-            widgets.pack(left_box, left_item, True, True, 0)
-            widgets.pack(right_box, right_item, True, True, 0)
+            widgets.pack(left_box, left_item)
+            widgets.pack(right_box, right_item)
 
 # vim: expandtab:sw=4:ts=4

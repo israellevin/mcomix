@@ -26,8 +26,9 @@ class _PreferenceSection(Gtk.Box):
         label = labels.BoldLabel(header)
         label.set_xalign(0)
         label.set_yalign(0.5)
+        label.set_margin_bottom(6)
         widgets.pack(self, label, False, False, 0)
-        widgets.pack(self, self.contentbox, True, True, 0)
+        widgets.pack(self, self.contentbox)
 
     def new_split_boxes(self) -> tuple[Gtk.Box, Gtk.Box]:
         """Return the two vertical boxes of a new row, left and right,
@@ -43,10 +44,14 @@ class _PreferenceSection(Gtk.Box):
         if self._right_column_width is not None:
             right_box.set_size_request(self._right_column_width, -1)
 
+        # A label beside a spinner or a chooser, which are taller than
+        # it, stands level with the middle of it.
+        left_box.set_valign(Gtk.Align.CENTER)
+        right_box.set_valign(Gtk.Align.CENTER)
         hbox = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 12)
         widgets.pack(hbox, left_box, True, True, 0)
         widgets.pack(hbox, right_box, False, False, 0)
-        widgets.pack(self.contentbox, hbox, True, True, 0)
+        widgets.pack(self.contentbox, hbox)
         return left_box, right_box
 
 # vim: expandtab:sw=4:ts=4

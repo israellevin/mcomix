@@ -57,6 +57,20 @@ class PreferencesDialogTest(MComixTest):
         pump()
         return self.dialog
 
+    def test_a_tab_keeps_its_sections_together_at_the_top(self):
+        """A row that asked for the slack spread the shorter tabs' sections
+        out over the height the longest tab gave the dialog, with a gap
+        of a hundred pixels and more between one section and the next."""
+        dialog = self._open()
+        notebook = dialog.notebook
+        tabs = [notebook.get_nth_page(n).get_child()
+                for n in range(notebook.get_n_pages())
+                if notebook.get_nth_page(n) is not dialog.shortcuts]
+        self.assertEqual(5, len(tabs))
+        spread = [type(tab).__name__ for tab in tabs
+                  if tab.compute_expand(Gtk.Orientation.VERTICAL)]
+        self.assertEqual([], spread)
+
     def test_the_gap_between_two_pages_goes_up_to_the_largest_gap(self):
         """The spinner stopped at 2 pixels, too narrow a gutter to see."""
         bounds = {}
