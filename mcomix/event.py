@@ -1039,13 +1039,17 @@ class EventHandler:
             max_scroll, backwards, axis_map)
 
         if new_index == -1:
-            self._previous_page_with_protection()
+            self._previous_page_with_protection(abreast=True)
         elif new_index == self._window.displayed_page_count():
-            if self._window.zoom._fitmode != constants.ZoomMode.BEST:
-                if self._next_page_with_protection():
-                    self._window.actiongroup.get_action('best_fit_mode').activate()
-            else:
+
+            # Smarter scroll hack: if the entire page is visible and we are not
+            # in fit-width, switch to fit-width instead of turning a new page.
+            # Otherwise, if a page is turned, switch to best-fit.
+            if not self._window.is_scrollable() and self._window.zoom._fitmode != constants.ZoomMode.WIDTH:
                 self._window.actiongroup.get_action('fit_width_mode').activate()
+            elif self._next_page_with_protection(abreast=True):
+                self._window.actiongroup.get_action('best_fit_mode').activate()
+
         else:
             self._window.update_viewport_position()
 

@@ -3,10 +3,10 @@
 This is a small hack for the MComix comics viewer which changes smart scroll
 behaviour.
 
-I like to see the entire page before I zoom in on it, so whenever smart space
-is used to move to the next page, it also automatically goes to best fit mode.
-And when in best fit mode, smart space will go to width mode instead of
-scrolling a page, so I can read the small letters.
+I like to see the entire page in best-fit mode, and then zoom in and read it in
+fit-width mode. So when the whole page is visible and not in fit-width, smart
+space switches to fit-width instead of turning to the next page, and when it
+does turn to the next page it also switches to best-fit.
 
 Original README below.
 
