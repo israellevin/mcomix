@@ -80,6 +80,10 @@ Zooming, or resizing the window, keeps the middle of the view on the same part o
 
 ## Continuous mode
 
+![A book in continuous mode](images/mcomix-continuous.png)
+
+<sub>Shown: the same episode of Pepper&Carrot, pages 2 and 3 as one strip.</sub>
+
 - Continuous mode, the V key or "View → Continuous mode", shows the book as one strip: the pages one below the other with no gap.
 - A book of long strips opens in it by itself: one most of whose first pages are at least twice as high as wide. Turned off there, it is off for that book only. The [preferences](preferences.md#display-tab) turn this off.
 - It is for webtoons and other long strips, whose pictures are cut anywhere, mid-panel included.
