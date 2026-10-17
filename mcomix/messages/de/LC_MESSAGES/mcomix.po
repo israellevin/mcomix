@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 2.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2024-01-21 19:55+0100\n"
 "Last-Translator: Moritz Brunner <oddegamra@gmx.org>\n"
 "Language-Team: \n"
@@ -200,7 +200,7 @@ msgid "A note on the selected bookmark"
 msgstr "Eine Notiz zum ausgewählten Lesezeichen"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "_Lesezeichen hinzufügen"
 
 #: mcomix/bookmark_menu.py:42
@@ -208,7 +208,7 @@ msgid "_Remove this book's bookmarks..."
 msgstr "Lesezeichen dieses Buches _entfernen..."
 
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "Lesezeichen _bearbeiten..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -290,7 +290,7 @@ msgstr "Archiv bearbeiten"
 msgid "A_pply"
 msgstr "An_wenden"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "Speichern _unter"
 
@@ -794,12 +794,12 @@ msgid "Go to page"
 msgstr "Gehe zu Seite"
 
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "Nächstes Archiv"
+msgid "Next book"
+msgstr "Nächstes Buch"
 
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "Vorheriges Archiv"
+msgid "Previous book"
+msgstr "Vorheriges Buch"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -810,11 +810,11 @@ msgid "Random archive in the folder"
 msgstr "Zufälliges Archiv im Ordner"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "Nächstes Verzeichnis"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "Vorheriges Verzeichnis"
 
 #: mcomix/keybindings.py:71
@@ -913,7 +913,7 @@ msgid "Transformation"
 msgstr "Bild-Veränderung"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "90° im Uhrzeigersinn"
 
 #: mcomix/keybindings.py:98
@@ -921,7 +921,7 @@ msgid "Rotate 180°"
 msgstr "180° drehen"
 
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "90° gegen den Uhrzeigersinn"
 
 #: mcomix/keybindings.py:100
@@ -2882,23 +2882,23 @@ msgid "Reloads the currently opened files or archive."
 msgstr "Läd die aktuell geöffneten Dateien oder das Archiv neu."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "Nächstes _Archiv"
+msgid "Next _book"
+msgstr "Nächstes _Buch"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "Vorheriges A_rchiv"
+msgid "Previous b_ook"
+msgstr "Vorheriges B_uch"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "_Heranzoomen"
 
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "_Wegzoomen"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "_Normale Größe"
 
 #: mcomix/ui.py:489
@@ -2921,7 +2921,7 @@ msgstr ""
 "Start wieder her."
 
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "Um 90° im Uh_rzeigersinn drehen"
 
 #: mcomix/ui.py:494
@@ -2929,7 +2929,7 @@ msgid "Rotate _180°"
 msgstr "Um _180° drehen"
 
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "Um 90° g_egen den Uhrzeigersinn drehen"
 
 #: mcomix/ui.py:496
@@ -2939,6 +2939,10 @@ msgstr "_Horizontal spiegeln"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "_Vertikal spiegeln"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "Seite speichern _unter..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -3699,6 +3703,51 @@ msgstr "Mit Unterverzeichnissen"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Aut_omatisch nach Büchern suchen, wenn Bibliothek geöffnet wird"
+
+#~ msgid "Add _Bookmark"
+#~ msgstr "_Lesezeichen hinzufügen"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "Lesezeichen _bearbeiten..."
+
+#~ msgid "Next archive"
+#~ msgstr "Nächstes Archiv"
+
+#~ msgid "Previous archive"
+#~ msgstr "Vorheriges Archiv"
+
+#~ msgid "Next directory"
+#~ msgstr "Nächstes Verzeichnis"
+
+#~ msgid "Previous directory"
+#~ msgstr "Vorheriges Verzeichnis"
+
+#~ msgid "Rotate 90° CW"
+#~ msgstr "90° im Uhrzeigersinn"
+
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "90° gegen den Uhrzeigersinn"
+
+#~ msgid "Next _archive"
+#~ msgstr "Nächstes _Archiv"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "Vorheriges A_rchiv"
+
+#~ msgid "Zoom _In"
+#~ msgstr "_Heranzoomen"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "_Wegzoomen"
+
+#~ msgid "_Normal Size"
+#~ msgstr "_Normale Größe"
+
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "Um 90° im Uh_rzeigersinn drehen"
+
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "Um 90° g_egen den Uhrzeigersinn drehen"
 
 #~ msgid "Transparency"
 #~ msgstr "Transparenz"

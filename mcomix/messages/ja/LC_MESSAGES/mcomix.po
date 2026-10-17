@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 1.00-SVN\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2012-08-16 13:10+0900\n"
 "Last-Translator: Toshiharu Kudoh <toshi.kd2@gmail.com>\n"
 "Language-Team: Japanese\n"
@@ -194,7 +194,7 @@ msgid "A note on the selected bookmark"
 msgstr "選択したブックマークのメモ"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "ブックマークに追加(_B)"
 
 #: mcomix/bookmark_menu.py:42
@@ -202,7 +202,7 @@ msgid "_Remove this book's bookmarks..."
 msgstr "この本のブックマークを削除(_R)..."
 
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "ブックマークの編集(_E)..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -284,7 +284,7 @@ msgstr "アーカイブファイルを編集"
 msgid "A_pply"
 msgstr "適用(_P)"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "別名で保存(_A)"
 
@@ -765,12 +765,12 @@ msgid "Go to page"
 msgstr "ページへ移動"
 
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "次のアーカイブファイル"
+msgid "Next book"
+msgstr "次の本"
 
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "前のアーカイブファイル"
+msgid "Previous book"
+msgstr "前の本"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -781,11 +781,11 @@ msgid "Random archive in the folder"
 msgstr "フォルダー内のランダムなアーカイブ"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "次のディレクトリー"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "前のディレクトリー"
 
 #: mcomix/keybindings.py:71
@@ -884,7 +884,7 @@ msgid "Transformation"
 msgstr "変形"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "右回りに90度回転"
 
 #: mcomix/keybindings.py:98
@@ -892,7 +892,7 @@ msgid "Rotate 180°"
 msgstr "180度回転"
 
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "左回りに90度回転"
 
 #: mcomix/keybindings.py:100
@@ -2818,23 +2818,23 @@ msgstr ""
 "現在開かれているファイル、もしくはアーカイブファイルを再読み込みします。"
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "次のアーカイブファイル(_A)"
+msgid "Next _book"
+msgstr "次の本(_B)"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "前のアーカイブファイル(_R)"
+msgid "Previous b_ook"
+msgstr "前の本(_O)"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "拡大(_I)"
 
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "縮小(_O)"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "通常サイズ(_N)"
 
 #: mcomix/ui.py:489
@@ -2857,7 +2857,7 @@ msgstr ""
 "終了します。"
 
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "右回りに90度回転(_R)"
 
 #: mcomix/ui.py:494
@@ -2865,7 +2865,7 @@ msgid "Rotate _180°"
 msgstr "180度回転(_G)"
 
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "左回りに90度回転(_E)"
 
 #: mcomix/ui.py:496
@@ -2875,6 +2875,10 @@ msgstr "左右をフリップ(_P)"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "上下をフリップ(_V)"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "ページを別名で保存(_A)..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -3615,6 +3619,51 @@ msgstr "サブディレクトリー含む"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "ライブラリーが開かれているとき自動的に新しい本をスキャン(_O)"
+
+#~ msgid "Add _Bookmark"
+#~ msgstr "ブックマークに追加(_B)"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "ブックマークの編集(_E)..."
+
+#~ msgid "Next archive"
+#~ msgstr "次のアーカイブファイル"
+
+#~ msgid "Previous archive"
+#~ msgstr "前のアーカイブファイル"
+
+#~ msgid "Next directory"
+#~ msgstr "次のディレクトリー"
+
+#~ msgid "Previous directory"
+#~ msgstr "前のディレクトリー"
+
+#~ msgid "Rotate 90° CW"
+#~ msgstr "右回りに90度回転"
+
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "左回りに90度回転"
+
+#~ msgid "Next _archive"
+#~ msgstr "次のアーカイブファイル(_A)"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "前のアーカイブファイル(_R)"
+
+#~ msgid "Zoom _In"
+#~ msgstr "拡大(_I)"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "縮小(_O)"
+
+#~ msgid "_Normal Size"
+#~ msgstr "通常サイズ(_N)"
+
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "右回りに90度回転(_R)"
+
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "左回りに90度回転(_E)"
 
 #~ msgid "Transparency"
 #~ msgstr "透過度"

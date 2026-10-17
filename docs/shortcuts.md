@@ -27,10 +27,10 @@ One page to the left (in double page mode) | CTRL+Left, CTRL+KeyPadLeft
 First page | Home, KeyPadHome
 Last page | End, KeyPadEnd
 Go to page | G
-Next archive | CTRL+SHIFT+N
-Previous archive | CTRL+SHIFT+P
-Next directory | CTRL+N
-Previous directory | CTRL+P
+Next book | CTRL+SHIFT+N
+Previous book | CTRL+SHIFT+P
+Next folder | CTRL+N
+Previous folder | CTRL+P
 
 In manga mode the page to the right is the previous one, the page to the left the next. PageDown and PageUp always go forward and back.
 

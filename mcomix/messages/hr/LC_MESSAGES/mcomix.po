@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: comix 4.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2008-12-13 18:00+0100\n"
 "Last-Translator: Adrian C. <anrxc@sysphere.org>\n"
 "Language-Team: Croatian\n"
@@ -213,15 +213,17 @@ msgid "A note on the selected bookmark"
 msgstr "Bilješka o odabranoj oznaci"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "Dodaj o_znaku"
 
 #: mcomix/bookmark_menu.py:42
 msgid "_Remove this book's bookmarks..."
 msgstr "Ukloni oznake ove _knjige..."
 
+#
+# File: src/bookmark.py, line: 29
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "_Uredi oznake..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -317,7 +319,7 @@ msgstr "Uredi arhivu"
 msgid "A_pply"
 msgstr "_Primijeni"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "Spremi _kao"
 
@@ -893,17 +895,13 @@ msgstr "Zadnja stranica"
 msgid "Go to page"
 msgstr "Idi na stranicu"
 
-#
-# File: src/edit.py, line: 28
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "Sljedeća arhiva"
+msgid "Next book"
+msgstr "Sljedeća knjiga"
 
-#
-# File: src/ui.py, line: 284
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "Prethodna arhiva"
+msgid "Previous book"
+msgstr "Prethodna knjiga"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -914,11 +912,11 @@ msgid "Random archive in the folder"
 msgstr "Nasumična arhiva u mapi"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "Sljedeći direktorij"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "Prethodni direktorij"
 
 #: mcomix/keybindings.py:71
@@ -1024,10 +1022,8 @@ msgstr "Zadržavanje transformacije"
 msgid "Transformation"
 msgstr "Transformacija"
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "Rotiraj 90° u smjeru kazaljke na satu"
 
 #
@@ -1036,10 +1032,8 @@ msgstr "Rotiraj 90° u smjeru kazaljke na satu"
 msgid "Rotate 180°"
 msgstr "Rotiraj 180°"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "Rotiraj 90° suprotno od kazaljke na satu"
 
 #
@@ -3272,23 +3266,25 @@ msgid "Reloads the currently opened files or archive."
 msgstr "Ponovno učitava otvorene datoteke ili arhivu."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "Sljedeća _arhiva"
+msgid "Next _book"
+msgstr "Sljedeća _knjiga"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "Pr_ethodna arhiva"
+msgid "Previous b_ook"
+msgstr "Pr_ethodna knjiga"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "_Uvećaj"
 
+#
+# File: src/ui.py, line: 44
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "_Smanji"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "_Normalna veličina"
 
 #: mcomix/ui.py:489
@@ -3310,10 +3306,8 @@ msgid ""
 "Quits and restores the currently opened file next time the program starts."
 msgstr "Izlazi i vraća otvorenu datoteku pri sljedećem pokretanju programa."
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "_Okreni za 90 stupnjeva u smjeru kazaljke na satu"
 
 #
@@ -3322,10 +3316,8 @@ msgstr "_Okreni za 90 stupnjeva u smjeru kazaljke na satu"
 msgid "Rotate _180°"
 msgstr "Okreni za 180 _stupnjeva"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "Okre_ni za 90 stupnjeva obrnuto od smjera kazaljke na satu"
 
 #
@@ -3339,6 +3331,10 @@ msgstr "Okreni _vodoravno"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "O_kreni okomito"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "Spremi stranicu _kao..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -4200,6 +4196,63 @@ msgstr "S poddirektorijima"
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatski traži nove knjige pri _otvaranju biblioteke"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "Dodaj o_znaku"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "_Uredi oznake..."
+
+#
+# File: src/edit.py, line: 28
+#~ msgid "Next archive"
+#~ msgstr "Sljedeća arhiva"
+
+#
+# File: src/ui.py, line: 284
+#~ msgid "Previous archive"
+#~ msgstr "Prethodna arhiva"
+
+#~ msgid "Next directory"
+#~ msgstr "Sljedeći direktorij"
+
+#~ msgid "Previous directory"
+#~ msgstr "Prethodni direktorij"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "Rotate 90° CW"
+#~ msgstr "Rotiraj 90° u smjeru kazaljke na satu"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "Rotiraj 90° suprotno od kazaljke na satu"
+
+#~ msgid "Next _archive"
+#~ msgstr "Sljedeća _arhiva"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "Pr_ethodna arhiva"
+
+#~ msgid "Zoom _In"
+#~ msgstr "_Uvećaj"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "_Smanji"
+
+#~ msgid "_Normal Size"
+#~ msgstr "_Normalna veličina"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "_Okreni za 90 stupnjeva u smjeru kazaljke na satu"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "Okre_ni za 90 stupnjeva obrnuto od smjera kazaljke na satu"
+
 #
 # File: src/preferences.py, line: 151
 #~ msgid "Transparency"
@@ -4664,11 +4717,6 @@ msgstr "Automatski traži nove knjige pri _otvaranju biblioteke"
 #~ msgstr "Neuspješno čitanje %s"
 
 #
-# File: src/bookmark.py, line: 29
-#~ msgid "_Edit bookmarks..."
-#~ msgstr "_Uredi oznake..."
-
-#
 # File: src/deprecated.py, line: 16
 #~ msgid "There are deprecated files left on your computer."
 #~ msgstr "Pronađene su zastarjele datoteke na vašem računalu."
@@ -4788,11 +4836,6 @@ msgstr "Automatski traži nove knjige pri _otvaranju biblioteke"
 #, fuzzy
 #~ msgid "_Previous archive"
 #~ msgstr "_Prethodna stranica"
-
-#
-# File: src/ui.py, line: 44
-#~ msgid "Zoom _out"
-#~ msgstr "U_manji"
 
 #
 # File: src/ui.py, line: 46

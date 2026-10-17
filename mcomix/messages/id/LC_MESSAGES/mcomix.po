@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix-4.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2008-12-13 21:23+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesia <id@li.org>\n"
@@ -213,15 +213,17 @@ msgid "A note on the selected bookmark"
 msgstr "Catatan untuk bookmark yang dipilih"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "Tambah _bookmark"
 
 #: mcomix/bookmark_menu.py:42
 msgid "_Remove this book's bookmarks..."
 msgstr "_Hapus bookmark buku ini..."
 
+#
+# File: src/bookmark.py, line: 29
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "_Sunting bookmark..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -317,7 +319,7 @@ msgstr "Sunting arsip"
 msgid "A_pply"
 msgstr "Tera_pkan"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "Simp_an Sebagai"
 
@@ -886,17 +888,13 @@ msgstr "Halaman terakhir"
 msgid "Go to page"
 msgstr "Ke halaman"
 
-#
-# File: src/edit.py, line: 28
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "Arsip berikutnya"
+msgid "Next book"
+msgstr "Buku berikutnya"
 
-#
-# File: src/ui.py, line: 284
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "Arsip sebelumnya"
+msgid "Previous book"
+msgstr "Buku sebelumnya"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -907,11 +905,11 @@ msgid "Random archive in the folder"
 msgstr "Arsip acak di folder"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "Direktori berikutnya"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "Direktori sebelumnya"
 
 #: mcomix/keybindings.py:71
@@ -1017,10 +1015,8 @@ msgstr "Pertahankan transformasi"
 msgid "Transformation"
 msgstr "Transformasi"
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "Putar 90° searah jarum jam"
 
 #
@@ -1029,10 +1025,8 @@ msgstr "Putar 90° searah jarum jam"
 msgid "Rotate 180°"
 msgstr "Putar 180°"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "Putar 90° berlawanan jarum jam"
 
 #
@@ -3271,23 +3265,25 @@ msgid "Reloads the currently opened files or archive."
 msgstr "Memuat ulang berkas atau arsip yang terbuka."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "_Arsip berikutnya"
+msgid "Next _book"
+msgstr "Buku b_erikutnya"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "A_rsip sebelumnya"
+msgid "Previous b_ook"
+msgstr "B_uku sebelumnya"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "Perbesar Tamp_ilan"
 
+#
+# File: src/ui.py, line: 44
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "P_erkecil Tampilan"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "Ukura_n Normal"
 
 #: mcomix/ui.py:489
@@ -3310,10 +3306,8 @@ msgid ""
 msgstr ""
 "Keluar dan memulihkan berkas yang terbuka saat program dijalankan berikutnya."
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "_Rotasi 90 derajat searah jarum jam"
 
 #
@@ -3322,10 +3316,8 @@ msgstr "_Rotasi 90 derajat searah jarum jam"
 msgid "Rotate _180°"
 msgstr "Ro_tasi 180 derajat"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "Rotasi 90 derajat b_erlawanan arah jarum jam"
 
 #
@@ -3339,6 +3331,10 @@ msgstr "Put_ar horizontal"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "Putar _vertikal"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "Simp_an halaman sebagai..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -4193,6 +4189,63 @@ msgstr "Dengan subdirektori"
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Cari buku baru secara otomatis saat perpustakaan di_buka"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "Tambah _bookmark"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "_Sunting bookmark..."
+
+#
+# File: src/edit.py, line: 28
+#~ msgid "Next archive"
+#~ msgstr "Arsip berikutnya"
+
+#
+# File: src/ui.py, line: 284
+#~ msgid "Previous archive"
+#~ msgstr "Arsip sebelumnya"
+
+#~ msgid "Next directory"
+#~ msgstr "Direktori berikutnya"
+
+#~ msgid "Previous directory"
+#~ msgstr "Direktori sebelumnya"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "Rotate 90° CW"
+#~ msgstr "Putar 90° searah jarum jam"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "Putar 90° berlawanan jarum jam"
+
+#~ msgid "Next _archive"
+#~ msgstr "_Arsip berikutnya"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "A_rsip sebelumnya"
+
+#~ msgid "Zoom _In"
+#~ msgstr "Perbesar Tamp_ilan"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "P_erkecil Tampilan"
+
+#~ msgid "_Normal Size"
+#~ msgstr "Ukura_n Normal"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "_Rotasi 90 derajat searah jarum jam"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "Rotasi 90 derajat b_erlawanan arah jarum jam"
+
 #
 # File: src/preferences.py, line: 151
 #~ msgid "Transparency"
@@ -4656,11 +4709,6 @@ msgstr "Cari buku baru secara otomatis saat perpustakaan di_buka"
 #~ msgstr "Tak dapat membaca %s"
 
 #
-# File: src/bookmark.py, line: 29
-#~ msgid "_Edit bookmarks..."
-#~ msgstr "_Sunting bookmark..."
-
-#
 # File: src/deprecated.py, line: 16
 #~ msgid "There are deprecated files left on your computer."
 #~ msgstr "Ada berkas tertinggal di komputer anda."
@@ -4780,11 +4828,6 @@ msgstr "Cari buku baru secara otomatis saat perpustakaan di_buka"
 #, fuzzy
 #~ msgid "_Previous archive"
 #~ msgstr "Halaman _sebelumnya"
-
-#
-# File: src/ui.py, line: 44
-#~ msgid "Zoom _out"
-#~ msgstr "Pembesaran _ke luar"
 
 #
 # File: src/ui.py, line: 46

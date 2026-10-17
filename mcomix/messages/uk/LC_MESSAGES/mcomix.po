@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2009-05-04 23:52+0300\n"
 "Last-Translator: Oleksandr Zaiats <ai@eth0.net.ua>\n"
 "Language-Team: \n"
@@ -190,7 +190,7 @@ msgid "A note on the selected bookmark"
 msgstr "Нотатка до вибраної закладки"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "Додати _закладку"
 
 #: mcomix/bookmark_menu.py:42
@@ -198,7 +198,7 @@ msgid "_Remove this book's bookmarks..."
 msgstr "Вилучити закладки цієї _книжки..."
 
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "_Редагувати закладки..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -280,7 +280,7 @@ msgstr "Редагувати архів"
 msgid "A_pply"
 msgstr "Заст_осувати"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "Зберегти _як"
 
@@ -777,12 +777,12 @@ msgid "Go to page"
 msgstr "Перейти до сторінки"
 
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "Наступний архів"
+msgid "Next book"
+msgstr "Наступна книжка"
 
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "Попередній архів"
+msgid "Previous book"
+msgstr "Попередня книжка"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -793,11 +793,11 @@ msgid "Random archive in the folder"
 msgstr "Випадковий архів у теці"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "Наступний каталог"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "Попередній каталог"
 
 #: mcomix/keybindings.py:71
@@ -896,7 +896,7 @@ msgid "Transformation"
 msgstr "Перетворення"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "Обернути на 90° за годинниковою стрілкою"
 
 #: mcomix/keybindings.py:98
@@ -904,7 +904,7 @@ msgid "Rotate 180°"
 msgstr "Обернути на 180°"
 
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "Обернути на 90° проти годинникової стрілки"
 
 #: mcomix/keybindings.py:100
@@ -2832,23 +2832,23 @@ msgid "Reloads the currently opened files or archive."
 msgstr "Перезавантажує відкриті файли або архів."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "Наступний _архів"
+msgid "Next _book"
+msgstr "Наступна _книжка"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "Попередній а_рхів"
+msgid "Previous b_ook"
+msgstr "Попе_редня книжка"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "З_більшити"
 
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "З_меншити"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "З_вичайний розмір"
 
 #: mcomix/ui.py:489
@@ -2869,7 +2869,7 @@ msgid ""
 msgstr "Виходить і відновлює відкритий файл при наступному запуску програми."
 
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "Обернути на 90° _за годинниковою стрілкою"
 
 #: mcomix/ui.py:494
@@ -2877,7 +2877,7 @@ msgid "Rotate _180°"
 msgstr "_Обернути на 180°"
 
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "Обернути на 90° п_роти годинникової стрілки"
 
 #: mcomix/ui.py:496
@@ -2887,6 +2887,10 @@ msgstr "Віддзеркалити _горизонтально"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "Віддзеркалити _вертикально"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "Зберегти сторінку _як..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -3631,6 +3635,51 @@ msgstr "З підкаталогами"
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Автоматично шукати нові книжки при _відкритті бібліотеки"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "Додати _закладку"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "_Редагувати закладки..."
+
+#~ msgid "Next archive"
+#~ msgstr "Наступний архів"
+
+#~ msgid "Previous archive"
+#~ msgstr "Попередній архів"
+
+#~ msgid "Next directory"
+#~ msgstr "Наступний каталог"
+
+#~ msgid "Previous directory"
+#~ msgstr "Попередній каталог"
+
+#~ msgid "Rotate 90° CW"
+#~ msgstr "Обернути на 90° за годинниковою стрілкою"
+
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "Обернути на 90° проти годинникової стрілки"
+
+#~ msgid "Next _archive"
+#~ msgstr "Наступний _архів"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "Попередній а_рхів"
+
+#~ msgid "Zoom _In"
+#~ msgstr "З_більшити"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "З_меншити"
+
+#~ msgid "_Normal Size"
+#~ msgstr "З_вичайний розмір"
+
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "Обернути на 90° _за годинниковою стрілкою"
+
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "Обернути на 90° п_роти годинникової стрілки"
+
 #~ msgid "Transparency"
 #~ msgstr "Прозорість"
 
@@ -3974,9 +4023,6 @@ msgstr "Автоматично шукати нові книжки при _від
 #~ msgid "! Could not add file "
 #~ msgstr "Не можу прочитати %s"
 
-#~ msgid "_Edit bookmarks..."
-#~ msgstr "_Редагувати закладки…"
-
 #~ msgid "There are deprecated files left on your computer."
 #~ msgstr "На комп’ютері знайдено застарілі файли"
 
@@ -4057,9 +4103,6 @@ msgstr "Автоматично шукати нові книжки при _від
 #, fuzzy
 #~ msgid "_Previous archive"
 #~ msgstr "_Попередня сторінка"
-
-#~ msgid "Zoom _out"
-#~ msgstr "З_меншити"
 
 #~ msgid "O_riginal size"
 #~ msgstr "_Оригінальний розмір"

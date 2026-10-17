@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mcomix 0.99\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2013-01-07 22:51+0200\n"
 "Last-Translator: Isratine Citizen <genghiskhan@gmx.ca>\n"
 "Language-Team: Hebrew <eliz@gnu.org>\n"
@@ -192,7 +192,7 @@ msgid "A note on the selected bookmark"
 msgstr "הערה על הסימנייה הנבחרת"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "הוספת _סימנייה"
 
 #: mcomix/bookmark_menu.py:42
@@ -200,7 +200,7 @@ msgid "_Remove this book's bookmarks..."
 msgstr "_הסרת הסימניות של חוברת זו..."
 
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "_עריכת סימניות..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -285,7 +285,7 @@ msgstr "עריכת ארכיון"
 msgid "A_pply"
 msgstr "ה_חלה"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "שמירה _בשם"
 
@@ -774,12 +774,12 @@ msgid "Go to page"
 msgstr "מעבר לעמוד"
 
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "ארכיון הבא"
+msgid "Next book"
+msgstr "החוברת הבאה"
 
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "ארכיון קודם"
+msgid "Previous book"
+msgstr "החוברת הקודמת"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -790,11 +790,11 @@ msgid "Random archive in the folder"
 msgstr "ארכיון אקראי בתיקייה"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "מדור הבא"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "מדור קודם"
 
 #: mcomix/keybindings.py:71
@@ -895,7 +895,7 @@ msgid "Transformation"
 msgstr "שינוי צורה"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "סיבוב 90 מעלות עם כיוון השעון"
 
 #: mcomix/keybindings.py:98
@@ -903,7 +903,7 @@ msgid "Rotate 180°"
 msgstr "סיבוב 180 מעלות"
 
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "סיבוב 90 מעלות נגד כיוון השעון"
 
 #: mcomix/keybindings.py:100
@@ -2832,24 +2832,23 @@ msgid "Reloads the currently opened files or archive."
 msgstr "טעינה מחדש של הקבצים או הארכיון הנוכחיים."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "ארכיון _הבא"
+msgid "Next _book"
+msgstr "החוברת _הבאה"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "אר_כיון קודם"
+msgid "Previous b_ook"
+msgstr "ה_חוברת הקודמת"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "זום _פנימה"
 
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "זום ה_חוצה"
 
-# מקורי
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "גודל _מקורי"
 
 #: mcomix/ui.py:489
@@ -2869,18 +2868,16 @@ msgid ""
 "Quits and restores the currently opened file next time the program starts."
 msgstr "יציאה ושחזור הקובץ שפתוח כעת בפעם הבאה בה התוכנית תופעל."
 
-# ימינה
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "סיבוב 90 מעלות _עם כיוון השעון"
 
 #: mcomix/ui.py:494
 msgid "Rotate _180°"
 msgstr "_סיבוב 180 מעלות"
 
-# שמאלה
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "סיבוב 90 מעלות _נגד כיוון השעון"
 
 #: mcomix/ui.py:496
@@ -2890,6 +2887,10 @@ msgstr "היפוך במאו_זן"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "_היפוך במאונך"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "שמירת העמוד _בשם..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -3642,6 +3643,54 @@ msgstr "עם מדורי משנה"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "סרוק חוברות אוטומטית כאשר הספרייה הינה _פתוחה"
+
+#~ msgid "Add _Bookmark"
+#~ msgstr "הוספת _סימנייה"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "_עריכת סימניות..."
+
+#~ msgid "Next archive"
+#~ msgstr "ארכיון הבא"
+
+#~ msgid "Previous archive"
+#~ msgstr "ארכיון קודם"
+
+#~ msgid "Next directory"
+#~ msgstr "מדור הבא"
+
+#~ msgid "Previous directory"
+#~ msgstr "מדור קודם"
+
+#~ msgid "Rotate 90° CW"
+#~ msgstr "סיבוב 90 מעלות עם כיוון השעון"
+
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "סיבוב 90 מעלות נגד כיוון השעון"
+
+#~ msgid "Next _archive"
+#~ msgstr "ארכיון _הבא"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "אר_כיון קודם"
+
+#~ msgid "Zoom _In"
+#~ msgstr "זום _פנימה"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "זום ה_חוצה"
+
+# מקורי
+#~ msgid "_Normal Size"
+#~ msgstr "גודל _מקורי"
+
+# ימינה
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "סיבוב 90 מעלות _עם כיוון השעון"
+
+# שמאלה
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "סיבוב 90 מעלות _נגד כיוון השעון"
 
 #~ msgid "Transparency"
 #~ msgstr "שקיפות"

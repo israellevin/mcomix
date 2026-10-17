@@ -38,9 +38,9 @@ class BookmarksMenu:
     #: gets none: it throws away every bookmark, so it is not something
     #: to be a keystroke away from; nor does removing the open book's,
     #: which asks first anyway.
-    FIXED = (('add', _('Add _Bookmark'), 'add_bookmark'),
+    FIXED = (('add', _('Add _bookmark'), 'add_bookmark'),
              ('remove', _("_Remove this book's bookmarks..."), None),
-             ('edit', _('_Edit Bookmarks...'), 'edit_bookmarks'),
+             ('edit', _('_Edit bookmarks...'), 'edit_bookmarks'),
              ('clear', _('C_lear bookmarks...'), None))
 
     def __init__(self, ui: "ui_module.MainUI",

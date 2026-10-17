@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 1.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2016-09-18 15:30+0300\n"
 "Last-Translator: Zygimantus <zygimantus@gmail.com>\n"
 "Language-Team: \n"
@@ -193,7 +193,7 @@ msgid "A note on the selected bookmark"
 msgstr "Pastaba apie pasirinktą žymelę"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "Pridėti ž_ymelę"
 
 #: mcomix/bookmark_menu.py:42
@@ -201,7 +201,7 @@ msgid "_Remove this book's bookmarks..."
 msgstr "_Pašalinti šios knygos žymeles..."
 
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "_Keisti žymeles..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -283,7 +283,7 @@ msgstr "Keisti archyvą"
 msgid "A_pply"
 msgstr "_Pritaikyti"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "Įrašyti t_aip"
 
@@ -779,12 +779,12 @@ msgid "Go to page"
 msgstr "Eiti į puslapį"
 
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "Kitas archyvas"
+msgid "Next book"
+msgstr "Kita knyga"
 
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "Ankstesnis archyvas"
+msgid "Previous book"
+msgstr "Ankstesnė knyga"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -795,11 +795,11 @@ msgid "Random archive in the folder"
 msgstr "Atsitiktinis archyvas aplanke"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "Kita direktorija"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "Buvusi direktorija"
 
 #: mcomix/keybindings.py:71
@@ -898,7 +898,7 @@ msgid "Transformation"
 msgstr "Transformacija"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "Pasukti 90° pagal laikrodžio rodyklę"
 
 #: mcomix/keybindings.py:98
@@ -906,7 +906,7 @@ msgid "Rotate 180°"
 msgstr "Pasukti 180°"
 
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "Pasukti 90° prieš laikrodžio rodyklę"
 
 #: mcomix/keybindings.py:100
@@ -2830,23 +2830,23 @@ msgid "Reloads the currently opened files or archive."
 msgstr "Iš naujo įkelia atvertus failus ar archyvą."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "Kitas arch_yvas"
+msgid "Next _book"
+msgstr "K_ita knyga"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "Ankstesnis a_rchyvas"
+msgid "Previous b_ook"
+msgstr "Ank_stesnė knyga"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "Pri_artinti"
 
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "Ati_tolinti"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "_Normalus dydis"
 
 #: mcomix/ui.py:489
@@ -2867,7 +2867,7 @@ msgid ""
 msgstr "Išeina ir kitą kartą paleidus programą atkuria atvertą failą."
 
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "_Pasukti 90° pagal laikrodžio rodyklę"
 
 #: mcomix/ui.py:494
@@ -2875,7 +2875,7 @@ msgid "Rotate _180°"
 msgstr "Pasukti _180°"
 
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "Pasukti 90° prieš laikrodžio rodykl_ę"
 
 #: mcomix/ui.py:496
@@ -2885,6 +2885,10 @@ msgstr "Apversti _horizontaliai"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "Apversti _vertikaliai"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "Įrašyti puslapį t_aip..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -3625,6 +3629,51 @@ msgstr "Su poaplankiais"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatiškai ieškoti naujų knygų kai yra _atidaroma biblioteka"
+
+#~ msgid "Add _Bookmark"
+#~ msgstr "Pridėti ž_ymelę"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "_Keisti žymeles..."
+
+#~ msgid "Next archive"
+#~ msgstr "Kitas archyvas"
+
+#~ msgid "Previous archive"
+#~ msgstr "Ankstesnis archyvas"
+
+#~ msgid "Next directory"
+#~ msgstr "Kita direktorija"
+
+#~ msgid "Previous directory"
+#~ msgstr "Buvusi direktorija"
+
+#~ msgid "Rotate 90° CW"
+#~ msgstr "Pasukti 90° pagal laikrodžio rodyklę"
+
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "Pasukti 90° prieš laikrodžio rodyklę"
+
+#~ msgid "Next _archive"
+#~ msgstr "Kitas arch_yvas"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "Ankstesnis a_rchyvas"
+
+#~ msgid "Zoom _In"
+#~ msgstr "Pri_artinti"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "Ati_tolinti"
+
+#~ msgid "_Normal Size"
+#~ msgstr "_Normalus dydis"
+
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "_Pasukti 90° pagal laikrodžio rodyklę"
+
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "Pasukti 90° prieš laikrodžio rodykl_ę"
 
 #~ msgid "Transparency"
 #~ msgstr "Permatomumas"

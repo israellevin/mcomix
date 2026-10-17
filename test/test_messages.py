@@ -366,7 +366,7 @@ class DialogMnemonicTest(MComixTest):
         'preferences, other tabs': ('_Close', 'Clear _dialog choices'),
         'message dialog, yes/no': ('_No', '_Yes'),
         'message dialog, ok/cancel': ('_Cancel', '_OK'),
-        'bookmark menu': ('Add _Bookmark', '_Edit Bookmarks...',
+        'bookmark menu': ('Add _bookmark', '_Edit bookmarks...',
                           'C_lear bookmarks...'),
     }
 

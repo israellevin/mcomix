@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 4.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2009-01-28 13:36+0800\n"
 "Last-Translator: Xie Yanbo <xieyanbo@gmail.com>\n"
 "Language-Team: Xie Yanbo <xieyanbo@gmail.com>\n"
@@ -198,15 +198,17 @@ msgid "A note on the selected bookmark"
 msgstr "所选书签的备注"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "添加书签(_B)"
 
 #: mcomix/bookmark_menu.py:42
 msgid "_Remove this book's bookmarks..."
 msgstr "删除本书的书签(_R)..."
 
+#
+# File: src/bookmark.py, line: 29
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "编辑书签(_E)..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -286,7 +288,7 @@ msgstr "编辑文件包"
 msgid "A_pply"
 msgstr "应用(_P)"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "另存为(_A)"
 
@@ -763,12 +765,12 @@ msgid "Go to page"
 msgstr "跳转至指定页"
 
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "下一个文件包"
+msgid "Next book"
+msgstr "下一本书"
 
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "上一个文件包"
+msgid "Previous book"
+msgstr "上一本书"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -779,11 +781,11 @@ msgid "Random archive in the folder"
 msgstr "文件夹中的随机压缩包"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "下一个目录"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "上一个目录"
 
 #: mcomix/keybindings.py:71
@@ -882,7 +884,7 @@ msgid "Transformation"
 msgstr "变换"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "顺时针旋转90度"
 
 #: mcomix/keybindings.py:98
@@ -890,7 +892,7 @@ msgid "Rotate 180°"
 msgstr "旋转180度"
 
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "逆时针旋转90度"
 
 #: mcomix/keybindings.py:100
@@ -2752,23 +2754,25 @@ msgid "Reloads the currently opened files or archive."
 msgstr "重新加载当前打开的文件或文件包。"
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "下一个文件包(_A)"
+msgid "Next _book"
+msgstr "下一本书(_B)"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "上一个文件包(_R)"
+msgid "Previous b_ook"
+msgstr "上一本书(_O)"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "放大(_I)"
 
+#
+# File: src/ui.py, line: 44
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "缩小(_O)"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "正常大小(_N)"
 
 #: mcomix/ui.py:489
@@ -2789,7 +2793,7 @@ msgid ""
 msgstr "退出并在下次打开程序时恢复当前打开的文件。"
 
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "顺时针旋转90度(_R)"
 
 #: mcomix/ui.py:494
@@ -2797,7 +2801,7 @@ msgid "Rotate _180°"
 msgstr "旋转180度(_G)"
 
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "逆时针旋转90度(_E)"
 
 #: mcomix/ui.py:496
@@ -2807,6 +2811,10 @@ msgstr "水平翻转(_P)"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "垂直翻转(_V)"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "页面另存为(_A)..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -3529,6 +3537,51 @@ msgstr "包含子目录"
 msgid "Automatically scan for new books when library is _opened"
 msgstr "当打开收藏库时自动扫描新书(_O)"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "添加书签(_B)"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "编辑书签(_E)..."
+
+#~ msgid "Next archive"
+#~ msgstr "下一个文件包"
+
+#~ msgid "Previous archive"
+#~ msgstr "上一个文件包"
+
+#~ msgid "Next directory"
+#~ msgstr "下一个目录"
+
+#~ msgid "Previous directory"
+#~ msgstr "上一个目录"
+
+#~ msgid "Rotate 90° CW"
+#~ msgstr "顺时针旋转90度"
+
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "逆时针旋转90度"
+
+#~ msgid "Next _archive"
+#~ msgstr "下一个文件包(_A)"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "上一个文件包(_R)"
+
+#~ msgid "Zoom _In"
+#~ msgstr "放大(_I)"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "缩小(_O)"
+
+#~ msgid "_Normal Size"
+#~ msgstr "正常大小(_N)"
+
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "顺时针旋转90度(_R)"
+
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "逆时针旋转90度(_E)"
+
 #~ msgid "Transparency"
 #~ msgstr "透明度"
 
@@ -3993,11 +4046,6 @@ msgstr "当打开收藏库时自动扫描新书(_O)"
 #~ msgstr "无法读取%s"
 
 #
-# File: src/bookmark.py, line: 29
-#~ msgid "_Edit bookmarks..."
-#~ msgstr "编辑书签(_E)..."
-
-#
 # File: src/deprecated.py, line: 16
 #~ msgid "There are deprecated files left on your computer."
 #~ msgstr "在您的计算机里留有一些已经不再被使用的文件。"
@@ -4120,11 +4168,6 @@ msgstr "当打开收藏库时自动扫描新书(_O)"
 # File: src/ui.py, line: 42
 #~ msgid "_Zoom in"
 #~ msgstr "放大(_Z)"
-
-#
-# File: src/ui.py, line: 44
-#~ msgid "Zoom _out"
-#~ msgstr "缩小(_O)"
 
 #
 # File: src/ui.py, line: 46

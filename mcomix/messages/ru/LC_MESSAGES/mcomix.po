@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 0.90.4\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2016-01-10 18:09+0200\n"
 "Last-Translator: Ulyanich Michael <ulianich_mihail@ukr.net>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -224,15 +224,17 @@ msgid "A note on the selected bookmark"
 msgstr "Заметка к выбранной закладке"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "_Добавить закладку"
 
 #: mcomix/bookmark_menu.py:42
 msgid "_Remove this book's bookmarks..."
 msgstr "Удалить закладки этой _книги..."
 
+#
+# File: src/bookmark.py, line: 29
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "_Управление закладками"
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -328,7 +330,7 @@ msgstr "Редактировать архив"
 msgid "A_pply"
 msgstr "_Применить"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "Сохранить _как..."
 
@@ -909,17 +911,13 @@ msgstr "Последняя страница"
 msgid "Go to page"
 msgstr "Перейти на страницу"
 
-#
-# File: src/edit.py, line: 28
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "Следующий архив"
+msgid "Next book"
+msgstr "Следующая книга"
 
-#
-# File: src/ui.py, line: 284
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "Предыдущий архив"
+msgid "Previous book"
+msgstr "Предыдущая книга"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -930,11 +928,11 @@ msgid "Random archive in the folder"
 msgstr "Случайный архив в папке"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "Следующий каталог"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "Предыдущий каталог"
 
 #: mcomix/keybindings.py:71
@@ -1040,10 +1038,8 @@ msgstr "Сохранить преобразования"
 msgid "Transformation"
 msgstr "Преобразование"
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "Повернуть на 90 градусов по _часовой стрелке"
 
 #
@@ -1052,10 +1048,8 @@ msgstr "Повернуть на 90 градусов по _часовой стр�
 msgid "Rotate 180°"
 msgstr "П_овернуть на 180 градусов"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "Повернуть на 90 градусов _против часовой стрелки"
 
 #
@@ -3288,23 +3282,25 @@ msgid "Reloads the currently opened files or archive."
 msgstr "Переоткрыть текущие файлы или архив"
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "Следующий _архив"
+msgid "Next _book"
+msgstr "Следующая _книга"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "_Предыдущий архив"
+msgid "Previous b_ook"
+msgstr "_Предыдущая книга"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "_Увеличить масштаб"
 
+#
+# File: src/ui.py, line: 44
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "У_меньшить масштаб"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "_Нормальный размер"
 
 #: mcomix/ui.py:489
@@ -3327,10 +3323,8 @@ msgid ""
 msgstr ""
 "Выходит и открывает текущий файл снова при следующем запуске программы."
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "Повернуть на 90 градусов по _часовой стрелке"
 
 #
@@ -3339,10 +3333,8 @@ msgstr "Повернуть на 90 градусов по _часовой стр�
 msgid "Rotate _180°"
 msgstr "П_овернуть на 180 градусов"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "Повернуть на 90 градусов _против часовой стрелки"
 
 #
@@ -3356,6 +3348,10 @@ msgstr "Отразить по _горизонтали"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "Отразить по _вертикали"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "Сохранить страницу _как..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -4242,6 +4238,63 @@ msgstr "С подкаталогами"
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Автоматически искать новые книги при _открытии библиотеки"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "_Добавить закладку"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "_Управление закладками"
+
+#
+# File: src/edit.py, line: 28
+#~ msgid "Next archive"
+#~ msgstr "Следующий архив"
+
+#
+# File: src/ui.py, line: 284
+#~ msgid "Previous archive"
+#~ msgstr "Предыдущий архив"
+
+#~ msgid "Next directory"
+#~ msgstr "Следующий каталог"
+
+#~ msgid "Previous directory"
+#~ msgstr "Предыдущий каталог"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "Rotate 90° CW"
+#~ msgstr "Повернуть на 90 градусов по _часовой стрелке"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "Повернуть на 90 градусов _против часовой стрелки"
+
+#~ msgid "Next _archive"
+#~ msgstr "Следующий _архив"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "_Предыдущий архив"
+
+#~ msgid "Zoom _In"
+#~ msgstr "_Увеличить масштаб"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "У_меньшить масштаб"
+
+#~ msgid "_Normal Size"
+#~ msgstr "_Нормальный размер"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "Повернуть на 90 градусов по _часовой стрелке"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "Повернуть на 90 градусов _против часовой стрелки"
+
 #
 # File: src/preferences.py, line: 151
 #~ msgid "Transparency"
@@ -4723,11 +4776,6 @@ msgstr "Автоматически искать новые книги при _о
 #~ msgstr "О нас"
 
 #
-# File: src/bookmark.py, line: 29
-#~ msgid "_Edit bookmarks..."
-#~ msgstr "_Редактировать закладки..."
-
-#
 # File: src/deprecated.py, line: 16
 #~ msgid "There are deprecated files left on your computer."
 #~ msgstr "На вашем компьютере остались устаревшие файлы."
@@ -4885,11 +4933,6 @@ msgstr "Автоматически искать новые книги при _о
 # File: src/ui.py, line: 36
 #~ msgid "_Previous archive"
 #~ msgstr "П_редыдущий архив"
-
-#
-# File: src/ui.py, line: 44
-#~ msgid "Zoom _out"
-#~ msgstr "_Отдалить"
 
 #
 # File: src/ui.py, line: 46

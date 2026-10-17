@@ -59,13 +59,13 @@ BINDING_INFO: "dict[str, dict[str, str]]" = {
     'last_page': {'title': _('Last page'), 'group': _('Navigation')},
     'go_to': {'title': _('Go to page'), 'group': _('Navigation')},
 
-    'next_archive': {'title': _('Next archive'), 'group': _('Navigation')},
-    'previous_archive': {'title': _('Previous archive'), 'group': _('Navigation')},
+    'next_archive': {'title': _('Next book'), 'group': _('Navigation')},
+    'previous_archive': {'title': _('Previous book'), 'group': _('Navigation')},
     'random_page': {'title': _('Random page'), 'group': _('Navigation')},
     'random_archive': {'title': _('Random archive in the folder'),
                        'group': _('Navigation')},
-    'next_directory': {'title': _('Next directory'), 'group': _('Navigation')},
-    'previous_directory': {'title': _('Previous directory'), 'group': _('Navigation')},
+    'next_directory': {'title': _('Next folder'), 'group': _('Navigation')},
+    'previous_directory': {'title': _('Previous folder'), 'group': _('Navigation')},
 
     # Scrolling
     'scroll_left_bottom': {'title': _('Align bottom left'), 'group': _('Scroll')},
@@ -94,17 +94,17 @@ BINDING_INFO: "dict[str, dict[str, str]]" = {
     'zoom_original': {'title': _('Normal size'), 'group': _('Zoom')},
 
     'keep_transformation': {'title': _('Keep transformation'), 'group': _('Transformation')},
-    'rotate_90': {'title': _('Rotate 90° CW'), 'group': _('Transformation')},
+    'rotate_90': {'title': _('Rotate 90° clockwise'), 'group': _('Transformation')},
     'rotate_180': {'title': _('Rotate 180°'), 'group': _('Transformation')},
-    'rotate_270': {'title': _('Rotate 90° CCW'), 'group': _('Transformation')},
+    'rotate_270': {'title': _('Rotate 90° anticlockwise'), 'group': _('Transformation')},
     'flip_horiz': {'title': _('Flip horizontally'), 'group': _('Transformation')},
     'flip_vert': {'title': _('Flip vertically'), 'group': _('Transformation')},
     'no_autorotation': {'title': _('Never autorotate'), 'group': _('Transformation')},
 
-    'rotate_90_width': {'title': _('Rotate 90° CW'), 'group': _('Autorotate by width')},
-    'rotate_270_width': {'title': _('Rotate 90° CCW'), 'group': _('Autorotate by width')},
-    'rotate_90_height': {'title': _('Rotate 90° CW'), 'group': _('Autorotate by height')},
-    'rotate_270_height': {'title': _('Rotate 90° CCW'), 'group': _('Autorotate by height')},
+    'rotate_90_width': {'title': _('Rotate 90° clockwise'), 'group': _('Autorotate by width')},
+    'rotate_270_width': {'title': _('Rotate 90° anticlockwise'), 'group': _('Autorotate by width')},
+    'rotate_90_height': {'title': _('Rotate 90° clockwise'), 'group': _('Autorotate by height')},
+    'rotate_270_height': {'title': _('Rotate 90° anticlockwise'), 'group': _('Autorotate by height')},
 
     'double_page': {'title': _('Double page mode'), 'group': _('View mode')},
     'title_page_alone': {'title': _('Title page alone'), 'group': _('View mode')},

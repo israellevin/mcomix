@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: comix 3.6.4\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2008-05-21 12:40+0330\n"
 "Last-Translator: Meelad Zakaria <meelad@farsiweb.info>\n"
 "Language-Team: Persian \n"
@@ -206,7 +206,7 @@ msgid "A note on the selected bookmark"
 msgstr "یادداشتی برای نشانک برگزیده"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "افزودن _نشانک"
 
 #: mcomix/bookmark_menu.py:42
@@ -214,7 +214,7 @@ msgid "_Remove this book's bookmarks..."
 msgstr "_حذف نشانک‌های این کتاب..."
 
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "_ویرایش نشانک‌ها..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -308,7 +308,7 @@ msgstr "ویرایش بایگانی"
 msgid "A_pply"
 msgstr "ا_عمال"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "ذخ_یره با نام"
 
@@ -865,16 +865,13 @@ msgstr "آخرین صفحه"
 msgid "Go to page"
 msgstr "رفتن به صفحه"
 
-#
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "بایگانی بعدی"
+msgid "Next book"
+msgstr "کتاب بعدی"
 
-#
-# File: src/ui.py, line: 284
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "بایگانی پیشین"
+msgid "Previous book"
+msgstr "کتاب پیشین"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -885,11 +882,11 @@ msgid "Random archive in the folder"
 msgstr "بایگانی تصادفی در پوشه"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "شاخهٔ بعدی"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "شاخهٔ پیشین"
 
 #: mcomix/keybindings.py:71
@@ -995,10 +992,8 @@ msgstr "نگه‌داشتن دگرگونی"
 msgid "Transformation"
 msgstr "دگرگونی"
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "چرخش ۹۰ درجه ساعت‌گرد"
 
 #
@@ -1007,10 +1002,8 @@ msgstr "چرخش ۹۰ درجه ساعت‌گرد"
 msgid "Rotate 180°"
 msgstr "چرخش ۱۸۰ درجه"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "چرخش ۹۰ درجه پادساعت‌گرد"
 
 #
@@ -3161,23 +3154,25 @@ msgid "Reloads the currently opened files or archive."
 msgstr "پرونده‌ها یا بایگانی گشوده را دوباره بار می‌کند."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "با_یگانی بعدی"
+msgid "Next _book"
+msgstr "_کتاب بعدی"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "بایگانی _پیشین"
+msgid "Previous b_ook"
+msgstr "کتاب _پیشین"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "_بزرگنمایی"
 
+#
+# File: src/ui.py, line: 44
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "_کوچک نمایی"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "اندازهٔ _عادی"
 
 #: mcomix/ui.py:489
@@ -3199,10 +3194,8 @@ msgid ""
 "Quits and restores the currently opened file next time the program starts."
 msgstr "بیرون می‌رود و در آغاز بعدی برنامه پروندهٔ گشوده را بازمی‌گرداند."
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "_چرخاندن ۹۰ درجه‌ای در جهت ساعت"
 
 #
@@ -3211,10 +3204,8 @@ msgstr "_چرخاندن ۹۰ درجه‌ای در جهت ساعت"
 msgid "Rotate _180°"
 msgstr "چرخاندن ۱۸۰ در_جه‌ای"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "چرخان_دن ۹۰ درجه‌ای در خلاف جهت ساعت"
 
 #
@@ -3228,6 +3219,10 @@ msgstr "_پشت و رو کردن افقی"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "پشت و رو کردن _عمودی"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "ذخ_یره صفحه با نام..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -4070,6 +4065,62 @@ msgstr "همراه با زیرشاخه‌ها"
 msgid "Automatically scan for new books when library is _opened"
 msgstr "پویش خودکار کتاب‌های تازه هنگام _گشودن کتاب‌خانه"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "افزودن _نشانک"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "_ویرایش نشانک‌ها..."
+
+#
+#~ msgid "Next archive"
+#~ msgstr "بایگانی بعدی"
+
+#
+# File: src/ui.py, line: 284
+#~ msgid "Previous archive"
+#~ msgstr "بایگانی پیشین"
+
+#~ msgid "Next directory"
+#~ msgstr "شاخهٔ بعدی"
+
+#~ msgid "Previous directory"
+#~ msgstr "شاخهٔ پیشین"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "Rotate 90° CW"
+#~ msgstr "چرخش ۹۰ درجه ساعت‌گرد"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "چرخش ۹۰ درجه پادساعت‌گرد"
+
+#~ msgid "Next _archive"
+#~ msgstr "با_یگانی بعدی"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "بایگانی _پیشین"
+
+#~ msgid "Zoom _In"
+#~ msgstr "_بزرگنمایی"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "_کوچک نمایی"
+
+#~ msgid "_Normal Size"
+#~ msgstr "اندازهٔ _عادی"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "_چرخاندن ۹۰ درجه‌ای در جهت ساعت"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "چرخان_دن ۹۰ درجه‌ای در خلاف جهت ساعت"
+
 #
 # File: src/preferences.py, line: 151
 #~ msgid "Transparency"
@@ -4390,11 +4441,6 @@ msgstr "پویش خودکار کتاب‌های تازه هنگام _گشودن 
 #, fuzzy
 #~ msgid "_Previous archive"
 #~ msgstr "صفحهٔ _قبل"
-
-#
-# File: src/ui.py, line: 44
-#~ msgid "Zoom _out"
-#~ msgstr "زوم به _عقب"
 
 #
 # File: src/ui.py, line: 62

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2009-01-25 21:54+0100\n"
 "Last-Translator: Jan Nekvasil <jan.nekvasil@gmail.com>\n"
 "Language-Team: \n"
@@ -214,15 +214,17 @@ msgid "A note on the selected bookmark"
 msgstr "Poznámka k vybrané záložce"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "Přidat _záložku"
 
 #: mcomix/bookmark_menu.py:42
 msgid "_Remove this book's bookmarks..."
 msgstr "_Odebrat záložky této knihy..."
 
+#
+# File: src/bookmark.py, line: 29
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "_Upravit záložky..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -318,7 +320,7 @@ msgstr "Upravit archiv"
 msgid "A_pply"
 msgstr "_Použít"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "Uložit _jako"
 
@@ -892,17 +894,13 @@ msgstr "Poslední strana"
 msgid "Go to page"
 msgstr "Přejít na stranu"
 
-#
-# File: src/edit.py, line: 28
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "Následující archiv"
+msgid "Next book"
+msgstr "Následující kniha"
 
-#
-# File: src/ui.py, line: 284
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "Předchozí archiv"
+msgid "Previous book"
+msgstr "Předchozí kniha"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -913,11 +911,11 @@ msgid "Random archive in the folder"
 msgstr "Náhodný archiv ve složce"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "Následující adresář"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "Předchozí adresář"
 
 #: mcomix/keybindings.py:71
@@ -1023,10 +1021,8 @@ msgstr "Zachování transformace"
 msgid "Transformation"
 msgstr "Transformace"
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "Otočit o 90° po směru hodinových ručiček"
 
 #
@@ -1035,10 +1031,8 @@ msgstr "Otočit o 90° po směru hodinových ručiček"
 msgid "Rotate 180°"
 msgstr "Otočit o 180°"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "Otočit o 90° proti směru hodinových ručiček"
 
 #
@@ -3259,23 +3253,25 @@ msgid "Reloads the currently opened files or archive."
 msgstr "Znovu načte otevřené soubory nebo archiv."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "Následující _archiv"
+msgid "Next _book"
+msgstr "Následující _kniha"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "P_ředchozí archiv"
+msgid "Previous b_ook"
+msgstr "P_ředchozí kniha"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "Z_většit"
 
+#
+# File: src/ui.py, line: 44
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "Z_menšit"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "_Normální velikost"
 
 #: mcomix/ui.py:489
@@ -3297,10 +3293,8 @@ msgid ""
 "Quits and restores the currently opened file next time the program starts."
 msgstr "Ukončí program a při příštím spuštění obnoví otevřený soubor."
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "Pootočit o 90° _ve směru hodinových ručiček"
 
 #
@@ -3309,10 +3303,8 @@ msgstr "Pootočit o 90° _ve směru hodinových ručiček"
 msgid "Rotate _180°"
 msgstr "Pootočit _o 180°"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "Pootočit o 90° _proti směru hodinových ručiček"
 
 #
@@ -3326,6 +3318,10 @@ msgstr "P_řevrátit vodorovně"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "Převrátit _svisle"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "Uložit stránku _jako..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -4184,6 +4180,63 @@ msgstr "S podadresáři"
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automaticky hledat nové knihy při _otevření knihovny"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "Přidat _záložku"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "_Upravit záložky..."
+
+#
+# File: src/edit.py, line: 28
+#~ msgid "Next archive"
+#~ msgstr "Následující archiv"
+
+#
+# File: src/ui.py, line: 284
+#~ msgid "Previous archive"
+#~ msgstr "Předchozí archiv"
+
+#~ msgid "Next directory"
+#~ msgstr "Následující adresář"
+
+#~ msgid "Previous directory"
+#~ msgstr "Předchozí adresář"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "Rotate 90° CW"
+#~ msgstr "Otočit o 90° po směru hodinových ručiček"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "Otočit o 90° proti směru hodinových ručiček"
+
+#~ msgid "Next _archive"
+#~ msgstr "Následující _archiv"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "P_ředchozí archiv"
+
+#~ msgid "Zoom _In"
+#~ msgstr "Z_většit"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "Z_menšit"
+
+#~ msgid "_Normal Size"
+#~ msgstr "_Normální velikost"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "Pootočit o 90° _ve směru hodinových ručiček"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "Pootočit o 90° _proti směru hodinových ručiček"
+
 #
 # File: src/preferences.py, line: 151
 #~ msgid "Transparency"
@@ -4646,11 +4699,6 @@ msgstr "Automaticky hledat nové knihy při _otevření knihovny"
 #~ msgstr "%s nelze načíst"
 
 #
-# File: src/bookmark.py, line: 29
-#~ msgid "_Edit bookmarks..."
-#~ msgstr "_Upravit záložky…"
-
-#
 # File: src/deprecated.py, line: 16
 #~ msgid "There are deprecated files left on your computer."
 #~ msgstr "Na vašem počítači byly nalezeny zastaralé soubory."
@@ -4769,11 +4817,6 @@ msgstr "Automaticky hledat nové knihy při _otevření knihovny"
 #, fuzzy
 #~ msgid "_Previous archive"
 #~ msgstr "_Předchozí strana"
-
-#
-# File: src/ui.py, line: 44
-#~ msgid "Zoom _out"
-#~ msgstr "_Oddálit"
 
 #
 # File: src/ui.py, line: 46

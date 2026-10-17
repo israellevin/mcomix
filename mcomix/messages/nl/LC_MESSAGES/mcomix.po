@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2006-10-15 21:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -207,7 +207,7 @@ msgid "A note on the selected bookmark"
 msgstr "Een notitie bij de geselecteerde bladwijzer"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "_Bladwijzer toevoegen"
 
 #: mcomix/bookmark_menu.py:42
@@ -215,7 +215,7 @@ msgid "_Remove this book's bookmarks..."
 msgstr "Bladwijzers van dit boek _verwijderen..."
 
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "Bladwijzers be_werken..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -309,7 +309,7 @@ msgstr "Archief bewerken"
 msgid "A_pply"
 msgstr "Toe_passen"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "Opslaan _als"
 
@@ -873,16 +873,13 @@ msgstr "Laatste pagina"
 msgid "Go to page"
 msgstr "Ga naar pagina"
 
-#
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "Volgend archief"
+msgid "Next book"
+msgstr "Volgend boek"
 
-#
-# File: src/ui.py, line: 284
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "Vorig archief"
+msgid "Previous book"
+msgstr "Vorig boek"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -893,11 +890,11 @@ msgid "Random archive in the folder"
 msgstr "Willekeurig archief in de map"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "Volgende map"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "Vorige map"
 
 #: mcomix/keybindings.py:71
@@ -1002,10 +999,8 @@ msgstr "Transformatie behouden"
 msgid "Transformation"
 msgstr "Transformatie"
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "90° met de klok mee draaien"
 
 #
@@ -1014,10 +1009,8 @@ msgstr "90° met de klok mee draaien"
 msgid "Rotate 180°"
 msgstr "180° draaien"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "90° tegen de klok in draaien"
 
 #
@@ -3206,23 +3199,25 @@ msgid "Reloads the currently opened files or archive."
 msgstr "Laadt de geopende bestanden of het archief opnieuw."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "Volgend _archief"
+msgid "Next _book"
+msgstr "Volgend _boek"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "_Vorig archief"
+msgid "Previous b_ook"
+msgstr "_Vorig boek"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "In_zoomen"
 
+#
+# File: src/ui.py, line: 44
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "_Uitzoomen"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "_Normale afmeting"
 
 #: mcomix/ui.py:489
@@ -3244,10 +3239,8 @@ msgid ""
 "Quits and restores the currently opened file next time the program starts."
 msgstr "Sluit af en herstelt het geopende bestand bij de volgende start."
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "_Roteer 90 graden MKM"
 
 #
@@ -3256,10 +3249,8 @@ msgstr "_Roteer 90 graden MKM"
 msgid "Rotate _180°"
 msgstr "R_oteer 180 graden"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "Rot_eer 90 graden TKI"
 
 #
@@ -3273,6 +3264,10 @@ msgstr "_Horizontaal spiegelen"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "_Verticaal spiegelen"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "Pagina opslaan _als..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -4131,6 +4126,62 @@ msgid "Automatically scan for new books when library is _opened"
 msgstr ""
 "Automatisch naar nieuwe boeken zoeken bij het _openen van de bibliotheek"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "_Bladwijzer toevoegen"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "Bladwijzers be_werken..."
+
+#
+#~ msgid "Next archive"
+#~ msgstr "Volgend archief"
+
+#
+# File: src/ui.py, line: 284
+#~ msgid "Previous archive"
+#~ msgstr "Vorig archief"
+
+#~ msgid "Next directory"
+#~ msgstr "Volgende map"
+
+#~ msgid "Previous directory"
+#~ msgstr "Vorige map"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "Rotate 90° CW"
+#~ msgstr "90° met de klok mee draaien"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "90° tegen de klok in draaien"
+
+#~ msgid "Next _archive"
+#~ msgstr "Volgend _archief"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "_Vorig archief"
+
+#~ msgid "Zoom _In"
+#~ msgstr "In_zoomen"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "_Uitzoomen"
+
+#~ msgid "_Normal Size"
+#~ msgstr "_Normale afmeting"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "_Roteer 90 graden MKM"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "Rot_eer 90 graden TKI"
+
 #
 # File: src/preferences.py, line: 151
 #~ msgid "Transparency"
@@ -4467,11 +4518,6 @@ msgstr ""
 # File: src/ui.py, line: 42
 #~ msgid "_Zoom in"
 #~ msgstr "_Zoom in"
-
-#
-# File: src/ui.py, line: 44
-#~ msgid "Zoom _out"
-#~ msgstr "Zoom _uit"
 
 #
 # File: src/ui.py, line: 62

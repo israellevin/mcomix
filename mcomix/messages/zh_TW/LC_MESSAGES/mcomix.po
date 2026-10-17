@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix zh_TW\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2013-07-05 21:37+0800\n"
 "Last-Translator: Wayne Su <mstarmstar@hotmail.com>\n"
 "Language-Team: \n"
@@ -193,7 +193,7 @@ msgid "A note on the selected bookmark"
 msgstr "所選書籤的備註"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "新增書籤(_B)"
 
 #: mcomix/bookmark_menu.py:42
@@ -201,7 +201,7 @@ msgid "_Remove this book's bookmarks..."
 msgstr "刪除這本書的書籤(_R)..."
 
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "編輯書籤(_E)..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -282,7 +282,7 @@ msgstr "編輯壓縮檔"
 msgid "A_pply"
 msgstr "套用(_P)"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "另存為(_A)"
 
@@ -757,12 +757,12 @@ msgid "Go to page"
 msgstr "指定頁數..."
 
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "下一個壓縮檔"
+msgid "Next book"
+msgstr "下一本書"
 
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "上一個壓縮檔"
+msgid "Previous book"
+msgstr "上一本書"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -773,11 +773,11 @@ msgid "Random archive in the folder"
 msgstr "資料夾中的隨機壓縮檔"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "下一個目錄"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "上一個目錄"
 
 #: mcomix/keybindings.py:71
@@ -876,7 +876,7 @@ msgid "Transformation"
 msgstr "形變設定"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "順時針旋轉 90 度"
 
 #: mcomix/keybindings.py:98
@@ -884,7 +884,7 @@ msgid "Rotate 180°"
 msgstr "旋轉 180 度"
 
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "逆時針旋轉 90 度"
 
 #: mcomix/keybindings.py:100
@@ -2745,23 +2745,23 @@ msgid "Reloads the currently opened files or archive."
 msgstr "重新載入目前開啟的檔案或壓縮檔。"
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "下一個壓縮檔(_A)"
+msgid "Next _book"
+msgstr "下一本書(_B)"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "上一個壓縮檔(_R)"
+msgid "Previous b_ook"
+msgstr "上一本書(_O)"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "放大(_I)"
 
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "縮小(_O)"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "正常大小(_N)"
 
 #: mcomix/ui.py:489
@@ -2782,7 +2782,7 @@ msgid ""
 msgstr "離開並在下次啟動程式時自動載入目前開啟的檔案。"
 
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "順時針旋轉 90 度(_R)"
 
 #: mcomix/ui.py:494
@@ -2790,7 +2790,7 @@ msgid "Rotate _180°"
 msgstr "旋轉 180 度(_G)"
 
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "逆時針旋轉 90 度(_E)"
 
 #: mcomix/ui.py:496
@@ -2800,6 +2800,10 @@ msgstr "水平翻轉(_P)"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "垂直翻轉(_V)"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "頁面另存為(_A)..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -3522,6 +3526,51 @@ msgstr "含子目錄"
 msgid "Automatically scan for new books when library is _opened"
 msgstr "書庫開啟時自動搜尋新書(_O)"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "新增書籤(_B)"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "編輯書籤(_E)..."
+
+#~ msgid "Next archive"
+#~ msgstr "下一個壓縮檔"
+
+#~ msgid "Previous archive"
+#~ msgstr "上一個壓縮檔"
+
+#~ msgid "Next directory"
+#~ msgstr "下一個目錄"
+
+#~ msgid "Previous directory"
+#~ msgstr "上一個目錄"
+
+#~ msgid "Rotate 90° CW"
+#~ msgstr "順時針旋轉 90 度"
+
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "逆時針旋轉 90 度"
+
+#~ msgid "Next _archive"
+#~ msgstr "下一個壓縮檔(_A)"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "上一個壓縮檔(_R)"
+
+#~ msgid "Zoom _In"
+#~ msgstr "放大(_I)"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "縮小(_O)"
+
+#~ msgid "_Normal Size"
+#~ msgstr "正常大小(_N)"
+
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "順時針旋轉 90 度(_R)"
+
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "逆時針旋轉 90 度(_E)"
+
 #~ msgid "Transparency"
 #~ msgstr "透明度"
 
@@ -3886,9 +3935,6 @@ msgstr "書庫開啟時自動搜尋新書(_O)"
 #~ msgid "! Could not add file "
 #~ msgstr "！ 無法新增檔案"
 
-#~ msgid "_Edit bookmarks..."
-#~ msgstr "編輯書籤...(_E)"
-
 #~ msgid "There are deprecated files left on your computer."
 #~ msgstr "你的電腦中有一些已不再使用的檔案。"
 
@@ -3958,9 +4004,6 @@ msgstr "書庫開啟時自動搜尋新書(_O)"
 
 #~ msgid "_Zoom in"
 #~ msgstr "放大(_Z)"
-
-#~ msgid "Zoom _out"
-#~ msgstr "縮小(_o)"
 
 #~ msgid "O_riginal size"
 #~ msgstr "正常大小(_r)"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:29+0200\n"
+"POT-Creation-Date: 2026-10-17 05:35+0200\n"
 "PO-Revision-Date: 2009-02-02 14:19+0100\n"
 "Last-Translator: Dariusz Jakoniuk <pipaceliny@gmail.com>\n"
 "Language-Team: \n"
@@ -217,15 +217,17 @@ msgid "A note on the selected bookmark"
 msgstr "Notatka do zaznaczonej zakładki"
 
 #: mcomix/bookmark_menu.py:41
-msgid "Add _Bookmark"
+msgid "Add _bookmark"
 msgstr "Dodaj _zakładkę"
 
 #: mcomix/bookmark_menu.py:42
 msgid "_Remove this book's bookmarks..."
 msgstr "_Usuń zakładki tej książki…"
 
+#
+# File: src/bookmark.py, line: 29
 #: mcomix/bookmark_menu.py:43
-msgid "_Edit Bookmarks..."
+msgid "_Edit bookmarks..."
 msgstr "_Edytuj zakładki..."
 
 #: mcomix/bookmark_menu.py:204 mcomix/file_actions.py:1179
@@ -321,7 +323,7 @@ msgstr "Edytuj archiwum"
 msgid "A_pply"
 msgstr "_Zastosuj"
 
-#: mcomix/edit_dialog.py:76 mcomix/ui.py:498 mcomix/ui.py:499
+#: mcomix/edit_dialog.py:76
 msgid "Save _As"
 msgstr "Zapi_sz jako"
 
@@ -899,17 +901,13 @@ msgstr "Ostatnia strona"
 msgid "Go to page"
 msgstr "Przejdź do strony"
 
-#
-# File: src/edit.py, line: 28
 #: mcomix/keybindings.py:62 mcomix/ui.py:480
-msgid "Next archive"
-msgstr "Następne archiwum"
+msgid "Next book"
+msgstr "Następna książka"
 
-#
-# File: src/ui.py, line: 284
 #: mcomix/keybindings.py:63 mcomix/ui.py:481
-msgid "Previous archive"
-msgstr "Poprzednie archiwum"
+msgid "Previous book"
+msgstr "Poprzednia książka"
 
 #: mcomix/keybindings.py:64
 msgid "Random page"
@@ -920,11 +918,11 @@ msgid "Random archive in the folder"
 msgstr "Losowe archiwum w folderze"
 
 #: mcomix/keybindings.py:67 mcomix/ui.py:482
-msgid "Next directory"
+msgid "Next folder"
 msgstr "Następny katalog"
 
 #: mcomix/keybindings.py:68 mcomix/ui.py:483
-msgid "Previous directory"
+msgid "Previous folder"
 msgstr "Poprzedni katalog"
 
 #: mcomix/keybindings.py:71
@@ -1030,10 +1028,8 @@ msgstr "Zachowanie przekształcenia"
 msgid "Transformation"
 msgstr "Przekształcenie"
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
-msgid "Rotate 90° CW"
+msgid "Rotate 90° clockwise"
 msgstr "Obróć o 90° w prawo"
 
 #
@@ -1042,10 +1038,8 @@ msgstr "Obróć o 90° w prawo"
 msgid "Rotate 180°"
 msgstr "Obróć o 180°"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:105 mcomix/keybindings.py:107
-msgid "Rotate 90° CCW"
+msgid "Rotate 90° anticlockwise"
 msgstr "Obróć o 90° w lewo"
 
 #
@@ -3281,23 +3275,25 @@ msgid "Reloads the currently opened files or archive."
 msgstr "Wczytuje ponownie otwarte pliki lub archiwum."
 
 #: mcomix/ui.py:480
-msgid "Next _archive"
-msgstr "Następne _archiwum"
+msgid "Next _book"
+msgstr "Następna _książka"
 
 #: mcomix/ui.py:481
-msgid "Previous a_rchive"
-msgstr "Poprzednie a_rchiwum"
+msgid "Previous b_ook"
+msgstr "Pop_rzednia książka"
 
 #: mcomix/ui.py:484
-msgid "Zoom _In"
+msgid "Zoom _in"
 msgstr "Po_większ"
 
+#
+# File: src/ui.py, line: 44
 #: mcomix/ui.py:485
-msgid "Zoom _Out"
+msgid "Zoom _out"
 msgstr "Po_mniejsz"
 
 #: mcomix/ui.py:486
-msgid "_Normal Size"
+msgid "_Normal size"
 msgstr "_Zwykły rozmiar"
 
 #: mcomix/ui.py:489
@@ -3320,10 +3316,8 @@ msgid ""
 msgstr ""
 "Kończy pracę i przywraca otwarty plik przy następnym uruchomieniu programu."
 
-#
-# File: src/ui.py, line: 52
 #: mcomix/ui.py:493 mcomix/ui.py:572 mcomix/ui.py:574
-msgid "_Rotate 90° CW"
+msgid "_Rotate 90° clockwise"
 msgstr "_Obróć o 90° w kierunku ruchu wskazówek zegara"
 
 #
@@ -3332,10 +3326,8 @@ msgstr "_Obróć o 90° w kierunku ruchu wskazówek zegara"
 msgid "Rotate _180°"
 msgstr "O_bróć o 180°"
 
-#
-# File: src/ui.py, line: 56
 #: mcomix/ui.py:495 mcomix/ui.py:573 mcomix/ui.py:575
-msgid "Rotat_e 90° CCW"
+msgid "Rotat_e 90° anticlockwise"
 msgstr "Ob_róć o 90° przeciwnie do ruchu wskazówek zegara"
 
 #
@@ -3349,6 +3341,10 @@ msgstr "_Przewróć w poziomie"
 #: mcomix/ui.py:497
 msgid "Flip _vertically"
 msgstr "Pr_zewróć w pionie"
+
+#: mcomix/ui.py:498 mcomix/ui.py:499
+msgid "Save page _as..."
+msgstr "Zapi_sz stronę jako..."
 
 #: mcomix/ui.py:499
 msgid "Saves the page the menu was opened over."
@@ -4210,6 +4206,63 @@ msgstr "Z podkatalogami"
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatycznie szukaj nowych książek przy _otwarciu biblioteki"
 
+#~ msgid "Add _Bookmark"
+#~ msgstr "Dodaj _zakładkę"
+
+#~ msgid "_Edit Bookmarks..."
+#~ msgstr "_Edytuj zakładki..."
+
+#
+# File: src/edit.py, line: 28
+#~ msgid "Next archive"
+#~ msgstr "Następne archiwum"
+
+#
+# File: src/ui.py, line: 284
+#~ msgid "Previous archive"
+#~ msgstr "Poprzednie archiwum"
+
+#~ msgid "Next directory"
+#~ msgstr "Następny katalog"
+
+#~ msgid "Previous directory"
+#~ msgstr "Poprzedni katalog"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "Rotate 90° CW"
+#~ msgstr "Obróć o 90° w prawo"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotate 90° CCW"
+#~ msgstr "Obróć o 90° w lewo"
+
+#~ msgid "Next _archive"
+#~ msgstr "Następne _archiwum"
+
+#~ msgid "Previous a_rchive"
+#~ msgstr "Poprzednie a_rchiwum"
+
+#~ msgid "Zoom _In"
+#~ msgstr "Po_większ"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "Po_mniejsz"
+
+#~ msgid "_Normal Size"
+#~ msgstr "_Zwykły rozmiar"
+
+#
+# File: src/ui.py, line: 52
+#~ msgid "_Rotate 90° CW"
+#~ msgstr "_Obróć o 90° w kierunku ruchu wskazówek zegara"
+
+#
+# File: src/ui.py, line: 56
+#~ msgid "Rotat_e 90° CCW"
+#~ msgstr "Ob_róć o 90° przeciwnie do ruchu wskazówek zegara"
+
 #
 # File: src/preferences.py, line: 151
 #~ msgid "Transparency"
@@ -4679,11 +4732,6 @@ msgstr "Automatycznie szukaj nowych książek przy _otwarciu biblioteki"
 #~ msgstr "Nie mozna odczytać %s"
 
 #
-# File: src/bookmark.py, line: 29
-#~ msgid "_Edit bookmarks..."
-#~ msgstr "_Edytuj zakładki…"
-
-#
 # File: src/deprecated.py, line: 16
 #~ msgid "There are deprecated files left on your computer."
 #~ msgstr "Na komputerze są przestarzałe pliki."
@@ -4803,11 +4851,6 @@ msgstr "Automatycznie szukaj nowych książek przy _otwarciu biblioteki"
 #, fuzzy
 #~ msgid "_Previous archive"
 #~ msgstr "_Poprzednia strona"
-
-#
-# File: src/ui.py, line: 44
-#~ msgid "Zoom _out"
-#~ msgstr "_Oddal"
 
 #
 # File: src/ui.py, line: 46
