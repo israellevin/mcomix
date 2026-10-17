@@ -19,7 +19,7 @@ Use checkered background for transparent images | A grey checkerboard behind tra
 Use this colour as the thumbnail background | The colour behind the sidebar's thumbnails.
 Show page numbers on thumbnails |
 Thumbnail size (in pixels) | 80 by default.
-Use fullscreen by default |
+Start in fullscreen |
 Automatically hide all toolbars in fullscreen | Menu bar, toolbar, status bar, thumbnails and scrollbars go away in fullscreen.
 Page number in fullscreen | The pages on screen and the number of pages, in the lower right corner: "Never" (the default), "Always", or "For a few seconds after a page turn", three seconds.
 
@@ -27,13 +27,13 @@ Page number in fullscreen | The pages on screen and the number of pages, in the 
 
 Option | Explanation
 -------|------------
-Automatically open the last viewed file on startup | Started without a file, reopen the one open last, at the picture that was shown. After "Save and quit" this happens regardless.
+Reopen the last book read | Started without a file, reopen the one open last, at the picture that was shown. After "Save and quit" this happens regardless.
 Open the library on startup | As `-l` does: the library comes up beside the window, to pick the book there.
 Open files in the window that is already open | A book opened from a file manager or a command line goes to the MComix that is running, which opens it and comes forward; no second one starts. Off by default: each book gets a window. Read at start. A middle click on a bookmark, a recent file or a library cover still opens a window of its own, as `--new-window` does. Needs a D-Bus session bus.
 Remember recently opened files | Keeps File → Recent and each book's last page, which the library's "Recent" collection lists. On by default. Turning it off offers to clear both. The page is stored two seconds after the last page turn, so a crash loses no more than that.
 Save As opens at the last directory saved into | Instead of the book's own directory.
 Save an edited archive in the format it was opened in | Write it back as the ZIP, tar, 7z or RAR it was read as. 7z and RAR need the `7z` and `rar` programs, which MComix does not install; a format it cannot write is saved as ZIP.
-Comment extensions | Which files in an archive count as comments. txt, nfo and xml by default.
+Comment file extensions | Which files in an archive count as comments. txt, nfo and xml by default.
 Prompts answered for good | Every prompt whose answer can be remembered, with its answer: reopening a part-read book, deleting the open file, bookmarking a book that has bookmarks, deleting books removed from the library, deleting a bookmarked file, changing the pages of the open book, leaving a book with pages picked out. "Do not ask again" sets an answer here; "Ask every time" takes it back.
 
 ## Navigation tab
@@ -41,20 +41,20 @@ Prompts answered for good | Every prompt whose answer can be remembered, with it
 Option | Explanation
 -------|------------
 Use smart scrolling | Space and the mouse wheel follow a comic page's reading order: sideways, down, sideways again. A page that cannot scroll sideways, as in "Fit to width", scrolls down only. Two pages side by side that scroll down only are read one after the other: the second from its top once the first is at its bottom. A wide page shown alone in double page mode counts as two.
-Number of pixels to scroll per arrow key press | 50 by default.
-Number of pixels to scroll per mouse wheel turn | 50 by default.
-Fraction of page to scroll per space key press (in percent) | 50 by default.
-Flip pages when scrolling off the edges of the page | Scrolling past a page's end, with the wheel or the arrow keys, turns it.
-Number of "steps" to take before flipping the page | Scrolls past a page's end before it turns, so reaching the bottom does not turn it by accident. 3 by default, at least 1.
+Arrow key step (in pixels) | 50 by default.
+Mouse wheel step (in pixels) | 50 by default.
+Space key step (in percent of the page) | 50 by default.
+Turn the page when scrolling past its edge | Scrolling past a page's end, with the wheel or the arrow keys, turns it.
+Steps past the edge before the page turns | Scrolls past a page's end before it turns, so reaching the bottom does not turn it by accident. 3 by default, at least 1.
 Count the steps also when the page fits | A page that fits the window turns on the first step past it. With this, it takes as many steps as the line above says. Off by default.
-Milliseconds to ignore the wheel after it turns a page | Keeps a wheel that spins on from turning several pages. 0, by default, ignores nothing.
+Wheel pause after a page turn (in milliseconds) | Keeps a wheel that spins on from turning several pages. 0, by default, ignores nothing.
 Flip pages with a left click | A left click on the page turns to the next one. Off, it does nothing; SHIFT+LeftMouse and ALT+RightMouse still turn pages, and a double click enters or leaves fullscreen.
 Where a click lands | With the one above. "Anywhere: the next page", the default. "Halves": the left half turns back, the right half forward. "Thirds": the left third back, the right third forward, the middle third enters or leaves fullscreen, for touch screens. Manga mode swaps left and right.
 Skip pages that cannot be shown | Turn past a page that is damaged or unreadable, the way you were going, instead of showing the broken-image icon. Past the last page that can be shown, a turn opens the next book, as from the last page. The thumbnail bar leaves them out once their thumbnails are made. Off by default. In double page mode its partner is shown alone.
-Automatically open the next archive | Past the last page, open the next archive in the directory; past the first, the previous one. For a book opened from the library, the next or previous of the books it shows. A RAR book in volumes (name.part1.rar, name.part2.rar, …) counts as one, opened from its first volume.
-Automatically open next directory | Past the last book in the directory, open the next directory with a book; past the first, the previous one. The walk stays on the shelf: the directory above the one the book was opened from by hand. It visits the shelf's directories and the ones in those, each before the ones in it, in natural order. It skips directories with no book, and does not go into a linked directory. Archives follow an archive and loose pictures follow pictures. A directory with none of that kind opens its other kind.
-Open first file when navigating to previous archive | Instead of its last file, which is shown from its bottom.
-Open first file when navigating to previous directory | Instead of its last file.
+Open the next book past the last page | Past the last page, open the next archive in the directory; past the first, the previous one. For a book opened from the library, the next or previous of the books it shows. A RAR book in volumes (name.part1.rar, name.part2.rar, …) counts as one, opened from its first volume.
+Go on into the next folder | Past the last book in the directory, open the next directory with a book; past the first, the previous one. The walk stays on the shelf: the directory above the one the book was opened from by hand. It visits the shelf's directories and the ones in those, each before the ones in it, in natural order. It skips directories with no book, and does not go into a linked directory. Archives follow an archive and loose pictures follow pictures. A directory with none of that kind opens its other kind.
+Open the previous book at its first page | Instead of its last file, which is shown from its bottom.
+Open the previous folder at its first page | Instead of its last file.
 Open a folder with the folders in it as one book | A folder is read with the folders in it, two levels down: `Series/Volume/Chapter` opened at `Series` is one book. Its own files come first, then those of each folder in it, in natural order, each folder before the ones in it. Archives are listed the same way. Hidden folders and linked folders are left out. The next directory is then the one beside the folder, not one in it. Off by default. A change reopens the book at the same picture.
 Sort files and directories by | Order of files in a directory: "No sorting", "File name", "File name (GLib)", "File size" or "Last modified", and direction. Not the order inside an archive. A change reopens the book in the new order, at the same picture.
 Sort archives by | Order of files inside an archive, and direction. "Natural order" reads numbers: Page1, Page3, Page20. "Literal order" compares characters: Page1, Page20, Page3. "GLib order" sorts as many GTK programs do. A change reopens the archive in the new order, at the same picture.
@@ -66,7 +66,7 @@ During a slideshow automatically open the next archive |
 
 Option | Explanation
 -------|------------
-Flip two pages in double page mode | Turn two pages at a time while two are shown. CTRL with PageUp or PageDown always turns one.
+Turn two pages at a time | Turn two pages at a time while two are shown. CTRL with PageUp or PageDown always turns one.
 Show only one page where appropriate | When double page mode shows one page: "Never", "Only for title pages" (the cover), "Only for wide images", or "Always" (both).
 Page auto-resizing | How two pages of different sizes are fitted side by side: "Prefer same scale", "Prefer same size" or "Fit to same size".
 Space between two pages (in pixels) | 0 to 100; 2 by default.
@@ -77,18 +77,18 @@ Fixed width for other pages | 1450 by default.
 Fixed height for other pages | 1800 by default.
 Automatically rotate images according to their metadata | Such as an Exif orientation tag. Thumbnails, the file chooser's preview and library covers turn the same way. Thumbnails in the desktop's shared store stay upright, as other programs expect.
 Animation mode | "Normal" plays an animated image; "Never" shows its first frame. P pauses and resumes the one on screen; ] and [ play it faster and slower, from a quarter to four times its speed, until MComix closes.
-Scaling mode | "Normal (fast)", "Bilinear" or "Hyperbolic (slow)": slower means better quality. "Bilinear" by default.
+Scaling quality | "Normal (fast)", "Bilinear" or "Hyperbolic (slow)": slower means better quality. "Bilinear" by default.
 Screen colour profile | The path of the screen's ICC profile, such as one made by calibrating it. Pages are converted into it from sRGB, thumbnails and the lens included; animated pages are not. Empty, the default, converts nothing. Leave it empty where the desktop already applies the screen's profile.
 Rendering intent | How colours the screen cannot show are fitted in: "Perceptual" (the default), "Relative colorimetric", "Saturation" or "Absolute colorimetric". Only with a screen colour profile.
-Magnifying lens size (in pixels) | The side of the square lens. 200 by default.
+Lens size (in pixels) | The side of the square lens. 200 by default.
 Magnification factor | 2 by default.
 
 ## Advanced tab
 
 Option | Explanation
 -------|------------
-Maximum number of concurrent extraction threads | For formats more than one thread can unpack: ZIP, PDF, and those unpacked by an outside program, such as 7z. 0, the default, is one per processor. Each PDF thread runs a process of its own of about 130 MB, so for PDFs 0 also keeps to a sixteenth of the memory.
-Maximum number of concurrent thumbnail threads | Read at start. 0, the default, is one per processor.
+Extraction threads | For formats more than one thread can unpack: ZIP, PDF, and those unpacked by an outside program, such as 7z. 0, the default, is one per processor. Each PDF thread runs a process of its own of about 130 MB, so for PDFs 0 also keeps to a sixteenth of the memory.
+Thumbnail threads | Read at start. 0, the default, is one per processor.
 Unpack books in | The folder archives are unpacked into while they are read, such as a RAM disk. Empty, the system's temporary folder. A folder that is missing or read-only is passed over. Takes effect with the next book. The pages of the two books closed last [stay there](reading.md) until MComix closes.
-Maximum number of pages to store in the cache | 7 by default. -1 caches the whole book; a large number can run MComix out of memory.
+Pages to keep in the cache | 7 by default. -1 caches the whole book; a large number can run MComix out of memory.
 Store thumbnails for opened files | In the freedesktop.org thumbnail directory that file managers and other programs share.

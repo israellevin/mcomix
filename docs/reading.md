@@ -35,10 +35,10 @@
 - An archive, PDF, DjVu or AZW3 file opens as one book. RAR, 7z, LHA, PDF and DjVu need a helper: see [Install](install.md#requirements).
 - An image opens with every image in its folder; a folder opens its images.
 - A folder with no images opens its first archive.
-- With "Open a folder with the folders in it as one book" in the [preferences](preferences.md), a folder opens with the images of the folders in it as well. The title names each page from that folder down. Reopened by "Automatically open the last viewed file on startup" or "Save and quit", the book is that folder again; a bookmark opens the folder its page is in.
+- With "Open a folder with the folders in it as one book" in the [preferences](preferences.md), a folder opens with the images of the folders in it as well. The title names each page from that folder down. Reopened by "Reopen the last book read" or "Save and quit", the book is that folder again; a bookmark opens the folder its page is in.
 - A picture whose name has no extension counts as an image: MComix reads what the file holds. One with an extension it does not read is left out.
 - Several files picked at once open as one book of just those.
-- CTRL+SHIFT+N and CTRL+SHIFT+P open the next and previous archive in the folder. Past its last archive they go on into the next folder, as "Automatically open next directory" in the [preferences](preferences.md) describes, while that is on.
+- CTRL+SHIFT+N and CTRL+SHIFT+P open the next and previous archive in the folder. Past its last archive they go on into the next folder, as "Go on into the next folder" in the [preferences](preferences.md) describes, while that is on.
 - For a book opened from the [library](library.md), they open the next and previous of the books it shows, and stop at the last.
 - The unpacked pages of the two books closed last are kept until MComix closes, so going back to one does not unpack it again. They are dropped sooner where they would take more than half the free room in the folder books are unpacked in, and not kept for a book whose pages were changed or handed to an outside program.
 - CTRL+N and CTRL+P open the next and previous folder with a book, the same way.

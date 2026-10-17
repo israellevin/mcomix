@@ -176,7 +176,7 @@ class _PreferencesDialog(Dialog):
         page.new_section(_('Fullscreen'))
 
         page.add_row(self._create_pref_check_button(
-            _('Use fullscreen by default'),
+            _('Start in fullscreen'),
             'default fullscreen', None))
 
         page.add_row(self._create_pref_check_button(
@@ -198,7 +198,7 @@ class _PreferencesDialog(Dialog):
         page.new_section(_('Startup'))
 
         page.add_row(self._create_pref_check_button(
-            _('Automatically open the last viewed file on startup'),
+            _('Reopen the last book read'),
             'auto load last file',
             _('Automatically open, on startup, the file that was open when MComix was last closed.')))
 
@@ -227,7 +227,7 @@ class _PreferencesDialog(Dialog):
             'keep archive format when saving',
             _('Write an edited archive back as a ZIP, a tar, a 7z or a RAR, whichever it was read as. The last two need the 7z and rar programs, which MComix does not install; a format it cannot write is saved as a ZIP.')))
 
-        page.add_row(Gtk.Label(label=_('Comment extensions:')),
+        page.add_row(Gtk.Label(label=_('Comment file extensions:')),
                      self._create_extensions_entry())
 
         page.new_section(_('Prompts answered for good'))
@@ -255,20 +255,19 @@ class _PreferencesDialog(Dialog):
               'do not only scroll down or up, but also sideways and so '
               'try to follow the natural reading order of the comic book.')))
 
-        page.add_row(Gtk.Label(label=_('Number of pixels to scroll per arrow key press:')),
+        page.add_row(Gtk.Label(label=_('Arrow key step (in pixels):')),
                      self._create_pref_spinner(
                          'number of pixels to scroll per key event',
                          1, 1, 500, 1, 3, 0,
                          _('Set the number of pixels to scroll on a page when using the arrow keys.')))
 
-        page.add_row(Gtk.Label(label=_('Number of pixels to scroll per mouse wheel turn:')),
+        page.add_row(Gtk.Label(label=_('Mouse wheel step (in pixels):')),
                      self._create_pref_spinner(
                          'number of pixels to scroll per mouse wheel event',
                          1, 1, 500, 1, 3, 0,
                          _('Set the number of pixels to scroll on a page when using a mouse wheel.')))
 
-        page.add_row(Gtk.Label(label=_('Fraction of page to scroll '
-                                       'per space key press (in percent):')),
+        page.add_row(Gtk.Label(label=_('Space key step (in percent of the page):')),
                      self._create_pref_spinner(
                          'smart scroll percentage',
                          0.01, 1, 100, 1, 5, 0,
@@ -278,11 +277,11 @@ class _PreferencesDialog(Dialog):
         page.new_section(_('Page turning'))
 
         page.add_row(self._create_pref_check_button(
-            _('Flip pages when scrolling off the edges of the page'),
+            _('Turn the page when scrolling past its edge'),
             'flip with wheel',
             _('Flip pages when scrolling "off the page" with the scroll wheel or with the arrow keys. It takes n consecutive "steps" with the scroll wheel or the arrow keys for the pages to be flipped.')))
 
-        page.add_row(Gtk.Label(label=_('Number of "steps" to take before flipping the page:')),
+        page.add_row(Gtk.Label(label=_('Steps past the edge before the page turns:')),
                      self._create_pref_spinner(
                          'number of key presses before page turn',
                          1, 1, 100, 1, 3, 0,
@@ -293,7 +292,7 @@ class _PreferencesDialog(Dialog):
             'steps also when page fits',
             _('A page that fits the window turns on the first step past it. With this, it takes as many steps as above.')))
 
-        page.add_row(Gtk.Label(label=_('Milliseconds to ignore the wheel after it turns a page:')),
+        page.add_row(Gtk.Label(label=_('Wheel pause after a page turn (in milliseconds):')),
                      self._create_pref_spinner(
                          'wheel pause after page turn',
                          1, 0, 2000, 50, 250, 0,
@@ -315,22 +314,22 @@ class _PreferencesDialog(Dialog):
         page.new_section(_('Between books'))
 
         page.add_row(self._create_pref_check_button(
-            _('Automatically open the next archive'),
+            _('Open the next book past the last page'),
             'auto open next archive',
             _('Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page.')))
 
         page.add_row(self._create_pref_check_button(
-            _('Automatically open next directory'),
+            _('Go on into the next folder'),
             'auto open next directory',
             _('Automatically open the first file in the next sibling directory when flipping past the last page of the last file in a directory, or the previous directory when flipping past the first page of the first file.')))
 
         page.add_row(self._create_pref_check_button(
-            _('Open first file when navigating to previous archive'),
+            _('Open the previous book at its first page'),
             'open first file in prev archive',
             _('Automatically open the first file of the previous archive when navigating to it, instead of opening the last file of the previous archive.')))
 
         page.add_row(self._create_pref_check_button(
-            _('Open first file when navigating to previous directory'),
+            _('Open the previous folder at its first page'),
             'open first file in prev directory',
             _('Automatically open the first file of the previous directory when navigating to it, instead of opening the last file of the previous directory.')))
 
@@ -376,7 +375,7 @@ class _PreferencesDialog(Dialog):
         page.new_section(_('Double page mode'))
 
         page.add_row(self._create_pref_check_button(
-            _('Flip two pages in double page mode'),
+            _('Turn two pages at a time'),
             'double step in double page mode',
             _('Flip two pages, instead of one, each time we flip pages in double page mode.')))
 
@@ -430,7 +429,7 @@ class _PreferencesDialog(Dialog):
         page.add_row(Gtk.Label(label=_('Animation mode:')),
                      self._create_animation_mode_combobox())
 
-        page.add_row(Gtk.Label(label=_('Scaling mode')),
+        page.add_row(Gtk.Label(label=_('Scaling quality:')),
                      self._create_scaling_quality_combobox())
 
         page.add_row(Gtk.Label(label=_('Screen colour profile:')),
@@ -439,9 +438,9 @@ class _PreferencesDialog(Dialog):
         page.add_row(Gtk.Label(label=_('Rendering intent:')),
                      self._create_rendering_intent_combobox())
 
-        page.new_section(_('Magnifying Lens'))
+        page.new_section(_('Magnifying lens'))
 
-        page.add_row(Gtk.Label(label=_('Magnifying lens size (in pixels):')),
+        page.add_row(Gtk.Label(label=_('Lens size (in pixels):')),
                      self._create_pref_spinner(
                          'lens size',
                          1, 50, 400, 1, 10, 0,
@@ -469,13 +468,13 @@ class _PreferencesDialog(Dialog):
         # as a slow disk, gains anything.
         max_threads = max(16, tools.thread_count(0))
 
-        page.add_row(Gtk.Label(label=_('Maximum number of concurrent extraction threads:')),
+        page.add_row(Gtk.Label(label=_('Extraction threads:')),
                      self._create_pref_spinner(
                          'max extract threads',
                          1, 0, max_threads, 1, 4, 0,
                          _('Set the maximum number of concurrent threads for formats that support it. A value of 0 uses one thread for each processor. For PDFs, 0 also keeps within a sixteenth of the memory.')))
 
-        page.add_row(Gtk.Label(label=_('Maximum number of concurrent thumbnail threads:')),
+        page.add_row(Gtk.Label(label=_('Thumbnail threads:')),
                      self._create_pref_spinner(
                          'max threads',
                          1, 0, max_threads, 1, 4, 0,
@@ -484,7 +483,7 @@ class _PreferencesDialog(Dialog):
         page.add_row(Gtk.Label(label=_('Unpack books in:')),
                      self._create_unpack_folder_entry())
 
-        page.add_row(Gtk.Label(label=_('Maximum number of pages to store in the cache:')),
+        page.add_row(Gtk.Label(label=_('Pages to keep in the cache:')),
                      self._create_pref_spinner(
                          'max pages to cache',
                          1, -1, 500, 1, 3, 0,
