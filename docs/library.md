@@ -75,6 +75,6 @@ A book is an archive in any format MComix opens; folders cannot be added.
 
 ## Recent books
 
-- While "Store information about recently opened files" is "Always", every archive opened joins the "Recent" collection with the page it was left at.
+- While "Remember recently opened files" is on, every archive opened joins the "Recent" collection with the page it was left at.
 - That page is remembered by its picture, so re-sorting the archive does not move it.
 - "Never" stops this, and offers to clear what is kept.

@@ -213,8 +213,10 @@ class _PreferencesDialog(Dialog):
 
         page.new_section(_('Files'))
 
-        page.add_row(Gtk.Label(label=_('Store information about recently opened files:')),
-                     self._create_store_recent_combobox())
+        page.add_row(self._create_pref_check_button(
+            _('Remember recently opened files'),
+            'store recent file info',
+            _('Add information about all files opened from within MComix to the shared recent files list.')))
 
         page.add_row(self._create_pref_check_button(_('Save As opens at the last directory saved into'),
                                                     'store last saved in directory',
@@ -829,28 +831,13 @@ class _PreferencesDialog(Dialog):
 
         self._window.filehandler.refresh_file()
 
-    def _create_store_recent_combobox(self) -> "widgets.Chooser[bool]":
-        """ Creates the combobox for "Store recently opened files". """
-        items = (
-                (_('Never'), False),
-                (_('Always'), True))
-
-        box = self._create_combobox(items, prefs['store recent file info'],
-                                    self._store_recent_changed_cb)
-        box.set_tooltip_text(
-            _('Add information about all files opened from within MComix to the shared recent files list.'))
-        return box
-
-    def _store_recent_changed_cb(self, combobox: "widgets.Chooser[bool]",
-                                 *args: object) -> None:
-        """ Called when option "Store recently opened files" was changed. """
-        value = combobox.get_value()
-        last_value = prefs['store recent file info']
-        prefs['store recent file info'] = value
+    def _store_recent_changed(self, value: bool) -> None:
+        """Start or stop remembering recently opened files, as the check
+        button was turned to <value>; turned off, offer to forget what
+        is remembered already."""
         self._window.filehandler.last_read_page.set_enabled(value)
 
-        # If "Never" was selected, ask to purge recent files.
-        if (bool(last_value) is True and value is False
+        if (not value
             and (self._window.uimanager.recent.count() > 0
                  or self._window.filehandler.last_read_page.count() > 0)):
 
@@ -1151,6 +1138,9 @@ class _PreferencesDialog(Dialog):
 
         elif preference == 'show page numbers on thumbnails':
             self._window.thumbnailsidebar.toggle_page_numbers_visible()
+
+        elif preference == 'store recent file info':
+            self._store_recent_changed(button.get_active())
 
     def _color_button_cb(self, colorbutton: Gtk.ColorDialogButton,
                          _pspec: GObject.ParamSpec, preference: str) -> None:

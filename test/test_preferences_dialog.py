@@ -472,8 +472,8 @@ class PreferencesDialogTest(MComixTest):
                             'the key given by hand was saved after the reset')
 
     def _never_store_recent(self, recent_count):
-        """Answer "Never" to "Store recently opened files", over a
-        recent list of <recent_count> and one book's page remembered.
+        """Turn "Remember recently opened files" off, over a recent
+        list of <recent_count> and one book's page remembered.
         Returns the stood-in recent list and the questions asked."""
         prefs['store recent file info'] = True
         last_read = self.window.filehandler.last_read_page
@@ -485,9 +485,9 @@ class PreferencesDialogTest(MComixTest):
         recent.count.return_value = recent_count
         self.window.uimanager.recent = recent
         self._open()
-        chooser = unittest.mock.Mock()
-        chooser.get_value.return_value = False
-        self.dialog._store_recent_changed_cb(chooser)
+        button = unittest.mock.Mock()
+        button.get_active.return_value = False
+        self.dialog._check_button_cb(button, 'store recent file info')
         pump()
         return recent, [window for window in Gtk.Window.list_toplevels()
                         if isinstance(window, message_dialog.MessageDialog)
