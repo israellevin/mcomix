@@ -32,8 +32,13 @@ class PropertiesDialogTest(MComixTest):
         icons.load_icons()
 
     def tearDown(self):
+        # The dialogs only: _close(), a cleanup and so run after this,
+        # stops the main window before destroying it.  Destroyed first,
+        # its menus let go of their actions, and closing the book then
+        # reached for them: "There is no action named 'add'", 144 times
+        # over the file.
         for window in Gtk.Window.list_toplevels():
-            if window.get_visible():
+            if window.get_visible() and not isinstance(window, main.MainWindow):
                 window.destroy()
         pump()
         super().tearDown()

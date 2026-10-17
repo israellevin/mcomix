@@ -38,8 +38,11 @@ class PageselectTest(MComixTest):
 
     def tearDown(self):
         self.dialog._stop_thumbnailing()
+        # Not the main window, which is stopped before it is destroyed:
+        # destroyed first, its menus let go of their actions, and closing
+        # the book then reached for them ("There is no action named").
         for window in Gtk.Window.list_toplevels():
-            if window.get_visible():
+            if window.get_visible() and window is not self.window:
                 window.destroy()
         self.window.terminate_program()
         self.window.destroy()
