@@ -3,6 +3,8 @@
 
 import glob
 import os
+import shutil
+import sys
 
 
 def list_files(basedir, *patterns):
@@ -31,9 +33,20 @@ added_files.extend([(os.path.join('..', path),
 languages = sorted(name for name in os.listdir('mcomix/messages')
                    if os.path.isdir(os.path.join('mcomix/messages', name)))
 
+# GLib starts the session bus an MComix finds the one already running
+# by ("Open files in the window that is already open") with gdbus.exe,
+# which it looks for beside libgio-2.0-0.dll.  PyInstaller collects the
+# DLL and not the program, and without it every MComix found itself
+# alone.  The destination is the folder the DLLs go to.
+binaries = []
+if sys.platform == 'win32':
+    gdbus = shutil.which('gdbus.exe')
+    if gdbus is not None:
+        binaries.append((gdbus, '.'))
+
 a = Analysis(['../mcomixstarter.py'],
              pathex=[],
-             binaries=[],
+             binaries=binaries,
              datas=added_files,
              # PyGObject imports these itself, when a cairo context
              # crosses into Python - as the on-screen display draws with

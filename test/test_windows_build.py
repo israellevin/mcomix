@@ -157,6 +157,26 @@ class SpecDataTest(MComixTest):
         self.assertEqual('MComix', args[0])
         self.assertEqual('MComix', kwargs['name'])
 
+    def test_the_program_glib_starts_the_session_bus_with_is_packed(self):
+        """Without gdbus.exe beside libgio-2.0-0.dll, GLib could start no
+        session bus, and a second MComix found none running to hand its
+        files to."""
+        found = []
+
+        def which(name):
+            found.append(name)
+            return 'C:/msys64/ucrt64/bin/gdbus.exe'
+
+        with unittest.mock.patch.object(sys, 'platform', 'win32'), \
+                unittest.mock.patch.object(shutil, 'which', which):
+            binaries = self._run_spec()['Analysis']['binaries']
+        self.assertEqual(['gdbus.exe'], found)
+        self.assertEqual([('C:/msys64/ucrt64/bin/gdbus.exe', '.')], binaries)
+
+    def test_elsewhere_the_spec_packs_no_program_of_its_own(self):
+        with unittest.mock.patch.object(sys, 'platform', 'linux'):
+            self.assertEqual([], self._run_spec()['Analysis']['binaries'])
+
     def test_the_icon_theme_goes_without_its_cursors(self):
         args, _ = self._run_spec()['COLLECT']
         collected = [entry[0] for part in args[2:] for entry in part]
