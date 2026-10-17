@@ -72,9 +72,27 @@ class EventHandler:
         scroll.connect('scroll', self.scroll_wheel_event)
         page_area.add_controller(scroll)
 
+        # Two fingers spread or brought together on a touchpad or a
+        # touch screen zoom, as CTRL and the wheel do.  The gesture
+        # claims both fingers, so neither is taken for a click that
+        # turns the page.
+        pinch = Gtk.GestureZoom()
+        pinch.connect('begin', self.pinch_begin_event)
+        pinch.connect('scale-changed', self.pinch_event)
+        pinch.connect('end', lambda *args: window.pinch_ended())
+        page_area.add_controller(pinch)
+
         drop = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop.connect('drop', self.drag_n_drop_event)
         page_area.add_controller(drop)
+
+    def pinch_begin_event(self, gesture: Gtk.GestureZoom,
+                          _sequence: "Gdk.EventSequence | None") -> None:
+        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
+        self._window.pinch_started()
+
+    def pinch_event(self, _gesture: Gtk.GestureZoom, scale: float) -> None:
+        self._window.pinch_zoom(scale)
 
     def focus_changed(self, window: 'main.MainWindow',
                       _parameter: object) -> None:

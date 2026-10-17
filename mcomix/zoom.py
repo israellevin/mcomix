@@ -96,6 +96,16 @@ class ZoomModel:
         """Put the reader's zoom at <zoom_log>, as far as it will go."""
         self._user_zoom_log = min(max(zoom_log, MIN_USER_ZOOM_LOG), MAX_USER_ZOOM_LOG)
 
+    @property
+    def user_zoom_log(self) -> int:
+        """The reader's zoom, in steps from the size the fit mode asks
+        for: USER_ZOOM_LOG_SCALE1 of them double it."""
+        return self._user_zoom_log
+
+    @user_zoom_log.setter
+    def user_zoom_log(self, zoom_log: int) -> None:
+        self._set_user_zoom_log(zoom_log)
+
     def zoom_in(self) -> None:
         """Take the pages one step larger."""
         self._set_user_zoom_log(self._user_zoom_log + 1)

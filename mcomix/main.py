@@ -113,6 +113,9 @@ class MainWindow(Gtk.Window):
         #: the menu's own Save As saves; None where it was opened on the
         #: background around the pages.
         self.popup_page: int | None = None
+        #: The reader's zoom level and the strip width a pinch began
+        #: at, while two fingers are on the touchpad or the screen.
+        self._pinch_start: tuple[int, int] | None = None
         #: The pages a reader has picked out with Ctrl and a click,
         #: which are the ones Delete removes.  They stay picked out
         #: while the book is read, so that pages can be marked as they
@@ -1648,6 +1651,42 @@ class MainWindow(Gtk.Window):
             self._set_strip_width(constants.CONTINUOUS_WIDTH_DEFAULT)
         else:
             self.zoom.reset_user_zoom()
+        self.draw_image()
+
+    def pinch_started(self) -> None:
+        """Remember the zoom a pinch starts from: the scale a pinch
+        reports is how far the fingers have spread since then."""
+        self._pinch_start = (self.zoom.user_zoom_log,
+                             prefs['continuous width'])
+
+    def pinch_ended(self) -> None:
+        self._pinch_start = None
+
+    def pinch_zoom(self, scale: float) -> None:
+        """Zoom by <scale>, the spread of the fingers since the pinch
+        began, in the steps the zoom keys take or, in continuous mode,
+        by widening the strip.
+
+        Steps rather than the scale itself, so that a pinch and the
+        keys land on the same sizes and Normal size undoes either.  The
+        page is drawn again only when the step changes: GTK reports
+        every movement of the fingers.
+        """
+        if self._pinch_start is None or scale <= 0:
+            return
+        zoom_log, width = self._pinch_start
+        if self.is_continuous:
+            before = prefs['continuous width']
+            self._set_strip_width(round(width * scale))
+            if prefs['continuous width'] == before:
+                return
+        else:
+            wanted = zoom_log + round(math.log2(scale)
+                                      * zoom.USER_ZOOM_LOG_SCALE1)
+            before = self.zoom.user_zoom_log
+            self.zoom.user_zoom_log = wanted
+            if self.zoom.user_zoom_log == before:
+                return
         self.draw_image()
 
     @staticmethod
