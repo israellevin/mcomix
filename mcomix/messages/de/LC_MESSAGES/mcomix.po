@@ -497,7 +497,7 @@ msgstr "Konnte Verzeichnis nicht anzeigen: %s"
 
 #: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
-msgstr "Seite speichern als"
+msgstr "Seite speichern unter"
 
 #: mcomix/file_actions.py:901 mcomix/page_marks.py:153
 #: mcomix/page_rotations.py:124

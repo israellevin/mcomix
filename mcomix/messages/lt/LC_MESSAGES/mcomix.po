@@ -488,7 +488,7 @@ msgstr "Nepavyko parodyti aplanko: %s"
 
 #: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
-msgstr "Išsaugoti kaip"
+msgstr "Įrašyti puslapį taip"
 
 #: mcomix/file_actions.py:901 mcomix/page_marks.py:153
 #: mcomix/page_rotations.py:124
