@@ -1038,14 +1038,20 @@ class EventHandler:
         new_index = self._window.layout.scroll_smartly(
             max_scroll, backwards, axis_map)
 
-        if new_index == -1:
-            self._previous_page_with_protection()
-        elif new_index == self._window.displayed_page_count():
-            if self._window.zoom._fitmode != constants.ZoomMode.BEST:
-                if self._next_page_with_protection():
-                    self._window.actiongroup.get_action('best_fit_mode').activate()
-            else:
+        # Smarter scroll hack: if a smart scroll is about to turn a page and we
+        # are in best-fit mode, we switch to fit-width instead. If we are not
+        # in best-fit mode we enter best-fit before we scroll.
+        if new_index in [-1, self._window.displayed_page_count()]:
+            if self._window.zoom._fitmode == constants.ZoomMode.BEST:
                 self._window.actiongroup.get_action('fit_width_mode').activate()
+                return
+            else:
+                self._window.actiongroup.get_action('best_fit_mode').activate()
+
+        if new_index == -1:
+            self._previous_page_with_protection(abreast=True)
+        elif new_index == self._window.displayed_page_count():
+            self._next_page_with_protection(abreast=True)
         else:
             self._window.update_viewport_position()
 
