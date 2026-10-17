@@ -101,7 +101,11 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
         # item.
         self._covers = thumbnail_list.ThumbnailGridView()
         self._covers.generate_thumbnail = self._get_pixbuf
+        #: The finished-book tick at each scale other than 1 it was
+        #: asked for.
+        self._scaled_marks: dict[float, GdkPixbuf.Pixbuf | None] = {}
         self.set_thumbnail_size()
+        self.connect('realize', self._realized)
         self.set_sort_order()
         self._covers.connect('activate', self._book_activated)
         self._covers.selection.connect('selection-changed',
@@ -551,8 +555,36 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
         self.set_sort_order()
 
     def set_thumbnail_size(self) -> None:
-        """Draw the covers at the size the preference asks for."""
+        """Draw the covers at the size the preference asks for, made
+        with the pixels of the screen the library is on."""
         self._covers.set_thumbnail_size(*self._pixbuf_size())
+        self._covers.device_scale = self._device_scale()
+
+    def _device_scale(self) -> float:
+        """How many of the screen's pixels there are to each of the
+        library window's, 1 until it has a surface to ask: the library
+        is a window of its own, and may be on another screen than the
+        main window."""
+        native = self.get_native()
+        surface = native.get_surface() if native is not None else None
+        return 1.0 if surface is None else max(1.0, surface.get_scale())
+
+    def _realized(self, *args: object) -> None:
+        """Make the covers again with the screen's pixels once there is
+        a screen to ask, and whenever its scale changes."""
+        native = self.get_native()
+        surface = native.get_surface() if native is not None else None
+        if surface is not None:
+            held = weakref.ref(self)
+
+            def rescaled(*args: object) -> None:
+                area = held()
+                if area is not None:
+                    area.load_covers()
+
+            surface.connect('notify::scale', rescaled)
+        if self._covers.device_scale != self._device_scale():
+            self.load_covers()
 
     def load_covers(self) -> None:
         self._cache.invalidate_all()
@@ -611,12 +643,15 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
         if prefs['library cover size'] != old_size:
             self.load_covers()
 
-    def _pixbuf_size(self, border_size: int = _BORDER_SIZE) -> tuple[int, int]:
+    def _pixbuf_size(self, border_size: int = _BORDER_SIZE,
+                     scale: float = 1) -> tuple[int, int]:
+        """The size of a cover in the window's pixels, or with <scale>
+        of the screen's to each of them."""
         # Don't forget the extra pixels for the border!
         # The ratio (0.67) is just above the normal aspect ratio for books.
-        size = preview.scaled(prefs['library cover size'], self)
-        return (int(0.67 * size) + 2 * border_size,
-                size + 2 * border_size)
+        size = preview.scaled(prefs['library cover size'], self) * scale
+        border = round(border_size * scale)
+        return (int(0.67 * size) + 2 * border, int(size) + 2 * border)
 
     @functools.cached_property
     def _finished_mark(self) -> GdkPixbuf.Pixbuf | None:
@@ -635,17 +670,35 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
         read from then on, so the worker threads can share it; two of
         them may both make it the first time, which does no harm.
         """
-        tick = icons.load_pixbuf('object-select-symbolic', 16)
+        return self._draw_finished_mark(1)
+
+    def _finished_mark_at(self, scale: float) -> GdkPixbuf.Pixbuf | None:
+        """The tick for a cover made with <scale> of the screen's pixels
+        to each of the window's: as many times larger."""
+        if scale == 1:
+            return self._finished_mark
+        if scale not in self._scaled_marks:
+            self._scaled_marks[scale] = self._draw_finished_mark(scale)
+        return self._scaled_marks[scale]
+
+    @staticmethod
+    def _draw_finished_mark(scale: float) -> GdkPixbuf.Pixbuf | None:
+        """The tick, 24 pixels across times <scale>."""
+        tick = icons.load_pixbuf('object-select-symbolic',
+                                 max(1, round(16 * scale)))
         if tick is None:
             return None
+        side = max(1, round(24 * scale))
         # Drawn four times over and scaled down, which smooths the edge
         # that ImageDraw leaves jagged.
-        mark = Image.new('RGBA', (96, 96), (0, 0, 0, 0))
-        ImageDraw.Draw(mark).ellipse((0, 0, 95, 95),
+        mark = Image.new('RGBA', (4 * side, 4 * side), (0, 0, 0, 0))
+        ImageDraw.Draw(mark).ellipse((0, 0, 4 * side - 1, 4 * side - 1),
                                      fill=(255, 255, 255, 230))
-        mark = mark.resize((24, 24), Image.Resampling.LANCZOS)
+        mark = mark.resize((side, side), Image.Resampling.LANCZOS)
         shape = image_tools.pixbuf_to_pil(tick).convert('RGBA')
-        mark.paste((46, 52, 54, 255), (4, 4), mask=shape.getchannel('A'))
+        inset = (side - shape.width) // 2
+        mark.paste((46, 52, 54, 255), (inset, inset),
+                   mask=shape.getchannel('A'))
         return image_tools.pil_to_pixbuf(mark)
 
     def _get_pixbuf(self, uid: int) -> GdkPixbuf.Pixbuf:
@@ -654,13 +707,15 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
         book = self._library.backend.get_book_by_id(uid)
         if book is None:
             # The book went while its cover was being drawn.
-            return image_tools.missing_image_icon(
-                *self._pixbuf_size(border_size=0))
+            return image_tools.missing_image_icon(*self._pixbuf_size(
+                border_size=0, scale=self._covers.device_scale))
         # One lookup rather than exists() plus get(): another worker thread
         # may evict the entry in between, and get() would then return None.
+        # The view's scale, which it records on the cover it is made for.
+        scale = self._covers.device_scale
         pixbuf = self._cache.get(book.path)
         if pixbuf is None:
-            width, height = self._pixbuf_size(border_size=0)
+            width, height = self._pixbuf_size(border_size=0, scale=scale)
             try:
                 thumbnail = self._library.backend.get_book_thumbnail(book.path)
             except Exception:
@@ -677,7 +732,8 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
             self._cache.add(book.path, pixbuf)
 
         pixbuf = self._library.main_window.enhancer.enhance(pixbuf)
-        pixbuf = image_tools.add_border(pixbuf, 1, 0xFFFFFFFF)
+        pixbuf = image_tools.add_border(pixbuf, max(1, round(scale)),
+                                        0xFFFFFFFF)
 
         # Display indicator of having finished reading the book.
         # This information isn't cached in the pixbuf cache, as it changes frequently.
@@ -691,7 +747,7 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
             return pixbuf
 
         # Composite icon on the lower right corner of the book cover pixbuf.
-        book_pixbuf = self._finished_mark
+        book_pixbuf = self._finished_mark_at(scale)
         if book_pixbuf is None:
             return pixbuf
         translation_x = pixbuf.get_width() - book_pixbuf.get_width() - 1

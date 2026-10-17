@@ -31,6 +31,7 @@ from mcomix import main
 from mcomix import message_dialog
 from mcomix import page_marks
 from mcomix import page_rotations
+from mcomix import thumbnail_list
 from mcomix import thumbnail_tools
 from mcomix import widgets
 from mcomix.dialog import Response
@@ -1046,6 +1047,47 @@ class CopyBookTest(_OneBookTest):
         path, cover = copy.call_args.args
         self.assertEqual(self.path, path)
         self.assertIsInstance(cover, GdkPixbuf.Pixbuf)
+
+
+class CoverScaleTest(_OneBookTest):
+
+    """Covers on a screen with more pixels than the window: made with
+    the screen's and drawn at the window's size, as the pages are."""
+
+    def _cover_at(self, scale):
+        area = self.dialog.book_area
+        with unittest.mock.patch.object(type(area), '_device_scale',
+                                        return_value=scale):
+            area.load_covers()
+            pump()
+            item = area._covers.get_item(0)
+            self.assertIsNotNone(item)
+            self.assertTrue(wait_for(lambda: item.thumbnail is not None
+                                     and item.scale == scale, seconds=20))
+        return area, item
+
+    def test_at_twice_the_pixels_a_cover_has_twice_as_many(self):
+        area, item = self._cover_at(1.0)
+        width, height = (item.thumbnail.get_width(),
+                         item.thumbnail.get_height())
+        self.assertIs(item.thumbnail, thumbnail_list._shown(item))
+        area, item = self._cover_at(2.0)
+        texture = item.thumbnail
+        # Twice the cover, give or take the rounding of each side, with
+        # a border of two of the screen's pixels where there was one.
+        self.assertAlmostEqual(2 * width, texture.get_width(), delta=2)
+        self.assertAlmostEqual(2 * height, texture.get_height(), delta=2)
+        shown = thumbnail_list._shown(item)
+        self.assertEqual((round(texture.get_width() / 2),
+                          round(texture.get_height() / 2)),
+                         (shown.get_intrinsic_width(),
+                          shown.get_intrinsic_height()))
+
+    def test_the_tick_of_a_finished_book_grows_with_the_scale(self):
+        area = self.dialog.book_area
+        self.assertEqual(24, area._finished_mark_at(1).get_width())
+        self.assertEqual(48, area._finished_mark_at(2.0).get_width())
+        self.assertIs(area._finished_mark_at(2.0), area._finished_mark_at(2.0))
 
 
 class MenuHeadingTest(_OneBookTest):

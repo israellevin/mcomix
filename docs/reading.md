@@ -66,7 +66,7 @@ Manual zoom | A | No scaling.
 
 No mode scales a small page up unless "View → Stretch small images" is on.
 
-On a screen scaled above 100 per cent, such as 200 or 150 per cent, pages and the sidebar's thumbnails are made with the screen's own pixels, so they stay sharp.
+On a screen scaled above 100 per cent, such as 200 or 150 per cent, pages, the sidebar's thumbnails and the library's covers are made with the screen's own pixels, so they stay sharp.
 
 Zooming, or resizing the window, keeps the middle of the view on the same part of the page.
 
