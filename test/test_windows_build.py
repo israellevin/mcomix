@@ -73,6 +73,14 @@ class VersionFileTest(MComixTest):
         self.assertIn('filevers=(26, 10, 0, 0)', written)
         self.assertIn('prodvers=(26, 10, 0, 0)', written)
 
+    def test_the_name_windows_shows_for_the_process_is_mcomix(self):
+        """Task Manager names a process by its FileDescription: a
+        sentence there stood in its list where MComix should."""
+        with open(os.path.join(WIN32, 'version_file.template'),
+                  encoding='utf-8') as fp:
+            template = fp.read()
+        self.assertIn("StringStruct('FileDescription', 'MComix')", template)
+
 
 class SpecDataTest(MComixTest):
 

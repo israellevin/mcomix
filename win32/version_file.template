@@ -30,7 +30,7 @@ VSVersionInfo(
       StringTable(
         '040904B0',
         [StringStruct('CompanyName', 'The MComix Team'),
-        StringStruct('FileDescription', 'MComix is a user-friendly, customizable image viewer.'),
+        StringStruct('FileDescription', 'MComix'),
         StringStruct('FileVersion', '$major.$minor.$patch.0'),
         StringStruct('InternalName', 'MComix'),
         StringStruct('LegalCopyright', '© The MComix Team'),
