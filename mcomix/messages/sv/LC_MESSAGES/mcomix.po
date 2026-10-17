@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 0.90.4\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2018-02-24 08:43+0100\n"
 "Last-Translator: Jonatan Nyberg <jonatan@autistici.org>\n"
 "Language-Team: Swedish <LL@li.org>\n"
@@ -110,7 +110,7 @@ msgstr "_Nej"
 
 #
 # File: src/preferences.py, line: 230
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -323,61 +323,61 @@ msgstr "Ange ett nytt namn för den här filen."
 msgid "Edit archive"
 msgstr "Redigera arkiv"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "_Verkställ"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "Spara _som"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "_Importera"
 
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "Spara _som"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "_Verkställ"
+
 #
 # File: src/edit.py, line: 50
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "Bilder"
 
 #
 # File: src/comment.py, line: 16
 # File: src/preferences.py, line: 288
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "Kommentarer"
 
 #
 # File: src/library.py, line: 271
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! Kunde inte spara arkivet %(archivefile)s: %(error)s"
 
 #
 # File: src/edit.py, line: 99
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "Det nya arkivet kunde inte sparas!"
 
 #
 # File: src/edit.py, line: 101
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "Originalfilerna har inte tagits bort."
 
 #
 # File: src/edit.py, line: 115
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "Arkiven sparas i ZIP-format."
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "Stänga boken som arkivredigeraren arbetar med?"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
@@ -385,11 +385,11 @@ msgstr ""
 "Redigeraren har ändringar som varken tillämpats eller sparats. De följer med "
 "boken."
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "_Fortsätt redigera"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "_Stäng boken"
 
@@ -1856,14 +1856,14 @@ msgstr ""
 "delade listan med senast öppnade filer."
 
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
-msgstr "\"Spara som\" öppnas i den katalog som senast sparats i"
+msgid "Save page as opens at the last folder saved into"
+msgstr "\\\"Spara som\\\" öppnas i den katalog som senast sparats i"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
+msgid "Open the save dialog at the folder the last page was saved into."
 msgstr ""
-"Öppna dialogrutan \"Spara som\" i den katalog där den senaste filen sparades."
+"Öppna dialogrutan \\\"Spara som\\\" i den katalog där den senaste filen "
+"sparades."
 
 #
 # File: src/library.py, line: 769
@@ -2026,12 +2026,10 @@ msgstr "Mellan böcker"
 msgid "Open the next book past the last page"
 msgstr "Öppna automatiskt nästa arkivet"
 
-#
-# File: src/preferences.py, line: 203
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "Öppna automatiskt nästa arkiv i katalogen när vi bläddrar förbi den sista "
 "sidan, eller det föregående arkivet när vi bläddrar förbi den första sidan."
@@ -2054,12 +2052,8 @@ msgstr ""
 msgid "Open the previous book at its first page"
 msgstr "Öppna den första filen när du går till föregående arkiv"
 
-#
-# File: src/preferences.py, line: 203
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr ""
 "Öppna automatiskt den första filen i föregående arkiv när du går dit, i "
 "stället för dess sista fil."
@@ -2069,9 +2063,7 @@ msgid "Open the previous folder at its first page"
 msgstr "Öppna den första filen när du går till föregående katalog"
 
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr ""
 "Öppna automatiskt den första filen i föregående katalog när du går dit, i "
 "stället för dess sista fil."
@@ -2093,14 +2085,12 @@ msgid "File order"
 msgstr "Filordning"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "Sortera filer och kataloger efter:"
 
-#
-# File: src/filechooser.py, line: 86
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "Sortera arkiv efter:"
+msgid "Sort pages inside an archive by:"
+msgstr "Sortera sidorna i ett arkiv efter:"
 
 #
 # File: src/preferences.py, line: 279
@@ -2135,8 +2125,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "Under ett bildspel öppnas automatiskt nästa arkiv"
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr "Vid bildspelsläge kommer nästa arkiv automatiskt öppnas."
 
 #: mcomix/preferences_dialog.py:378
@@ -4187,6 +4176,54 @@ msgstr "Med underkataloger"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Skanna automatiskt efter nya böcker när biblioteket _öppnas"
+
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "\"Spara som\" öppnas i den katalog som senast sparats i"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr ""
+#~ "Öppna dialogrutan \"Spara som\" i den katalog där den senaste filen "
+#~ "sparades."
+
+#
+# File: src/preferences.py, line: 203
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "Öppna automatiskt nästa arkiv i katalogen när vi bläddrar förbi den sista "
+#~ "sidan, eller det föregående arkivet när vi bläddrar förbi den första "
+#~ "sidan."
+
+#
+# File: src/preferences.py, line: 203
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr ""
+#~ "Öppna automatiskt den första filen i föregående arkiv när du går dit, i "
+#~ "stället för dess sista fil."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr ""
+#~ "Öppna automatiskt den första filen i föregående katalog när du går dit, i "
+#~ "stället för dess sista fil."
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "Sortera filer och kataloger efter:"
+
+#
+# File: src/filechooser.py, line: 86
+#~ msgid "Sort archives by:"
+#~ msgstr "Sortera arkiv efter:"
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr "Vid bildspelsläge kommer nästa arkiv automatiskt öppnas."
 
 #
 # File: src/preferences.py, line: 198

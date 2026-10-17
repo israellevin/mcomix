@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2006-10-15 21:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -100,7 +100,7 @@ msgstr "_Ja"
 msgid "_No"
 msgstr "_Nee"
 
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -305,58 +305,58 @@ msgstr "Voer een nieuwe naam in voor dit bestand."
 msgid "Edit archive"
 msgstr "Archief bewerken"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "Toe_passen"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "Opslaan _als"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "_Importeren"
 
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "Opslaan _als"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "Toe_passen"
+
 #
 # File: src/edit.py, line: 50
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "Afbeeldingen"
 
 #
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "Commentaarbestanden"
 
 #
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! Kon archief %(archivefile)s niet opslaan: %(error)s"
 
 #
 # File: src/edit.py, line: 99
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "Het nieuwe archief kon niet worden opgeslagen!"
 
 #
 # File: src/edit.py, line: 101
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "De oorspronkelijke bestanden zijn niet verwijderd."
 
 #
 # File: src/edit.py, line: 115
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "Archieven worden als ZIP-bestanden opgeslagen."
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "Het boek sluiten waaraan de archiefbewerker werkt?"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
@@ -364,11 +364,11 @@ msgstr ""
 "De bewerker heeft wijzigingen die niet zijn toegepast of opgeslagen. Ze gaan "
 "met het boek mee."
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "_Verder bewerken"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "Boek _sluiten"
 
@@ -1800,17 +1800,15 @@ msgstr ""
 "Voegt gegevens over alle in MComix geopende bestanden toe aan de gedeelde "
 "lijst met recente bestanden."
 
-#
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
-msgstr "\"Opslaan als\" opent in de map waarin het laatst is opgeslagen"
+msgid "Save page as opens at the last folder saved into"
+msgstr "\\\"Opslaan als\\\" opent in de map waarin het laatst is opgeslagen"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
+msgid "Open the save dialog at the folder the last page was saved into."
 msgstr ""
-"Opent het venster \"Opslaan als\" in de map waarin het laatste bestand is "
-"opgeslagen."
+"Opent het venster \\\"Opslaan als\\\" in de map waarin het laatste bestand "
+"is opgeslagen."
 
 #: mcomix/preferences_dialog.py:226
 msgid "Save an edited archive in the format it was opened in"
@@ -1972,12 +1970,10 @@ msgstr "Tussen boeken"
 msgid "Open the next book past the last page"
 msgstr "Volgend archief automatisch openen"
 
-#
-# File: src/preferences.py, line: 203
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "Opent automatisch het volgende archief in de map wanneer voorbij de laatste "
 "pagina wordt gebladerd, of het vorige archief wanneer voor de eerste pagina "
@@ -2003,9 +1999,7 @@ msgid "Open the previous book at its first page"
 msgstr "Eerste bestand openen bij het teruggaan naar het vorige archief"
 
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr ""
 "Opent bij het teruggaan naar het vorige archief automatisch het eerste "
 "bestand in plaats van het laatste."
@@ -2015,9 +2009,7 @@ msgid "Open the previous folder at its first page"
 msgstr "Eerste bestand openen bij het teruggaan naar de vorige map"
 
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr ""
 "Opent bij het teruggaan naar de vorige map automatisch het eerste bestand in "
 "plaats van het laatste."
@@ -2039,14 +2031,12 @@ msgid "File order"
 msgstr "Bestandsvolgorde"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "Bestanden en mappen sorteren op:"
 
-#
-# File: src/archive.py, line: 302
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "Archieven sorteren op:"
+msgid "Sort pages inside an archive by:"
+msgstr "Pagina's in een archief sorteren op:"
 
 #
 # File: src/preferences.py, line: 279
@@ -2079,8 +2069,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "Tijdens een slideshow automatisch het volgende archief openen"
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr ""
 "Staat toe dat in de slideshow automatisch het volgende archief wordt geopend."
 
@@ -4106,6 +4095,55 @@ msgstr "Met submappen"
 msgid "Automatically scan for new books when library is _opened"
 msgstr ""
 "Automatisch naar nieuwe boeken zoeken bij het _openen van de bibliotheek"
+
+#
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "\"Opslaan als\" opent in de map waarin het laatst is opgeslagen"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr ""
+#~ "Opent het venster \"Opslaan als\" in de map waarin het laatste bestand is "
+#~ "opgeslagen."
+
+#
+# File: src/preferences.py, line: 203
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "Opent automatisch het volgende archief in de map wanneer voorbij de "
+#~ "laatste pagina wordt gebladerd, of het vorige archief wanneer voor de "
+#~ "eerste pagina wordt teruggebladerd."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr ""
+#~ "Opent bij het teruggaan naar het vorige archief automatisch het eerste "
+#~ "bestand in plaats van het laatste."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr ""
+#~ "Opent bij het teruggaan naar de vorige map automatisch het eerste bestand "
+#~ "in plaats van het laatste."
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "Bestanden en mappen sorteren op:"
+
+#
+# File: src/archive.py, line: 302
+#~ msgid "Sort archives by:"
+#~ msgstr "Archieven sorteren op:"
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr ""
+#~ "Staat toe dat in de slideshow automatisch het volgende archief wordt "
+#~ "geopend."
 
 #~ msgid "During a slideshow automatically open the next archive"
 #~ msgstr "Tijdens een slideshow automatisch het volgende archief openen"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 3.2\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2009-01-25 22:33+0100\n"
 "Last-Translator: Carles Escrig i Royo <simkin@ono.com>\n"
 "Language-Team: CA <gentoo@softcatala.net>\n"
@@ -106,7 +106,7 @@ msgstr "_No"
 
 #
 # File: src/preferences.py, line: 230
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -316,72 +316,72 @@ msgstr "Introduïu un nom nou per a aquest fitxer."
 msgid "Edit archive"
 msgstr "Edita l'arxiu"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "A_plica"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "_Anomena i desa"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "_Importa"
 
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "_Anomena i desa"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "A_plica"
+
 #
 # File: src/edit.py, line: 50
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "Imatges"
 
 #
 # File: src/comment.py, line: 16
 # File: src/preferences.py, line: 288
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "Fitxers de comentaris"
 
 #
 # File: src/library.py, line: 271
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! No s'ha pogut desar l'arxiu %(archivefile)s: %(error)s"
 
 #
 # File: src/edit.py, line: 99
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "No s'ha pogut desar l'arxiu nou!"
 
 #
 # File: src/edit.py, line: 101
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "No s'han eliminat els fitxers originals."
 
 #
 # File: src/edit.py, line: 115
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "Els arxius es desen en format ZIP."
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "Voleu tancar el llibre que s’està editant a l’editor d’arxius?"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
 msgstr ""
 "L’editor té canvis que no s’han aplicat ni desat. Es perdran amb el llibre."
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "_Continua editant"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "Tanca el _llibre"
 
@@ -1845,12 +1845,11 @@ msgstr ""
 "compartida de fitxers recents."
 
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
+msgid "Save page as opens at the last folder saved into"
 msgstr "«Anomena i desa» s'obre al darrer directori on s'ha desat"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
+msgid "Open the save dialog at the folder the last page was saved into."
 msgstr ""
 "Obre el diàleg «Anomena i desa» al directori on s'ha desat el darrer fitxer."
 
@@ -2017,12 +2016,10 @@ msgstr "Entre llibres"
 msgid "Open the next book past the last page"
 msgstr "Obre automàticament l'arxiu següent"
 
-#
-# File: src/preferences.py, line: 203
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "Obre automàticament el següent arxiu del directori quan passem de l'última "
 "pàgina, o l'arxiu anterior si girem la primera pàgina."
@@ -2045,12 +2042,8 @@ msgstr ""
 msgid "Open the previous book at its first page"
 msgstr "Obre el primer fitxer en anar a l'arxiu anterior"
 
-#
-# File: src/preferences.py, line: 203
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr ""
 "En anar a l'arxiu anterior, obre automàticament el seu primer fitxer en "
 "comptes del darrer."
@@ -2059,12 +2052,8 @@ msgstr ""
 msgid "Open the previous folder at its first page"
 msgstr "Obre el primer fitxer en anar al directori anterior"
 
-#
-# File: src/preferences.py, line: 203
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr ""
 "En anar al directori anterior, obre automàticament el seu primer fitxer en "
 "comptes del darrer."
@@ -2086,14 +2075,12 @@ msgid "File order"
 msgstr "Ordre dels fitxers"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "Ordena els fitxers i directoris per:"
 
-#
-# File: src/filechooser.py, line: 86
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "Ordena els arxius per:"
+msgid "Sort pages inside an archive by:"
+msgstr "Ordena les pàgines dins d'un arxiu per:"
 
 #
 # File: src/preferences.py, line: 279
@@ -2128,8 +2115,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "Durant una projecció, obre automàticament l'arxiu següent"
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr ""
 "Permet que en el mode de projecció s'obri automàticament l'arxiu següent."
 
@@ -4173,6 +4159,56 @@ msgstr "Amb subdirectoris"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Cerca automàticament llibres nous en _obrir la biblioteca"
+
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "«Anomena i desa» s'obre al darrer directori on s'ha desat"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr ""
+#~ "Obre el diàleg «Anomena i desa» al directori on s'ha desat el darrer "
+#~ "fitxer."
+
+#
+# File: src/preferences.py, line: 203
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "Obre automàticament el següent arxiu del directori quan passem de "
+#~ "l'última pàgina, o l'arxiu anterior si girem la primera pàgina."
+
+#
+# File: src/preferences.py, line: 203
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr ""
+#~ "En anar a l'arxiu anterior, obre automàticament el seu primer fitxer en "
+#~ "comptes del darrer."
+
+#
+# File: src/preferences.py, line: 203
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr ""
+#~ "En anar al directori anterior, obre automàticament el seu primer fitxer "
+#~ "en comptes del darrer."
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "Ordena els fitxers i directoris per:"
+
+#
+# File: src/filechooser.py, line: 86
+#~ msgid "Sort archives by:"
+#~ msgstr "Ordena els arxius per:"
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr ""
+#~ "Permet que en el mode de projecció s'obri automàticament l'arxiu següent."
 
 #
 # File: src/preferences.py, line: 198

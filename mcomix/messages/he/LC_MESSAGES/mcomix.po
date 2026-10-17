@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mcomix 0.99\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2013-01-07 22:51+0200\n"
 "Last-Translator: Isratine Citizen <genghiskhan@gmx.ca>\n"
 "Language-Team: Hebrew <eliz@gnu.org>\n"
@@ -101,7 +101,7 @@ msgstr "_כן"
 msgid "_No"
 msgstr "_לא"
 
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -281,59 +281,59 @@ msgstr "נא להזין שם חדש עבור קובץ זה."
 msgid "Edit archive"
 msgstr "עריכת ארכיון"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "ה_חלה"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "שמירה _בשם"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "_ייבוא"
 
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "שמירה _בשם"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "ה_חלה"
+
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "תמונות"
 
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "קבצי הערות"
 
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! לא ניתן היה לשמור את הארכיון %(archivefile)s: %(error)s"
 
 # מאחר ונרשם שמירה (saved) בנטיה לעבר, יש הכרח לציין את המילה "היה" (לשמור) בהתאמה
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "לא ניתן היה לשמור את הארכיון החדש!"
 
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "הקבצים הנוכחיים לא הוסרו."
 
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "הארכיונים מאוחסנים כקבציי ZIP."
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "לסגור את הספר שעורך הארכיון עובד עליו?"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
 msgstr "לעורך יש שינויים שלא הוחלו ולא נשמרו. הם ילכו עם הספר."
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "_המשך עריכה"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "_סגירת הספר"
 
@@ -1589,13 +1589,12 @@ msgstr ""
 "המשותפת."
 
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
-msgstr "\"שמירה בשם\" נפתח במדור שאליו נשמר הקובץ האחרון"
+msgid "Save page as opens at the last folder saved into"
+msgstr "\\\"שמירה בשם\\\" נפתח במדור שאליו נשמר הקובץ האחרון"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
-msgstr "פותח את דו־שיח \"שמירה בשם\" במדור שבו נשמר הקובץ האחרון."
+msgid "Open the save dialog at the folder the last page was saved into."
+msgstr "פותח את דו־שיח \\\"שמירה בשם\\\" במדור שבו נשמר הקובץ האחרון."
 
 #: mcomix/preferences_dialog.py:226
 msgid "Save an edited archive in the format it was opened in"
@@ -1752,11 +1751,10 @@ msgstr "בין חוברות"
 msgid "Open the next book past the last page"
 msgstr "פתח את הארכיון הבא אוטומטית"
 
-# past = מעבר = beyond
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "פתח אוטומטית את הארכיון הבא שבמדור הקבצים בעת דפדוף מעבר לעמוד האחרון, או של "
 "הארכיון הקודם בעת דפדוף מעבר לעמוד הראשון."
@@ -1781,9 +1779,7 @@ msgid "Open the previous book at its first page"
 msgstr "פתיחת הקובץ הראשון בעת מעבר לארכיון הקודם"
 
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr ""
 "בעת מעבר לארכיון הקודם ייפתח אוטומטית הקובץ הראשון שבו, במקום הקובץ האחרון."
 
@@ -1792,9 +1788,7 @@ msgid "Open the previous folder at its first page"
 msgstr "פתיחת הקובץ הראשון בעת מעבר למדור הקודם"
 
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr ""
 "בעת מעבר למדור הקודם ייפתח אוטומטית הקובץ הראשון שבו, במקום הקובץ האחרון."
 
@@ -1815,12 +1809,12 @@ msgid "File order"
 msgstr "מסדר קבצים"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "סדר קבצים ומדורים לפי:"
 
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "סדר ארכיונים לפי:"
+msgid "Sort pages inside an archive by:"
+msgstr "סדר עמודים בתוך ארכיון לפי:"
 
 #: mcomix/preferences_dialog.py:349
 msgid "Slideshow"
@@ -1849,8 +1843,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "במהלך מצגת פתח אוטומטית את הארכיון הבא."
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr "בהיותי במצב מצגת פתח אוטומטית את הארכיון הבא."
 
 #: mcomix/preferences_dialog.py:378
@@ -3634,6 +3627,45 @@ msgstr "עם מדורי משנה"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "סרוק חוברות אוטומטית כאשר הספרייה הינה _פתוחה"
+
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "\"שמירה בשם\" נפתח במדור שאליו נשמר הקובץ האחרון"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr "פותח את דו־שיח \"שמירה בשם\" במדור שבו נשמר הקובץ האחרון."
+
+# past = מעבר = beyond
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "פתח אוטומטית את הארכיון הבא שבמדור הקבצים בעת דפדוף מעבר לעמוד האחרון, או "
+#~ "של הארכיון הקודם בעת דפדוף מעבר לעמוד הראשון."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr ""
+#~ "בעת מעבר לארכיון הקודם ייפתח אוטומטית הקובץ הראשון שבו, במקום הקובץ "
+#~ "האחרון."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr ""
+#~ "בעת מעבר למדור הקודם ייפתח אוטומטית הקובץ הראשון שבו, במקום הקובץ האחרון."
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "סדר קבצים ומדורים לפי:"
+
+#~ msgid "Sort archives by:"
+#~ msgstr "סדר ארכיונים לפי:"
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr "בהיותי במצב מצגת פתח אוטומטית את הארכיון הבא."
 
 #~ msgid "During a slideshow automatically open the next archive"
 #~ msgstr "במהלך מצגת פתח אוטומטית את הארכיון הבא."

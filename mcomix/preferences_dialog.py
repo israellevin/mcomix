@@ -218,9 +218,9 @@ class _PreferencesDialog(Dialog):
             'store recent file info',
             _('Add information about all files opened from within MComix to the shared recent files list.')))
 
-        page.add_row(self._create_pref_check_button(_('Save As opens at the last directory saved into'),
+        page.add_row(self._create_pref_check_button(_('Save page as opens at the last folder saved into'),
                                                     'store last saved in directory',
-                                                    _('Open the Save As dialog at the directory in which the last file was saved.')))
+                                                    _('Open the save dialog at the folder the last page was saved into.')))
 
         page.add_row(self._create_pref_check_button(
             _('Save an edited archive in the format it was opened in'),
@@ -316,7 +316,7 @@ class _PreferencesDialog(Dialog):
         page.add_row(self._create_pref_check_button(
             _('Open the next book past the last page'),
             'auto open next archive',
-            _('Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page.')))
+            _('Past the last page, open the next book in the folder; past the first page, the previous one.')))
 
         page.add_row(self._create_pref_check_button(
             _('Go on into the next folder'),
@@ -326,12 +326,12 @@ class _PreferencesDialog(Dialog):
         page.add_row(self._create_pref_check_button(
             _('Open the previous book at its first page'),
             'open first file in prev archive',
-            _('Automatically open the first file of the previous archive when navigating to it, instead of opening the last file of the previous archive.')))
+            _('Open the previous book at its first page rather than at its last.')))
 
         page.add_row(self._create_pref_check_button(
             _('Open the previous folder at its first page'),
             'open first file in prev directory',
-            _('Automatically open the first file of the previous directory when navigating to it, instead of opening the last file of the previous directory.')))
+            _('Open the previous folder at its first page rather than at its last.')))
 
         page.add_row(self._create_pref_check_button(
             _('Open a folder with the folders in it as one book'),
@@ -340,10 +340,10 @@ class _PreferencesDialog(Dialog):
 
         page.new_section(_('File order'))
 
-        page.add_row(Gtk.Label(label=_('Sort files and directories by:')),
+        page.add_row(Gtk.Label(label=_('Sort files in a folder by:')),
                      self._create_sort_by_control())
 
-        page.add_row(Gtk.Label(label=_('Sort archives by:')),
+        page.add_row(Gtk.Label(label=_('Sort pages inside an archive by:')),
                      self._create_archive_sort_by_control())
 
         page.new_section(_('Slideshow'))
@@ -362,7 +362,7 @@ class _PreferencesDialog(Dialog):
         page.add_row(self._create_pref_check_button(
             _('Let the slideshow go on to the next book'),
             'slideshow can go to next archive',
-            _('While in slideshow mode allow the next archive to automatically be opened.')))
+            _('Past the last page during a slideshow, open the next book.')))
 
         return page
 

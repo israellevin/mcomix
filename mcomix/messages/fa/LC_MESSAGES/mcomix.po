@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: comix 3.6.4\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2008-05-21 12:40+0330\n"
 "Last-Translator: Meelad Zakaria <meelad@farsiweb.info>\n"
 "Language-Team: Persian \n"
@@ -101,7 +101,7 @@ msgstr "_بله"
 msgid "_No"
 msgstr "_خیر"
 
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -304,69 +304,69 @@ msgstr "برای این پرونده نام تازه‌ای وارد کنید."
 msgid "Edit archive"
 msgstr "ویرایش بایگانی"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "ا_عمال"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "ذخ_یره با نام"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "_درون‌ریزی"
 
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "ذخ_یره با نام"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "ا_عمال"
+
 #
 # File: src/edit.py, line: 50
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "تصاویر"
 
 #
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "پرونده‌های توضیح"
 
 #
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! ذخیرهٔ بایگانی %(archivefile)s ممکن نشد: %(error)s"
 
 #
 # File: src/edit.py, line: 99
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "ذخیرهٔ بایگانی جدید ممکن نشد!"
 
 #
 # File: src/edit.py, line: 101
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "پرونده‌های اصلی برداشته نشده‌اند."
 
 #
 # File: src/edit.py, line: 115
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "بایگانی‌ها به شکل پرونده‌های ZIP ذخیره می‌شوند."
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "کتابی که ویرایشگر بایگانی روی آن کار می‌کند بسته شود؟"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
 msgstr ""
 "ویرایشگر تغییرهایی دارد که نه اعمال شده‌اند و نه ذخیره. با کتاب از دست می‌روند."
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "_ادامهٔ ویرایش"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "_بستن کتاب"
 
@@ -1785,14 +1785,12 @@ msgstr ""
 "اطلاعات همهٔ پرونده‌های گشوده‌شده در MComix را به فهرست مشترک پرونده‌های اخیر "
 "می‌افزاید."
 
-#
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
+msgid "Save page as opens at the last folder saved into"
 msgstr "«ذخیره به نام» در آخرین شاخهٔ ذخیره گشوده می‌شود"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
+msgid "Open the save dialog at the folder the last page was saved into."
 msgstr ""
 "محاورهٔ «ذخیره به نام» را در شاخه‌ای می‌گشاید که آخرین پرونده در آن ذخیره شده "
 "است."
@@ -1946,12 +1944,10 @@ msgstr "میان کتاب‌ها"
 msgid "Open the next book past the last page"
 msgstr "گشودن خودکار بایگانی بعدی"
 
-#
-# File: src/preferences.py, line: 203
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "هنگام گذشتن از آخرین صفحه، بایگانی بعدی همان شاخه را و هنگام بازگشت از "
 "نخستین صفحه، بایگانی پیشین را به‌طور خودکار می‌گشاید."
@@ -1975,9 +1971,7 @@ msgid "Open the previous book at its first page"
 msgstr "گشودن نخستین پرونده هنگام رفتن به بایگانی پیشین"
 
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr ""
 "هنگام رفتن به بایگانی پیشین، به جای آخرین پرونده، نخستین پروندهٔ آن را به‌طور "
 "خودکار می‌گشاید."
@@ -1987,9 +1981,7 @@ msgid "Open the previous folder at its first page"
 msgstr "گشودن نخستین پرونده هنگام رفتن به شاخهٔ پیشین"
 
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr ""
 "هنگام رفتن به شاخهٔ پیشین، به جای آخرین پرونده، نخستین پروندهٔ آن را به‌طور "
 "خودکار می‌گشاید."
@@ -2011,14 +2003,12 @@ msgid "File order"
 msgstr "ترتیب پرونده‌ها"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "مرتب‌سازی پرونده‌ها و شاخه‌ها بر پایهٔ:"
 
-#
-# File: src/archive.py, line: 302
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "مرتب‌سازی بایگانی‌ها بر پایهٔ:"
+msgid "Sort pages inside an archive by:"
+msgstr "مرتب‌سازی صفحه‌های درون بایگانی بر پایهٔ:"
 
 #
 # File: src/preferences.py, line: 279
@@ -2051,8 +2041,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "در نمایش اسلایدی، بایگانی بعدی به‌طور خودکار گشوده شود"
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr "اجازه می‌دهد در حالت نمایش اسلایدی بایگانی بعدی به‌طور خودکار گشوده شود."
 
 #: mcomix/preferences_dialog.py:378
@@ -4045,6 +4034,53 @@ msgstr "همراه با زیرشاخه‌ها"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "پویش خودکار کتاب‌های تازه هنگام _گشودن کتاب‌خانه"
+
+#
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "«ذخیره به نام» در آخرین شاخهٔ ذخیره گشوده می‌شود"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr ""
+#~ "محاورهٔ «ذخیره به نام» را در شاخه‌ای می‌گشاید که آخرین پرونده در آن ذخیره "
+#~ "شده است."
+
+#
+# File: src/preferences.py, line: 203
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "هنگام گذشتن از آخرین صفحه، بایگانی بعدی همان شاخه را و هنگام بازگشت از "
+#~ "نخستین صفحه، بایگانی پیشین را به‌طور خودکار می‌گشاید."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr ""
+#~ "هنگام رفتن به بایگانی پیشین، به جای آخرین پرونده، نخستین پروندهٔ آن را "
+#~ "به‌طور خودکار می‌گشاید."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr ""
+#~ "هنگام رفتن به شاخهٔ پیشین، به جای آخرین پرونده، نخستین پروندهٔ آن را به‌طور "
+#~ "خودکار می‌گشاید."
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "مرتب‌سازی پرونده‌ها و شاخه‌ها بر پایهٔ:"
+
+#
+# File: src/archive.py, line: 302
+#~ msgid "Sort archives by:"
+#~ msgstr "مرتب‌سازی بایگانی‌ها بر پایهٔ:"
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr ""
+#~ "اجازه می‌دهد در حالت نمایش اسلایدی بایگانی بعدی به‌طور خودکار گشوده شود."
 
 #~ msgid "During a slideshow automatically open the next archive"
 #~ msgstr "در نمایش اسلایدی، بایگانی بعدی به‌طور خودکار گشوده شود"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 1.00-SVN\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2012-08-16 13:10+0900\n"
 "Last-Translator: Toshiharu Kudoh <toshi.kd2@gmail.com>\n"
 "Language-Team: Japanese\n"
@@ -102,7 +102,7 @@ msgstr "はい(_Y)"
 msgid "_No"
 msgstr "いいえ(_N)"
 
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -280,59 +280,59 @@ msgstr "このファイルの新しい名前を入力してください。"
 msgid "Edit archive"
 msgstr "アーカイブファイルを編集"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "適用(_P)"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "別名で保存(_A)"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "インポート(_I)"
 
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "別名で保存(_A)"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "適用(_P)"
+
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "画像"
 
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "コメントファイル"
 
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! アーカイブファイル %(archivefile)s を保存できませんでした: %(error)s"
 
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "新しいアーカイブファイルが保存できませんでした!"
 
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "元のファイルは削除されません。"
 
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "アーカイブファイルは ZIP 形式で保存されます。"
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "書庫エディタが編集中の本を閉じますか?"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
 msgstr ""
 "エディタには、適用も保存もされていない変更があります。本と一緒に失われます。"
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "編集を続ける(_G)"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "本を閉じる(_C)"
 
@@ -1571,12 +1571,11 @@ msgstr ""
 "す。"
 
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
+msgid "Save page as opens at the last folder saved into"
 msgstr "「別名で保存」を最後に保存したディレクトリーで開く"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
+msgid "Open the save dialog at the folder the last page was saved into."
 msgstr ""
 "最後のファイルを保存したディレクトリーで「別名で保存」ダイアログを開きます。"
 
@@ -1736,8 +1735,8 @@ msgstr "自動的に次のアーカイブファイルを開く"
 
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "アーカイブファイルの最後のページの次に進もうとした時には同じディレクトリー内"
 "の次のアーカイブファイルを、或いは最初のページの前に進もうとした時には前の"
@@ -1762,9 +1761,7 @@ msgid "Open the previous book at its first page"
 msgstr "前のアーカイブファイルへ移動したとき最初のファイルを開く"
 
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr ""
 "前のアーカイブファイルへ移動したとき、その最後のファイルではなく最初のファイ"
 "ルを自動的に開きます。"
@@ -1774,9 +1771,7 @@ msgid "Open the previous folder at its first page"
 msgstr "前のディレクトリーへ移動したとき最初のファイルを開く"
 
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr ""
 "前のディレクトリーへ移動したとき、その最後のファイルではなく最初のファイルを"
 "自動的に開きます。"
@@ -1798,12 +1793,12 @@ msgid "File order"
 msgstr "ファイルの順序"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "ファイルとディレクトリーの並び順:"
 
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "アーカイブファイルの並び順:"
+msgid "Sort pages inside an archive by:"
+msgstr "アーカイブファイル内のページの並び順:"
 
 #: mcomix/preferences_dialog.py:349
 msgid "Slideshow"
@@ -1832,8 +1827,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "スライドショーの間、次のアーカイブファイルを自動的に開く"
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr ""
 "スライドショーモードの間、次のアーカイブファイルが自動的に開かれるのを許可し"
 "ます。"
@@ -3614,6 +3608,50 @@ msgstr "サブディレクトリー含む"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "ライブラリーが開かれているとき自動的に新しい本をスキャン(_O)"
+
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "「別名で保存」を最後に保存したディレクトリーで開く"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr ""
+#~ "最後のファイルを保存したディレクトリーで「別名で保存」ダイアログを開きま"
+#~ "す。"
+
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "アーカイブファイルの最後のページの次に進もうとした時には同じディレクトリー"
+#~ "内の次のアーカイブファイルを、或いは最初のページの前に進もうとした時には前"
+#~ "のアーカイブファイルを自動的に開きます。"
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr ""
+#~ "前のアーカイブファイルへ移動したとき、その最後のファイルではなく最初のファ"
+#~ "イルを自動的に開きます。"
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr ""
+#~ "前のディレクトリーへ移動したとき、その最後のファイルではなく最初のファイル"
+#~ "を自動的に開きます。"
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "ファイルとディレクトリーの並び順:"
+
+#~ msgid "Sort archives by:"
+#~ msgstr "アーカイブファイルの並び順:"
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr ""
+#~ "スライドショーモードの間、次のアーカイブファイルが自動的に開かれるのを許可"
+#~ "します。"
 
 #~ msgid "During a slideshow automatically open the next archive"
 #~ msgstr "スライドショーの間、次のアーカイブファイルを自動的に開く"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 1.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2016-09-18 15:30+0300\n"
 "Last-Translator: Zygimantus <zygimantus@gmail.com>\n"
 "Language-Team: \n"
@@ -101,7 +101,7 @@ msgstr "_Taip"
 msgid "_No"
 msgstr "_Ne"
 
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -279,48 +279,48 @@ msgstr "Įveskite naują šio failo pavadinimą."
 msgid "Edit archive"
 msgstr "Keisti archyvą"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "_Pritaikyti"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "Įrašyti t_aip"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "_Importuoti"
 
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "Įrašyti t_aip"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "_Pritaikyti"
+
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "Vaizdai"
 
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "Komentuoti failus"
 
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! Nepavyko išsaugoti archyvo %(archivefile)s: %(error)s"
 
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "Naujo archyvo išsaugoti nepavyko!"
 
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "Pradiniai failai nepašalinti."
 
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "Archyvai išsaugomi kaip ZIP failai."
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "Užverti knygą, su kuria dirba archyvo rengyklė?"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
@@ -328,11 +328,11 @@ msgstr ""
 "Rengyklėje yra pakeitimų, kurie nebuvo nei pritaikyti, nei įrašyti. Jie "
 "dings kartu su knyga."
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "_Tęsti redagavimą"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "_Užverti knygą"
 
@@ -1586,12 +1586,11 @@ msgstr ""
 "failų sąrašą."
 
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
+msgid "Save page as opens at the last folder saved into"
 msgstr "„Išsaugoti kaip“ atveriama paskutiniame naudotame aplanke"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
+msgid "Open the save dialog at the folder the last page was saved into."
 msgstr ""
 "Atveria „Išsaugoti kaip“ langą aplanke, kuriame išsaugotas paskutinis failas."
 
@@ -1753,8 +1752,8 @@ msgstr "Automatiškai atverti kitą archyvą"
 
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "Automatiškai atveria kitą aplanko archyvą, kai pereinama už paskutinio "
 "puslapio, arba ankstesnį archyvą, kai grįžtama prieš pirmą puslapį."
@@ -1778,9 +1777,7 @@ msgid "Open the previous book at its first page"
 msgstr "Pereinant į ankstesnį archyvą atverti pirmą failą"
 
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr ""
 "Pereinant į ankstesnį archyvą automatiškai atveria jo pirmą, o ne paskutinį "
 "failą."
@@ -1790,9 +1787,7 @@ msgid "Open the previous folder at its first page"
 msgstr "Pereinant į ankstesnį aplanką atverti pirmą failą"
 
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr ""
 "Pereinant į ankstesnį aplanką automatiškai atveria jo pirmą, o ne paskutinį "
 "failą."
@@ -1814,12 +1809,12 @@ msgid "File order"
 msgstr "Failų tvarka"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "Rikiuoti failus ir aplankus pagal:"
 
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "Rikiuoti archyvus pagal:"
+msgid "Sort pages inside an archive by:"
+msgstr "Rikiuoti puslapius archyve pagal:"
 
 #: mcomix/preferences_dialog.py:349
 msgid "Slideshow"
@@ -1848,8 +1843,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "Rodant skaidres automatiškai atverti kitą archyvą"
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr "Leidžia skaidrių rodymo veiksenoje automatiškai atverti kitą archyvą."
 
 #: mcomix/preferences_dialog.py:378
@@ -3624,6 +3618,48 @@ msgstr "Su poaplankiais"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatiškai ieškoti naujų knygų kai yra _atidaroma biblioteka"
+
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "„Išsaugoti kaip“ atveriama paskutiniame naudotame aplanke"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr ""
+#~ "Atveria „Išsaugoti kaip“ langą aplanke, kuriame išsaugotas paskutinis "
+#~ "failas."
+
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "Automatiškai atveria kitą aplanko archyvą, kai pereinama už paskutinio "
+#~ "puslapio, arba ankstesnį archyvą, kai grįžtama prieš pirmą puslapį."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr ""
+#~ "Pereinant į ankstesnį archyvą automatiškai atveria jo pirmą, o ne "
+#~ "paskutinį failą."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr ""
+#~ "Pereinant į ankstesnį aplanką automatiškai atveria jo pirmą, o ne "
+#~ "paskutinį failą."
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "Rikiuoti failus ir aplankus pagal:"
+
+#~ msgid "Sort archives by:"
+#~ msgstr "Rikiuoti archyvus pagal:"
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr ""
+#~ "Leidžia skaidrių rodymo veiksenoje automatiškai atverti kitą archyvą."
 
 #~ msgid "During a slideshow automatically open the next archive"
 #~ msgstr "Rodant skaidres automatiškai atverti kitą archyvą"

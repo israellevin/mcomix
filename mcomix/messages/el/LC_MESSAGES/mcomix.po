@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2006-09-27 10:18+0200\n"
 "Last-Translator: Paul Chatzidimitriou <paulmedic555@gmail.com>\n"
 "Language-Team: \n"
@@ -103,7 +103,7 @@ msgstr "_Ναι"
 msgid "_No"
 msgstr "Ό_χι"
 
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -309,58 +309,58 @@ msgstr "Δώστε ένα νέο όνομα για αυτό το αρχείο."
 msgid "Edit archive"
 msgstr "Επεξεργασία αρχείου"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "_Εφαρμογή"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "Αποθήκευση _ως"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "Ει_σαγωγή"
 
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "Αποθήκευση _ως"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "_Εφαρμογή"
+
 #
 # File: src/edit.py, line: 50
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "Εικόνες"
 
 #
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "Αρχεία σχολίων"
 
 #
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! Δεν ήταν δυνατή η αποθήκευση του αρχείου %(archivefile)s: %(error)s"
 
 #
 # File: src/edit.py, line: 99
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "Δεν ήταν δυνατή η αποθήκευση του νέου αρχείου!"
 
 #
 # File: src/edit.py, line: 101
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "Τα αρχικά αρχεία δεν αφαιρέθηκαν."
 
 #
 # File: src/edit.py, line: 115
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "Τα αρχεία αποθηκεύονται ως αρχεία ZIP."
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "Κλείσιμο του βιβλίου στο οποίο εργάζεται ο επεξεργαστής αρχείου;"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
@@ -368,11 +368,11 @@ msgstr ""
 "Ο επεξεργαστής έχει αλλαγές που δεν εφαρμόστηκαν ούτε αποθηκεύτηκαν. "
 "Χάνονται μαζί με το βιβλίο."
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "_Συνέχεια επεξεργασίας"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "_Κλείσιμο του βιβλίου"
 
@@ -1805,14 +1805,12 @@ msgstr ""
 "Προσθέτει πληροφορίες για όλα τα αρχεία που ανοίγονται μέσα από το MComix "
 "στην κοινή λίστα πρόσφατων αρχείων."
 
-#
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
+msgid "Save page as opens at the last folder saved into"
 msgstr "Η «Αποθήκευση ως» ανοίγει στον τελευταίο κατάλογο αποθήκευσης"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
+msgid "Open the save dialog at the folder the last page was saved into."
 msgstr ""
 "Ανοίγει τον διάλογο «Αποθήκευση ως» στον κατάλογο όπου αποθηκεύτηκε το "
 "τελευταίο αρχείο."
@@ -1977,12 +1975,10 @@ msgstr "Μεταξύ βιβλίων"
 msgid "Open the next book past the last page"
 msgstr "Αυτόματο άνοιγμα του επόμενου αρχείου"
 
-#
-# File: src/preferences.py, line: 203
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "Ανοίγει αυτόματα το επόμενο αρχείο του καταλόγου όταν περνάτε την τελευταία "
 "σελίδα, ή το προηγούμενο όταν γυρίζετε πριν την πρώτη."
@@ -2006,9 +2002,7 @@ msgid "Open the previous book at its first page"
 msgstr "Άνοιγμα του πρώτου αρχείου κατά τη μετάβαση στο προηγούμενο αρχείο"
 
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr ""
 "Κατά τη μετάβαση στο προηγούμενο αρχείο ανοίγει αυτόματα το πρώτο του αρχείο "
 "αντί για το τελευταίο."
@@ -2018,9 +2012,7 @@ msgid "Open the previous folder at its first page"
 msgstr "Άνοιγμα του πρώτου αρχείου κατά τη μετάβαση στον προηγούμενο κατάλογο"
 
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr ""
 "Κατά τη μετάβαση στον προηγούμενο κατάλογο ανοίγει αυτόματα το πρώτο του "
 "αρχείο αντί για το τελευταίο."
@@ -2042,14 +2034,12 @@ msgid "File order"
 msgstr "Σειρά αρχείων"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "Ταξινόμηση αρχείων και καταλόγων κατά:"
 
-#
-# File: src/archive.py, line: 302
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "Ταξινόμηση αρχείων κατά:"
+msgid "Sort pages inside an archive by:"
+msgstr "Ταξινόμηση σελίδων μέσα σε αρχείο κατά:"
 
 #
 # File: src/preferences.py, line: 279
@@ -2082,8 +2072,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "Κατά την προβολή εναλλαγής αυτόματο άνοιγμα του επόμενου αρχείου"
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr ""
 "Επιτρέπει στη λειτουργία προβολής εναλλαγής να ανοίγει αυτόματα το επόμενο "
 "αρχείο."
@@ -4121,6 +4110,54 @@ msgstr "Με τους υποκαταλόγους"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Αυτόματη αναζήτηση νέων βιβλίων κατά το άν_οιγμα της βιβλιοθήκης"
+
+#
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "Η «Αποθήκευση ως» ανοίγει στον τελευταίο κατάλογο αποθήκευσης"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr ""
+#~ "Ανοίγει τον διάλογο «Αποθήκευση ως» στον κατάλογο όπου αποθηκεύτηκε το "
+#~ "τελευταίο αρχείο."
+
+#
+# File: src/preferences.py, line: 203
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "Ανοίγει αυτόματα το επόμενο αρχείο του καταλόγου όταν περνάτε την "
+#~ "τελευταία σελίδα, ή το προηγούμενο όταν γυρίζετε πριν την πρώτη."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr ""
+#~ "Κατά τη μετάβαση στο προηγούμενο αρχείο ανοίγει αυτόματα το πρώτο του "
+#~ "αρχείο αντί για το τελευταίο."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr ""
+#~ "Κατά τη μετάβαση στον προηγούμενο κατάλογο ανοίγει αυτόματα το πρώτο του "
+#~ "αρχείο αντί για το τελευταίο."
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "Ταξινόμηση αρχείων και καταλόγων κατά:"
+
+#
+# File: src/archive.py, line: 302
+#~ msgid "Sort archives by:"
+#~ msgstr "Ταξινόμηση αρχείων κατά:"
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr ""
+#~ "Επιτρέπει στη λειτουργία προβολής εναλλαγής να ανοίγει αυτόματα το "
+#~ "επόμενο αρχείο."
 
 #~ msgid "During a slideshow automatically open the next archive"
 #~ msgstr "Κατά την προβολή εναλλαγής αυτόματο άνοιγμα του επόμενου αρχείου"

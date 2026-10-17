@@ -31,7 +31,7 @@ Reopen the last book read | Started without a file, reopen the one open last, at
 Open the library on startup | As `-l` does: the library comes up beside the window, to pick the book there.
 Open files in the window that is already open | A book opened from a file manager or a command line goes to the MComix that is running, which opens it and comes forward; no second one starts. Off by default: each book gets a window. Read at start. A middle click on a bookmark, a recent file or a library cover still opens a window of its own, as `--new-window` does. Needs a D-Bus session bus.
 Remember recently opened files | Keeps File → Recent and each book's last page, which the library's "Recent" collection lists. On by default. Turning it off offers to clear both. The page is stored two seconds after the last page turn, so a crash loses no more than that.
-Save As opens at the last directory saved into | Instead of the book's own directory.
+Save page as opens at the last folder saved into | Instead of the book's own directory.
 Save an edited archive in the format it was opened in | Write it back as the ZIP, tar, 7z or RAR it was read as. 7z and RAR need the `7z` and `rar` programs, which MComix does not install; a format it cannot write is saved as ZIP.
 Comment file extensions | Which files in an archive count as comments. txt, nfo and xml by default.
 Prompts answered for good | Every prompt whose answer can be remembered, with its answer: reopening a part-read book, deleting the open file, bookmarking a book that has bookmarks, deleting books removed from the library, deleting a bookmarked file, changing the pages of the open book, leaving a book with pages picked out. "Do not ask again" sets an answer here; "Ask every time" takes it back.
@@ -56,8 +56,8 @@ Go on into the next folder | Past the last book in the directory, open the next 
 Open the previous book at its first page | Instead of its last file, which is shown from its bottom.
 Open the previous folder at its first page | Instead of its last file.
 Open a folder with the folders in it as one book | A folder is read with the folders in it, two levels down: `Series/Volume/Chapter` opened at `Series` is one book. Its own files come first, then those of each folder in it, in natural order, each folder before the ones in it. Archives are listed the same way. Hidden folders and linked folders are left out. The next directory is then the one beside the folder, not one in it. Off by default. A change reopens the book at the same picture.
-Sort files and directories by | Order of files in a directory: "No sorting", "File name", "File name (GLib)", "File size" or "Last modified", and direction. Not the order inside an archive. A change reopens the book in the new order, at the same picture.
-Sort archives by | Order of files inside an archive, and direction. "Natural order" reads numbers: Page1, Page3, Page20. "Literal order" compares characters: Page1, Page20, Page3. "GLib order" sorts as many GTK programs do. A change reopens the archive in the new order, at the same picture.
+Sort files in a folder by | Order of files in a directory: "No sorting", "File name", "File name (GLib)", "File size" or "Last modified", and direction. Not the order inside an archive. A change reopens the book in the new order, at the same picture.
+Sort pages inside an archive by | Order of files inside an archive, and direction. "Natural order" reads numbers: Page1, Page3, Page20. "Literal order" compares characters: Page1, Page20, Page3. "GLib order" sorts as many GTK programs do. A change reopens the archive in the new order, at the same picture.
 Slideshow delay (in seconds) | 3 by default.
 Slideshow step (in pixels) | How far each slideshow step scrolls: forward if positive, back if negative, a page turn if 0. 50 by default.
 Let the slideshow go on to the next book |

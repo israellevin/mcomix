@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 4.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2009-01-28 13:36+0800\n"
 "Last-Translator: Xie Yanbo <xieyanbo@gmail.com>\n"
 "Language-Team: Xie Yanbo <xieyanbo@gmail.com>\n"
@@ -104,7 +104,7 @@ msgstr "是(_Y)"
 msgid "_No"
 msgstr "否(_N)"
 
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -284,60 +284,60 @@ msgstr "请输入这个文件的新名称。"
 msgid "Edit archive"
 msgstr "编辑文件包"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "应用(_P)"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "另存为(_A)"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "导入(_I)"
 
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "另存为(_A)"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "应用(_P)"
+
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "图像文件"
 
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "注释文件"
 
 #
 # File: src/library.py, line: 271
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! 无法保存文件包 %(archivefile)s：%(error)s"
 
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "无法保存新的文件包！"
 
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "原始文件没有被删除。"
 
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "文件包以ZIP格式保存。"
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "要关闭压缩包编辑器正在处理的书吗？"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
 msgstr "编辑器中有尚未应用也未保存的更改。它们会随书一起消失。"
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "继续编辑(_G)"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "关闭这本书(_C)"
 
@@ -1567,12 +1567,11 @@ msgid ""
 msgstr "把所有 MComix 打开过的文件信息添加到最近文件列表中。"
 
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
+msgid "Save page as opens at the last folder saved into"
 msgstr "“另存为”总是打开上次保存的目录"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
+msgid "Open the save dialog at the folder the last page was saved into."
 msgstr "在上次保存文件所在的目录中打开“另存为”对话框。"
 
 #: mcomix/preferences_dialog.py:226
@@ -1718,8 +1717,8 @@ msgstr "自动打开下一个文件包"
 
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "当翻过最后一页时，自动打开当前目录的下一个文件包；或翻过第一页时，自动打开上"
 "一个文件包。"
@@ -1742,9 +1741,7 @@ msgid "Open the previous book at its first page"
 msgstr "打开上一个文件包的时候，打开第一个文件"
 
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr "转到上一个文件包时自动打开它的第一个文件，而不是最后一个文件。"
 
 #: mcomix/preferences_dialog.py:332
@@ -1752,9 +1749,7 @@ msgid "Open the previous folder at its first page"
 msgstr "打开上一个目录的时候，打开第一个文件"
 
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr "转到上一个目录时自动打开它的第一个文件，而不是最后一个文件。"
 
 #: mcomix/preferences_dialog.py:337
@@ -1774,12 +1769,12 @@ msgid "File order"
 msgstr "文件顺序"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "文件和目录排序依据："
 
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "文件包排序依据："
+msgid "Sort pages inside an archive by:"
+msgstr "文件包内页面排序依据："
 
 #: mcomix/preferences_dialog.py:349
 msgid "Slideshow"
@@ -1807,8 +1802,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "幻灯片模式下自动打开下一个文件包"
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr "幻灯片模式下允许自动打开下一个文件包。"
 
 #: mcomix/preferences_dialog.py:378
@@ -3531,6 +3525,41 @@ msgstr "包含子目录"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "当打开收藏库时自动扫描新书(_O)"
+
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "“另存为”总是打开上次保存的目录"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr "在上次保存文件所在的目录中打开“另存为”对话框。"
+
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "当翻过最后一页时，自动打开当前目录的下一个文件包；或翻过第一页时，自动打开"
+#~ "上一个文件包。"
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr "转到上一个文件包时自动打开它的第一个文件，而不是最后一个文件。"
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr "转到上一个目录时自动打开它的第一个文件，而不是最后一个文件。"
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "文件和目录排序依据："
+
+#~ msgid "Sort archives by:"
+#~ msgstr "文件包排序依据："
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr "幻灯片模式下允许自动打开下一个文件包。"
 
 #~ msgid "During a slideshow automatically open the next archive"
 #~ msgstr "幻灯片模式下自动打开下一个文件包"

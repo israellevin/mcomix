@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 4.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:26+0200\n"
+"POT-Creation-Date: 2026-10-17 06:29+0200\n"
 "PO-Revision-Date: 2009-01-26 19:34+0100\n"
 "Last-Translator: Ernő Drabik <drerno@gmail.com>\n"
 "Language-Team: \n"
@@ -95,7 +95,7 @@ msgstr "_Igen"
 msgid "_No"
 msgstr "_Nem"
 
-#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:59
+#: mcomix/bookmark_backend.py:460 mcomix/edit_dialog.py:64
 #: mcomix/file_actions.py:952 mcomix/file_actions.py:1118
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
@@ -273,48 +273,48 @@ msgstr "Adja meg a fájl új nevét."
 msgid "Edit archive"
 msgstr "Archívum szerkesztése"
 
-#: mcomix/edit_dialog.py:61
-msgid "A_pply"
-msgstr "_Alkalmaz"
-
-#: mcomix/edit_dialog.py:76
-msgid "Save _As"
-msgstr "Men_tés másként"
-
-#: mcomix/edit_dialog.py:78
+#: mcomix/edit_dialog.py:62
 msgid "_Import"
 msgstr "_Importálás"
 
-#: mcomix/edit_dialog.py:109 mcomix/preferences_dialog.py:422
+#: mcomix/edit_dialog.py:65
+msgid "Save _As"
+msgstr "Men_tés másként"
+
+#: mcomix/edit_dialog.py:66
+msgid "A_pply"
+msgstr "_Alkalmaz"
+
+#: mcomix/edit_dialog.py:110 mcomix/preferences_dialog.py:422
 msgid "Images"
 msgstr "Képek"
 
-#: mcomix/edit_dialog.py:110
+#: mcomix/edit_dialog.py:111
 msgid "Comment files"
 msgstr "Megjegyzésfájlok"
 
-#: mcomix/edit_dialog.py:251 mcomix/file_actions.py:680
+#: mcomix/edit_dialog.py:252 mcomix/file_actions.py:680
 #, python-format
 msgid "! Could not save the archive %(archivefile)s: %(error)s"
 msgstr "! Nem sikerült menteni a(z) %(archivefile)s archívumot: %(error)s"
 
-#: mcomix/edit_dialog.py:264 mcomix/file_actions.py:685
+#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:685
 msgid "The new archive could not be saved!"
 msgstr "Nem lehet elmenteni az új arhívumot!"
 
-#: mcomix/edit_dialog.py:265 mcomix/file_actions.py:686
+#: mcomix/edit_dialog.py:266 mcomix/file_actions.py:686
 msgid "The original files have not been removed."
 msgstr "Az eredeti fájlok megmaradtak."
 
-#: mcomix/edit_dialog.py:368
+#: mcomix/edit_dialog.py:369
 msgid "Archives are stored as ZIP files."
 msgstr "Az arhívumok ZIP állományként lesznek tárolva."
 
-#: mcomix/edit_dialog.py:452
+#: mcomix/edit_dialog.py:453
 msgid "Close the book the archive editor is working on?"
 msgstr "Bezárja a könyvet, amelyen az archívumszerkesztő dolgozik?"
 
-#: mcomix/edit_dialog.py:453
+#: mcomix/edit_dialog.py:454
 msgid ""
 "The editor holds changes that have not been applied or saved. They go with "
 "the book."
@@ -322,11 +322,11 @@ msgstr ""
 "A szerkesztőben olyan változások vannak, amelyeket nem alkalmaztak és nem "
 "mentettek. A könyvvel együtt elvesznek."
 
-#: mcomix/edit_dialog.py:455
+#: mcomix/edit_dialog.py:456
 msgid "_Go on editing"
 msgstr "_Szerkesztés folytatása"
 
-#: mcomix/edit_dialog.py:456
+#: mcomix/edit_dialog.py:457
 msgid "_Close the book"
 msgstr "Könyv _bezárása"
 
@@ -1585,12 +1585,11 @@ msgstr ""
 "fájlok listájához."
 
 #: mcomix/preferences_dialog.py:221
-msgid "Save As opens at the last directory saved into"
+msgid "Save page as opens at the last folder saved into"
 msgstr "A „Mentés másként” a legutóbb használt mappában nyílik meg"
 
 #: mcomix/preferences_dialog.py:223
-msgid ""
-"Open the Save As dialog at the directory in which the last file was saved."
+msgid "Open the save dialog at the folder the last page was saved into."
 msgstr ""
 "A „Mentés másként” ablakot abban a mappában nyitja meg, ahová a legutóbbi "
 "fájl mentve lett."
@@ -1754,8 +1753,8 @@ msgstr "A következő archívum automatikus megnyitása"
 
 #: mcomix/preferences_dialog.py:319
 msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
+"Past the last page, open the next book in the folder; past the first page, "
+"the previous one."
 msgstr ""
 "Automatikusan megnyitja a következő arhívumot, ha az aktuális utolsó lapját "
 "elhagyjuk, illetve az előzőt, ha az első kép elé lépünk."
@@ -1779,9 +1778,7 @@ msgid "Open the previous book at its first page"
 msgstr "Az első fájl megnyitása az előző archívumra lépéskor"
 
 #: mcomix/preferences_dialog.py:329
-msgid ""
-"Automatically open the first file of the previous archive when navigating to "
-"it, instead of opening the last file of the previous archive."
+msgid "Open the previous book at its first page rather than at its last."
 msgstr ""
 "Az előző archívumra lépéskor automatikusan annak első fájlját nyitja meg az "
 "utolsó helyett."
@@ -1791,9 +1788,7 @@ msgid "Open the previous folder at its first page"
 msgstr "Az első fájl megnyitása az előző mappára lépéskor"
 
 #: mcomix/preferences_dialog.py:334
-msgid ""
-"Automatically open the first file of the previous directory when navigating "
-"to it, instead of opening the last file of the previous directory."
+msgid "Open the previous folder at its first page rather than at its last."
 msgstr ""
 "Az előző mappára lépéskor automatikusan annak első fájlját nyitja meg az "
 "utolsó helyett."
@@ -1815,12 +1810,12 @@ msgid "File order"
 msgstr "Fájlsorrend"
 
 #: mcomix/preferences_dialog.py:343
-msgid "Sort files and directories by:"
+msgid "Sort files in a folder by:"
 msgstr "Fájlok és mappák rendezése eszerint:"
 
 #: mcomix/preferences_dialog.py:346
-msgid "Sort archives by:"
-msgstr "Archívumok rendezése eszerint:"
+msgid "Sort pages inside an archive by:"
+msgstr "Az archívumon belüli oldalak rendezése eszerint:"
 
 #: mcomix/preferences_dialog.py:349
 msgid "Slideshow"
@@ -1849,8 +1844,7 @@ msgid "Let the slideshow go on to the next book"
 msgstr "Diavetítés közben a következő archívum automatikus megnyitása"
 
 #: mcomix/preferences_dialog.py:365
-msgid ""
-"While in slideshow mode allow the next archive to automatically be opened."
+msgid "Past the last page during a slideshow, open the next book."
 msgstr ""
 "Engedélyezi, hogy diavetítés módban automatikusan megnyíljon a következő "
 "archívum."
@@ -3648,6 +3642,49 @@ msgstr "Almappákkal együtt"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Új könyvek automatikus keresése a könyvtár _megnyitásakor"
+
+#~ msgid "Save As opens at the last directory saved into"
+#~ msgstr "A „Mentés másként” a legutóbb használt mappában nyílik meg"
+
+#~ msgid ""
+#~ "Open the Save As dialog at the directory in which the last file was saved."
+#~ msgstr ""
+#~ "A „Mentés másként” ablakot abban a mappában nyitja meg, ahová a legutóbbi "
+#~ "fájl mentve lett."
+
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when flipping past "
+#~ "the last page, or the previous archive when flipping past the first page."
+#~ msgstr ""
+#~ "Automatikusan megnyitja a következő arhívumot, ha az aktuális utolsó "
+#~ "lapját elhagyjuk, illetve az előzőt, ha az első kép elé lépünk."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous archive when navigating "
+#~ "to it, instead of opening the last file of the previous archive."
+#~ msgstr ""
+#~ "Az előző archívumra lépéskor automatikusan annak első fájlját nyitja meg "
+#~ "az utolsó helyett."
+
+#~ msgid ""
+#~ "Automatically open the first file of the previous directory when "
+#~ "navigating to it, instead of opening the last file of the previous "
+#~ "directory."
+#~ msgstr ""
+#~ "Az előző mappára lépéskor automatikusan annak első fájlját nyitja meg az "
+#~ "utolsó helyett."
+
+#~ msgid "Sort files and directories by:"
+#~ msgstr "Fájlok és mappák rendezése eszerint:"
+
+#~ msgid "Sort archives by:"
+#~ msgstr "Archívumok rendezése eszerint:"
+
+#~ msgid ""
+#~ "While in slideshow mode allow the next archive to automatically be opened."
+#~ msgstr ""
+#~ "Engedélyezi, hogy diavetítés módban automatikusan megnyíljon a következő "
+#~ "archívum."
 
 #~ msgid "During a slideshow automatically open the next archive"
 #~ msgstr "Diavetítés közben a következő archívum automatikus megnyitása"
