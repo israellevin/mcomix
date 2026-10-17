@@ -7,6 +7,8 @@ from mcomix import tools
 
 APPNAME = 'MComix'
 VERSION = '26.09'
+#: The manual: docs/ in the tree, as GitHub Pages publishes it.
+MANUAL_URL = 'https://twwn.github.io/mcomix/docs/'
 
 HOME_DIR = tools.get_home_directory()
 CONFIG_DIR = tools.get_config_directory()

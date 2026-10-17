@@ -206,11 +206,11 @@ class ManualTest(unittest.TestCase):
 
     #: The menu items the page tells the reader to use, all of which
     #: ui.py builds: the View menu's, the ones that edit a book, and the
-    #: Tools menu's.
+    #: Image menu's.
     QUOTED_MENU_ITEMS = ('Toolbar', 'Menubar', 'Statusbar', 'Scrollbars',
                          'Hide all', 'Stretch small images',
                          'Edit archive', 'Delete page', 'Undo',
-                         'Enhance image', 'Transform image',
+                         'Enhance image', 'Invert image colors',
                          'Keep transformation', 'Auto-rotate image')
 
     #: The labels of the dialogs the page describes, which live in the

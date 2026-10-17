@@ -126,6 +126,9 @@ BINDING_INFO: "dict[str, dict[str, str]]" = {
 
     'osd_panel': {'title': _('OSD panel'), 'group': _('User interface')},
     'minimize': {'title': _('Minimize'), 'group': _('User interface')},
+    'manual': {'title': _('Manual'), 'group': _('User interface')},
+    'shortcuts': {'title': _('Keyboard shortcuts'),
+                  'group': _('User interface')},
     'fullscreen': {'title': _('Fullscreen'), 'group': _('User interface')},
     'toolbar': {'title': _('Toolbar'), 'group': _('User interface')},
     'menubar': {'title': _('Menubar'), 'group': _('User interface')},

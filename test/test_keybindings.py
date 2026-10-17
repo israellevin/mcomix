@@ -511,6 +511,8 @@ class DocumentedKeyBindingsTest(MComixTest):
         'Show/hide thumbnails': 'thumbnails',
         'Hide/show all UI elements': 'hide_all',
         'Preferences': 'preferences',
+        'Manual': 'manual',
+        'Keyboard shortcuts': 'shortcuts',
         'Archive comments': 'comments',
         'Properties': 'properties',
         'Enhance image': 'enhance_image',
@@ -542,6 +544,7 @@ class DocumentedKeyBindingsTest(MComixTest):
         'Minus': 'minus',
         'Equal': 'equal',
         'Space': 'space',
+        '?': 'question',
     }
 
     #: What the page puts in front of a keypad key's name.

@@ -440,6 +440,14 @@ class EventHandler:
                          ['F12'],
                          self._window.actiongroup.get_action('preferences').activate)
 
+        manager.register('manual',
+                         ['F1'],
+                         self._window.actiongroup.get_action('manual').activate)
+
+        manager.register('shortcuts',
+                         ['<Control>question'],
+                         self._window.actiongroup.get_action('shortcuts').activate)
+
         manager.register('edit_archive',
                          [],
                          self._window.actiongroup.get_action('edit_archive').activate)

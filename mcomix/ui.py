@@ -311,48 +311,59 @@ class Actions:
 type _Layout = "Sequence[str | None | tuple[str, _Layout]]"
 
 
+#: What turns or flips the page, and the rest of what is done to how it
+#: looks: the menu bar's Image menu and the right-click menu's submenu
+#: of the same name.
+_IMAGE = ('rotate_90', 'rotate_270', 'rotate_180', None,
+          'flip_horiz', 'flip_vert', None,
+          ('menu_autorotate', ('no_autorotation', None,
+                               'menu_autorotate_height', None,
+                               'rotate_90_height', 'rotate_270_height', None,
+                               'menu_autorotate_width', None,
+                               'rotate_90_width', 'rotate_270_width')),
+          'keep_transformation', None,
+          'invert_color', 'enhance_image')
+
+#: How the pages are laid out and drawn: the View menu, and the
+#: right-click menu's View submenu.
+_VIEW = ('fullscreen', None,
+         'double_page', 'title_page_alone', 'manga_mode', 'continuous_mode',
+         None,
+         'best_fit_mode', 'fit_width_mode', 'fit_height_mode',
+         'fit_size_mode', 'fit_manual_mode', None,
+         ('menu_zoom', ('zoom_in', 'zoom_out', 'zoom_original')),
+         'stretch', None,
+         'lens', 'slideshow', None,
+         ('menu_toolbars', ('menubar', 'toolbar', 'statusbar',
+                            'scrollbar', 'thumbnails', None,
+                            'hide_all')))
+
+#: Moving through the book and on to the next: the Go menu and the
+#: right-click menu's Go submenu.  Smart scrolling is how the keys and
+#: the wheel move through a page, so which way it goes is chosen here.
+_GO = ('next_page', 'previous_page', 'go_to',
+       'first_page', 'last_page', None,
+       'next_archive', 'previous_archive', None,
+       'next_directory', 'previous_directory', None,
+       'invert_scroll')
+
 #: The menu bar.  None is a separator, and a pair is a submenu.
 _MENUBAR = (
     ('menu_file', ('open', 'menu_recent', 'library', None,
-                   'extract_page', 'refresh_archive', 'properties', None,
+                   'extract_page', 'properties', 'comments', None,
                    'menu_open_with', 'open_containing_folder', None,
+                   'refresh_archive', None,
                    'delete', 'delete_permanently', None,
-                   'about', None,
-                   'minimize', 'close', 'save_and_quit', 'quit')),
-    ('menu_edit', ('undo', 'redo', 'unpick_pages', None,
-                   'copy_page', None,
-                   'edit_archive', 'comments', None,
+                   'close', 'save_and_quit', 'quit')),
+    ('menu_edit', ('undo', 'redo', None,
+                   'copy_page', 'unpick_pages', None,
+                   'edit_archive', None,
                    'preferences')),
-    ('menu_view', ('fullscreen', 'double_page', 'title_page_alone', 'manga_mode',
-                   'continuous_mode', None,
-                   'best_fit_mode', 'fit_width_mode', 'fit_height_mode',
-                   'fit_size_mode', 'fit_manual_mode', None,
-                   'slideshow', None,
-                   'stretch', 'invert_scroll', 'lens',
-                   ('menu_zoom', ('zoom_in', 'zoom_out', 'zoom_original')),
-                   None,
-                   ('menu_toolbars', ('menubar', 'toolbar', 'statusbar',
-                                      'scrollbar', 'thumbnails', None,
-                                      'hide_all')))),
-    ('menu_go', ('next_page', 'previous_page', 'go_to',
-                 'first_page', 'last_page', None,
-                 'next_archive', 'previous_archive', None,
-                 'next_directory', 'previous_directory')),
+    ('menu_view', _VIEW),
+    ('menu_go', _GO),
     'menu_bookmarks',
-    ('menu_tools', ('enhance_image',
-                    ('menu_transform', ('rotate_90', 'rotate_270',
-                                        'rotate_180', None,
-                                        ('menu_autorotate',
-                                         ('no_autorotation', None,
-                                          'menu_autorotate_height', None,
-                                          'rotate_90_height',
-                                          'rotate_270_height', None,
-                                          'menu_autorotate_width', None,
-                                          'rotate_90_width',
-                                          'rotate_270_width')),
-                                        None,
-                                        'flip_horiz', 'flip_vert', None,
-                                        'keep_transformation')))),
+    ('menu_image', _IMAGE),
+    ('menu_help', ('manual', 'shortcuts', None, 'about')),
 )
 
 #: The right-click menu.  An item of its top level that is disabled is
@@ -372,23 +383,9 @@ _POPUP = (
     'page_alone_popup', 'library_cover_popup', 'remove_bookmark_popup',
     'unpick_pages',
     None,
-    ('menu_go_popup', ('next_page', 'previous_page', 'go_to',
-                       'first_page', 'last_page', None,
-                       'next_archive', 'previous_archive', None,
-                       'next_directory', 'previous_directory')),
-    ('menu_view_popup', ('fullscreen', 'double_page', 'title_page_alone', 'manga_mode',
-                         'continuous_mode', None,
-                         'best_fit_mode', 'fit_width_mode', 'fit_height_mode',
-                         'fit_size_mode', 'fit_manual_mode', None,
-                         'slideshow', None,
-                         'enhance_image', None,
-                         'stretch', 'invert_scroll', 'lens',
-                         ('menu_zoom', ('zoom_in', 'zoom_out',
-                                        'zoom_original')),
-                         None,
-                         ('menu_toolbars', ('menubar', 'toolbar', 'statusbar',
-                                            'scrollbar', 'thumbnails', None,
-                                            'hide_all')))),
+    ('menu_go_popup', _GO),
+    ('menu_view_popup', _VIEW),
+    ('menu_image_popup', _IMAGE),
     'menu_bookmarks_popup',
     None,
     'open', 'menu_recent', 'library',
@@ -487,7 +484,6 @@ class MainUI:
             _Entry('zoom_in', 'zoom-in', _('Zoom _In'), None, window.manual_zoom_in),
             _Entry('zoom_out', 'zoom-out', _('Zoom _Out'), None, window.manual_zoom_out),
             _Entry('zoom_original', 'zoom-original', _('_Normal Size'), None, window.manual_zoom_original),
-            _Entry('minimize', 'view-restore', _('Mi_nimize'), None, window.minimize),
             _Entry('leave_fullscreen', 'view-restore-symbolic', _('Leave fullscreen'), None,
                    _action_lambda(self._leave_fullscreen)),
             _Entry('close', 'window-close', _('_Close'), _('Closes all opened files.'), _action_lambda(window.filehandler.close_file)),
@@ -517,8 +513,14 @@ class MainUI:
             _Entry('menu_view_popup', 'mcomix-image', _('_View')),
             _Entry('menu_go', None, _('_Go')),
             _Entry('menu_go_popup', 'go-next', _('_Go')),
-            _Entry('menu_tools', None, _('_Tools')),
-            _Entry('menu_transform', 'mcomix-transform', _('_Transform image')),
+            _Entry('menu_image', None, _('_Image')),
+            # The top level of the right-click menu has no letter left
+            # for it in several languages, as for the items without one
+            # above it.
+            _Entry('menu_image_popup', 'mcomix-transform', _('Image')),
+            _Entry('menu_help', None, _('_Help')),
+            _Entry('manual', 'help-browser', _('_Manual'), None,
+                   _action_lambda(self._open_manual)),
             _Entry('menu_autorotate', None, _('_Auto-rotate image')),
             _Entry('menu_autorotate_width', None, _('...when width exceeds height')),
             _Entry('menu_autorotate_height', None, _('...when height exceeds width')),
@@ -583,7 +585,9 @@ class MainUI:
             _Entry('properties', 'document-properties', _('Proper_ties'), None, dialog_handler.open_dialog)], (window, 'properties-dialog'))
 
         self._actions.add_with_data([
-            _Entry('preferences', 'preferences-system', _('_Preferences'), None, preferences_dialog.open_dialog)], window)
+            _Entry('preferences', 'preferences-system', _('_Preferences'), None, preferences_dialog.open_dialog),
+            _Entry('shortcuts', 'preferences-desktop-keyboard-shortcuts', _('_Keyboard shortcuts'), None,
+                   preferences_dialog.open_shortcuts)], window)
 
         # Some actions added separately since they need extra arguments.
         self._actions.add_with_data([
@@ -679,6 +683,26 @@ class MainUI:
         page = self._window.popup_page
         if page is not None:
             bookmark_backend.BookmarksStore.remove_for_page(page)
+
+    def _open_manual(self) -> None:
+        """Open the manual, which is the docs folder as GitHub Pages
+        publishes it, in the program the desktop opens web pages with."""
+        launcher = Gtk.UriLauncher.new(constants.MANUAL_URL)
+        launcher.launch(self._window, None,
+                        lambda _source, result: self._manual_shown(
+                            launcher, result))
+
+    def _manual_shown(self, launcher: Gtk.UriLauncher,
+                      result: Gio.AsyncResult) -> None:
+        try:
+            launcher.launch_finish(result)
+        except GLib.Error as error:
+            if any(error.matches(Gtk.dialog_error_quark(), code)
+                   for code in (Gtk.DialogError.DISMISSED,
+                                Gtk.DialogError.CANCELLED)):
+                return
+            self._window.osd.show(_('Could not open the manual: %s')
+                                  % error.message)
 
     def _leave_fullscreen(self) -> None:
         """Turn the fullscreen toggle off, which leaves fullscreen."""

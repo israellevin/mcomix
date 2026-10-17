@@ -1253,6 +1253,16 @@ def open_dialog(action: Gio.SimpleAction, window: "main.MainWindow") -> None:
         _dialog.present()
 
 
+def open_shortcuts(action: Gio.SimpleAction,
+                   window: "main.MainWindow") -> None:
+    """Open the preference dialog on its Shortcuts tab, which is where
+    every key MComix answers to is listed."""
+    open_dialog(action, window)
+    if _dialog is not None:
+        _dialog.notebook.set_current_page(
+            _dialog.notebook.page_num(_dialog.shortcuts))
+
+
 def _close_dialog() -> None:
 
     global _dialog

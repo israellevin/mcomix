@@ -93,6 +93,8 @@ To quit with Escape, give it to Quit in the editor below. While pages are picked
 Function | Binding
 ---------|--------
 Preferences | F12
+Manual | F1
+Keyboard shortcuts | CTRL+?
 Archive comments | C
 Properties | ALT+Return
 Enhance image | E
