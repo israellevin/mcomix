@@ -1667,9 +1667,9 @@ class MainWindow(Gtk.Window):
 
     @staticmethod
     def _follow_device_scale(window: "MainWindow") -> None:
-        """Draw the pages again when the window moves to a screen of
-        another scale, or the desktop's scale changes: they were scaled
-        to the screen's pixels.
+        """Draw the pages and the thumbnails again when the window moves
+        to a screen of another scale, or the desktop's scale changes:
+        they were made with the screen's pixels.
 
         The handler holds the window weakly: GDK can keep the surface
         a while after the window is unrealized, and a handler holding
@@ -1683,6 +1683,7 @@ class MainWindow(Gtk.Window):
             still = held()
             if still is not None:
                 still.draw_image()
+                still.thumbnailsidebar.resize()
 
         surface.connect('notify::scale', rescaled)
 

@@ -286,6 +286,9 @@ class ThumbnailSidebar(Gtk.ScrolledWindow, widgets.Releasable):
             return
 
         self.toggle_page_numbers_visible()
+        # Asked here rather than once: the window has no surface to ask
+        # until it is shown, and resize() comes here when it changes.
+        self._list.device_scale = self._window.device_scale()
 
         # One row per page, numbered from 1.  The thumbnails themselves
         # are made as their rows come on screen.
@@ -314,7 +317,9 @@ class ThumbnailSidebar(Gtk.ScrolledWindow, widgets.Releasable):
         """
         assert isinstance(uid, int)
         page = uid
-        size = self._thumbnail_size
+        # Made with the screen's pixels, and drawn at the window's.
+        scale = self._list.device_scale
+        size = round(self._thumbnail_size * scale)
         pixbuf = self._window.imagehandler.get_thumbnail(page, size, size,
                                                          nowait=True)
         if pixbuf is not None and image_tools.is_missing_image(pixbuf):
@@ -323,7 +328,8 @@ class ThumbnailSidebar(Gtk.ScrolledWindow, widgets.Releasable):
                 GLib.idle_add(self._found_broken, path)
         if pixbuf is not None:
             pixbuf = self._window.enhancer.enhance(pixbuf)
-            pixbuf = image_tools.add_border(pixbuf, self._BORDER_SIZE)
+            pixbuf = image_tools.add_border(
+                pixbuf, max(1, round(self._BORDER_SIZE * scale)))
 
         return pixbuf
 
