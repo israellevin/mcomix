@@ -71,6 +71,40 @@ class Chooser[V](Gtk.DropDown):
                      lambda widget, _param: changed(widget))
 
 
+# pygobject-stubs declares props on GObject.Object and on the
+# interface base with signatures that do not match.
+class ScaledTexture(GObject.Object, Gdk.Paintable):  # type: ignore[misc, unused-ignore]
+
+    """A picture made with the screen's pixels, where there are more of
+    them than the window's, drawn at the window's size: GTK draws a
+    texture one of its pixels to one of the window's, so a picture made
+    for the window alone was enlarged and blurred."""
+
+    __gtype_name__ = 'MComixScaledTexture'
+
+    def __init__(self, texture: Gdk.Texture, scale: float) -> None:
+        super().__init__()
+        self.texture = texture
+        self._width = max(1, round(texture.get_width() / scale))
+        self._height = max(1, round(texture.get_height() / scale))
+
+    def do_get_intrinsic_width(self) -> int:
+        return self._width
+
+    def do_get_intrinsic_height(self) -> int:
+        return self._height
+
+    def do_snapshot(self, snapshot: Gtk.Snapshot, width: float,
+                    height: float) -> None:
+        self.texture.snapshot(snapshot, width, height)
+
+
+def at_scale(texture: Gdk.Texture, scale: float) -> Gdk.Paintable:
+    """<texture>, made with <scale> of the screen's pixels to each of the
+    window's, as a paintable of the size it is to be shown at."""
+    return texture if scale == 1 else ScaledTexture(texture, scale)
+
+
 def pack(box: Gtk.Box, child: Gtk.Widget, expand: bool = False,
          fill: bool = True, padding: int = 0, end: bool = False) -> None:
     """Add <child> to <box>, the way Gtk.Box.pack_start/pack_end did.

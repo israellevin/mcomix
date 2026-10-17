@@ -197,11 +197,15 @@ class _PropertiesDialog(Dialog):
                            page_number: int | None = None) -> None:
         if not self._window.imagehandler.page_is_available(page_number):
             return
-        thumb = self._window.imagehandler.get_thumbnail(page_number, width=128, height=128)
+        # 128 of the window's pixels, made with the screen's.
+        scale = self._window.device_scale()
+        side = int(round(128 * scale))
+        thumb = self._window.imagehandler.get_thumbnail(page_number,
+                                                        width=side, height=side)
         if thumb is None:
             # The page is there but its thumbnail could not be made.
             return
-        page.set_thumbnail(thumb)
+        page.set_thumbnail(thumb, scale)
 
     def _update_page_secondary_info(
             self, page: properties_page._Page, location: str,

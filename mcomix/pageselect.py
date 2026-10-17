@@ -151,31 +151,35 @@ class Pageselector(Dialog):
 
     def _update_thumbnail(self, page: int) -> None:
         """ Trigger a thumbnail update. """
-        width = self._image_preview.get_width()
-        height = self._image_preview.get_height()
+        # The picture's size in the screen's pixels, which is what the
+        # preview is made with.
+        scale = self._window.device_scale()
+        width = int(round(self._image_preview.get_width() * scale))
+        height = int(round(self._image_preview.get_height() * scale))
         self._thumbnail_page = page
         self._thread.clear_orders()
-        self._thread.append_order((page, width, height))
+        self._thread.append_order((page, width, height, scale))
 
-    def _generate_thumbnail(self, params: tuple[int, int, int]) -> None:
+    def _generate_thumbnail(self, params: tuple[int, int, int, float]) -> None:
         """ Generate the preview thumbnail for the page selector.
         A page that is not available yet has no thumbnail, and the
         preview is then left empty. """
-        page, width, height = params
+        page, width, height, scale = params
 
         pixbuf = self._window.imagehandler.get_thumbnail(page,
                                                          width=width, height=height, nowait=True)
-        self._thumbnail_finished(page, pixbuf)
+        self._thumbnail_finished(page, pixbuf, scale)
 
     @callback.Callback
     def _thumbnail_finished(self, page: int,
-                            pixbuf: "GdkPixbuf.Pixbuf | None") -> None:
+                            pixbuf: "GdkPixbuf.Pixbuf | None",
+                            scale: float = 1) -> None:
         # Don't bother if we changed page in the meantime.
         if page == self._thumbnail_page:
             # get_thumbnail() answers None for a page that has not been
             # extracted yet, which is nothing to make a texture of.
             self._image_preview.set_paintable(
-                image_tools.pixbuf_to_texture(pixbuf)
+                widgets.at_scale(image_tools.pixbuf_to_texture(pixbuf), scale)
                 if pixbuf is not None else None)
 
     def _page_available(self, page: int) -> None:

@@ -19,6 +19,9 @@ from mcomix import edit_image_area
 from mcomix import icons
 from mcomix import keybindings
 from mcomix import main
+from mcomix import pageselect
+from mcomix import properties_page
+from mcomix import widgets
 from mcomix import thumbnail_list
 from mcomix.preferences import prefs
 
@@ -195,6 +198,75 @@ class EditorScaleTest(MComixTest):
         area = self._area_at(1.0)
         self.assertEqual(1.0, area._grid.device_scale)
         self.assertEqual(area._thumbnail_size, area._made_size)
+
+
+
+class PreviewScaleTest(MComixTest):
+
+    """The previews in the page selector and the properties dialog, made
+    with the screen's pixels and drawn at the window's size."""
+
+    def setUp(self):
+        super().setUp()
+        for directory in (constants.CONFIG_DIR, constants.DATA_DIR,
+                          constants.THUMBNAIL_PATH):
+            os.makedirs(directory, exist_ok=True)
+        icons.load_icons()
+        self.window = main.MainWindow(open_path=get_testfile_path(
+            'pepper-and-carrot',
+            'Pepper-and-Carrot_E01_The-Potion-of-Flight.cbz'))
+        main.set_main_window(self.window)
+        self.assertTrue(wait_for(
+            lambda: self.window.imagehandler.page_is_available(1),
+            seconds=20))
+        self.dialog = None
+
+    def tearDown(self):
+        if self.dialog is not None:
+            if hasattr(self.dialog, '_stop_thumbnailing'):
+                self.dialog._stop_thumbnailing()
+            self.dialog.destroy()
+        self.window.terminate_program()
+        self.window.destroy()
+        main.set_main_window(None)
+        pump()
+        super().tearDown()
+
+    def test_the_page_selector_asks_for_the_screen_s_pixels(self):
+        with unittest.mock.patch.object(main.MainWindow, 'device_scale',
+                                        return_value=2.0):
+            self.dialog = pageselect.Pageselector(self.window)
+            pump()
+            self.assertTrue(wait_for(
+                lambda: self.dialog._image_preview.get_width() > 0))
+            with unittest.mock.patch.object(
+                    self.dialog._thread, 'append_order') as asked:
+                self.dialog._update_thumbnail(1)
+        page, width, height, scale = asked.call_args.args[0]
+        self.assertEqual(2.0, scale)
+        self.assertEqual(2 * self.dialog._image_preview.get_width(), width)
+
+    def test_the_page_selector_draws_it_at_the_window_s_size(self):
+        self.dialog = pageselect.Pageselector(self.window)
+        pump()
+        pixbuf = self.window.imagehandler.get_thumbnail(1, width=200,
+                                                        height=200)
+        self.dialog._thumbnail_page = 1
+        self.dialog._thumbnail_finished(1, pixbuf, 2.0)
+        shown = self.dialog._image_preview.get_paintable()
+        self.assertEqual(round(pixbuf.get_width() / 2),
+                         shown.get_intrinsic_width())
+
+    def test_the_properties_thumbnail_is_made_with_the_screen_s_pixels(self):
+        page = properties_page._Page()
+        pixbuf = self.window.imagehandler.get_thumbnail(1, width=256,
+                                                        height=256)
+        page.set_thumbnail(pixbuf, 2.0)
+        shown = page._thumb.get_paintable()
+        self.assertIsInstance(shown, widgets.ScaledTexture)
+        # The border is two of the screen's pixels on each side.
+        self.assertEqual(round((pixbuf.get_width() + 4) / 2),
+                         shown.get_intrinsic_width())
 
 
 # vim: expandtab:sw=4:ts=4

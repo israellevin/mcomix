@@ -53,9 +53,12 @@ class _Page(Gtk.ScrolledWindow):
         widgets.empty(self._mainbox)
         widgets.empty(self._extrabox)
 
-    def set_thumbnail(self, pixbuf: GdkPixbuf.Pixbuf) -> None:
-        pixbuf = image_tools.add_border(pixbuf, 1)
-        self._thumb.set_paintable(image_tools.pixbuf_to_texture(pixbuf))
+    def set_thumbnail(self, pixbuf: GdkPixbuf.Pixbuf, scale: float = 1) -> None:
+        """Show <pixbuf>, made with <scale> of the screen's pixels to each
+        of the window's, at the size it stands for."""
+        pixbuf = image_tools.add_border(pixbuf, int(round(scale)))
+        self._thumb.set_paintable(widgets.at_scale(
+            image_tools.pixbuf_to_texture(pixbuf), scale))
 
     def set_filename(self, filename: str) -> None:
         """Set the filename to be displayed to <filename>. Call this before
