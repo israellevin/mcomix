@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mcomix 0.99\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2013-01-07 22:51+0200\n"
 "Last-Translator: Isratine Citizen <genghiskhan@gmx.ca>\n"
 "Language-Team: Hebrew <eliz@gnu.org>\n"
@@ -175,7 +175,7 @@ msgstr "שם"
 msgid "Page"
 msgstr "עמוד"
 
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "מיקום"
 
@@ -237,7 +237,7 @@ msgstr ""
 "נא לשים לב שהקבצים היחידים שייווספו אוטומטית אל רשימה זו יהיו קבצים "
 "בארכיונים שהיישום MComix מזהם כהערות."
 
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "גודל"
 
@@ -2349,19 +2349,19 @@ msgid "Writer"
 msgstr "כותב"
 
 # הונגש
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "נוגש לאחרונה"
 
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "שונה לאחרונה"
 
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "הרשאות"
 
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "בעלים"
 
@@ -3559,19 +3559,19 @@ msgstr "סורק כעת עבור חוברות חדשות..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "התווספה חוברת חדשה '%(bookname)s' מן המדור '%(directory)s'."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "התווספו %(count)d חוברות חדשות מן המדור '%(directory)s'."
 msgstr[1] "התווספו %(count)d חוברות חדשות מן המדור '%(directory)s'."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "לא נמצאו חוברות חדשות במדור '%s'."
 
 #: mcomix/library/main_dialog.py:246
@@ -3612,21 +3612,41 @@ msgid "_Scan now"
 msgstr "_סרוק עכשיו"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "מדור"
 
 #: mcomix/library/watchlist.py:53
 msgid "Collection"
 msgstr "אוסף"
 
-# לכלול מדורי משנה
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "עם מדורי משנה"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "סרוק חוברות אוטומטית כאשר הספרייה הינה _פתוחה"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "התווספה חוברת חדשה '%(bookname)s' מן המדור '%(directory)s'."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "התווספו %(count)d חוברות חדשות מן המדור '%(directory)s'."
+#~ msgstr[1] "התווספו %(count)d חוברות חדשות מן המדור '%(directory)s'."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "לא נמצאו חוברות חדשות במדור '%s'."
+
+#~ msgid "Directory"
+#~ msgstr "מדור"
+
+# לכלול מדורי משנה
+#~ msgid "With subdirectories"
+#~ msgstr "עם מדורי משנה"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "\"שמירה בשם\" נפתח במדור שאליו נשמר הקובץ האחרון"

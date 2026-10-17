@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: comix 4.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2008-12-13 18:00+0100\n"
 "Last-Translator: Adrian C. <anrxc@sysphere.org>\n"
 "Language-Team: Croatian\n"
@@ -196,7 +196,7 @@ msgstr "Stranica"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Lokacija"
 
@@ -266,7 +266,7 @@ msgstr ""
 
 #
 # File: src/edit.py, line: 270
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Veličina"
 
@@ -2673,28 +2673,28 @@ msgstr "Scenarist"
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Pristupljeno"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Mijenjano"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Dozvole"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Vlasnik"
 
@@ -4078,20 +4078,20 @@ msgstr "Traženje novih knjiga..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "Dodana nova knjiga „%(bookname)s” iz direktorija „%(directory)s”."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "Dodano novih knjiga: %(count)d iz direktorija „%(directory)s”."
 msgstr[1] "Dodano novih knjiga: %(count)d iz direktorija „%(directory)s”."
 msgstr[2] "Dodano novih knjiga: %(count)d iz direktorija „%(directory)s”."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "U direktoriju „%s” nije pronađena nijedna nova knjiga."
 
 #: mcomix/library/main_dialog.py:246
@@ -4132,7 +4132,7 @@ msgid "_Scan now"
 msgstr "_Pretraži sada"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Direktorij"
 
 #
@@ -4142,7 +4142,7 @@ msgid "Collection"
 msgstr "Zbirka"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "S poddirektorijima"
 
 #
@@ -4150,6 +4150,27 @@ msgstr "S poddirektorijima"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatski traži nove knjige pri _otvaranju biblioteke"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "Dodana nova knjiga „%(bookname)s” iz direktorija „%(directory)s”."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "Dodano novih knjiga: %(count)d iz direktorija „%(directory)s”."
+#~ msgstr[1] "Dodano novih knjiga: %(count)d iz direktorija „%(directory)s”."
+#~ msgstr[2] "Dodano novih knjiga: %(count)d iz direktorija „%(directory)s”."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "U direktoriju „%s” nije pronađena nijedna nova knjiga."
+
+#~ msgid "Directory"
+#~ msgstr "Direktorij"
+
+#~ msgid "With subdirectories"
+#~ msgstr "S poddirektorijima"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr ""

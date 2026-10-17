@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 0.93\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2015-04-05 08:54+0100\n"
 "Last-Translator: Benoit Pierre <benoit.pierre@gmail.com>\n"
 "Language-Team: \n"
@@ -176,7 +176,7 @@ msgid "Page"
 msgstr "Page"
 
 # Do not remove extra blank space at the end of the fr translation. It is needed before ":"
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Emplacement "
 
@@ -235,7 +235,7 @@ msgstr ""
 "Les seuls fichiers ajoutés automatiquement à cette liste sont les fichiers "
 "de l'archive que MComix reconnait comme commentaires."
 
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Taille"
 
@@ -2386,22 +2386,22 @@ msgid "Writer"
 msgstr "Scénariste"
 
 # Do not remove extra blank space at the end of the fr translation. It is needed before ":"
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Accédé le "
 
 # Do not remove extra blank space at the end of the fr translation. It is needed before ":"
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Modifié le "
 
 # Do not remove extra blank space at the end of the fr translation. It is needed before ":"
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Permissions "
 
 # Do not remove extra blank space at the end of the fr translation. It is needed before ":"
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Propriétaire "
 
@@ -3608,14 +3608,14 @@ msgstr "Recherche de nouvelles archives…"
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr ""
 "Nouveau livre '%(bookname)s' ajouté depuis le répertoire '%(directory)s'."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] ""
 "%(count)d nouveaux livres ajoutés depuis le répertoire '%(directory)s'."
 msgstr[1] ""
@@ -3623,7 +3623,7 @@ msgstr[1] ""
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "Pas de nouveau livre trouvé dans le répertoire '%s'."
 
 #: mcomix/library/main_dialog.py:246
@@ -3665,7 +3665,7 @@ msgid "_Scan now"
 msgstr "_Rechercher maintenant"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Répertoire"
 
 #: mcomix/library/watchlist.py:53
@@ -3673,7 +3673,7 @@ msgid "Collection"
 msgstr "Collection"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "Inclure les sous-dossiers"
 
 #: mcomix/library/watchlist.py:81
@@ -3681,6 +3681,29 @@ msgid "Automatically scan for new books when library is _opened"
 msgstr ""
 "Rechercher automatiquement les nouveaux livres à l'_ouverture de la "
 "bibliothèque"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr ""
+#~ "Nouveau livre '%(bookname)s' ajouté depuis le répertoire '%(directory)s'."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] ""
+#~ "%(count)d nouveaux livres ajoutés depuis le répertoire '%(directory)s'."
+#~ msgstr[1] ""
+#~ "%(count)d nouveaux livres ajoutés depuis le répertoire '%(directory)s'."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "Pas de nouveau livre trouvé dans le répertoire '%s'."
+
+#~ msgid "Directory"
+#~ msgstr "Répertoire"
+
+#~ msgid "With subdirectories"
+#~ msgstr "Inclure les sous-dossiers"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "« Enregistrer sous » s'ouvre dans le dernier répertoire utilisé"

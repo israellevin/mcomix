@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2006-09-27 10:18+0200\n"
 "Last-Translator: Paul Chatzidimitriou <paulmedic555@gmail.com>\n"
 "Language-Team: \n"
@@ -194,7 +194,7 @@ msgstr "Σελίδα"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Τοποθεσία"
 
@@ -260,7 +260,7 @@ msgstr ""
 
 #
 # File: src/edit.py, line: 270
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Μέγεθος"
 
@@ -2626,28 +2626,28 @@ msgstr "Σεναριογράφος"
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Η πρόσβαση πραγματοποιήθηκε"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Τροποποιήθηκε"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Άδειες χρήσης"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Ιδιοκτήτης"
 
@@ -4037,20 +4037,20 @@ msgstr "Αναζήτηση νέων βιβλίων..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr ""
 "Προστέθηκε το νέο βιβλίο «%(bookname)s» από τον κατάλογο «%(directory)s»."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "Προστέθηκαν %(count)d νέα βιβλία από τον κατάλογο «%(directory)s»."
 msgstr[1] "Προστέθηκαν %(count)d νέα βιβλία από τον κατάλογο «%(directory)s»."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "Δεν βρέθηκαν νέα βιβλία στον κατάλογο «%s»."
 
 #: mcomix/library/main_dialog.py:246
@@ -4091,9 +4091,8 @@ msgstr "Λίστα παρακολούθησης της βιβλιοθήκης"
 msgid "_Scan now"
 msgstr "_Σάρωση τώρα"
 
-#
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Κατάλογος"
 
 #
@@ -4104,12 +4103,36 @@ msgid "Collection"
 msgstr "Συλλογή"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "Με τους υποκαταλόγους"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Αυτόματη αναζήτηση νέων βιβλίων κατά το άν_οιγμα της βιβλιοθήκης"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr ""
+#~ "Προστέθηκε το νέο βιβλίο «%(bookname)s» από τον κατάλογο «%(directory)s»."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] ""
+#~ "Προστέθηκαν %(count)d νέα βιβλία από τον κατάλογο «%(directory)s»."
+#~ msgstr[1] ""
+#~ "Προστέθηκαν %(count)d νέα βιβλία από τον κατάλογο «%(directory)s»."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "Δεν βρέθηκαν νέα βιβλία στον κατάλογο «%s»."
+
+#
+#~ msgid "Directory"
+#~ msgstr "Κατάλογος"
+
+#~ msgid "With subdirectories"
+#~ msgstr "Με τους υποκαταλόγους"
 
 #
 #~ msgid "Save As opens at the last directory saved into"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marcelo Góes <vanquirius@gentoo.org>\n"
 "Language-Team: \n"
@@ -170,7 +170,7 @@ msgstr "Nome"
 msgid "Page"
 msgstr "Páxina"
 
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Local"
 
@@ -229,7 +229,7 @@ msgstr ""
 "A esta lista só se engaden automaticamente os ficheiros dos arquivos que "
 "MComix recoñece como comentarios."
 
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Tamaño"
 
@@ -2350,19 +2350,19 @@ msgstr "Título"
 msgid "Writer"
 msgstr "Guionista"
 
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Accedido"
 
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Modificado"
 
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Permisos"
 
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Propietario"
 
@@ -3551,19 +3551,19 @@ msgstr "Buscando libros novos..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "Engadiuse o libro novo «%(bookname)s» do directorio «%(directory)s»."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "Engadíronse %(count)d libros novos do directorio «%(directory)s»."
 msgstr[1] "Engadíronse %(count)d libros novos do directorio «%(directory)s»."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "Non se atopou ningún libro novo no directorio «%s»."
 
 #: mcomix/library/main_dialog.py:246
@@ -3605,7 +3605,7 @@ msgid "_Scan now"
 msgstr "E_xaminar agora"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Directorio"
 
 #: mcomix/library/watchlist.py:53
@@ -3613,12 +3613,35 @@ msgid "Collection"
 msgstr "Colección"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "Con subdirectorios"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Buscar automaticamente libros novos ao _abrir a biblioteca"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr ""
+#~ "Engadiuse o libro novo «%(bookname)s» do directorio «%(directory)s»."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] ""
+#~ "Engadíronse %(count)d libros novos do directorio «%(directory)s»."
+#~ msgstr[1] ""
+#~ "Engadíronse %(count)d libros novos do directorio «%(directory)s»."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "Non se atopou ningún libro novo no directorio «%s»."
+
+#~ msgid "Directory"
+#~ msgstr "Directorio"
+
+#~ msgid "With subdirectories"
+#~ msgstr "Con subdirectorios"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "«Gardar como» ábrese no último directorio no que se gardou"

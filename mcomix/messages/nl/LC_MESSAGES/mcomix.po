@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2006-10-15 21:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -190,7 +190,7 @@ msgstr "Pagina"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Locatie"
 
@@ -256,7 +256,7 @@ msgstr ""
 
 #
 # File: src/edit.py, line: 270
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Grootte"
 
@@ -2618,28 +2618,28 @@ msgstr "Schrijver"
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Gebruikt"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Gewijzigd"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Rechten"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Eigenaar"
 
@@ -4022,19 +4022,19 @@ msgstr "Zoeken naar nieuwe boeken..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "Nieuw boek \"%(bookname)s\" toegevoegd uit map \"%(directory)s\"."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "%(count)d nieuwe boeken toegevoegd uit map \"%(directory)s\"."
 msgstr[1] "%(count)d nieuwe boeken toegevoegd uit map \"%(directory)s\"."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "Geen nieuwe boeken gevonden in map \"%s\"."
 
 #: mcomix/library/main_dialog.py:246
@@ -4075,9 +4075,8 @@ msgstr "Volglijst van de bibliotheek"
 msgid "_Scan now"
 msgstr "Nu _zoeken"
 
-#
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Map"
 
 #
@@ -4088,13 +4087,34 @@ msgid "Collection"
 msgstr "Collectie"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "Met submappen"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr ""
 "Automatisch naar nieuwe boeken zoeken bij het _openen van de bibliotheek"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "Nieuw boek \"%(bookname)s\" toegevoegd uit map \"%(directory)s\"."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "%(count)d nieuwe boeken toegevoegd uit map \"%(directory)s\"."
+#~ msgstr[1] "%(count)d nieuwe boeken toegevoegd uit map \"%(directory)s\"."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "Geen nieuwe boeken gevonden in map \"%s\"."
+
+#
+#~ msgid "Directory"
+#~ msgstr "Map"
+
+#~ msgid "With subdirectories"
+#~ msgstr "Met submappen"
 
 #
 #~ msgid "Save As opens at the last directory saved into"

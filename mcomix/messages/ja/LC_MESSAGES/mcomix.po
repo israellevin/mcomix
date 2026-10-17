@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 1.00-SVN\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2012-08-16 13:10+0900\n"
 "Last-Translator: Toshiharu Kudoh <toshi.kd2@gmail.com>\n"
 "Language-Team: Japanese\n"
@@ -177,7 +177,7 @@ msgstr "名前"
 msgid "Page"
 msgstr "ページ"
 
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "位置"
 
@@ -236,7 +236,7 @@ msgstr ""
 "注意：MComix がコメントファイルだと認識するアーカイブファイル内のファイルだけ"
 "が、自動的にこのリストに追加されます。"
 
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "サイズ"
 
@@ -2331,19 +2331,19 @@ msgstr "タイトル"
 msgid "Writer"
 msgstr "作者"
 
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "最終アクセス時"
 
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "最終修正時"
 
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "パーミッション"
 
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "所有者"
 
@@ -3539,21 +3539,21 @@ msgstr "新しい本を検索中..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr ""
 "新しい本 '%(bookname)s' が ディレクトリー '%(directory)s' から追加されまし"
 "た。"
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] ""
 "%(count)d 個の新しい本が ディレクトリー '%(directory)s' から追加されました。"
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "ディレクトリー '%s' に新しい本はありません。"
 
 #: mcomix/library/main_dialog.py:246
@@ -3594,7 +3594,7 @@ msgid "_Scan now"
 msgstr "直ちにスキャン(_S)"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "ディレクトリー"
 
 #: mcomix/library/watchlist.py:53
@@ -3602,12 +3602,35 @@ msgid "Collection"
 msgstr "コレクション"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "サブディレクトリー含む"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "ライブラリーが開かれているとき自動的に新しい本をスキャン(_O)"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr ""
+#~ "新しい本 '%(bookname)s' が ディレクトリー '%(directory)s' から追加されまし"
+#~ "た。"
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] ""
+#~ "%(count)d 個の新しい本が ディレクトリー '%(directory)s' から追加されまし"
+#~ "た。"
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "ディレクトリー '%s' に新しい本はありません。"
+
+#~ msgid "Directory"
+#~ msgstr "ディレクトリー"
+
+#~ msgid "With subdirectories"
+#~ msgstr "サブディレクトリー含む"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "「別名で保存」を最後に保存したディレクトリーで開く"

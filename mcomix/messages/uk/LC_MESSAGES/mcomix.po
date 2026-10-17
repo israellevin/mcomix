@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2009-05-04 23:52+0300\n"
 "Last-Translator: Oleksandr Zaiats <ai@eth0.net.ua>\n"
 "Language-Team: \n"
@@ -173,7 +173,7 @@ msgstr "Ім’я"
 msgid "Page"
 msgstr "Сторінка"
 
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Розташування"
 
@@ -232,7 +232,7 @@ msgstr ""
 "До цього переліку автоматично додаються лише ті файли в архівах, які MComix "
 "розпізнає як коментарі."
 
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Розмір"
 
@@ -2355,19 +2355,19 @@ msgstr "Назва"
 msgid "Writer"
 msgstr "Сценарист"
 
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Доступ"
 
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Змінений"
 
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Права"
 
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Власник"
 
@@ -3555,20 +3555,20 @@ msgstr "Пошук нових книжок..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "Додано нову книжку «%(bookname)s» з каталогу «%(directory)s»."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "Додано нових книжок: %(count)d з каталогу «%(directory)s»."
 msgstr[1] "Додано нових книжок: %(count)d з каталогу «%(directory)s»."
 msgstr[2] "Додано нових книжок: %(count)d з каталогу «%(directory)s»."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "У каталозі «%s» нових книжок не знайдено."
 
 #: mcomix/library/main_dialog.py:246
@@ -3609,7 +3609,7 @@ msgid "_Scan now"
 msgstr "_Шукати зараз"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Каталог"
 
 #: mcomix/library/watchlist.py:53
@@ -3617,12 +3617,33 @@ msgid "Collection"
 msgstr "Збірка"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "З підкаталогами"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Автоматично шукати нові книжки при _відкритті бібліотеки"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "Додано нову книжку «%(bookname)s» з каталогу «%(directory)s»."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "Додано нових книжок: %(count)d з каталогу «%(directory)s»."
+#~ msgstr[1] "Додано нових книжок: %(count)d з каталогу «%(directory)s»."
+#~ msgstr[2] "Додано нових книжок: %(count)d з каталогу «%(directory)s»."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "У каталозі «%s» нових книжок не знайдено."
+
+#~ msgid "Directory"
+#~ msgstr "Каталог"
+
+#~ msgid "With subdirectories"
+#~ msgstr "З підкаталогами"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "«Зберегти як» відкривається в каталозі, куди зберігали востаннє"

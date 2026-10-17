@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 1.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2016-09-18 15:30+0300\n"
 "Last-Translator: Zygimantus <zygimantus@gmail.com>\n"
 "Language-Team: \n"
@@ -176,7 +176,7 @@ msgstr "Pavadinimas"
 msgid "Page"
 msgstr "Puslapis"
 
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Vieta"
 
@@ -235,7 +235,7 @@ msgstr ""
 "Į šį sąrašą automatiškai įtraukiami tik tie archyvuose esantys failai, "
 "kuriuos MComix atpažįsta kaip komentarus."
 
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Dydis"
 
@@ -2353,19 +2353,19 @@ msgstr "Pavadinimas"
 msgid "Writer"
 msgstr "Scenarijaus autorius"
 
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Prieitas"
 
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Modifikuota"
 
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Leidimai"
 
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Savininkas"
 
@@ -3550,20 +3550,20 @@ msgstr "Ieškoma naujų knygų..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "Pridėta nauja knyga „%(bookname)s“ iš aplanko „%(directory)s“."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "Pridėta naujų knygų: %(count)d iš aplanko „%(directory)s“."
 msgstr[1] "Pridėta naujų knygų: %(count)d iš aplanko „%(directory)s“."
 msgstr[2] "Pridėta naujų knygų: %(count)d iš aplanko „%(directory)s“."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "Aplanke '%s' nebuvo rasta naujų knygų."
 
 #: mcomix/library/main_dialog.py:246
@@ -3604,7 +3604,7 @@ msgid "_Scan now"
 msgstr "_Nuskaityti dabar"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Aplankas"
 
 #: mcomix/library/watchlist.py:53
@@ -3612,12 +3612,33 @@ msgid "Collection"
 msgstr "Kolekcija"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "Su poaplankiais"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatiškai ieškoti naujų knygų kai yra _atidaroma biblioteka"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "Pridėta nauja knyga „%(bookname)s“ iš aplanko „%(directory)s“."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "Pridėta naujų knygų: %(count)d iš aplanko „%(directory)s“."
+#~ msgstr[1] "Pridėta naujų knygų: %(count)d iš aplanko „%(directory)s“."
+#~ msgstr[2] "Pridėta naujų knygų: %(count)d iš aplanko „%(directory)s“."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "Aplanke '%s' nebuvo rasta naujų knygų."
+
+#~ msgid "Directory"
+#~ msgstr "Aplankas"
+
+#~ msgid "With subdirectories"
+#~ msgstr "Su poaplankiais"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "„Išsaugoti kaip“ atveriama paskutiniame naudotame aplanke"

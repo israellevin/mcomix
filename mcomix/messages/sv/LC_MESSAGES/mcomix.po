@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 0.90.4\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2018-02-24 08:43+0100\n"
 "Last-Translator: Jonatan Nyberg <jonatan@autistici.org>\n"
 "Language-Team: Swedish <LL@li.org>\n"
@@ -204,7 +204,7 @@ msgstr "Sida"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Plats"
 
@@ -274,7 +274,7 @@ msgstr ""
 
 #
 # File: src/edit.py, line: 270
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Storlek"
 
@@ -2674,28 +2674,28 @@ msgstr "Manusförfattare"
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Åtkomsttid"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Modifieringstid"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Rättigheter"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Ägare"
 
@@ -4105,19 +4105,19 @@ msgstr "Letar efter nya böcker..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "Lade till ny bok '%(bookname)s' från katalogen '%(directory)s'."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "Lade till %(count)d nya böcker från katalogen '%(directory)s'."
 msgstr[1] "Lade till %(count)d nya böcker från katalogen '%(directory)s'."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "Inga nya böcker hittades i katalogen '%s'."
 
 #: mcomix/library/main_dialog.py:246
@@ -4158,7 +4158,7 @@ msgid "_Scan now"
 msgstr "_Skanna nu"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Katalog"
 
 #
@@ -4168,7 +4168,7 @@ msgid "Collection"
 msgstr "Samling"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "Med underkataloger"
 
 #
@@ -4176,6 +4176,26 @@ msgstr "Med underkataloger"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Skanna automatiskt efter nya böcker när biblioteket _öppnas"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "Lade till ny bok '%(bookname)s' från katalogen '%(directory)s'."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "Lade till %(count)d nya böcker från katalogen '%(directory)s'."
+#~ msgstr[1] "Lade till %(count)d nya böcker från katalogen '%(directory)s'."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "Inga nya böcker hittades i katalogen '%s'."
+
+#~ msgid "Directory"
+#~ msgstr "Katalog"
+
+#~ msgid "With subdirectories"
+#~ msgstr "Med underkataloger"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "\"Spara som\" öppnas i den katalog som senast sparats i"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix zh_TW\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2013-07-05 21:37+0800\n"
 "Last-Translator: Wayne Su <mstarmstar@hotmail.com>\n"
 "Language-Team: \n"
@@ -176,7 +176,7 @@ msgstr "檔案名稱"
 msgid "Page"
 msgstr "頁次"
 
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "位置"
 
@@ -234,7 +234,7 @@ msgid ""
 msgstr ""
 "請注意：只有壓縮檔內被 MComix 認為是註解的檔案，才會被自動加入這個清單。"
 
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "大小"
 
@@ -2271,19 +2271,19 @@ msgstr "標題"
 msgid "Writer"
 msgstr "編劇"
 
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "存取時間"
 
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "修改時間"
 
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "權限"
 
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "擁有者"
 
@@ -3448,18 +3448,18 @@ msgstr "正在掃描新書..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "已經將新書「%(bookname)s」從 %(directory)s 目錄加到書庫了。"
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "已經從 %(directory)s 目錄新增 %(count)d 本新書了。"
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "在 %s 目錄裏沒有找到新書。"
 
 #: mcomix/library/main_dialog.py:246
@@ -3500,7 +3500,7 @@ msgid "_Scan now"
 msgstr "立即掃描(_S)"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "目錄"
 
 #: mcomix/library/watchlist.py:53
@@ -3508,12 +3508,31 @@ msgid "Collection"
 msgstr "書集"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "含子目錄"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "書庫開啟時自動搜尋新書(_O)"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "已經將新書「%(bookname)s」從 %(directory)s 目錄加到書庫了。"
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "已經從 %(directory)s 目錄新增 %(count)d 本新書了。"
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "在 %s 目錄裏沒有找到新書。"
+
+#~ msgid "Directory"
+#~ msgstr "目錄"
+
+#~ msgid "With subdirectories"
+#~ msgstr "含子目錄"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "「另存新檔」在上次儲存的目錄開啟"

@@ -178,21 +178,21 @@ class _LibraryDialog(Gtk.Window):
 
             if len(filelist) == 1:
                 message = _("Added new book '%(bookname)s' "
-                            "from directory '%(directory)s'.")
+                            "from folder '%(directory)s'.")
             else:
                 # Only ever two or more, but that is not one form in
                 # every language: Polish says "2 nowe książki" and
                 # "5 nowych książek".
                 message = i18n.get_translation().ngettext(
-                    "Added %(count)d new book from directory '%(directory)s'.",
-                    "Added %(count)d new books from directory '%(directory)s'.",
+                    "Added %(count)d new book from folder '%(directory)s'.",
+                    "Added %(count)d new books from folder '%(directory)s'.",
                     len(filelist))
 
             self.set_status_message(message % {'directory': watchentry.directory,
                                                'count': len(filelist), 'bookname': os.path.basename(filelist[0])})
         else:
             self.set_status_message(
-                _("No new books found in directory '%s'.") % watchentry.directory)
+                _("No new books found in folder '%s'.") % watchentry.directory)
 
     def set_status_message(self, message: str) -> None:
         """Set a specific message on the statusbar, replacing whatever was

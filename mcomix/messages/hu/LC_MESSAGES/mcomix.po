@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 4.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2009-01-26 19:34+0100\n"
 "Last-Translator: Ernő Drabik <drerno@gmail.com>\n"
 "Language-Team: \n"
@@ -170,7 +170,7 @@ msgstr "Név"
 msgid "Page"
 msgstr "Oldal"
 
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Hely"
 
@@ -229,7 +229,7 @@ msgstr ""
 "Ehhez a listához csak azok az archívumbeli fájlok adódnak hozzá "
 "automatikusan, amelyeket az MComix megjegyzésként ismer fel."
 
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Méret"
 
@@ -2359,19 +2359,19 @@ msgstr "Cím"
 msgid "Writer"
 msgstr "Író"
 
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Utolsó elérés"
 
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Módosítva"
 
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Jogosultságok"
 
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Tulajdonos"
 
@@ -3574,19 +3574,19 @@ msgstr "Új könyvek keresése..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "Új könyv hozzáadva: „%(bookname)s” a(z) „%(directory)s” mappából."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "%(count)d új könyv hozzáadva a(z) „%(directory)s” mappából."
 msgstr[1] "%(count)d új könyv hozzáadva a(z) „%(directory)s” mappából."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "Nem található új könyv a(z) „%s” mappában."
 
 #: mcomix/library/main_dialog.py:246
@@ -3628,7 +3628,7 @@ msgid "_Scan now"
 msgstr "_Keresés most"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Mappa"
 
 #: mcomix/library/watchlist.py:53
@@ -3636,12 +3636,32 @@ msgid "Collection"
 msgstr "Gyűjtemény"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "Almappákkal együtt"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Új könyvek automatikus keresése a könyvtár _megnyitásakor"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "Új könyv hozzáadva: „%(bookname)s” a(z) „%(directory)s” mappából."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "%(count)d új könyv hozzáadva a(z) „%(directory)s” mappából."
+#~ msgstr[1] "%(count)d új könyv hozzáadva a(z) „%(directory)s” mappából."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "Nem található új könyv a(z) „%s” mappában."
+
+#~ msgid "Directory"
+#~ msgstr "Mappa"
+
+#~ msgid "With subdirectories"
+#~ msgstr "Almappákkal együtt"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "A „Mentés másként” a legutóbb használt mappában nyílik meg"

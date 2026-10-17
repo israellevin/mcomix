@@ -49,12 +49,12 @@ class WatchListDialog(Dialog):
 
         # Initialize the list control showing existing watch directories
         self._list = column_list.ColumnListView()
-        self._list.add_text_column(_("Directory"), 'directory', expand=True)
+        self._list.add_text_column(_("Folder"), 'directory', expand=True)
         self._list.add_choice_column(_("Collection"), 'collection_id',
                                      self._collection_names,
                                      self._collection_chosen,
                                      shown=self._collection_name_of)
-        self._list.add_toggle_column(_("With subdirectories"), 'recursive',
+        self._list.add_toggle_column(_("With subfolders"), 'recursive',
                                      self._recursive_changed_cb)
         self.connect_while_open(self._list.selection, 'selection-changed',
                                 self._item_selected_cb)

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 3.2\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2009-01-25 22:33+0100\n"
 "Last-Translator: Carles Escrig i Royo <simkin@ono.com>\n"
 "Language-Team: CA <gentoo@softcatala.net>\n"
@@ -197,7 +197,7 @@ msgstr "Pàgina"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Ubicació"
 
@@ -267,7 +267,7 @@ msgstr ""
 
 #
 # File: src/edit.py, line: 270
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Mida"
 
@@ -2674,28 +2674,28 @@ msgstr "Guionista"
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Accedit"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Modificat"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Permisos"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Propietari"
 
@@ -4086,20 +4086,20 @@ msgstr "S'estan cercant llibres nous..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr ""
 "S'ha afegit el llibre nou «%(bookname)s» del directori «%(directory)s»."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "S'han afegit %(count)d llibres nous del directori «%(directory)s»."
 msgstr[1] "S'han afegit %(count)d llibres nous del directori «%(directory)s»."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "No s'ha trobat cap llibre nou al directori «%s»."
 
 #: mcomix/library/main_dialog.py:246
@@ -4141,7 +4141,7 @@ msgid "_Scan now"
 msgstr "_Explora ara"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Directori"
 
 #
@@ -4151,7 +4151,7 @@ msgid "Collection"
 msgstr "Col·lecció"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "Amb subdirectoris"
 
 #
@@ -4159,6 +4159,29 @@ msgstr "Amb subdirectoris"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Cerca automàticament llibres nous en _obrir la biblioteca"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr ""
+#~ "S'ha afegit el llibre nou «%(bookname)s» del directori «%(directory)s»."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] ""
+#~ "S'han afegit %(count)d llibres nous del directori «%(directory)s»."
+#~ msgstr[1] ""
+#~ "S'han afegit %(count)d llibres nous del directori «%(directory)s»."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "No s'ha trobat cap llibre nou al directori «%s»."
+
+#~ msgid "Directory"
+#~ msgstr "Directori"
+
+#~ msgid "With subdirectories"
+#~ msgstr "Amb subdirectoris"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "«Anomena i desa» s'obre al darrer directori on s'ha desat"

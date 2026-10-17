@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2009-01-25 21:54+0100\n"
 "Last-Translator: Jan Nekvasil <jan.nekvasil@gmail.com>\n"
 "Language-Team: \n"
@@ -197,7 +197,7 @@ msgstr "Strana"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "Umístění"
 
@@ -267,7 +267,7 @@ msgstr ""
 
 #
 # File: src/edit.py, line: 270
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "Velikost"
 
@@ -2661,28 +2661,28 @@ msgstr "Scenárista"
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "Použitý"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "Změněný"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "Oprávnění"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "Vlastník"
 
@@ -4062,20 +4062,20 @@ msgstr "Hledání nových knih..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "Přidána nová kniha „%(bookname)s“ z adresáře „%(directory)s“."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "Přidána %(count)d nová kniha z adresáře „%(directory)s“."
 msgstr[1] "Přidány %(count)d nové knihy z adresáře „%(directory)s“."
 msgstr[2] "Přidáno %(count)d nových knih z adresáře „%(directory)s“."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "V adresáři „%s“ nebyly nalezeny žádné nové knihy."
 
 #: mcomix/library/main_dialog.py:246
@@ -4116,7 +4116,7 @@ msgid "_Scan now"
 msgstr "_Prohledat nyní"
 
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "Adresář"
 
 #
@@ -4126,7 +4126,7 @@ msgid "Collection"
 msgstr "Sbírka"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "S podadresáři"
 
 #
@@ -4134,6 +4134,27 @@ msgstr "S podadresáři"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automaticky hledat nové knihy při _otevření knihovny"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "Přidána nová kniha „%(bookname)s“ z adresáře „%(directory)s“."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "Přidána %(count)d nová kniha z adresáře „%(directory)s“."
+#~ msgstr[1] "Přidány %(count)d nové knihy z adresáře „%(directory)s“."
+#~ msgstr[2] "Přidáno %(count)d nových knih z adresáře „%(directory)s“."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "V adresáři „%s“ nebyly nalezeny žádné nové knihy."
+
+#~ msgid "Directory"
+#~ msgstr "Adresář"
+
+#~ msgid "With subdirectories"
+#~ msgstr "S podadresáři"
 
 #~ msgid "Save As opens at the last directory saved into"
 #~ msgstr "„Uložit jako“ se otevře v adresáři, kam se ukládalo naposledy"

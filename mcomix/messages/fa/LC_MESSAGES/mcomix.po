@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: comix 3.6.4\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:29+0200\n"
+"POT-Creation-Date: 2026-10-17 06:37+0200\n"
 "PO-Revision-Date: 2008-05-21 12:40+0330\n"
 "Last-Translator: Meelad Zakaria <meelad@farsiweb.info>\n"
 "Language-Team: Persian \n"
@@ -189,7 +189,7 @@ msgstr "صفحه"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:216
+#: mcomix/bookmark_dialog.py:70 mcomix/properties_dialog.py:220
 msgid "Location"
 msgstr "مکان"
 
@@ -255,7 +255,7 @@ msgstr ""
 
 #
 # File: src/edit.py, line: 270
-#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:233
+#: mcomix/edit_comment_area.py:45 mcomix/properties_dialog.py:237
 msgid "Size"
 msgstr "اندازه"
 
@@ -2580,28 +2580,28 @@ msgstr "نویسنده"
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: mcomix/properties_dialog.py:234
+#: mcomix/properties_dialog.py:238
 msgid "Accessed"
 msgstr "آخرین دسترسی"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: mcomix/properties_dialog.py:236
+#: mcomix/properties_dialog.py:240
 msgid "Modified"
 msgstr "آخرین تغییر"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: mcomix/properties_dialog.py:239
+#: mcomix/properties_dialog.py:243
 msgid "Permissions"
 msgstr "اجازه‌ها"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: mcomix/properties_dialog.py:240
+#: mcomix/properties_dialog.py:244
 msgid "Owner"
 msgstr "مالک"
 
@@ -3963,19 +3963,19 @@ msgstr "پویش کتاب‌های تازه..."
 
 #: mcomix/library/main_dialog.py:180
 #, python-format
-msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+msgid "Added new book '%(bookname)s' from folder '%(directory)s'."
 msgstr "کتاب تازهٔ «%(bookname)s» از شاخهٔ «%(directory)s» افزوده شد."
 
 #: mcomix/library/main_dialog.py:187
 #, python-format
-msgid "Added %(count)d new book from directory '%(directory)s'."
-msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+msgid "Added %(count)d new book from folder '%(directory)s'."
+msgid_plural "Added %(count)d new books from folder '%(directory)s'."
 msgstr[0] "%(count)d کتاب تازه از شاخهٔ «%(directory)s» افزوده شد."
 msgstr[1] "%(count)d کتاب تازه از شاخهٔ «%(directory)s» افزوده شد."
 
 #: mcomix/library/main_dialog.py:195
 #, python-format
-msgid "No new books found in directory '%s'."
+msgid "No new books found in folder '%s'."
 msgstr "هیچ کتاب تازه‌ای در شاخهٔ «%s» یافت نشد."
 
 #: mcomix/library/main_dialog.py:246
@@ -4015,9 +4015,8 @@ msgstr "فهرست پایش کتاب‌خانه"
 msgid "_Scan now"
 msgstr "_پویش کن"
 
-#
 #: mcomix/library/watchlist.py:52
-msgid "Directory"
+msgid "Folder"
 msgstr "شاخه"
 
 #
@@ -4028,12 +4027,33 @@ msgid "Collection"
 msgstr "مجموعه"
 
 #: mcomix/library/watchlist.py:57
-msgid "With subdirectories"
+msgid "With subfolders"
 msgstr "همراه با زیرشاخه‌ها"
 
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "پویش خودکار کتاب‌های تازه هنگام _گشودن کتاب‌خانه"
+
+#, python-format
+#~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
+#~ msgstr "کتاب تازهٔ «%(bookname)s» از شاخهٔ «%(directory)s» افزوده شد."
+
+#, python-format
+#~ msgid "Added %(count)d new book from directory '%(directory)s'."
+#~ msgid_plural "Added %(count)d new books from directory '%(directory)s'."
+#~ msgstr[0] "%(count)d کتاب تازه از شاخهٔ «%(directory)s» افزوده شد."
+#~ msgstr[1] "%(count)d کتاب تازه از شاخهٔ «%(directory)s» افزوده شد."
+
+#, python-format
+#~ msgid "No new books found in directory '%s'."
+#~ msgstr "هیچ کتاب تازه‌ای در شاخهٔ «%s» یافت نشد."
+
+#
+#~ msgid "Directory"
+#~ msgstr "شاخه"
+
+#~ msgid "With subdirectories"
+#~ msgstr "همراه با زیرشاخه‌ها"
 
 #
 #~ msgid "Save As opens at the last directory saved into"
