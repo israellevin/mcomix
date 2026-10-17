@@ -18,13 +18,18 @@ from mcomix.i18n import _
 # implementing a GTK interface is reported.
 class _AnimationPaintable(GObject.GObject, Gdk.Paintable):  # type: ignore[misc, unused-ignore]
 
-    """One frame of an animation at a time, at a size that never moves.
+    """A texture drawn at a size of its own, which never moves.
 
-    Handing a Gtk.Picture a new texture for every frame made it a new
-    picture as far as GTK was concerned: the whole window was measured,
-    laid out and drawn again thirty times a second.  A paintable that
-    keeps its size and only says its contents changed damages the page
-    and nothing else.
+    It stands for an animation, one frame at a time: handing a
+    Gtk.Picture a new texture for every frame made it a new picture as
+    far as GTK was concerned, and the whole window was measured, laid
+    out and drawn again thirty times a second.  A paintable that keeps
+    its size and only says its contents changed damages the page and
+    nothing else.
+
+    And for a still page scaled to the screen's pixels where there are
+    more of them than of the window's: the texture is that many times
+    larger than the page is laid out, and drawn into the page's box.
     """
 
     __gtype_name__ = 'MComixAnimationPaintable'
@@ -176,7 +181,17 @@ class PageImage(Gtk.Picture):
             self.set_paintable(self._animation)
             self._start(path, paused)
             return
-        self.set_paintable(image_tools.pixbuf_to_texture(pixbuf))
+        texture = image_tools.pixbuf_to_texture(pixbuf)
+        if size is not None:
+            width, height = (max(1, int(round(side))) for side in size)
+            if (width, height) != (pixbuf.get_width(), pixbuf.get_height()):
+                # Scaled to a screen with more pixels than the window,
+                # and drawn at the size the window laid it out at.
+                still = _AnimationPaintable(width, height)
+                still.set_texture(texture)
+                self.set_paintable(still)
+                return
+        self.set_paintable(texture)
 
     def clear(self) -> None:
         """Stop showing anything."""

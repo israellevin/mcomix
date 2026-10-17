@@ -5,6 +5,7 @@ import os
 import random
 import threading
 import time
+import weakref
 
 from gi.repository import Gdk, GdkPixbuf, Gtk, GLib
 
@@ -357,6 +358,7 @@ class MainWindow(Gtk.Window):
         self.connect('notify::fullscreened', self.event_handler.window_state_event)
         self.connect('notify::maximized', self.event_handler.window_state_event)
         self.connect_after('unrealize', MainWindow._release)
+        self.connect('realize', MainWindow._follow_device_scale)
 
         self.uimanager.set_sensitivities()
         self.restore_window_geometry()
@@ -660,24 +662,34 @@ class MainWindow(Gtk.Window):
 
             self.transforms = [Transform.ID] * pixbuf_count
             fitted: "dict[tuple[object, ...], GdkPixbuf.Pixbuf]" = {}
+            # The pages are laid out in the window's pixels and scaled to
+            # the screen's: on a screen with two of them to each of the
+            # window's, a page scaled to its layout alone was drawn
+            # enlarged and blurred.  The page widget draws the larger
+            # pixbuf into the box the layout gave it.
+            device_scale = self.device_scale()
+            device_sizes = [
+                size if device_scale == 1
+                else [max(1, round(side * device_scale)) for side in size]
+                for size in scaled_sizes]
             for i in range(pixbuf_count):
                 if do_not_transform[i]:
                     continue
                 if missing[i]:
                     # Drawn from its SVG at the size shown, turned as the
                     # page would be, so that the fitting below only turns it.
-                    width, height = scaled_sizes[i]
+                    width, height = device_sizes[i]
                     if tools.rotation_swaps_axes(rotation_list[i]):
                         width, height = height, width
                     pixbuf_list[i] = image_tools.missing_image_icon(
                         max(1, int(width)), max(1, int(height)))
                 # Everything fit_pixbuf_to_rectangle() reads.
-                key = (pixbuf_list[i], *scaled_sizes[i], rotation_list[i],
+                key = (pixbuf_list[i], *device_sizes[i], rotation_list[i],
                        prefs['scaling quality'],
                        prefs['checkered bg for transparent images'])
                 pixbuf_list[i] = fitted[key] = self._strip_fitted.get(key) \
                     or image_tools.fit_pixbuf_to_rectangle(
-                        pixbuf_list[i], scaled_sizes[i], rotation_list[i])
+                        pixbuf_list[i], device_sizes[i], rotation_list[i])
                 # The turn only.  fit_pixbuf_to_rectangle() also scaled
                 # the page to the content box, which the lens - the one
                 # reader of these - takes from the box itself rather
@@ -1652,6 +1664,37 @@ class MainWindow(Gtk.Window):
         else:
             self.zoom.reset_user_zoom()
         self.draw_image()
+
+    @staticmethod
+    def _follow_device_scale(window: "MainWindow") -> None:
+        """Draw the pages again when the window moves to a screen of
+        another scale, or the desktop's scale changes: they were scaled
+        to the screen's pixels.
+
+        The handler holds the window weakly: GDK can keep the surface
+        a while after the window is unrealized, and a handler holding
+        the window itself kept the window from being freed with it."""
+        surface = window.get_surface()
+        if surface is None:
+            return
+        held = weakref.ref(window)
+
+        def rescaled(*args: object) -> None:
+            still = held()
+            if still is not None:
+                still.draw_image()
+
+        surface.connect('notify::scale', rescaled)
+
+    def device_scale(self) -> float:
+        """How many of the screen's pixels there are to each of the
+        window's along a side: 2 on a screen scaled to 200 per cent,
+        1.25 at 125 per cent where the desktop scales by fractions, and
+        1 until the window has a surface to ask."""
+        surface = self.get_surface()
+        if surface is None:
+            return 1.0
+        return max(1.0, surface.get_scale())
 
     def pinch_started(self) -> None:
         """Remember the zoom a pinch starts from: the scale a pinch
