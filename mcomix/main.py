@@ -144,6 +144,9 @@ class MainWindow(Gtk.Window):
         #: The timeout that will run _keep_reading_position(), while one
         #: is counting down.
         self._position_source: int | None = None
+        #: The idle that will give the window back its size after
+        #: fullscreen, while one is queued.
+        self._geometry_source: int | None = None
         #: Where the redraw that is pending was asked to scroll to.
         self._pending_scroll_to: int | None = None
         #: The page the reader last turned to, the page they turned from,
@@ -2463,6 +2466,33 @@ class MainWindow(Gtk.Window):
                                   prefs['window height'])
         return True
 
+    def restore_window_geometry_soon(self) -> None:
+        """Give the window back its size once leaving fullscreen is over.
+
+        The notification that fullscreen has ended arrives while GDK is
+        still putting the window back: on Windows it comes from inside
+        the unfullscreen call, before the window is maximized again, so
+        is_maximized() still says no, and a maximize() asked for from
+        there reaches into the transition.  From an idle the transition
+        is over, and only what it did not put back is asked for.  The
+        page is redrawn here only when nothing changed, since a resize
+        redraws it otherwise.
+        """
+        if self._geometry_source is not None:
+            return
+        self._geometry_source = GLib.idle_add(self._restore_geometry_idle)
+
+    def _restore_geometry_idle(self) -> bool:
+        self._geometry_source = None
+        # Fullscreen asked for again before this ran: the size it goes
+        # back to is the next leaving's business.
+        if self.is_fullscreen():
+            return GLib.SOURCE_REMOVE
+        if not self.restore_window_geometry():
+            self.previous_size = self.get_window_size()
+            self.draw_image()
+        return GLib.SOURCE_REMOVE
+
     def update_space(self) -> None:
         """Take the gap between two pages from the preferences and redraw."""
         self._spacing = prefs['space between two pages']
@@ -2547,6 +2577,9 @@ class MainWindow(Gtk.Window):
         if self._position_source is not None:
             GLib.source_remove(self._position_source)
             self._position_source = None
+        if self._geometry_source is not None:
+            GLib.source_remove(self._geometry_source)
+            self._geometry_source = None
         widgets.release(self)
         self.page_area.clear()
         self.uimanager.release()

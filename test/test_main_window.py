@@ -597,6 +597,7 @@ class MainWindowTest(MComixTest):
                 unittest.mock.patch.object(self.window,
                                            'draw_image') as drawn:
             self._state_changes_to(False)
+            self._pump()
         self.assertFalse(self.window.was_fullscreen)
         self.assertEqual({name: True for name in self._TOGGLES},
                          self._toggles_usable())
@@ -638,7 +639,36 @@ class MainWindowTest(MComixTest):
                 unittest.mock.patch.object(self.window,
                                            'draw_image') as drawn:
             self._state_changes_to(False)
+            self._pump()
         drawn.assert_not_called()
+
+    def test_going_back_waits_for_the_windowing_system_to_finish(self):
+        """On Windows the notification that fullscreen has ended comes
+        from inside GDK's unfullscreen, before the window is maximized
+        again, and a maximize() asked for from there crashed MComix on
+        Windows 11.  The size is given back once the main loop turns."""
+        self._state_changes_to(True)
+        with unittest.mock.patch.object(
+                self.window, 'restore_window_geometry',
+                return_value=True) as restored:
+            self._state_changes_to(False)
+            restored.assert_not_called()
+            self._pump()
+            restored.assert_called_once_with()
+
+    def test_fullscreen_again_before_the_size_is_given_back_keeps_it(self):
+        """Back in fullscreen before the idle ran, the window is not
+        resized out from under it."""
+        self._state_changes_to(True)
+        with unittest.mock.patch.object(
+                self.window, 'restore_window_geometry',
+                return_value=True) as restored:
+            self._state_changes_to(False)
+            with unittest.mock.patch.object(type(self.window),
+                                            'is_fullscreen',
+                                            return_value=True):
+                self._pump()
+        restored.assert_not_called()
 
     def test_a_notification_that_changes_nothing_is_let_pass(self):
         """Both notify::fullscreened and notify::maximized arrive, and

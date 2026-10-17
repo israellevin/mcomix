@@ -128,17 +128,13 @@ class EventHandler:
 
         Which toggle widgets are usable depends on the fullscreen state,
         through the "hide all in fullscreen" preference, so they are asked
-        again here.  Going back to a window redraws only where the size it
-        is given is the size it already had, because otherwise the resize
-        that follows does it.
+        again here.  Going back to a window leaves its size, and the
+        redraw, to restore_window_geometry_soon(), which waits for the
+        windowing system to finish putting the window back.
         """
         is_fullscreen = self._window.is_fullscreen()
         if self._window.was_fullscreen != is_fullscreen:
             self._window.was_fullscreen = is_fullscreen
-            if is_fullscreen:
-                redraw = True
-            else:
-                redraw = not self._window.restore_window_geometry()
             self._window.update_toggles_sensitivity()
             self._window.page_counter.update()
             self._window.leave_fullscreen_button.update()
@@ -146,9 +142,11 @@ class EventHandler:
             # is one to take.
             self._window.actiongroup.get_action('leave_fullscreen') \
                 .set_sensitive(is_fullscreen)
-            if redraw:
+            if is_fullscreen:
                 self._window.previous_size = self._window.get_window_size()
                 self._window.draw_image()
+            else:
+                self._window.restore_window_geometry_soon()
 
     def register_key_events(self) -> None:
         """ Registers keyboard events and their default binings, and hooks
