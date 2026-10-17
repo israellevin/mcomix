@@ -141,8 +141,11 @@ class MagnifyingLens:
         border_size = 1
         rectangle = self._calculate_lens_rect(x, y, *lens_size, border_size)
 
+        # Made with the screen's pixels, and drawn into the rectangle
+        # the window's give it, as the pages are.
         pixbuf = self._get_lens_pixbuf(x, y, lens_size, border_size,
-                                       (x - rectangle[0], y - rectangle[1]))
+                                       (x - rectangle[0], y - rectangle[1]),
+                                       self._window.device_scale())
 
         # The canvas draws the lens over the pages, and works out for
         # itself what that damages.
@@ -200,16 +203,27 @@ class MagnifyingLens:
 
     def _get_lens_pixbuf(self, x: int, y: int, lens_size: Sequence[int],
                          border_size: int,
-                         check_offset: Sequence[int]) -> GdkPixbuf.Pixbuf:
+                         check_offset: Sequence[int],
+                         scale: float = 1) -> GdkPixbuf.Pixbuf:
         """Get a pixbuf containing the appropiate image data for the lens
         where <x> and <y> are the positions of the cursor.
+
+        Positions and sizes are in the window's pixels; the pixbuf has
+        <scale> of the screen's to each of them.  What the lens draws is
+        worked out along each axis in proportion to those, so taking
+        every one of them <scale> times gives the same lens with that
+        many more pixels in it.
         """
+        def up(vector: Sequence[float]) -> list[int]:
+            return [int(round(side * scale)) for side in vector]
+
         cb = self._window.layout.get_content_boxes()
         source_pixbufs = self._window.imagehandler.get_pixbufs(len(cb))
         transforms = self._window.transforms
         lens_scale = (prefs['lens magnification'],) * 2  # 2D only
         opaque = prefs['checkered bg for transparent images'] or not any(
             map(GdkPixbuf.Pixbuf.get_has_alpha, source_pixbufs))
+        lens_size = up(lens_size)
         canvas = GdkPixbuf.Pixbuf.new(colorspace=GdkPixbuf.Colorspace.RGB,
                                       has_alpha=not opaque, bits_per_sample=8, width=lens_size[0],
                                       height=lens_size[1])  # 2D only
@@ -226,16 +240,16 @@ class MagnifyingLens:
             _scale, rotation, flips = tf.to_image_transforms()
             composite_color_args = image_tools.get_composite_color_args(0) if \
                 source_pixbuf.get_has_alpha() and opaque else None
-            self._draw_lens_pixbuf((x - cpos[0], y - cpos[1]), b.get_size(),
+            self._draw_lens_pixbuf(up((x - cpos[0], y - cpos[1])), up(b.get_size()),
                                    source_pixbuf, rotation, flips,
                                    lens_size, lens_scale, canvas,
                                    image_tools.scaling_quality_preference(),
-                                   composite_color_args, (x - border_size - check_offset[0],
-                                                          y - border_size - check_offset[1]))  # 2D only
+                                   composite_color_args, up((x - border_size - check_offset[0],
+                                                             y - border_size - check_offset[1])))  # 2D only
 
         canvas = self._window.enhancer.enhance(canvas)
 
-        return image_tools.add_border(canvas, border_size)
+        return image_tools.add_border(canvas, int(round(border_size * scale)))
 
     def _draw_lens_pixbuf(self, ref_pos: Sequence[int], csize: Sequence[int],
                           srcbuf: GdkPixbuf.Pixbuf, rotation: int,

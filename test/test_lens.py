@@ -7,6 +7,7 @@ it draws is a cursor, so nothing raises when it draws the wrong thing.
 
 import hashlib
 import os
+import unittest.mock
 
 from gi.repository import GdkPixbuf, GLib
 
@@ -219,7 +220,11 @@ class LensFollowsThePagesTest(MComixTest):
         self.drawn = []
         original = self.lens._get_lens_pixbuf
 
+        self.lens_scales = []
+
         def record(*args):
+            if len(args) > 5:
+                self.lens_scales.append(args[5])
             pixbuf = original(*args)
             self.drawn.append((self.lens._last_lens_rect, args[:2],
                                bytes(pixbuf.get_pixels())))
@@ -259,6 +264,33 @@ class LensFollowsThePagesTest(MComixTest):
         # Not assertNotEqual: it would print both lenses, byte by byte.
         self.assertTrue(before[2] != after[2],
                         'the lens still shows the page before')
+
+    def test_at_twice_the_pixels_the_lens_has_twice_as_many(self):
+        """On a screen scaled to 200 per cent the lens is made with the
+        screen's pixels and drawn into its rectangle, as the pages are:
+        the same lens, twice as many pixels along each side."""
+        x, y = self.drawn[-1][1]
+        size = (prefs['lens size'],) * 2
+        once = self.lens._get_lens_pixbuf(x, y, size, 1, (0, 0))
+        twice = self.lens._get_lens_pixbuf(x, y, size, 1, (0, 0), 2.0)
+        self.assertEqual((2 * once.get_width(), 2 * once.get_height()),
+                         (twice.get_width(), twice.get_height()))
+
+        def middle(pixbuf):
+            row = pixbuf.get_height() // 2 * pixbuf.get_rowstride()
+            column = pixbuf.get_width() // 2 * pixbuf.get_n_channels()
+            return pixbuf.get_pixels()[row + column:row + column + 3]
+
+        # What is under the pointer, give or take the scaling.
+        for one, two in zip(middle(once), middle(twice)):
+            self.assertAlmostEqual(one, two, delta=24)
+
+    def test_the_lens_follows_the_window_s_scale(self):
+        with unittest.mock.patch.object(type(self.window), 'device_scale',
+                                        return_value=2.0):
+            width, height = self.window.get_visible_area_size()
+            self.lens._motion_event(None, width / 2, height / 2)
+        self.assertEqual(2.0, self.lens_scales[-1])
 
     def test_the_lens_leaves_the_pages_with_the_pointer(self):
         """It stayed where the pointer had left the pages, and was drawn
