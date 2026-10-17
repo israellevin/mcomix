@@ -14,8 +14,10 @@
 #   social-preview.png (1280x640, GitHub's social preview; not in "all")
 
 PNG_SIZES = 16 22 24 32 48 256
-# The icon is 4:3, and an icon theme's <N>x<N> folder holds square
-# pictures: each is centred on a transparent square (ImageMagick).
+# The picture is 4:3, centred on the artwork's square page (flatpak
+# build-export refuses an icon that is not square).  An icon theme's
+# <N>x<N> folder holds square pictures: each PNG is also centred on a
+# transparent square (ImageMagick), whatever the page.
 SQUARE := magick -background none -gravity center \
 	-define png:exclude-chunks=date,time
 # Every output is optimised as it is written: svgo for an SVG, pngquant

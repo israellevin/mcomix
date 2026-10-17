@@ -3,6 +3,7 @@
 import glob
 import os
 import re
+from xml.etree import ElementTree
 
 from gi.repository import Gtk
 from PIL import Image
@@ -70,4 +71,21 @@ class IconSizesTest(MComixTest):
             with Image.open(path) as image:
                 if image.size != (int(folder[1]), int(folder[2])):
                     wrong.append((os.path.relpath(path, ROOT), image.size))
+        self.assertEqual([], wrong)
+
+    def test_each_scalable_picture_is_square(self):
+        """flatpak build-export refuses an application icon that is not
+        square ("Expected a square icon but got: 3540x2655"), which
+        stopped the Flatpak of 26.10; the 4:3 picture sits centred on a
+        square page."""
+        found = glob.glob(os.path.join(ROOT, '**', 'hicolor', 'scalable',
+                                       '**', '*.svg'), recursive=True)
+        self.assertGreater(len(found), 1)
+        wrong = []
+        for path in found:
+            root = ElementTree.parse(path).getroot()
+            view_box = [float(n) for n in root.get('viewBox').split()]
+            if (root.get('width') != root.get('height')
+                    or view_box[2] != view_box[3]):
+                wrong.append(os.path.relpath(path, ROOT))
         self.assertEqual([], wrong)
