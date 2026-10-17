@@ -122,6 +122,22 @@ class PageselectTest(MComixTest):
         self.dialog._selector_adjustment.set_value(2)
         self.assertEqual(2, self.dialog._thumbnail_page)
 
+    def test_it_opens_large_enough_for_a_preview(self):
+        """With no size remembered it came up 154 pixels wide, around a
+        preview a thumbnail across."""
+        self.assertTrue(wait_for(lambda: self.dialog.get_width() > 0,
+                                 seconds=5))
+        self.assertGreaterEqual(self.dialog.get_width(), 320)
+        self.assertGreaterEqual(self.dialog.get_height(), 420)
+
+    def test_cancel_comes_before_go(self):
+        labels = []
+        child = self.dialog._button_row.get_first_child()
+        while child is not None:
+            labels.append(child.get_label())
+            child = child.get_next_sibling()
+        self.assertEqual(['_Cancel', '_Go'], labels)
+
     def test_the_size_it_is_given_is_remembered(self):
         self.dialog.set_default_size(420, 360)
         self.assertTrue(wait_for(

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 0.93\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:44+0200\n"
+"POT-Creation-Date: 2026-10-17 05:48+0200\n"
 "PO-Revision-Date: 2015-04-05 08:54+0100\n"
 "Last-Translator: Benoit Pierre <benoit.pierre@gmail.com>\n"
 "Language-Team: \n"
@@ -104,7 +104,7 @@ msgstr "_Non"
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
 #: mcomix/file_chooser_library_dialog.py:42 mcomix/message_dialog.py:26
-#: mcomix/message_dialog.py:29 mcomix/pageselect.py:32
+#: mcomix/message_dialog.py:29 mcomix/pageselect.py:36
 msgid "_Cancel"
 msgstr "_Annuler"
 
@@ -778,7 +778,7 @@ msgstr "Première page"
 msgid "Last page"
 msgstr "Dernière page"
 
-#: mcomix/keybindings.py:60
+#: mcomix/keybindings.py:60 mcomix/pageselect.py:33
 msgid "Go to page"
 msgstr "Aller à la page..."
 
@@ -1444,15 +1444,11 @@ msgstr ""
 msgid "! Could not draw the next frame: %s"
 msgstr "! Impossible d'afficher l'image suivante : %s"
 
-#: mcomix/pageselect.py:29 mcomix/ui.py:477
-msgid "Go to page..."
-msgstr "Aller à la page…"
-
-#: mcomix/pageselect.py:31 mcomix/ui.py:514 mcomix/ui.py:515
+#: mcomix/pageselect.py:37 mcomix/ui.py:514 mcomix/ui.py:515
 msgid "_Go"
 msgstr "A_ller à"
 
-#: mcomix/pageselect.py:52
+#: mcomix/pageselect.py:57
 #, python-format
 msgid " of %s"
 msgstr " de %s"
@@ -2853,6 +2849,10 @@ msgstr "_Dernière page"
 #: mcomix/ui.py:477
 msgid "_Go to page..."
 msgstr "_Aller à la page…"
+
+#: mcomix/ui.py:477
+msgid "Go to page..."
+msgstr "Aller à la page…"
 
 #: mcomix/ui.py:478
 msgid "Re_fresh"

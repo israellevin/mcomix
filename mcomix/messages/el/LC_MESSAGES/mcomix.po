@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:44+0200\n"
+"POT-Creation-Date: 2026-10-17 05:48+0200\n"
 "PO-Revision-Date: 2006-09-27 10:18+0200\n"
 "Last-Translator: Paul Chatzidimitriou <paulmedic555@gmail.com>\n"
 "Language-Team: \n"
@@ -108,7 +108,7 @@ msgstr "Ό_χι"
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
 #: mcomix/file_chooser_library_dialog.py:42 mcomix/message_dialog.py:26
-#: mcomix/message_dialog.py:29 mcomix/pageselect.py:32
+#: mcomix/message_dialog.py:29 mcomix/pageselect.py:36
 msgid "_Cancel"
 msgstr "_Ακύρωση"
 
@@ -874,7 +874,7 @@ msgid "Last page"
 msgstr "Τελευταία σελίδα"
 
 #
-#: mcomix/keybindings.py:60
+#: mcomix/keybindings.py:60 mcomix/pageselect.py:33
 msgid "Go to page"
 msgstr "Μετάβαση σε σελίδα"
 
@@ -1619,17 +1619,12 @@ msgid "! Could not draw the next frame: %s"
 msgstr "! Δεν ήταν δυνατή η σχεδίαση του επόμενου καρέ: %s"
 
 #
-#: mcomix/pageselect.py:29 mcomix/ui.py:477
-msgid "Go to page..."
-msgstr "Μετάβαση σε σελίδα..."
-
-#
 # File: src/ui.py, line: 69
-#: mcomix/pageselect.py:31 mcomix/ui.py:514 mcomix/ui.py:515
+#: mcomix/pageselect.py:37 mcomix/ui.py:514 mcomix/ui.py:515
 msgid "_Go"
 msgstr "Πήγαι_νε"
 
-#: mcomix/pageselect.py:52
+#: mcomix/pageselect.py:57
 #, python-format
 msgid " of %s"
 msgstr " από %s"
@@ -3175,6 +3170,11 @@ msgstr "_Τελευταία σελίδα"
 #: mcomix/ui.py:477
 msgid "_Go to page..."
 msgstr "_Μετάβαση σε σελίδα..."
+
+#
+#: mcomix/ui.py:477
+msgid "Go to page..."
+msgstr "Μετάβαση σε σελίδα..."
 
 #: mcomix/ui.py:478
 msgid "Re_fresh"

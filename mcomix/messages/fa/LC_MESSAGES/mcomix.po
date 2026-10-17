@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: comix 3.6.4\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:44+0200\n"
+"POT-Creation-Date: 2026-10-17 05:48+0200\n"
 "PO-Revision-Date: 2008-05-21 12:40+0330\n"
 "Last-Translator: Meelad Zakaria <meelad@farsiweb.info>\n"
 "Language-Team: Persian \n"
@@ -106,7 +106,7 @@ msgstr "_خیر"
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
 #: mcomix/file_chooser_library_dialog.py:42 mcomix/message_dialog.py:26
-#: mcomix/message_dialog.py:29 mcomix/pageselect.py:32
+#: mcomix/message_dialog.py:29 mcomix/pageselect.py:36
 msgid "_Cancel"
 msgstr "_انصراف"
 
@@ -861,7 +861,7 @@ msgid "Last page"
 msgstr "آخرین صفحه"
 
 #
-#: mcomix/keybindings.py:60
+#: mcomix/keybindings.py:60 mcomix/pageselect.py:33
 msgid "Go to page"
 msgstr "رفتن به صفحه"
 
@@ -1604,17 +1604,12 @@ msgid "! Could not draw the next frame: %s"
 msgstr "! کشیدن فریم بعدی ممکن نشد: %s"
 
 #
-#: mcomix/pageselect.py:29 mcomix/ui.py:477
-msgid "Go to page..."
-msgstr "رفتن به صفحه..."
-
-#
 # File: src/ui.py, line: 69
-#: mcomix/pageselect.py:31 mcomix/ui.py:514 mcomix/ui.py:515
+#: mcomix/pageselect.py:37 mcomix/ui.py:514 mcomix/ui.py:515
 msgid "_Go"
 msgstr "_رفتن"
 
-#: mcomix/pageselect.py:52
+#: mcomix/pageselect.py:57
 #, python-format
 msgid " of %s"
 msgstr " از %s"
@@ -3120,6 +3115,11 @@ msgstr "صفحهٔ آ_خر"
 #: mcomix/ui.py:477
 msgid "_Go to page..."
 msgstr "_رفتن به صفحه..."
+
+#
+#: mcomix/ui.py:477
+msgid "Go to page..."
+msgstr "رفتن به صفحه..."
 
 #: mcomix/ui.py:478
 msgid "Re_fresh"

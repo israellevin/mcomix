@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 2.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:44+0200\n"
+"POT-Creation-Date: 2026-10-17 05:48+0200\n"
 "PO-Revision-Date: 2024-01-21 19:55+0100\n"
 "Last-Translator: Moritz Brunner <oddegamra@gmx.org>\n"
 "Language-Team: \n"
@@ -110,7 +110,7 @@ msgstr "_Nein"
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
 #: mcomix/file_chooser_library_dialog.py:42 mcomix/message_dialog.py:26
-#: mcomix/message_dialog.py:29 mcomix/pageselect.py:32
+#: mcomix/message_dialog.py:29 mcomix/pageselect.py:36
 msgid "_Cancel"
 msgstr "_Abbrechen"
 
@@ -789,7 +789,7 @@ msgstr "Erste Seite"
 msgid "Last page"
 msgstr "Letzte Seite"
 
-#: mcomix/keybindings.py:60
+#: mcomix/keybindings.py:60 mcomix/pageselect.py:33
 msgid "Go to page"
 msgstr "Gehe zu Seite"
 
@@ -1450,15 +1450,11 @@ msgstr ""
 msgid "! Could not draw the next frame: %s"
 msgstr "! Konnte das nächste Einzelbild nicht zeichnen: %s"
 
-#: mcomix/pageselect.py:29 mcomix/ui.py:477
-msgid "Go to page..."
-msgstr "Gehe zu Seite..."
-
-#: mcomix/pageselect.py:31 mcomix/ui.py:514 mcomix/ui.py:515
+#: mcomix/pageselect.py:37 mcomix/ui.py:514 mcomix/ui.py:515
 msgid "_Go"
 msgstr "_Gehe"
 
-#: mcomix/pageselect.py:52
+#: mcomix/pageselect.py:57
 #, python-format
 msgid " of %s"
 msgstr " von %s"
@@ -2862,6 +2858,10 @@ msgstr "_Letzte Seite"
 #: mcomix/ui.py:477
 msgid "_Go to page..."
 msgstr "_Gehe zu Seite..."
+
+#: mcomix/ui.py:477
+msgid "Go to page..."
+msgstr "Gehe zu Seite..."
 
 #: mcomix/ui.py:478
 msgid "Re_fresh"

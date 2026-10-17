@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 4.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:44+0200\n"
+"POT-Creation-Date: 2026-10-17 05:48+0200\n"
 "PO-Revision-Date: 2009-01-28 13:36+0800\n"
 "Last-Translator: Xie Yanbo <xieyanbo@gmail.com>\n"
 "Language-Team: Xie Yanbo <xieyanbo@gmail.com>\n"
@@ -109,7 +109,7 @@ msgstr "否(_N)"
 #: mcomix/file_chooser_base_dialog.py:237
 #: mcomix/file_chooser_base_dialog.py:242
 #: mcomix/file_chooser_library_dialog.py:42 mcomix/message_dialog.py:26
-#: mcomix/message_dialog.py:29 mcomix/pageselect.py:32
+#: mcomix/message_dialog.py:29 mcomix/pageselect.py:36
 msgid "_Cancel"
 msgstr "取消(_C)"
 
@@ -760,7 +760,7 @@ msgstr "第一页"
 msgid "Last page"
 msgstr "最后一页"
 
-#: mcomix/keybindings.py:60
+#: mcomix/keybindings.py:60 mcomix/pageselect.py:33
 msgid "Go to page"
 msgstr "跳转至指定页"
 
@@ -1418,15 +1418,11 @@ msgstr ""
 msgid "! Could not draw the next frame: %s"
 msgstr "! 无法绘制下一帧：%s"
 
-#: mcomix/pageselect.py:29 mcomix/ui.py:477
-msgid "Go to page..."
-msgstr "跳至第几页..."
-
-#: mcomix/pageselect.py:31 mcomix/ui.py:514 mcomix/ui.py:515
+#: mcomix/pageselect.py:37 mcomix/ui.py:514 mcomix/ui.py:515
 msgid "_Go"
 msgstr "跳转(_G)"
 
-#: mcomix/pageselect.py:52
+#: mcomix/pageselect.py:57
 #, python-format
 msgid " of %s"
 msgstr " / %s"
@@ -2734,6 +2730,10 @@ msgstr "最后一页(_L)"
 #: mcomix/ui.py:477
 msgid "_Go to page..."
 msgstr "跳至第几页(_G)..."
+
+#: mcomix/ui.py:477
+msgid "Go to page..."
+msgstr "跳至第几页..."
 
 #: mcomix/ui.py:478
 msgid "Re_fresh"

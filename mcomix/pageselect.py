@@ -23,13 +23,18 @@ class Pageselector(Dialog):
     """The Pageselector takes care of the popup page selector
     """
 
+    #: The size it opens at until it has been given one: room for a
+    #: preview of a page rather than a thumbnail's worth.
+    _DEFAULT_SIZE = (320, 420)
+
     def __init__(self, window: "main.MainWindow") -> None:
         self._window = window
         super().__init__(
-            title=_('Go to page...'), transient_for=window,
+            title=_('Go to page'), transient_for=window,
             modal=True, destroy_with_parent=True)
-        self.add_buttons(_('_Go'), Response.OK,
-                         _('_Cancel'), Response.CANCEL,)
+        # Cancel first and the default last, as in every other dialog.
+        self.add_buttons(_('_Cancel'), Response.CANCEL,
+                         _('_Go'), Response.OK)
         self.set_default_response(Response.OK)
         self.connect('response', self._response)
         self.set_resizable(True)
@@ -61,8 +66,10 @@ class Pageselector(Dialog):
         self._image_preview.set_size_request(
             prefs['thumbnail size'], prefs['thumbnail size'])
 
-        self.set_size_request(prefs['pageselector width'],
-                              prefs['pageselector height'])
+        # -1 until the dialog has been resized once.
+        width, height = prefs['pageselector width'], prefs['pageselector height']
+        self.set_size_request(width if width > 0 else self._DEFAULT_SIZE[0],
+                              height if height > 0 else self._DEFAULT_SIZE[1])
 
         # Group preview image and page selector next to each other
         preview_box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 0)
