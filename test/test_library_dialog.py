@@ -23,6 +23,7 @@ from mcomix import bookmark_backend
 from mcomix import bookmark_menu_item
 from mcomix import column_list
 from mcomix import constants
+from mcomix import file_actions
 from mcomix import i18n
 from mcomix import icons
 from mcomix import last_read_page
@@ -1045,6 +1046,41 @@ class CopyBookTest(_OneBookTest):
         path, cover = copy.call_args.args
         self.assertEqual(self.path, path)
         self.assertIsInstance(cover, GdkPixbuf.Pixbuf)
+
+
+class ShowInFolderTest(_OneBookTest):
+
+    """"Open containing folder" in the menu over the covers, which the
+    main window had and the library did not."""
+
+    def test_it_shows_the_selected_book_over_the_library(self):
+        area = self.dialog.book_area
+        area._covers.select_only(0)
+        pump()
+        with unittest.mock.patch.object(
+                file_actions.Gtk, 'FileLauncher') as launcher:
+            area._popup_actions.activate_action('open-containing-folder',
+                                                None)
+        given = launcher.new.call_args.args[0]
+        self.assertEqual(self.path, given.get_path())
+        opened = launcher.new.return_value.open_containing_folder
+        self.assertIs(self.dialog, opened.call_args.args[0])
+
+    def test_it_is_offered_for_one_book_alone(self):
+        area = self.dialog.book_area
+        actions = area._popup_actions
+        area._covers.unselect_all()
+        pump()
+        with unittest.mock.patch.object(widgets, 'popup_at'):
+            area._popup_book_menu()
+        self.assertFalse(actions.lookup_action(
+            'open-containing-folder').get_enabled())
+        area._covers.select_only(0)
+        pump()
+        with unittest.mock.patch.object(widgets, 'popup_at'):
+            area._popup_book_menu()
+        self.assertTrue(actions.lookup_action(
+            'open-containing-folder').get_enabled())
 
 
 class AddBooksTest(_LibraryWindowTest):

@@ -771,7 +771,7 @@ class FileActions:
     def open_containing_folder(self, *args: object) -> None:
         """Show the open file in the file manager: the archive, or the
         picture being read where the book is a folder of them."""
-        self._show_in_folder(self._window.imagehandler.get_real_path())
+        self.show_in_folder(self._window.imagehandler.get_real_path())
 
     def open_popup_containing_folder(self, *args: object) -> None:
         """Show the file the right-click menu was opened over.
@@ -785,15 +785,18 @@ class FileActions:
         if page is None or self._window.filehandler.archive_type is not None:
             self.open_containing_folder()
             return
-        self._show_in_folder(self._window.imagehandler.get_path_to_page(page))
+        self.show_in_folder(self._window.imagehandler.get_path_to_page(page))
 
-    def _show_in_folder(self, path: "str | None") -> None:
+    def show_in_folder(self, path: "str | None",
+                       parent: "Gtk.Window | None" = None) -> None:
+        """Show <path> in the file manager, over <parent>: the main
+        window unless another one, such as the library, asked."""
         if path is None:
             # The menu entry is insensitive without a file open.
             return
         launcher = Gtk.FileLauncher.new(Gio.File.new_for_path(path))
         launcher.open_containing_folder(
-            self._window, None,
+            parent or self._window, None,
             lambda _source, result: self._shown_in_folder(launcher, result))
 
     def _shown_in_folder(self, launcher: Gtk.FileLauncher,

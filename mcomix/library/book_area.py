@@ -210,6 +210,9 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
             ('copy-to-clipboard', _('_Copy'),
              _("Copies the selected book's path to clipboard."),
              self._copy_selected),
+            ('open-containing-folder', _('Open containing folder'),
+             _('Shows the selected book in the file manager.'),
+             self._show_selected_in_folder),
         )
 
     def _create_popup_menu(self) -> Gtk.PopoverMenu:
@@ -252,7 +255,7 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
 
         entries = self._menu_entries()
         for group in (entries[0:2], entries[2:4], entries[4:5], entries[5:9],
-                      entries[9:10]):
+                      entries[9:11]):
             section = Gio.Menu()
             for name, label, tooltip, handler in group:
                 section.append(label, 'books.' + name)
@@ -954,6 +957,14 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
             self._library.main_window.clipboard.copy(item.path,
                                                  self._get_pixbuf(item.uid))
 
+    def _show_selected_in_folder(self, *args: object) -> None:
+        """Show the one book selected in the file manager, as the main
+        window's "Open containing folder" shows the book being read."""
+        selected = self._selected_items()
+        if len(selected) == 1:
+            self._library.main_window.file_actions.show_in_folder(
+                selected[0].path, self._library)
+
     def _middle_click(self, gesture: Gtk.GestureClick, n_press: int,
                       x: float, y: float) -> None:
         """Open the book under the pointer in an MComix of its own.
@@ -1008,6 +1019,7 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
         self._set_sensitive('remove-from-collection',
                             books_selected and not is_collection_all)
         self._set_sensitive('copy-to-clipboard', len(selected) == 1)
+        self._set_sensitive('open-containing-folder', len(selected) == 1)
 
         widgets.popup_at(self._book_menu, over or self, x, y)
 

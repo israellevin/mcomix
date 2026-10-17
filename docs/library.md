@@ -42,11 +42,12 @@ A book is an archive in any format MComix opens; folders cannot be added.
 - "Mark as read" in the books' right-click menu gives the selected books the tick; "Mark as unread" takes it away, with the page they were left at.
 - The line under the covers gives the selected book's folder, size, page count, and the page it was left on or when it was finished.
 - With no book selected, it counts the books on show: how many, how many were started and finished, the pages read, and when the last was read.
-- Right-clicking the books offers "Open", "Open without closing library", "Mark as read", "Mark as unread", "Add...", "Clean up", "Copy", and three ways to take them out:
+- Right-clicking the books offers "Open", "Open without closing library", "Mark as read", "Mark as unread", "Add...", "Clean up", "Copy", "Open containing folder", and three ways to take them out:
   - "Remove from this collection".
   - "Remove from the library".
   - "Remove and move to the trash": the only one that touches the files. They can be restored from the trash. Where the trash would refuse one, MComix asks to delete it permanently instead. It also takes them out of the recent files and asks about their bookmarks.
 - "Copy" puts a single book's path and cover on the clipboard.
+- "Open containing folder" shows a single book in the file manager.
 - "Sort" orders by name, full path, file size, date added or by hand; "Cover size" sets how large covers are drawn.
 - A middle click on a cover starts a second MComix on that book.
 - A book opened from the library is one of the books shown. The next and previous archive are the next and previous of those, in the order shown, not of its folder. Past the last one shown there is no next.
