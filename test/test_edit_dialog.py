@@ -74,6 +74,17 @@ class EditArchiveDialogTest(MComixTest):
                 return window
         return None
 
+    def test_the_buttons_end_with_the_one_that_applies(self):
+        """Import, which closes nothing, came last, after Apply."""
+        labels = []
+        child = self.dialog._button_row.get_first_child()
+        while child is not None:
+            labels.append(child.get_label())
+            child = child.get_next_sibling()
+        self.assertEqual(['_Import', '_Cancel', 'Save _As', 'A_pply'], labels)
+        self.assertTrue(self.dialog.get_widget_for_response(
+            Response.APPLY).has_css_class('suggested-action'))
+
     def test_a_popup_menu_is_let_go_of_when_the_editor_closes(self):
         """A Gtk.PopoverMenu is parented to the widget it opens over,
         and GTK finalizes that widget with the menu still on it:

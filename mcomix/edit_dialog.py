@@ -56,9 +56,14 @@ class _EditArchiveDialog(Dialog):
     def __init__(self, window: "main.MainWindow") -> None:
         super().__init__(
             title=_('Edit archive'), transient_for=window, modal=True)
+        # Import adds to the book and closes nothing, so it stands apart
+        # at the start; then Cancel, and what ends the editing last,
+        # Apply the one it is meant to end with.
+        self._import_button = self.add_button(_('_Import'), constants.RESPONSE_IMPORT)
+        self._import_button.set_margin_end(12)
         self.add_buttons(_('_Cancel'), Response.CANCEL)
-
-        self.add_button(_('A_pply'), Response.APPLY)
+        self._save_button = self.add_button(_('Save _As'), constants.RESPONSE_SAVE_AS)
+        self.add_button(_('A_pply'), Response.APPLY).add_css_class('suggested-action')
 
         self.file_handler = window.filehandler
         self._window = window
@@ -72,10 +77,6 @@ class _EditArchiveDialog(Dialog):
         #: or to a new archive with Save As.  What it shows now, where
         #: it differs from this, is work that would go with the book.
         self._handed_over: "tuple[tuple[str, ...], tuple[tuple[str, str], ...]]" = ((), ())
-
-        self._save_button = self.add_button(_('Save _As'), constants.RESPONSE_SAVE_AS)
-
-        self._import_button = self.add_button(_('_Import'), constants.RESPONSE_IMPORT)
 
         widgets.set_border(self, 4)
         # As large on this screen as 750x600 was on the ones MComix
