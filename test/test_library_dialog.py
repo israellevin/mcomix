@@ -1048,6 +1048,30 @@ class CopyBookTest(_OneBookTest):
         self.assertIsInstance(cover, GdkPixbuf.Pixbuf)
 
 
+class MenuHeadingTest(_OneBookTest):
+
+    """The two menus' headings were items bound to an action that is
+    never enabled, from when GTK 3 drew a section's label as a bare
+    separator; a GTK 4 popover draws it as a title."""
+
+    def _heading(self, menu):
+        model = menu.get_menu_model()
+        label = model.get_item_attribute_value(0, 'label', None)
+        return label.get_string() if label is not None else None
+
+    def test_each_menu_is_headed_by_its_first_section_s_label(self):
+        self.assertEqual('Library books',
+                         self._heading(self.dialog.book_area._book_menu))
+        self.assertEqual('Library collections', self._heading(
+            self.dialog.collection_area._collection_menu))
+
+    def test_there_is_no_dead_item_to_stand_for_it(self):
+        self.assertIsNone(self.dialog.book_area._popup_actions
+                          .lookup_action('title'))
+        self.assertIsNone(self.dialog.collection_area._popup_actions
+                          .lookup_action('title'))
+
+
 class ShowInFolderTest(_OneBookTest):
 
     """"Open containing folder" in the menu over the covers, which the

@@ -162,22 +162,14 @@ class _CollectionArea(Gtk.ScrolledWindow, widgets.Releasable):
             action.connect('activate', handler)
             self._popup_actions.add_action(action)
 
-        # The heading is an item bound to an action that is never enabled,
-        # which is what it was before.  A labelled Gio.Menu section would
-        # say the same thing, but Gtk.Menu draws such a section as a bare
-        # separator and throws the label away.
-        title = Gio.SimpleAction.new('title', None)
-        title.set_enabled(False)
-        self._popup_actions.add_action(title)
         self.insert_action_group('collections', self._popup_actions)
 
+        # The heading is the label of the first section, which a GTK 4
+        # popover draws as a title over it.
         model = Gio.Menu()
-        heading = Gio.Menu()
-        heading.append(_('Library collections'), 'collections.title')
-        model.append_section(None, heading)
         adding = Gio.Menu()
         adding.append(entries[0][1], 'collections.add')
-        model.append_section(None, adding)
+        model.append_section(_('Library collections'), adding)
         creating = Gio.Menu()
         for entry in entries[1:4]:
             creating.append(entry[1], 'collections.%s' % entry[0])

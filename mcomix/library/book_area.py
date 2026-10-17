@@ -222,11 +222,6 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
             action.connect('activate', handler)
             self._popup_actions.add_action(action)
 
-        # An item bound to an action that is never enabled, which is what
-        # the heading was before.
-        title = Gio.SimpleAction.new('title', None)
-        title.set_enabled(False)
-        self._popup_actions.add_action(title)
 
         # Each of the three radio groups is one stateful action, whose
         # state is the value picked in it.
@@ -248,18 +243,17 @@ class _BookArea(Gtk.ScrolledWindow, widgets.Releasable):
                                                  GLib.Variant('i', value))
                 menu.append_item(item)
 
+        # The heading is the label of the first section, which a GTK 4
+        # popover draws as a title over it.
         model = Gio.Menu()
-        heading = Gio.Menu()
-        heading.append(_('Library books'), 'books.title')
-        model.append_section(None, heading)
-
         entries = self._menu_entries()
-        for group in (entries[0:2], entries[2:4], entries[4:5], entries[5:9],
-                      entries[9:11]):
+        for heading, group in ((_('Library books'), entries[0:2]),
+                               (None, entries[2:4]), (None, entries[4:5]),
+                               (None, entries[5:9]), (None, entries[9:11])):
             section = Gio.Menu()
             for name, label, tooltip, handler in group:
                 section.append(label, 'books.' + name)
-            model.append_section(None, section)
+            model.append_section(heading, section)
 
         sort_menu = Gio.Menu()
         by = Gio.Menu()
