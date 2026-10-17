@@ -6,6 +6,9 @@ an archive to describe.
 """
 
 import os
+import shutil
+import sys
+import unittest
 import zipfile
 from unittest import mock
 
@@ -241,6 +244,19 @@ class PropertiesDialogTest(MComixTest):
                                  seconds=10))
         wait_for(lambda: False, seconds=0.5)
         self.assertNotIn('Series:', self._texts(page))
+
+    @unittest.skipIf(sys.platform == 'win32',
+                     'Windows keeps no permission bits but read-only')
+    def test_the_permissions_are_written_as_ls_writes_them(self):
+        """They were Python's octal literal, "0o644"."""
+        picture = os.path.join(self.tmp_dir, 'blue.png')
+        shutil.copy(get_testfile_path('images', 'blue.png'), picture)
+        os.chmod(picture, 0o640)
+        page = self._open(picture)._image_page
+        self.assertTrue(wait_for(lambda: 'Permissions:' in self._texts(page),
+                                 seconds=10))
+        self.assertIn('-rw-r-----', self._texts(page))
+        self.assertNotIn('0o640', self._texts(page))
 
     def test_a_file_whose_owner_has_no_name_here_is_described(self):
         """A file from another system - a USB stick, an unpacked
