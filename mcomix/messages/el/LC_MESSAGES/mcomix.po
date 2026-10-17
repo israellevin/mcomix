@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:43+0200\n"
+"POT-Creation-Date: 2026-10-17 05:44+0200\n"
 "PO-Revision-Date: 2006-09-27 10:18+0200\n"
 "Last-Translator: Paul Chatzidimitriou <paulmedic555@gmail.com>\n"
 "Language-Team: \n"
@@ -913,7 +913,7 @@ msgstr "Στοίχιση κάτω αριστερά"
 #: mcomix/keybindings.py:79 mcomix/keybindings.py:80 mcomix/keybindings.py:81
 #: mcomix/keybindings.py:83 mcomix/keybindings.py:84 mcomix/keybindings.py:85
 #: mcomix/keybindings.py:86 mcomix/keybindings.py:88 mcomix/keybindings.py:89
-#: mcomix/preferences_dialog.py:249
+#: mcomix/keybindings.py:113 mcomix/preferences_dialog.py:249
 msgid "Scroll"
 msgstr "Κύλιση"
 
@@ -997,12 +997,13 @@ msgid "Keep transformation"
 msgstr "Διατήρηση μετασχηματισμού"
 
 #
-# File: src/ui.py, line: 93
+# File: src/properties.py, line: 169
 #: mcomix/keybindings.py:96 mcomix/keybindings.py:97 mcomix/keybindings.py:98
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:100 mcomix/keybindings.py:101
-#: mcomix/keybindings.py:102
-msgid "Transformation"
-msgstr "Μετασχηματισμός"
+#: mcomix/keybindings.py:102 mcomix/keybindings.py:169
+#: mcomix/keybindings.py:171 mcomix/properties_dialog.py:51 mcomix/ui.py:520
+msgid "Image"
+msgstr "Εικόνα"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
 msgid "Rotate 90° clockwise"
@@ -1056,10 +1057,10 @@ msgstr "Προβολή διπλής σελίδας"
 # File: src/ui.py, line: 290
 #: mcomix/keybindings.py:109 mcomix/keybindings.py:110
 #: mcomix/keybindings.py:111 mcomix/keybindings.py:112
-#: mcomix/keybindings.py:113 mcomix/keybindings.py:115
-#: mcomix/keybindings.py:116 mcomix/keybindings.py:118
-#: mcomix/keybindings.py:119 mcomix/keybindings.py:120
-#: mcomix/keybindings.py:121 mcomix/keybindings.py:122
+#: mcomix/keybindings.py:115 mcomix/keybindings.py:116
+#: mcomix/keybindings.py:118 mcomix/keybindings.py:119
+#: mcomix/keybindings.py:120 mcomix/keybindings.py:121
+#: mcomix/keybindings.py:122
 msgid "View mode"
 msgstr "Λειτουργία προβολής"
 
@@ -1229,10 +1230,8 @@ msgstr "Διαγραφή"
 #: mcomix/keybindings.py:157 mcomix/keybindings.py:158
 #: mcomix/keybindings.py:159 mcomix/keybindings.py:160
 #: mcomix/keybindings.py:162 mcomix/keybindings.py:163
-#: mcomix/keybindings.py:164 mcomix/keybindings.py:166
 #: mcomix/keybindings.py:167 mcomix/keybindings.py:168
-#: mcomix/keybindings.py:169 mcomix/keybindings.py:170
-#: mcomix/keybindings.py:171
+#: mcomix/keybindings.py:170
 msgid "File"
 msgstr "Αρχείο"
 
@@ -1249,6 +1248,7 @@ msgid "Undo"
 msgstr "Αναίρεση"
 
 #: mcomix/keybindings.py:154 mcomix/keybindings.py:155
+#: mcomix/keybindings.py:164 mcomix/keybindings.py:166
 msgid "Edit"
 msgstr "Επεξεργασία"
 
@@ -2605,12 +2605,6 @@ msgid ""
 msgstr ""
 "Να θεωρούνται σχόλια όλα τα αρχεία μέσα σε αρχεία που έχουν μία από αυτές "
 "τις καταλήξεις."
-
-#
-# File: src/properties.py, line: 169
-#: mcomix/properties_dialog.py:51 mcomix/ui.py:520
-msgid "Image"
-msgstr "Εικόνα"
 
 #
 # File: src/properties.py, line: 135
@@ -4122,6 +4116,11 @@ msgstr "Με τους υποκαταλόγους"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Αυτόματη αναζήτηση νέων βιβλίων κατά το άν_οιγμα της βιβλιοθήκης"
+
+#
+# File: src/ui.py, line: 93
+#~ msgid "Transformation"
+#~ msgstr "Μετασχηματισμός"
 
 #
 #~ msgid "Use fullscreen by default"

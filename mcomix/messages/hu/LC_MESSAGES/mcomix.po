@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 4.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:43+0200\n"
+"POT-Creation-Date: 2026-10-17 05:44+0200\n"
 "PO-Revision-Date: 2009-01-26 19:34+0100\n"
 "Last-Translator: Ernő Drabik <drerno@gmail.com>\n"
 "Language-Team: \n"
@@ -804,7 +804,7 @@ msgstr "Igazítás balra lentre"
 #: mcomix/keybindings.py:79 mcomix/keybindings.py:80 mcomix/keybindings.py:81
 #: mcomix/keybindings.py:83 mcomix/keybindings.py:84 mcomix/keybindings.py:85
 #: mcomix/keybindings.py:86 mcomix/keybindings.py:88 mcomix/keybindings.py:89
-#: mcomix/preferences_dialog.py:249
+#: mcomix/keybindings.py:113 mcomix/preferences_dialog.py:249
 msgid "Scroll"
 msgstr "Gördítés"
 
@@ -886,9 +886,10 @@ msgstr "Az átalakítás megtartása"
 
 #: mcomix/keybindings.py:96 mcomix/keybindings.py:97 mcomix/keybindings.py:98
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:100 mcomix/keybindings.py:101
-#: mcomix/keybindings.py:102
-msgid "Transformation"
-msgstr "Átalakítás"
+#: mcomix/keybindings.py:102 mcomix/keybindings.py:169
+#: mcomix/keybindings.py:171 mcomix/properties_dialog.py:51 mcomix/ui.py:520
+msgid "Image"
+msgstr "Kép"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
 msgid "Rotate 90° clockwise"
@@ -928,10 +929,10 @@ msgstr "Dupla lapos mód"
 
 #: mcomix/keybindings.py:109 mcomix/keybindings.py:110
 #: mcomix/keybindings.py:111 mcomix/keybindings.py:112
-#: mcomix/keybindings.py:113 mcomix/keybindings.py:115
-#: mcomix/keybindings.py:116 mcomix/keybindings.py:118
-#: mcomix/keybindings.py:119 mcomix/keybindings.py:120
-#: mcomix/keybindings.py:121 mcomix/keybindings.py:122
+#: mcomix/keybindings.py:115 mcomix/keybindings.py:116
+#: mcomix/keybindings.py:118 mcomix/keybindings.py:119
+#: mcomix/keybindings.py:120 mcomix/keybindings.py:121
+#: mcomix/keybindings.py:122
 msgid "View mode"
 msgstr "Nézetmód"
 
@@ -1068,10 +1069,8 @@ msgstr "Törlés"
 #: mcomix/keybindings.py:157 mcomix/keybindings.py:158
 #: mcomix/keybindings.py:159 mcomix/keybindings.py:160
 #: mcomix/keybindings.py:162 mcomix/keybindings.py:163
-#: mcomix/keybindings.py:164 mcomix/keybindings.py:166
 #: mcomix/keybindings.py:167 mcomix/keybindings.py:168
-#: mcomix/keybindings.py:169 mcomix/keybindings.py:170
-#: mcomix/keybindings.py:171
+#: mcomix/keybindings.py:170
 msgid "File"
 msgstr "Fájl"
 
@@ -1088,6 +1087,7 @@ msgid "Undo"
 msgstr "Visszavonás"
 
 #: mcomix/keybindings.py:154 mcomix/keybindings.py:155
+#: mcomix/keybindings.py:164 mcomix/keybindings.py:166
 msgid "Edit"
 msgstr "Szerkesztés"
 
@@ -2338,10 +2338,6 @@ msgid ""
 msgstr ""
 "Az itt megadott kiterjesztésű állományokat az arhívumokban "
 "megjegyzésfájlként kezeli majd a program."
-
-#: mcomix/properties_dialog.py:51 mcomix/ui.py:520
-msgid "Image"
-msgstr "Kép"
 
 #: mcomix/properties_dialog.py:110
 msgid "Archive"
@@ -3647,6 +3643,9 @@ msgstr "Almappákkal együtt"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Új könyvek automatikus keresése a könyvtár _megnyitásakor"
+
+#~ msgid "Transformation"
+#~ msgstr "Átalakítás"
 
 #~ msgid "Use fullscreen by default"
 #~ msgstr "Teljes képernyő használata alapértelmezetten"

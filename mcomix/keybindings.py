@@ -93,13 +93,13 @@ BINDING_INFO: "dict[str, dict[str, str]]" = {
     'zoom_out': {'title': _('Zoom out'), 'group': _('Zoom')},
     'zoom_original': {'title': _('Normal size'), 'group': _('Zoom')},
 
-    'keep_transformation': {'title': _('Keep transformation'), 'group': _('Transformation')},
-    'rotate_90': {'title': _('Rotate 90° clockwise'), 'group': _('Transformation')},
-    'rotate_180': {'title': _('Rotate 180°'), 'group': _('Transformation')},
-    'rotate_270': {'title': _('Rotate 90° anticlockwise'), 'group': _('Transformation')},
-    'flip_horiz': {'title': _('Flip horizontally'), 'group': _('Transformation')},
-    'flip_vert': {'title': _('Flip vertically'), 'group': _('Transformation')},
-    'no_autorotation': {'title': _('Never autorotate'), 'group': _('Transformation')},
+    'keep_transformation': {'title': _('Keep transformation'), 'group': _('Image')},
+    'rotate_90': {'title': _('Rotate 90° clockwise'), 'group': _('Image')},
+    'rotate_180': {'title': _('Rotate 180°'), 'group': _('Image')},
+    'rotate_270': {'title': _('Rotate 90° anticlockwise'), 'group': _('Image')},
+    'flip_horiz': {'title': _('Flip horizontally'), 'group': _('Image')},
+    'flip_vert': {'title': _('Flip vertically'), 'group': _('Image')},
+    'no_autorotation': {'title': _('Never autorotate'), 'group': _('Image')},
 
     'rotate_90_width': {'title': _('Rotate 90° clockwise'), 'group': _('Autorotate by width')},
     'rotate_270_width': {'title': _('Rotate 90° anticlockwise'), 'group': _('Autorotate by width')},
@@ -110,7 +110,7 @@ BINDING_INFO: "dict[str, dict[str, str]]" = {
     'title_page_alone': {'title': _('Title page alone'), 'group': _('View mode')},
     'manga_mode': {'title': _('Manga mode'), 'group': _('View mode')},
     'continuous_mode': {'title': _('Continuous mode'), 'group': _('View mode')},
-    'invert_scroll': {'title': _('Invert smart scroll'), 'group': _('View mode')},
+    'invert_scroll': {'title': _('Invert smart scroll'), 'group': _('Scroll')},
 
     'lens': {'title': _('Magnifying lens'), 'group': _('View mode')},
     'stretch': {'title': _('Stretch small images'), 'group': _('View mode')},
@@ -161,14 +161,14 @@ BINDING_INFO: "dict[str, dict[str, str]]" = {
 
     'comments': {'title': _('Archive comments'), 'group': _('File')},
     'properties': {'title': _('Properties'), 'group': _('File')},
-    'preferences': {'title': _('Preferences'), 'group': _('File')},
+    'preferences': {'title': _('Preferences'), 'group': _('Edit')},
 
-    'edit_archive': {'title': _('Edit archive'), 'group': _('File')},
+    'edit_archive': {'title': _('Edit archive'), 'group': _('Edit')},
     'open_containing_folder': {'title': _('Open containing folder'), 'group': _('File')},
     'open': {'title': _('Open'), 'group': _('File')},
-    'enhance_image': {'title': _('Enhance image'), 'group': _('File')},
+    'enhance_image': {'title': _('Enhance image'), 'group': _('Image')},
     'library': {'title': _('Library'), 'group': _('File')},
-    'invert_color': {'title': _('Invert image colors'), 'group': _('File')},
+    'invert_color': {'title': _('Invert image colors'), 'group': _('Image')},
 
     # Bookmarks
     'add_bookmark': {'title': _('Add bookmark'), 'group': _('Bookmarks')},

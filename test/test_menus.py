@@ -13,6 +13,7 @@ from gi.repository import GLib
 from . import MComixTest, pump
 
 from mcomix import constants
+from mcomix import keybindings
 from mcomix import icons
 from mcomix import main
 from mcomix import preferences_dialog
@@ -58,6 +59,17 @@ class LayoutTest(MComixTest):
                            ('menu_go', 'menu_go_popup')):
             self.assertEqual(_submenu(ui._MENUBAR, bar),
                              _submenu(ui._POPUP, popup))
+
+    def test_the_shortcuts_tab_files_the_image_menu_s_keys_together(self):
+        """Enhance and invert colours were filed under File, and the
+        rotations under a group of their own."""
+        top = [name for name in _submenu(ui._MENUBAR, 'menu_image')
+               if isinstance(name, str)]
+        groups = {keybindings.BINDING_INFO[name]['group'] for name in top
+                  if name in keybindings.BINDING_INFO}
+        self.assertEqual({'Image'}, groups)
+        for name in ('preferences', 'edit_archive', 'undo'):
+            self.assertEqual('Edit', keybindings.BINDING_INFO[name]['group'])
 
     def test_no_item_is_in_two_places_of_the_menu_bar(self):
         names = [name for name in _names(ui._MENUBAR)

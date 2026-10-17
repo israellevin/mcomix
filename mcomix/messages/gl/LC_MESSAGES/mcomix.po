@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:43+0200\n"
+"POT-Creation-Date: 2026-10-17 05:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marcelo Góes <vanquirius@gentoo.org>\n"
 "Language-Team: \n"
@@ -801,7 +801,7 @@ msgstr "Aliñar abaixo á esquerda"
 #: mcomix/keybindings.py:79 mcomix/keybindings.py:80 mcomix/keybindings.py:81
 #: mcomix/keybindings.py:83 mcomix/keybindings.py:84 mcomix/keybindings.py:85
 #: mcomix/keybindings.py:86 mcomix/keybindings.py:88 mcomix/keybindings.py:89
-#: mcomix/preferences_dialog.py:249
+#: mcomix/keybindings.py:113 mcomix/preferences_dialog.py:249
 msgid "Scroll"
 msgstr "Progresión das imaxes"
 
@@ -883,9 +883,10 @@ msgstr "Conservación da transformación"
 
 #: mcomix/keybindings.py:96 mcomix/keybindings.py:97 mcomix/keybindings.py:98
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:100 mcomix/keybindings.py:101
-#: mcomix/keybindings.py:102
-msgid "Transformation"
-msgstr "Transformación"
+#: mcomix/keybindings.py:102 mcomix/keybindings.py:169
+#: mcomix/keybindings.py:171 mcomix/properties_dialog.py:51 mcomix/ui.py:520
+msgid "Image"
+msgstr "Imaxe"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
 msgid "Rotate 90° clockwise"
@@ -925,10 +926,10 @@ msgstr "Modo de páxina dobre"
 
 #: mcomix/keybindings.py:109 mcomix/keybindings.py:110
 #: mcomix/keybindings.py:111 mcomix/keybindings.py:112
-#: mcomix/keybindings.py:113 mcomix/keybindings.py:115
-#: mcomix/keybindings.py:116 mcomix/keybindings.py:118
-#: mcomix/keybindings.py:119 mcomix/keybindings.py:120
-#: mcomix/keybindings.py:121 mcomix/keybindings.py:122
+#: mcomix/keybindings.py:115 mcomix/keybindings.py:116
+#: mcomix/keybindings.py:118 mcomix/keybindings.py:119
+#: mcomix/keybindings.py:120 mcomix/keybindings.py:121
+#: mcomix/keybindings.py:122
 msgid "View mode"
 msgstr "Modo de visualización"
 
@@ -1065,10 +1066,8 @@ msgstr "Eliminar"
 #: mcomix/keybindings.py:157 mcomix/keybindings.py:158
 #: mcomix/keybindings.py:159 mcomix/keybindings.py:160
 #: mcomix/keybindings.py:162 mcomix/keybindings.py:163
-#: mcomix/keybindings.py:164 mcomix/keybindings.py:166
 #: mcomix/keybindings.py:167 mcomix/keybindings.py:168
-#: mcomix/keybindings.py:169 mcomix/keybindings.py:170
-#: mcomix/keybindings.py:171
+#: mcomix/keybindings.py:170
 msgid "File"
 msgstr "Ficheiro"
 
@@ -1085,6 +1084,7 @@ msgid "Undo"
 msgstr "Desfacer"
 
 #: mcomix/keybindings.py:154 mcomix/keybindings.py:155
+#: mcomix/keybindings.py:164 mcomix/keybindings.py:166
 msgid "Edit"
 msgstr "Editar"
 
@@ -2329,10 +2329,6 @@ msgid ""
 msgstr ""
 "Tratar todos os documentos atopados dentro de arquivos, incluíndo os que "
 "teñen estas terminacións de arquivo, como comentarios."
-
-#: mcomix/properties_dialog.py:51 mcomix/ui.py:520
-msgid "Image"
-msgstr "Imaxe"
 
 #: mcomix/properties_dialog.py:110
 msgid "Archive"
@@ -3624,6 +3620,9 @@ msgstr "Con subdirectorios"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Buscar automaticamente libros novos ao _abrir a biblioteca"
+
+#~ msgid "Transformation"
+#~ msgstr "Transformación"
 
 #~ msgid "Use fullscreen by default"
 #~ msgstr "Usar a pantalla completa de forma predeterminada"

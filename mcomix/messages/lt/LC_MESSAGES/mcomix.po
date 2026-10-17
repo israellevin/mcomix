@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 1.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 05:43+0200\n"
+"POT-Creation-Date: 2026-10-17 05:44+0200\n"
 "PO-Revision-Date: 2016-09-18 15:30+0300\n"
 "Last-Translator: Zygimantus <zygimantus@gmail.com>\n"
 "Language-Team: \n"
@@ -811,7 +811,7 @@ msgstr "Lygiuoti apačioje kairėje"
 #: mcomix/keybindings.py:79 mcomix/keybindings.py:80 mcomix/keybindings.py:81
 #: mcomix/keybindings.py:83 mcomix/keybindings.py:84 mcomix/keybindings.py:85
 #: mcomix/keybindings.py:86 mcomix/keybindings.py:88 mcomix/keybindings.py:89
-#: mcomix/preferences_dialog.py:249
+#: mcomix/keybindings.py:113 mcomix/preferences_dialog.py:249
 msgid "Scroll"
 msgstr "Slinkimas"
 
@@ -893,9 +893,10 @@ msgstr "Palikti transformaciją"
 
 #: mcomix/keybindings.py:96 mcomix/keybindings.py:97 mcomix/keybindings.py:98
 #: mcomix/keybindings.py:99 mcomix/keybindings.py:100 mcomix/keybindings.py:101
-#: mcomix/keybindings.py:102
-msgid "Transformation"
-msgstr "Transformacija"
+#: mcomix/keybindings.py:102 mcomix/keybindings.py:169
+#: mcomix/keybindings.py:171 mcomix/properties_dialog.py:51 mcomix/ui.py:520
+msgid "Image"
+msgstr "Vaizdas"
 
 #: mcomix/keybindings.py:97 mcomix/keybindings.py:104 mcomix/keybindings.py:106
 msgid "Rotate 90° clockwise"
@@ -935,10 +936,10 @@ msgstr "Dviejų puslapių veiksena"
 
 #: mcomix/keybindings.py:109 mcomix/keybindings.py:110
 #: mcomix/keybindings.py:111 mcomix/keybindings.py:112
-#: mcomix/keybindings.py:113 mcomix/keybindings.py:115
-#: mcomix/keybindings.py:116 mcomix/keybindings.py:118
-#: mcomix/keybindings.py:119 mcomix/keybindings.py:120
-#: mcomix/keybindings.py:121 mcomix/keybindings.py:122
+#: mcomix/keybindings.py:115 mcomix/keybindings.py:116
+#: mcomix/keybindings.py:118 mcomix/keybindings.py:119
+#: mcomix/keybindings.py:120 mcomix/keybindings.py:121
+#: mcomix/keybindings.py:122
 msgid "View mode"
 msgstr "Rodymo veiksena"
 
@@ -1075,10 +1076,8 @@ msgstr "Ištrinti"
 #: mcomix/keybindings.py:157 mcomix/keybindings.py:158
 #: mcomix/keybindings.py:159 mcomix/keybindings.py:160
 #: mcomix/keybindings.py:162 mcomix/keybindings.py:163
-#: mcomix/keybindings.py:164 mcomix/keybindings.py:166
 #: mcomix/keybindings.py:167 mcomix/keybindings.py:168
-#: mcomix/keybindings.py:169 mcomix/keybindings.py:170
-#: mcomix/keybindings.py:171
+#: mcomix/keybindings.py:170
 msgid "File"
 msgstr "Failas"
 
@@ -1095,6 +1094,7 @@ msgid "Undo"
 msgstr "Atšaukti"
 
 #: mcomix/keybindings.py:154 mcomix/keybindings.py:155
+#: mcomix/keybindings.py:164 mcomix/keybindings.py:166
 msgid "Edit"
 msgstr "Taisa"
 
@@ -2331,10 +2331,6 @@ msgid ""
 "as comments."
 msgstr ""
 "Visus archyvuose rastus failus su šiomis galūnėmis laikyti komentarais."
-
-#: mcomix/properties_dialog.py:51 mcomix/ui.py:520
-msgid "Image"
-msgstr "Vaizdas"
 
 #: mcomix/properties_dialog.py:110
 msgid "Archive"
@@ -3623,6 +3619,9 @@ msgstr "Su poaplankiais"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatiškai ieškoti naujų knygų kai yra _atidaroma biblioteka"
+
+#~ msgid "Transformation"
+#~ msgstr "Transformacija"
 
 #~ msgid "Use fullscreen by default"
 #~ msgstr "Pagal numatymą naudoti visą ekraną"
