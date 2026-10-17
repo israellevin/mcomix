@@ -17,6 +17,7 @@ if __name__ == '__main__':
 from mcomix import (
     constants,
     log,
+    portability,
     preferences,
 )
 from mcomix.version_tools import Version
@@ -273,6 +274,9 @@ def run() -> None:
         except OSError as error:
             log.error('! Could not write the log to %s: %s', opts.output, error)
     log.log_uncaught_exceptions()
+    since_start = portability.seconds_since_process_start()
+    if since_start is not None:
+        log.debug('Python started %.1f s after the process', since_start)
 
     # Reconfigure stdout to replace characters that cannot be printed
     if hasattr(sys.stdout, 'reconfigure'):
@@ -283,11 +287,16 @@ def run() -> None:
 
     # Before GTK is loaded and a window built: an MComix that only has
     # files to pass on is there to save the wait for both.
+    # Each step of the start is logged at debug level, so that a log
+    # of a slow start shows which step the time went to.
     instance = single_instance_for(opts)
-    if instance is not None \
-            and instance.hand_over(args, opts.page, opts.page_member):
-        return
+    if instance is not None:
+        log.debug('Looking for a running MComix on the session bus')
+        if instance.hand_over(args, opts.page, opts.page_member):
+            log.debug('Handed the files to the running MComix')
+            return
 
+    log.debug('Loading GTK')
     setup_dependencies()
 
     from gi.repository import GLib
@@ -308,6 +317,7 @@ def run() -> None:
 
     GLib.set_prgname(program_name())
 
+    log.debug('Building the main window')
     from mcomix import main
     window = main.MainWindow(fullscreen=opts.fullscreen, is_slideshow=opts.slideshow,
                              show_library=shows_library(opts),
@@ -334,6 +344,12 @@ def run() -> None:
 
     for sig in (signal.SIGINT, signal.SIGTERM):
         signal.signal(sig, lambda signum, stack: GLib.idle_add(window.terminate_program))
+
+    def started() -> bool:
+        log.debug('Started')
+        return GLib.SOURCE_REMOVE
+
+    GLib.idle_add(started)
     try:
         main.main_loop().run()
     except KeyboardInterrupt:  # Will not always work because of threading.

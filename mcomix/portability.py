@@ -37,6 +37,28 @@ def get_default_locale() -> str:
             return "C"
 
 
+def seconds_since_process_start() -> float | None:
+    """How long ago, by the system's clock, this process was created.
+
+    Known on Windows only, where MComix.exe loads its DLLs before any
+    Python runs; None elsewhere.
+    """
+    if sys.platform == "win32":
+        kernel32 = ctypes.windll.kernel32
+        # FILETIMEs, counted in 100 ns, read as the 64-bit numbers they are.
+        created, exited, kernel, user, now = (ctypes.c_uint64() for _ in range(5))
+        # The handle GetCurrentProcess() answers with, as a pointer:
+        # ctypes would pass the int it returns as 32 bits.
+        this_process = ctypes.c_void_p(-1)
+        if not kernel32.GetProcessTimes(this_process, ctypes.byref(created),
+                                        ctypes.byref(exited), ctypes.byref(kernel),
+                                        ctypes.byref(user)):
+            return None
+        kernel32.GetSystemTimeAsFileTime(ctypes.byref(now))
+        return (now.value - created.value) / 10_000_000
+    return None
+
+
 def is_system_ui_dark_themed() -> constants.SystemThemeLightness:
     """Determine if the system is configured to use a dark theme by default."""
     if sys.platform == "win32":

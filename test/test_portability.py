@@ -90,6 +90,38 @@ class WindowsDefaultLocaleTest(MComixTest):
         """
         self.assertEqual('C', self._locale(0x1000))
 
+
+class ProcessAgeTest(MComixTest):
+
+    """How long ago Windows says the process was created."""
+
+    def _age(self, created, now, answered=True):
+        def process_times(handle, created_at, *others):
+            self.assertEqual(-1 & 0xFFFFFFFFFFFFFFFF, handle.value)
+            created_at._obj.value = created
+            return answered
+
+        def system_time(now_at):
+            now_at._obj.value = now
+
+        kernel32 = unittest.mock.Mock()
+        kernel32.GetProcessTimes.side_effect = process_times
+        kernel32.GetSystemTimeAsFileTime.side_effect = system_time
+        windll = unittest.mock.Mock(kernel32=kernel32)
+        with unittest.mock.patch('sys.platform', 'win32'), \
+                unittest.mock.patch('ctypes.windll', windll, create=True):
+            return portability.seconds_since_process_start()
+
+    def test_the_times_are_counted_in_100_ns(self):
+        self.assertEqual(90.5, self._age(10**17, 10**17 + 905_000_000))
+
+    def test_a_process_whose_times_cannot_be_read_has_none(self):
+        self.assertIsNone(self._age(0, 0, answered=False))
+
+    def test_elsewhere_it_is_not_known(self):
+        with unittest.mock.patch('sys.platform', 'linux'):
+            self.assertIsNone(portability.seconds_since_process_start())
+
 @unittest.skipIf(sys.platform == 'win32',
                  "Windows' colour scheme comes from the registry")
 class ColourSchemeTest(MComixTest):

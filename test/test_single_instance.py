@@ -310,3 +310,34 @@ class StartTest(MComixTest):
                     side_effect=AssertionError('it went on to start')):
             run.run()
         instance.hand_over.assert_called_once_with(['a.cbz'], 4, None)
+
+    def test_a_log_shows_which_step_of_the_start_took_the_time(self):
+        """A start that took minutes on Windows left a debug log with
+        nothing between the options and the first window: the time
+        could have gone to the bus, to GTK or to the window."""
+        class Stop(Exception):
+            pass
+
+        prefs['single instance'] = True
+        instance = unittest.mock.Mock()
+        instance.hand_over.return_value = False
+        with unittest.mock.patch.object(sys, 'argv', ['mcomix', 'a.cbz']), \
+                unittest.mock.patch.object(
+                    run.preferences, 'read_preferences_file'), \
+                unittest.mock.patch.object(i18n, 'install_gettext'), \
+                unittest.mock.patch.object(sys, 'stdout'), \
+                unittest.mock.patch.object(run.log, 'setLevel'), \
+                unittest.mock.patch.object(run.log, 'log_uncaught_exceptions'), \
+                unittest.mock.patch.object(run.log, 'debug') as debug, \
+                unittest.mock.patch.object(
+                    run.portability, 'seconds_since_process_start',
+                    return_value=None), \
+                unittest.mock.patch.object(run, 'single_instance_for',
+                                           return_value=instance), \
+                unittest.mock.patch.object(run, 'setup_dependencies',
+                                           side_effect=Stop):
+            with self.assertRaises(Stop):
+                run.run()
+        self.assertEqual(['Looking for a running MComix on the session bus',
+                          'Loading GTK'],
+                         [call.args[0] for call in debug.call_args_list])
