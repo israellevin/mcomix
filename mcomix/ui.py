@@ -407,7 +407,7 @@ _TOOLBAR = ('previous_archive', 'first_page', 'previous_page', 'go_to',
             'fullscreen', 'slideshow', 'expander',
             'best_fit_mode', 'fit_width_mode', 'fit_height_mode',
             'fit_size_mode', 'fit_manual_mode', None,
-            'double_page', 'manga_mode', None,
+            'double_page', 'manga_mode', 'continuous_mode', None,
             'lens')
 
 
@@ -546,7 +546,7 @@ class MainUI:
             _Entry('thumbnails', None, _('Th_umbnails'), None, window.change_thumbnails_visibility),
             _Entry('hide_all', None, _('H_ide all'), None, window.change_hide_all),
             _Entry('manga_mode', 'view-mirror-symbolic', _('_Manga mode'), _('Manga mode'), window.change_manga_mode),
-            _Entry('continuous_mode', None, _('_Continuous mode'), _('Continuous mode'), window.change_continuous_mode),
+            _Entry('continuous_mode', 'view-continuous-symbolic', _('_Continuous mode'), _('Continuous mode'), window.change_continuous_mode),
             _Entry('invert_scroll', 'edit-undo', _('Invert smart scroll'), _('Invert smart scrolling direction.'), window.change_invert_scroll),
             _Entry('keep_transformation', None, _('_Keep transformation'), _('Keeps the currently selected transformation for the next pages.'),
                    window.change_keep_transformation),

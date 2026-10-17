@@ -168,6 +168,19 @@ class MainWindowTest(MComixTest):
             self.assertIsNotNone(button.get_action_name(),
                                  'a tool bar button does nothing')
 
+    def test_every_page_layout_has_its_tool_bar_button(self):
+        """Double page and manga mode had one, continuous mode none."""
+        actions = {button.get_action_name()
+                   for button in self._children(self.window.toolbar)
+                   if isinstance(button, Gtk.Button)}
+        for name in ('double_page', 'manga_mode', 'continuous_mode'):
+            self.assertIn(ui.Actions.PREFIX + '.' + ui._gio_name(name),
+                          actions)
+
+    def test_the_continuous_mode_icon_is_in_the_icon_theme(self):
+        theme = Gtk.IconTheme.get_for_display(self.window.get_display())
+        self.assertTrue(theme.has_icon('view-continuous-symbolic'))
+
     def test_the_slideshow_button_keeps_its_icon_while_it_changes_it(self):
         """Starting and stopping a slideshow put an icon of the default
         size, full colour rather than symbolic, in place of the tool
