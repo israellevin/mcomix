@@ -15,6 +15,7 @@ from gi.repository import Gdk
 from . import MComixTest, get_testfile_path, pump, wait_for
 
 from mcomix import constants
+from mcomix import edit_image_area
 from mcomix import icons
 from mcomix import keybindings
 from mcomix import main
@@ -149,6 +150,51 @@ class ThumbnailScaleTest(MComixTest):
         item = self._first_at(1.0)
         self.assertEqual(1.0, item.scale)
         self.assertIs(item.thumbnail, thumbnail_list._shown(item))
+
+
+
+class EditorScaleTest(MComixTest):
+
+    """The archive editor's page thumbnails, made with the screen's
+    pixels where there are more of them than the window's."""
+
+    def setUp(self):
+        super().setUp()
+        for directory in (constants.CONFIG_DIR, constants.DATA_DIR,
+                          constants.THUMBNAIL_PATH):
+            os.makedirs(directory, exist_ok=True)
+        icons.load_icons()
+        self.window = main.MainWindow()
+        main.set_main_window(self.window)
+        pump()
+
+    def tearDown(self):
+        self.area.cleanup()
+        self.area.release()
+        self.window.terminate_program()
+        self.window.destroy()
+        main.set_main_window(None)
+        pump()
+        super().tearDown()
+
+    def _area_at(self, scale):
+        with unittest.mock.patch.object(main.MainWindow, 'device_scale',
+                                        return_value=scale):
+            self.area = edit_image_area._ImageArea(unittest.mock.Mock(),
+                                                   self.window)
+        return self.area
+
+    def test_at_twice_the_pixels_the_thumbnails_are_made_twice_as_large(self):
+        area = self._area_at(2.0)
+        self.assertEqual(2.0, area._grid.device_scale)
+        self.assertEqual(2 * area._thumbnail_size, area._made_size)
+        self.assertEqual((area._made_size,) * 2, (area._thumbnailer.width,
+                                                  area._thumbnailer.height))
+
+    def test_at_one_to_one_they_are_made_at_the_size_shown(self):
+        area = self._area_at(1.0)
+        self.assertEqual(1.0, area._grid.device_scale)
+        self.assertEqual(area._thumbnail_size, area._made_size)
 
 
 # vim: expandtab:sw=4:ts=4

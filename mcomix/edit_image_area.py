@@ -35,12 +35,17 @@ class _ImageArea(Gtk.ScrolledWindow, widgets.Releasable):
         # As every other preview in MComix, as large as this screen
         # wants it.
         self._thumbnail_size = preview.scaled(128, self)
+        # Made with the screen's pixels and drawn at the window's, on the
+        # main window's screen: the editor opens over it, and is put
+        # away before a move to another screen would matter.
+        self._made_size = round(self._thumbnail_size * window.device_scale())
 
         # An entry's uid is the full path to its image, which is what
         # the thumbnailer takes; its tooltip is the basename.
         self._grid = thumbnail_list.ThumbnailGridView()
         self._grid.generate_thumbnail = self._generate_thumbnail
         self._grid.set_thumbnail_size(self._thumbnail_size)
+        self._grid.device_scale = window.device_scale()
         self._grid.set_reorderable(True)
         self._grid.about_to_reorder = lambda: self._edit_dialog.record_change()
         clicks = Gtk.GestureClick()
@@ -54,8 +59,8 @@ class _ImageArea(Gtk.ScrolledWindow, widgets.Releasable):
         self.set_child(self._grid)
 
         self._thumbnailer = thumbnail_tools.Thumbnailer(store_on_disk=False,
-                                                        size=(self._thumbnail_size,
-                                                              self._thumbnail_size))
+                                                        size=(self._made_size,
+                                                              self._made_size))
 
         self._window.imagehandler.page_available += self._on_page_available
 
@@ -185,8 +190,8 @@ class _ImageArea(Gtk.ScrolledWindow, widgets.Releasable):
         if pixbuf is not None:
             pixbuf = image_tools.turned_as_shown(pixbuf, path)
         if pixbuf is None:
-            pixbuf = image_tools.missing_image_icon(self._thumbnail_size,
-                                                    self._thumbnail_size)
+            pixbuf = image_tools.missing_image_icon(self._made_size,
+                                                    self._made_size)
         return pixbuf
 
     def add_extra_image(self, path: str) -> None:
