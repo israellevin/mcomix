@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mcomix 0.99\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2013-01-07 22:51+0200\n"
 "Last-Translator: Isratine Citizen <genghiskhan@gmx.ca>\n"
 "Language-Team: Hebrew <eliz@gnu.org>\n"
@@ -484,7 +484,7 @@ msgstr "_לא עכשיו"
 msgid "Could not show the folder: %s"
 msgstr "לא ניתן להציג את המדור: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "שמירת עמוד בשם"
 
@@ -1116,10 +1116,6 @@ msgstr "יציאה"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "שמירה ויציאה"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "שמירה בשם"
 
 #: mcomix/keybindings.py:162
 msgid "Archive comments"
@@ -3626,6 +3622,9 @@ msgstr "עם מדורי משנה"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "סרוק חוברות אוטומטית כאשר הספרייה הינה _פתוחה"
+
+#~ msgid "Save As"
+#~ msgstr "שמירה בשם"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

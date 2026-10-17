@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2009-02-02 14:19+0100\n"
 "Last-Translator: Dariusz Jakoniuk <pipaceliny@gmail.com>\n"
 "Language-Team: \n"
@@ -556,7 +556,7 @@ msgstr "Nie _teraz"
 msgid "Could not show the folder: %s"
 msgstr "Nie udało się wyświetlić katalogu: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "Zapisz stronę jako"
 
@@ -1298,12 +1298,6 @@ msgstr "Zakończ"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "Zapisz i zakończ"
-
-#
-# File: src/filechooser.py, line: 39
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "Zapisz jako"
 
 #
 # File: src/properties.py, line: 135
@@ -4161,6 +4155,11 @@ msgstr "Z podkatalogami"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatycznie szukaj nowych książek przy _otwarciu biblioteki"
+
+#
+# File: src/filechooser.py, line: 39
+#~ msgid "Save As"
+#~ msgstr "Zapisz jako"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

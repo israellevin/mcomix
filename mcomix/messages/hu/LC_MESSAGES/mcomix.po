@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 4.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2009-01-26 19:34+0100\n"
 "Last-Translator: Ernő Drabik <drerno@gmail.com>\n"
 "Language-Team: \n"
@@ -481,7 +481,7 @@ msgstr "Most _ne"
 msgid "Could not show the folder: %s"
 msgstr "Nem sikerült megjeleníteni a mappát: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "Oldal mentése másként"
 
@@ -1110,10 +1110,6 @@ msgstr "Kilépés"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "Mentés és kilépés"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "Mentés másként"
 
 #: mcomix/keybindings.py:162
 msgid "Archive comments"
@@ -3642,6 +3638,9 @@ msgstr "Almappákkal együtt"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Új könyvek automatikus keresése a könyvtár _megnyitásakor"
+
+#~ msgid "Save As"
+#~ msgstr "Mentés másként"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

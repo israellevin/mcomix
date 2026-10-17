@@ -157,7 +157,7 @@ BINDING_INFO: "dict[str, dict[str, str]]" = {
     'close': {'title': _('Close'), 'group': _('File')},
     'quit': {'title': _('Quit'), 'group': _('File')},
     'save_and_quit': {'title': _('Save and quit'), 'group': _('File')},
-    'extract_page': {'title': _('Save As'), 'group': _('File')},
+    'extract_page': {'title': _('Save page as'), 'group': _('File')},
 
     'comments': {'title': _('Archive comments'), 'group': _('File')},
     'properties': {'title': _('Properties'), 'group': _('File')},

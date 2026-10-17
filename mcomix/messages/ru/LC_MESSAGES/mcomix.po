@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 0.90.4\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2016-01-10 18:09+0200\n"
 "Last-Translator: Ulyanich Michael <ulianich_mihail@ukr.net>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -566,7 +566,7 @@ msgstr "Не удалось показать каталог: %s"
 #
 # File: src/library.py, line: 832
 # File: src/properties.py, line: 113
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "Сохранить страницу как"
 
@@ -1308,10 +1308,6 @@ msgstr "Выйти"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "Сохранить и выйти"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "Сохранить как..."
 
 #
 # File: src/properties.py, line: 135
@@ -4196,6 +4192,9 @@ msgstr "С подкаталогами"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Автоматически искать новые книги при _открытии библиотеки"
+
+#~ msgid "Save As"
+#~ msgstr "Сохранить как..."
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

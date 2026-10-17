@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 4.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2009-01-28 13:36+0800\n"
 "Last-Translator: Xie Yanbo <xieyanbo@gmail.com>\n"
 "Language-Team: Xie Yanbo <xieyanbo@gmail.com>\n"
@@ -484,7 +484,7 @@ msgstr "暂不(_N)"
 msgid "Could not show the folder: %s"
 msgstr "无法显示目录：%s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "页面另存为"
 
@@ -1103,10 +1103,6 @@ msgstr "退出"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "保存并退出"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "另存为"
 
 #: mcomix/keybindings.py:162
 msgid "Archive comments"
@@ -3525,6 +3521,9 @@ msgstr "包含子目录"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "当打开收藏库时自动扫描新书(_O)"
+
+#~ msgid "Save As"
+#~ msgstr "另存为"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

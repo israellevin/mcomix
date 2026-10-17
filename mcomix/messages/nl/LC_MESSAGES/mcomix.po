@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2006-10-15 21:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -536,7 +536,7 @@ msgstr "_Niet nu"
 msgid "Could not show the folder: %s"
 msgstr "Kon de map niet tonen: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "Pagina opslaan als"
 
@@ -1271,10 +1271,6 @@ msgstr "Afsluiten"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "Opslaan en afsluiten"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "Opslaan als"
 
 #
 #: mcomix/keybindings.py:162
@@ -4094,6 +4090,9 @@ msgstr "Met submappen"
 msgid "Automatically scan for new books when library is _opened"
 msgstr ""
 "Automatisch naar nieuwe boeken zoeken bij het _openen van de bibliotheek"
+
+#~ msgid "Save As"
+#~ msgstr "Opslaan als"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

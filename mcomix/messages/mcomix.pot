@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 26.09\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -467,7 +467,7 @@ msgstr ""
 msgid "Could not show the folder: %s"
 msgstr ""
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr ""
 
@@ -1088,10 +1088,6 @@ msgstr ""
 
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
-msgstr ""
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
 msgstr ""
 
 #: mcomix/keybindings.py:162

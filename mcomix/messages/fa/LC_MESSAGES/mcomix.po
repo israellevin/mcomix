@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: comix 3.6.4\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2008-05-21 12:40+0330\n"
 "Last-Translator: Meelad Zakaria <meelad@farsiweb.info>\n"
 "Language-Team: Persian \n"
@@ -532,7 +532,7 @@ msgstr "_حالا نه"
 msgid "Could not show the folder: %s"
 msgstr "نمایش شاخه ممکن نشد: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "ذخیرهٔ صفحه به نام"
 
@@ -1264,10 +1264,6 @@ msgstr "خروج"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "ذخیره و خروج"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "ذخیره به نام"
 
 #
 #: mcomix/keybindings.py:162
@@ -4033,6 +4029,9 @@ msgstr "همراه با زیرشاخه‌ها"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "پویش خودکار کتاب‌های تازه هنگام _گشودن کتاب‌خانه"
+
+#~ msgid "Save As"
+#~ msgstr "ذخیره به نام"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

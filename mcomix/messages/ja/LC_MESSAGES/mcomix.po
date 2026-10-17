@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 1.00-SVN\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2012-08-16 13:10+0900\n"
 "Last-Translator: Toshiharu Kudoh <toshi.kd2@gmail.com>\n"
 "Language-Team: Japanese\n"
@@ -481,7 +481,7 @@ msgstr "今はしない(_N)"
 msgid "Could not show the folder: %s"
 msgstr "ディレクトリーを表示できませんでした: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "別名でページを保存"
 
@@ -1103,10 +1103,6 @@ msgstr "終了"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "保存して終了"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "別名で保存"
 
 #: mcomix/keybindings.py:162
 msgid "Archive comments"
@@ -3608,6 +3604,9 @@ msgstr "サブディレクトリー含む"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "ライブラリーが開かれているとき自動的に新しい本をスキャン(_O)"
+
+#~ msgid "Save As"
+#~ msgstr "別名で保存"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

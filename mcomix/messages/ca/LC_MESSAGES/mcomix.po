@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 3.2\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2009-01-25 22:33+0100\n"
 "Last-Translator: Carles Escrig i Royo <simkin@ono.com>\n"
 "Language-Team: CA <gentoo@softcatala.net>\n"
@@ -551,7 +551,7 @@ msgstr "Ara _no"
 msgid "Could not show the folder: %s"
 msgstr "No s'ha pogut mostrar la carpeta: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "Anomena i desa la pàgina"
 
@@ -1287,12 +1287,6 @@ msgstr "Surt"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "Desa i surt"
-
-#
-# File: src/filechooser.py, line: 39
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "Anomena i desa"
 
 #
 # File: src/properties.py, line: 135
@@ -4159,6 +4153,11 @@ msgstr "Amb subdirectoris"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Cerca automàticament llibres nous en _obrir la biblioteca"
+
+#
+# File: src/filechooser.py, line: 39
+#~ msgid "Save As"
+#~ msgstr "Anomena i desa"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

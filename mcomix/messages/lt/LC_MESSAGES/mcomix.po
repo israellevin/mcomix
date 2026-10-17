@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix 1.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2016-09-18 15:30+0300\n"
 "Last-Translator: Zygimantus <zygimantus@gmail.com>\n"
 "Language-Team: \n"
@@ -486,7 +486,7 @@ msgstr "_Ne dabar"
 msgid "Could not show the folder: %s"
 msgstr "Nepavyko parodyti aplanko: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "Išsaugoti kaip"
 
@@ -1117,10 +1117,6 @@ msgstr "Išeiti"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "Išsaugoti ir išeiti"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "Išsaugoti kaip"
 
 #: mcomix/keybindings.py:162
 msgid "Archive comments"
@@ -3618,6 +3614,9 @@ msgstr "Su poaplankiais"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatiškai ieškoti naujų knygų kai yra _atidaroma biblioteka"
+
+#~ msgid "Save As"
+#~ msgstr "Išsaugoti kaip"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

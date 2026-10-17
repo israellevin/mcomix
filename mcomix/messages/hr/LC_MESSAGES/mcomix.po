@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: comix 4.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2008-12-13 18:00+0100\n"
 "Last-Translator: Adrian C. <anrxc@sysphere.org>\n"
 "Language-Team: Croatian\n"
@@ -552,7 +552,7 @@ msgstr "Ne _sada"
 msgid "Could not show the folder: %s"
 msgstr "Nije moguće prikazati direktorij: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "Spremi stranicu kao"
 
@@ -1292,12 +1292,6 @@ msgstr "Izađi"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "Spremi i izađi"
-
-#
-# File: src/filechooser.py, line: 39
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "Spremi kao"
 
 #
 # File: src/properties.py, line: 135
@@ -4150,6 +4144,11 @@ msgstr "S poddirektorijima"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Automatski traži nove knjige pri _otvaranju biblioteke"
+
+#
+# File: src/filechooser.py, line: 39
+#~ msgid "Save As"
+#~ msgstr "Spremi kao"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2013-04-26 18:00+0100\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -491,7 +491,7 @@ msgstr "_Non ora"
 msgid "Could not show the folder: %s"
 msgstr "Impossibile mostrare la cartella: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "Salva la pagina come"
 
@@ -1121,10 +1121,6 @@ msgstr "Esci"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "Salva ed esci"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "Salva come"
 
 #: mcomix/keybindings.py:162
 msgid "Archive comments"
@@ -3670,6 +3666,9 @@ msgstr "Con le sottodirectory"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Cerca a_utomaticamente nuovi libri quando la libreria è aperta"
+
+#~ msgid "Save As"
+#~ msgstr "Salva come"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

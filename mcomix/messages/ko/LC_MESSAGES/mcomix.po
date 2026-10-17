@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2018-05-10 22:46+0900\n"
 "Last-Translator: Minho Jeung <jeungmh@gmail.com>\n"
 "Language-Team: \n"
@@ -476,7 +476,7 @@ msgstr "지금은 안 함(_N)"
 msgid "Could not show the folder: %s"
 msgstr "디렉토리를 표시할 수 없습니다: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "페이지를 다른 이름으로 저장"
 
@@ -1098,10 +1098,6 @@ msgstr "종료"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "저장하고 종료"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "다른 이름으로 저장"
 
 #: mcomix/keybindings.py:162
 msgid "Archive comments"
@@ -3570,6 +3566,9 @@ msgstr "하위 디렉토리 포함"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "새 책을 모음집에 자동으로 추가(_O)"
+
+#~ msgid "Save As"
+#~ msgstr "다른 이름으로 저장"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."

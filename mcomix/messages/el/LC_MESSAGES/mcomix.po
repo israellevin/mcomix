@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MComix\n"
 "Report-Msgid-Bugs-To: https://github.com/twwn/mcomix/issues\n"
-"POT-Creation-Date: 2026-10-17 06:37+0200\n"
+"POT-Creation-Date: 2026-10-17 10:09+0200\n"
 "PO-Revision-Date: 2006-09-27 10:18+0200\n"
 "Last-Translator: Paul Chatzidimitriou <paulmedic555@gmail.com>\n"
 "Language-Team: \n"
@@ -540,7 +540,7 @@ msgstr "Ό_χι τώρα"
 msgid "Could not show the folder: %s"
 msgstr "Δεν ήταν δυνατή η εμφάνιση του καταλόγου: %s"
 
-#: mcomix/file_actions.py:860
+#: mcomix/file_actions.py:860 mcomix/keybindings.py:160
 msgid "Save page as"
 msgstr "Αποθήκευση σελίδας ως"
 
@@ -1276,10 +1276,6 @@ msgstr "Έξοδος"
 #: mcomix/keybindings.py:159
 msgid "Save and quit"
 msgstr "Αποθήκευση και έξοδος"
-
-#: mcomix/keybindings.py:160
-msgid "Save As"
-msgstr "Αποθήκευση ως"
 
 #
 #: mcomix/keybindings.py:162
@@ -4109,6 +4105,9 @@ msgstr "Με τους υποκαταλόγους"
 #: mcomix/library/watchlist.py:81
 msgid "Automatically scan for new books when library is _opened"
 msgstr "Αυτόματη αναζήτηση νέων βιβλίων κατά το άν_οιγμα της βιβλιοθήκης"
+
+#~ msgid "Save As"
+#~ msgstr "Αποθήκευση ως"
 
 #, python-format
 #~ msgid "Added new book '%(bookname)s' from directory '%(directory)s'."
