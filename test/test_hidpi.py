@@ -10,13 +10,14 @@ are now scaled to the screen's pixels and drawn into the layout's box.
 import os
 import unittest.mock
 
-from gi.repository import Gdk
+from gi.repository import Gdk, GdkPixbuf, Gtk
 
 from . import MComixTest, get_testfile_path, pump, wait_for
 
 from mcomix import constants
 from mcomix import edit_image_area
 from mcomix import icons
+from mcomix import image_tools
 from mcomix import keybindings
 from mcomix import main
 from mcomix import pageselect
@@ -87,6 +88,16 @@ class DeviceScaleTest(MComixTest):
         with unittest.mock.patch.object(type(surface), 'get_scale',
                                         return_value=1.25):
             self.assertEqual(1.25, self.window.device_scale())
+
+    def test_a_change_of_the_surface_s_scale_draws_everything_again(self):
+        pump()
+        surface = self.window.get_surface()
+        with unittest.mock.patch.object(self.window, 'draw_image') as drawn, \
+                unittest.mock.patch.object(self.window.thumbnailsidebar,
+                                           'resize') as resized:
+            surface.notify('scale')
+        drawn.assert_called_once_with()
+        resized.assert_called_once_with()
 
     def test_a_window_without_a_surface_counts_one_to_one(self):
         with unittest.mock.patch.object(main.MainWindow, 'get_surface',
@@ -267,6 +278,31 @@ class PreviewScaleTest(MComixTest):
         # The border is two of the screen's pixels on each side.
         self.assertEqual(round((pixbuf.get_width() + 4) / 2),
                          shown.get_intrinsic_width())
+
+
+class ScaledTextureTest(MComixTest):
+
+    def test_it_is_as_large_as_the_texture_over_the_scale(self):
+        pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8,
+                                      200, 100)
+        pixbuf.fill(0x336699ff)
+        texture = image_tools.pixbuf_to_texture(pixbuf)
+        scaled = widgets.at_scale(texture, 2.0)
+        self.assertEqual((100, 50), (scaled.get_intrinsic_width(),
+                                     scaled.get_intrinsic_height()))
+        self.assertIs(texture, widgets.at_scale(texture, 1))
+
+    def test_it_draws_the_whole_texture_into_the_box_it_is_given(self):
+        pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8,
+                                      200, 100)
+        pixbuf.fill(0x336699ff)
+        scaled = widgets.at_scale(image_tools.pixbuf_to_texture(pixbuf), 2.0)
+        snapshot = Gtk.Snapshot()
+        scaled.snapshot(snapshot, 100, 50)
+        node = snapshot.to_node()
+        self.assertIsNotNone(node)
+        bounds = node.get_bounds()
+        self.assertEqual((100, 50), (bounds.get_width(), bounds.get_height()))
 
 
 # vim: expandtab:sw=4:ts=4

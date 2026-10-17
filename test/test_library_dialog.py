@@ -1083,6 +1083,13 @@ class CoverScaleTest(_OneBookTest):
                          (shown.get_intrinsic_width(),
                           shown.get_intrinsic_height()))
 
+    def test_a_change_of_the_surface_s_scale_makes_the_covers_again(self):
+        area = self.dialog.book_area
+        surface = area.get_native().get_surface()
+        with unittest.mock.patch.object(area, 'load_covers') as made:
+            surface.notify('scale')
+        made.assert_called_once_with()
+
     def test_the_tick_of_a_finished_book_grows_with_the_scale(self):
         area = self.dialog.book_area
         self.assertEqual(24, area._finished_mark_at(1).get_width())

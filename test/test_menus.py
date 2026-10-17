@@ -8,7 +8,7 @@ them; what an item does is read from the window it was built for.
 import os
 import unittest.mock
 
-from gi.repository import GLib
+from gi.repository import GLib, Gtk
 
 from . import MComixTest, pump
 
@@ -112,6 +112,17 @@ class HelpMenuTest(MComixTest):
             self.window.uimanager._manual_shown(launcher, None)
         show.assert_called_once_with(
             'Could not open the manual: no browser')
+
+    def test_a_manual_the_reader_dismissed_says_nothing(self):
+        """Where a portal asks which program to use, turning the question
+        down is an answer, not a failure."""
+        launcher = unittest.mock.Mock()
+        launcher.launch_finish.side_effect = GLib.Error.new_literal(
+            Gtk.dialog_error_quark(), 'dismissed',
+            int(Gtk.DialogError.DISMISSED))
+        with unittest.mock.patch.object(self.window.osd, 'show') as show:
+            self.window.uimanager._manual_shown(launcher, None)
+        show.assert_not_called()
 
     def test_keyboard_shortcuts_opens_the_preferences_on_their_tab(self):
         self.window.actiongroup.get_action('shortcuts').activate()
