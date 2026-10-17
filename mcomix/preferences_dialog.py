@@ -360,7 +360,7 @@ class _PreferencesDialog(Dialog):
                          _('Specify the number of pixels to scroll while in slideshow mode. A positive value will scroll forward, a negative value will scroll backwards, and a value of 0 will cause the slideshow to always flip to a new page.')))
 
         page.add_row(self._create_pref_check_button(
-            _('During a slideshow automatically open the next archive'),
+            _('Let the slideshow go on to the next book'),
             'slideshow can go to next archive',
             _('While in slideshow mode allow the next archive to automatically be opened.')))
 
@@ -379,7 +379,7 @@ class _PreferencesDialog(Dialog):
             'double step in double page mode',
             _('Flip two pages, instead of one, each time we flip pages in double page mode.')))
 
-        page.add_row(Gtk.Label(label=_('Show only one page where appropriate:')),
+        page.add_row(Gtk.Label(label=_('Show a page alone:')),
                      self._create_doublepage_as_one_control())
 
         page.add_row(Gtk.Label(label=_('Page auto-resizing:')),

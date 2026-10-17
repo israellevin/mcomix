@@ -60,14 +60,14 @@ Sort files and directories by | Order of files in a directory: "No sorting", "Fi
 Sort archives by | Order of files inside an archive, and direction. "Natural order" reads numbers: Page1, Page3, Page20. "Literal order" compares characters: Page1, Page20, Page3. "GLib order" sorts as many GTK programs do. A change reopens the archive in the new order, at the same picture.
 Slideshow delay (in seconds) | 3 by default.
 Slideshow step (in pixels) | How far each slideshow step scrolls: forward if positive, back if negative, a page turn if 0. 50 by default.
-During a slideshow automatically open the next archive |
+Let the slideshow go on to the next book |
 
 ## Display tab
 
 Option | Explanation
 -------|------------
 Turn two pages at a time | Turn two pages at a time while two are shown. CTRL with PageUp or PageDown always turns one.
-Show only one page where appropriate | When double page mode shows one page: "Never", "Only for title pages" (the cover), "Only for wide images", or "Always" (both).
+Show a page alone | When double page mode shows one page: "Never", "Only for title pages" (the cover), "Only for wide images", or "Always" (both).
 Page auto-resizing | How two pages of different sizes are fitted side by side: "Prefer same scale", "Prefer same size" or "Fit to same size".
 Space between two pages (in pixels) | 0 to 100; 2 by default.
 Open long strips in continuous mode | A book most of whose first six pages are at least twice as high as wide opens in [continuous mode](reading.md#continuous-mode). On by default. "View → Continuous mode" turns the mode off for that book alone.
