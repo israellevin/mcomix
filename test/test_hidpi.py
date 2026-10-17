@@ -299,10 +299,13 @@ class ScaledTextureTest(MComixTest):
         scaled = widgets.at_scale(image_tools.pixbuf_to_texture(pixbuf), 2.0)
         snapshot = Gtk.Snapshot()
         scaled.snapshot(snapshot, 100, 50)
-        node = snapshot.to_node()
-        self.assertIsNotNone(node)
-        bounds = node.get_bounds()
-        self.assertEqual((100, 50), (bounds.get_width(), bounds.get_height()))
+        # A paintable rather than the render node itself: PyGObject hands
+        # render nodes to Python only from 3.48 on, and a paintable made
+        # without a size is as large as the node's bounds.
+        drawn = snapshot.to_paintable(None)
+        self.assertIsNotNone(drawn)
+        self.assertEqual((100, 50), (drawn.get_intrinsic_width(),
+                                     drawn.get_intrinsic_height()))
 
 
 # vim: expandtab:sw=4:ts=4
